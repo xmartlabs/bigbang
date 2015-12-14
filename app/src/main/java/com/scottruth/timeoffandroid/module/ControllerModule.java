@@ -1,6 +1,7 @@
 package com.scottruth.timeoffandroid.module;
 
 import com.scottruth.timeoffandroid.controller.SessionController;
+import com.scottruth.timeoffandroid.controller.demo.DemoController;
 
 import javax.inject.Singleton;
 
@@ -16,5 +17,11 @@ public class ControllerModule {
     @Singleton
     public SessionController provideSessionController() {
         return new SessionController();
+    }
+
+    @Provides
+    @Singleton
+    public DemoController provideDemoController() {
+        return new DemoController();
     }
 }

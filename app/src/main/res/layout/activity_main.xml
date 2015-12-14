@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                style="@style/Toolbar">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/toolbar_tabLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TabLayout.Toolbar" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </android.support.design.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBackground"
+        android:clickable="true"
+        android:layout_gravity="start">
+
+        <ListView
+            android:id="@+id/drawer_listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            style="@style/Drawer" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/primaryBackground"
+            android:contentDescription="@string/app_name"
+            android:layout_above="@id/drawer_listView"
+            android:layout_marginBottom="@dimen/drawer_logo_bottom_end_start_margin"
+            android:layout_marginEnd="@dimen/drawer_logo_bottom_end_start_margin"
+            android:layout_marginStart="@dimen/drawer_logo_bottom_end_start_margin"
+            android:layout_marginTop="@dimen/drawer_logo_top_margin"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_app_logo" />
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

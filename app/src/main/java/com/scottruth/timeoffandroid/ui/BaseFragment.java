@@ -104,10 +104,11 @@ public abstract class BaseFragment extends RxFragment {
         }
     }
 
-    public void showTutorialIfNeeded() {
-
-    }
-
+//    // TODO: use next if fragments need show to show a tutorial
+//    public void showTutorialIfNeeded() {
+//
+//    }
+//
 //    protected boolean showTutorialIfNeeded(int titleResId, int textResId, @NonNull View view, @NonNull String onceTag) {
 //        if (Once.beenDone(Once.THIS_APP_INSTALL, onceTag) || showcaseView != null) {
 //            return false;

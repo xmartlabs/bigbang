@@ -10,5 +10,5 @@ import javax.inject.Inject;
  */
 public abstract class ServiceController extends Controller {
     @Inject
-    GeneralErrorHelper generalErrorHelper;
+    protected GeneralErrorHelper generalErrorHelper;
 }

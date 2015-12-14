@@ -3,6 +3,7 @@ package com.scottruth.timeoffandroid;
 import com.scottruth.timeoffandroid.controller.Controller;
 import com.scottruth.timeoffandroid.controller.ServiceController;
 import com.scottruth.timeoffandroid.controller.SessionController;
+import com.scottruth.timeoffandroid.controller.demo.DemoController;
 import com.scottruth.timeoffandroid.helper.DatabaseHelper;
 import com.scottruth.timeoffandroid.helper.GeneralErrorHelper;
 import com.scottruth.timeoffandroid.module.AndroidModule;
@@ -11,12 +12,23 @@ import com.scottruth.timeoffandroid.module.DatabaseModule;
 import com.scottruth.timeoffandroid.module.GeneralErrorHelperModule;
 import com.scottruth.timeoffandroid.module.ReceiverModule;
 import com.scottruth.timeoffandroid.module.RestServiceModule;
+import com.scottruth.timeoffandroid.module.SessionInterceptor;
 import com.scottruth.timeoffandroid.ui.BaseActivity;
 import com.scottruth.timeoffandroid.ui.BaseAppCompatActivity;
 import com.scottruth.timeoffandroid.ui.BaseFragment;
+import com.scottruth.timeoffandroid.ui.FragmentWithDrawer;
 import com.scottruth.timeoffandroid.ui.MainActivity;
-import com.scottruth.timeoffandroid.ui.MainFragment;
+import com.scottruth.timeoffandroid.ui.SettingsActivity;
+import com.scottruth.timeoffandroid.ui.SettingsFragment;
 import com.scottruth.timeoffandroid.ui.SingleFragmentActivity;
+import com.scottruth.timeoffandroid.ui.ValidatableFragment;
+import com.scottruth.timeoffandroid.ui.demo.DemoDrawerItemFragment;
+import com.scottruth.timeoffandroid.ui.demo.RepoDetailActivity;
+import com.scottruth.timeoffandroid.ui.StartActivity;
+import com.scottruth.timeoffandroid.ui.WelcomeActivity;
+import com.scottruth.timeoffandroid.ui.WelcomeFragment;
+import com.scottruth.timeoffandroid.ui.demo.RepoDetailFragment;
+import com.scottruth.timeoffandroid.ui.demo.ReposListFragment;
 
 import javax.inject.Singleton;
 
@@ -35,18 +47,37 @@ import dagger.Component;
         RestServiceModule.class,
 })
 public interface ApplicationComponent {
-    void inject(BaseActivity baseActivity);
-    void inject(BaseAppCompatActivity baseAppCompatActivity);
+    // FIXME: DON'T inject base classes. Dagger may use the base class definition to inject the
+    // dependencies in some cases instead of the concrete class making injected members be always null
+
+//    void inject(BaseActivity baseActivity);
+//    void inject(BaseAppCompatActivity baseAppCompatActivity);
+//    void inject(SingleFragmentActivity singleFragmentActivity);
+
     void inject(MainActivity mainActivity);
-    void inject(SingleFragmentActivity singleFragmentActivity);
+    void inject(RepoDetailActivity repoDetailActivity);
+    void inject(StartActivity startActivity);
+    void inject(SettingsActivity settingsActivity);
+    void inject(WelcomeActivity welcomeActivity);
 
-    void inject(BaseFragment baseFragment);
-    void inject(MainFragment mainFragment);
+//    void inject(BaseFragment baseFragment);
+//    void inject(FragmentWithDrawer fragmentWithDrawer);
+//    void inject(ValidatableFragment validatableFragment);
 
-//    void inject(AuthController authController);
-    void inject(Controller controller);
-    void inject(ServiceController serviceController);
+    void inject(DemoDrawerItemFragment demoDrawerItemFragment);
+    void inject(RepoDetailFragment repoDetailFragment);
+    void inject(ReposListFragment reposListFragment);
+    void inject(SettingsFragment settingsFragment);
+    void inject(WelcomeFragment welcomeFragment);
+
+//    void inject(Controller controller);
+//    void inject(ServiceController serviceController);
+
+    //    void inject(AuthController authController);
+    void inject(DemoController demoController);
     void inject(SessionController sessionController);
+
+    void inject(SessionInterceptor sessionInterceptor);
 
     void inject(DatabaseHelper databaseHelper);
     void inject(GeneralErrorHelper generalErrorHelper);

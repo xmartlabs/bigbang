@@ -1,5 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- TODO: customize your theme here. -->
+        <item name="actionModeBackground">@color/primaryBackgroundLight</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textViewStyle">@style/TextView</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="colorControlHighlight">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/primary</item>
+        <item name="android:textColorSecondary">@color/secondary</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/grayLight</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/primaryBackgroundDark</item>
+        <item name="android:gravity">start</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">@style/ToolbarTheme</item>
+        <item name="elevation">4dp</item>
+        <item name="navigationIcon">@drawable/ic_app_logo</item>
+        <item name="popupTheme">@style/AppTheme</item>
+    </style>
+
+    <style name="Toolbar.Transparent" parent="Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="popupTheme">@style/Toolbar.Transparent.Theme</item>
+        <item name="theme">@style/Toolbar.Transparent.Theme</item>
+    </style>
+
+    <style name="Toolbar.Transparent.Theme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="Drawer" parent="Base.Widget.AppCompat.ListView">
+        <item name="android:background">@color/primaryBackgroundDark</item>
+        <item name="android:choiceMode">singleChoice</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:layout_gravity">start</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
+        <item name="spinBars">true</item>
+    </style>
+
+    <style name="TabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabTextAppearance">@style/InactiveTab</item>
+    </style>
+
+    <style name="TabLayout.Toolbar" parent="TabLayout">
+        <item name="tabIndicatorHeight">0dp</item>
+    </style>
+
+    <style name="InactiveTab" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/secondaryLight</item>
+    </style>
+
+    <style name="TextView" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextView.Dialog" parent="TextView">
+        <item name="android:textColor">@color/textColorSecondary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextViewDrawerItem" parent="TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+    </style>
+
+    <style name="TextViewDrawerAboveItem" parent="TextViewDrawerItem">
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+    </style>
+
+    <style name="TextViewDrawerBelowItem" parent="TextViewDrawerItem">
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">16dp</item>
     </style>
 </resources>

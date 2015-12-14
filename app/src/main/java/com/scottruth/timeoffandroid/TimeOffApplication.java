@@ -7,6 +7,7 @@ import com.crashlytics.android.core.CrashlyticsCore;
 import com.scottruth.timeoffandroid.helper.GeneralErrorHelper;
 import com.scottruth.timeoffandroid.module.AndroidModule;
 import com.scottruth.timeoffandroid.module.ControllerModule;
+import com.scottruth.timeoffandroid.module.DatabaseModule;
 import com.scottruth.timeoffandroid.module.GeneralErrorHelperModule;
 import com.scottruth.timeoffandroid.module.ReceiverModule;
 import com.scottruth.timeoffandroid.module.RestServiceModule;
@@ -50,7 +51,7 @@ public class TimeOffApplication extends Application {
         ApplicationComponent component = DaggerApplicationComponent.builder()
                 .androidModule(new AndroidModule(this))
                 .controllerModule(new ControllerModule())
-//                .databaseModule(new DatabaseModule())
+                .databaseModule(new DatabaseModule())
                 .generalErrorHelperModule(generalErrorHelperModule)
                 .receiverModule(new ReceiverModule())
                 .restServiceModule(new RestServiceModule())
