@@ -18,13 +18,9 @@ import timber.log.Timber;
  * Created by remer on 08/12/2015.
  */
 public class TimeOffApplication extends Application {
-
     private static TimeOffApplication instance;
 
     private BulletApplicationComponent bullet;
-
-    //@Inject // FIXME: gives error if trying to inject this class
-    GeneralErrorHelper generalErrorHelper;
 
     public TimeOffApplication() {
         super();
@@ -60,19 +56,9 @@ public class TimeOffApplication extends Application {
                 .restServiceModule(new RestServiceModule())
                 .build();
         bullet = new BulletApplicationComponent(component);
-
-        // TODO: inject itself???
-
-        generalErrorHelper = generalErrorHelperModule.provideGeneralErrorHelper();
-        generalErrorHelper.setTracked(true);
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
     }
 
     public <T> T inject(final T t) {
-        return null;//bullet.inject(t);
+        return bullet.inject(t);
     }
 }
