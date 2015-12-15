@@ -14,10 +14,10 @@ import org.parceler.Parcel;
 @Parcel
 public enum DrawerItem {
     // TODO: define here the ites added to the drawer menu. Use next definitions as examples.
-    HOME(TimeOffApplication.getContext().getString(R.string.home), R.drawable.ic_action_action_home, DrawerItemType.ABOVE, R.drawable.ic_action_action_home_inactive),
-    REPOS(TimeOffApplication.getContext().getString(R.string.public_repos_title), R.drawable.ic_action_action_polymer, DrawerItemType.ABOVE, R.drawable.ic_action_action_polymer_inactive),
+    HOME(TimeOffApplication.getContext().getString(R.string.home), R.drawable.ic_action_action_home, DrawerItemType.MAIN, R.drawable.ic_action_action_home_inactive),
+    REPOS(TimeOffApplication.getContext().getString(R.string.public_repos_title), R.drawable.ic_action_action_polymer, DrawerItemType.MAIN, R.drawable.ic_action_action_polymer_inactive),
     __DIVIDED__(null, null, DrawerItemType.DIVIDER),
-    SETTINGS(TimeOffApplication.getContext().getString(R.string.settings), null, DrawerItemType.BELOW);
+    SETTINGS(TimeOffApplication.getContext().getString(R.string.settings), null, DrawerItemType.SECONDARY);
 
     @Nullable
     private final String text;
@@ -33,7 +33,7 @@ public enum DrawerItem {
     DrawerItem() { // For Parceler
         text = null;
         drawableResId = null;
-        drawerItemType = DrawerItemType.ABOVE;
+        drawerItemType = DrawerItemType.MAIN;
         inactiveDrawableResId = null;
         selectable = true;
     }
@@ -43,7 +43,7 @@ public enum DrawerItem {
         this.drawableResId = drawableResId;
         this.drawerItemType = drawerItemType;
         inactiveDrawableResId = null;
-        selectable = drawerItemType == DrawerItemType.ABOVE;
+        selectable = drawerItemType == DrawerItemType.MAIN;
     }
 
     DrawerItem(@Nullable String text, @Nullable Integer drawableResId, @NonNull DrawerItemType drawerItemType, int inactiveDrawableResId) {

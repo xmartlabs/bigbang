@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,11 @@ import com.f2prateek.dart.InjectExtra;
 import com.scottruth.timeoffandroid.R;
 import com.scottruth.timeoffandroid.controller.SessionController;
 import com.scottruth.timeoffandroid.helper.UiHelper;
+import com.scottruth.timeoffandroid.ui.demo.DemoDrawerItemFragmentBuilder;
+import com.scottruth.timeoffandroid.ui.demo.ReposListFragmentBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,10 +47,10 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
     DrawerLayout drawerLayout;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.toolbar_tabLayout)
-    TabLayout toolbarTabLayout;
-    @Bind(R.id.viewPager)
-    ViewPager viewPager;
+//    @Bind(R.id.toolbar_tabLayout)
+//    TabLayout toolbarTabLayout;
+
+    List<FragmentWithDrawer> fragments;
 
     @Inject
     SessionController sessionController;
@@ -62,32 +68,9 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
 
         setSupportActionBar(toolbar);
 
-        MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-
-        toolbarTabLayout.setupWithViewPager(viewPager);
-
-        TabLayout.ViewPagerOnTabSelectedListener onTabSelectedListener = new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                super.onTabSelected(tab);
-                DrawerItem drawerItem = DrawerItem.fromInteger(tab.getPosition());
-                selectDrawerItemIfSelectable(drawerItem);
-                if (drawerItem.getDrawableResId() != null) {
-                    tab.setIcon(drawerItem.getDrawableResId());
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                super.onTabUnselected(tab);
-                DrawerItem drawerItem = DrawerItem.fromInteger(tab.getPosition());
-                if (drawerItem.getInactiveDrawableResId() != null) {
-                    tab.setIcon(drawerItem.getInactiveDrawableResId());
-                }
-            }
-        };
-        toolbarTabLayout.setOnTabSelectedListener(onTabSelectedListener);
+        fragments = new ArrayList<>();
+        fragments.add(new DemoDrawerItemFragmentBuilder().build());
+        fragments.add(new ReposListFragmentBuilder().build());
 
         drawerAdapter = new DrawerAdapter();
         drawerListView.setAdapter(drawerAdapter);
@@ -109,25 +92,16 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
         }
         displayDrawerView(initialDrawerItem);
 
-        for (int i = 0; i < toolbarTabLayout.getTabCount(); i++) {
-            TabLayout.Tab tab = toolbarTabLayout.getTabAt(i);
-            if (tab != null) {
-                DrawerItem drawerItem = DrawerItem.fromInteger(i);
-                if (drawerItem == initialDrawerItem) {
-                    onTabSelectedListener.onTabSelected(tab);
-                } else {
-                    onTabSelectedListener.onTabUnselected(tab);
-                }
-            }
-        }
-
         UiHelper.checkGooglePlayServicesAndShowAlertIfNeeded(this);
 
-        preloadViewPager();
-    }
-
-    private void preloadViewPager() {
-        viewPager.setOffscreenPageLimit(2);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment headerFragment = fragmentManager.findFragmentById(R.id.drawerHeader);
+        if (headerFragment == null) {
+            headerFragment = new DrawerHeaderFragmentBuilder().build();
+        }
+        fragmentManager.beginTransaction()
+                .add(R.id.drawerHeader, headerFragment)
+                .commit();
     }
 
     @Override
@@ -138,7 +112,7 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+        public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_settings:
                 displayDrawerView(DrawerItem.SETTINGS);
@@ -171,13 +145,14 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
             if (Objects.equals(selectedDrawerItem, drawerItem)) {
                 drawerLayout.closeDrawer(drawer);
             } else {
+                Fragment fragment = null;
                 switch (drawerItem) {
                     case HOME: {
-                        viewPager.setCurrentItem(drawerItem.getValue());
+                        fragment = fragments.get(drawerItem.getValue());
                         break;
                     }
                     case REPOS: {
-                        viewPager.setCurrentItem(drawerItem.getValue());
+                        fragment = fragments.get(drawerItem.getValue());
                         break;
                     }
                     case SETTINGS:
@@ -185,6 +160,14 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
                                 .build();
                         startActivity(intent);
                         break;
+                }
+
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, fragment)
+                            .commit();
                 }
 
                 selectDrawerItemIfSelectable(drawerItem);

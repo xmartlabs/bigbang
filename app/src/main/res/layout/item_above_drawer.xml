@@ -37,6 +37,6 @@
         android:layout_centerVertical="true"
         android:layout_toEndOf="@android:id/icon"
         android:layout_toStartOf="@android:id/text2"
-        style="@style/TextViewDrawerAboveItem"
+        style="@style/TextViewDrawerMainItem"
         tools:text="Hello" />
 </RelativeLayout>

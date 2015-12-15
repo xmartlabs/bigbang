@@ -7,10 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// TODO: Just for demo purposes, delete this class in a real project
-
 /**
  * Created by remer on 10/12/2015.
+ * TODO: Just for demo purposes, delete this class in a real project
  */
 @AllArgsConstructor
 @Builder

@@ -84,11 +84,6 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextView.Dialog" parent="TextView">
-        <item name="android:textColor">@color/textColorSecondary</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
     <style name="TextViewDrawerItem" parent="TextView">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
@@ -98,13 +93,21 @@
         <item name="android:paddingTop">12dp</item>
     </style>
 
-    <style name="TextViewDrawerAboveItem" parent="TextViewDrawerItem">
+    <style name="TextViewDrawerMainItem" parent="TextViewDrawerItem">
         <item name="android:layout_marginStart">20dp</item>
         <item name="android:layout_marginEnd">4dp</item>
     </style>
 
-    <style name="TextViewDrawerBelowItem" parent="TextViewDrawerItem">
+    <style name="TextViewDrawerSecondaryItem" parent="TextViewDrawerItem">
         <item name="android:paddingEnd">16dp</item>
         <item name="android:paddingStart">16dp</item>
+    </style>
+
+    <style name="TextView.HeaderTitle" parent="TextView">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="TextView.HeaderSubitle" parent="TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
     </style>
 </resources>

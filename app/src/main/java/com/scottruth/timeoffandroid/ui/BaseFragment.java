@@ -103,45 +103,4 @@ public abstract class BaseFragment extends RxFragment {
             removeItselfFromParentFragment();
         }
     }
-
-//    // TODO: use next if fragments need show to show a tutorial
-//    public void showTutorialIfNeeded() {
-//
-//    }
-//
-//    protected boolean showTutorialIfNeeded(int titleResId, int textResId, @NonNull View view, @NonNull String onceTag) {
-//        if (Once.beenDone(Once.THIS_APP_INSTALL, onceTag) || showcaseView != null) {
-//            return false;
-//        } else {
-//            showcaseView = new ShowcaseView.Builder(getActivity())
-//                    .blockAllTouches()
-//                    .hideOnTouchOutside()
-//                    .replaceEndButton(R.layout.showcase_button)
-//                    .setContentText(textResId)
-//                    .setContentTitle(titleResId)
-//                    .setOnClickListener(v -> {
-//                        showcaseView.hide();
-//                        Once.markDone(onceTag);
-//                        showcaseView = null;
-//                        showTutorialIfNeeded();
-//                    })
-//                    .setStyle(R.style.Tutorial)
-//                    .setTarget(new ViewTarget(view))
-//                    .withMaterialShowcase()
-//                    .build();
-//
-//            showcaseView.setTitleTextAlignment(Layout.Alignment.ALIGN_CENTER);
-//            showcaseView.setDetailTextAlignment(Layout.Alignment.ALIGN_CENTER);
-//
-//            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START);
-//            int marginBottom = (int) getResources().getDimension(R.dimen.fab_margin_button);
-//            int marginStart = MetricsHelper.dpToPxInt(16, getActivity());
-//            layoutParams.setMargins(marginStart, 0, 0, marginBottom);
-//            showcaseView.setButtonPosition(layoutParams);
-//
-//            return true;
-//        }
-//    }
 }

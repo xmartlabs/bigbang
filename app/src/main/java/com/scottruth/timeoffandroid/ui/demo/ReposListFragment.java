@@ -61,6 +61,9 @@ public class ReposListFragment extends FragmentWithDrawer {
     @Nullable
     @Override
     public String getTitle() {
+        if (getActivity() == null) {
+            return null;
+        }
         return getActivity().getString(R.string.public_repos_title);
     }
 
@@ -83,10 +86,7 @@ public class ReposListFragment extends FragmentWithDrawer {
     private void filterRepositories(@Nullable String filter) {
         demoController.getPublicRepositoriesFilteredBy(filter)
                 .subscribe(
-                        repos -> {
-                            reposAdapter.setItems(repos);
-
-                        },
+                        repos -> reposAdapter.setItems(repos),
                         error -> {
                             showAlertError(R.string.message_error_service_call);
                             Timber.d(error, "Error on service call");

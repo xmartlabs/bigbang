@@ -46,7 +46,7 @@ public class DrawerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         DrawerItem drawerItem = getItem(position);
         switch (drawerItem.getDrawerItemType()) {
-            case ABOVE:
+            case MAIN:
                 if (convertView == null) {
                     convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_above_drawer, parent, false);
                 }
@@ -68,7 +68,7 @@ public class DrawerAdapter extends BaseAdapter {
                     convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_divider_drawer, parent, false);
                 }
                 break;
-            case BELOW:
+            case SECONDARY:
                 if (convertView == null) {
                     convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_below_drawer, parent, false);
                 }

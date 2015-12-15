@@ -36,7 +36,7 @@ public class DemoController extends ServiceController {
         return demoService.repositories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(generalErrorHelper.getGeneralErrorAction())
+                .doOnError(getGeneralErrorHelper().getGeneralErrorAction())
                 .flatMap(Observable::from)
                 .filter(repo -> repo.match(filter))
                 .toList();
