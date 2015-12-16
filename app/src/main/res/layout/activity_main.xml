@@ -38,11 +38,12 @@
 
     <RelativeLayout
         android:id="@+id/drawer"
-        android:layout_width="240dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryBackground"
         android:clickable="true"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:layout_marginEnd="0dp">
 
         <FrameLayout
             android:id="@+id/drawerHeader"

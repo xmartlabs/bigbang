@@ -2,13 +2,15 @@ package com.scottruth.timeoffandroid.ui.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.scottruth.timeoffandroid.R;
@@ -16,11 +18,16 @@ import com.scottruth.timeoffandroid.controller.demo.DemoController;
 import com.scottruth.timeoffandroid.model.demo.DemoRepo;
 import com.scottruth.timeoffandroid.ui.FragmentWithDrawer;
 import com.scottruth.timeoffandroid.ui.Henson;
+import com.trello.rxlifecycle.FragmentEvent;
+import com.trello.rxlifecycle.RxLifecycle;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnTextChanged;
 import timber.log.Timber;
@@ -35,8 +42,8 @@ public class ReposListFragment extends FragmentWithDrawer {
 
     @Bind(R.id.filter_editText)
     EditText filterEditText;
-    @Bind(R.id.repos_listView)
-    ListView reposListView;
+    @Bind(R.id.repos_recyclerView)
+    RecyclerView reposReciclerView;
 
     private DemoAdapter reposAdapter;
 
@@ -45,7 +52,19 @@ public class ReposListFragment extends FragmentWithDrawer {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
         reposAdapter = new DemoAdapter();
-        reposListView.setAdapter(reposAdapter);
+        reposAdapter.setListener((repo, repoView) -> {
+            Intent intent = Henson.with(getActivity()).gotoRepoDetailActivity()
+                    .repo(repo)
+                    .build();
+            startActivity(intent);
+        });
+
+        reposReciclerView.setAdapter(reposAdapter);
+        reposReciclerView.setHasFixedSize(true);
+        reposReciclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        reposReciclerView.setClickable(true);
+        reposReciclerView.setFocusable(true);
+        reposReciclerView.setFocusableInTouchMode(true);
 
         String defaultFilter = filterEditText.getText().toString();
         filterRepositories(defaultFilter);
@@ -73,18 +92,9 @@ public class ReposListFragment extends FragmentWithDrawer {
         filterRepositories(filter == null ? null : filter.toString());
     }
 
-    @OnItemClick(R.id.repos_listView)
-    @SuppressWarnings("unused")
-    void onRepoSelected(AdapterView<?> parent, View view, int position, long id) {
-        DemoRepo repo = reposAdapter.getItems().get(position);
-        Intent intent = Henson.with(getActivity()).gotoRepoDetailActivity()
-                .repo(repo)
-                .build();
-        startActivity(intent);
-    }
-
     private void filterRepositories(@Nullable String filter) {
         demoController.getPublicRepositoriesFilteredBy(filter)
+                .<List<DemoRepo>>compose(RxLifecycle.bindUntilFragmentEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
                 .subscribe(
                         repos -> reposAdapter.setItems(repos),
                         error -> {

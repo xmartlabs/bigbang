@@ -47,8 +47,6 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
     DrawerLayout drawerLayout;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-//    @Bind(R.id.toolbar_tabLayout)
-//    TabLayout toolbarTabLayout;
 
     List<FragmentWithDrawer> fragments;
 

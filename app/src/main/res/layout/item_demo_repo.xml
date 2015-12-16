@@ -5,11 +5,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/name_textView"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:background="@drawable/rounded_white_background"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        tools:text="Repo name" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="4dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/circle_background"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_action_action_polymer" />
+
+            <TextView
+                android:id="@+id/name_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/imageView"
+                style="@style/TextView.HeaderTitle"
+                tools:text="Repo name" />
+
+            <TextView
+                android:id="@+id/author_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/name_textView"
+                android:layout_below="@id/name_textView"
+                android:layout_marginBottom="16dp"
+                style="@style/TextView.HeaderSubitle"
+                tools:text="\@remer"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

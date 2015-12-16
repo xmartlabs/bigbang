@@ -28,7 +28,7 @@ public class GeneralErrorHelper {
     private static final String CRASHLYTICS_KEY_RESPONSE_BODY = "response_body";
     private static final String CRASHLYTICS_KEY_RESPONSE_HEADERS = "response_headers";
     private static final String CRASHLYTICS_KEY_STATUS_CODE = "status_code";
-    private static final String CRASHLYTICS_KEY_URL = "url";
+    public static final String CRASHLYTICS_KEY_URL = "url";
 
     @Inject
     Context applicationContext;

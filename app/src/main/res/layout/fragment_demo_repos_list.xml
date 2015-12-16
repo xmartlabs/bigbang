@@ -9,12 +9,15 @@
         android:id="@+id/filter_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Filter..."/>
+        android:hint="Filter..." />
 
-    <ListView
-        android:id="@+id/repos_listView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/repos_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="#55aa0000"/>
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        tools:background="#55aa0000" />
 
 </LinearLayout>
