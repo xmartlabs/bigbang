@@ -47,8 +47,6 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    List<FragmentWithDrawer> fragments;
-
     @Inject
     SessionController sessionController;
 
@@ -64,10 +62,6 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-
-        fragments = new ArrayList<>();
-        fragments.add(new DemoDrawerItemFragmentBuilder().build());
-        fragments.add(new ReposListFragmentBuilder().build());
 
         drawerAdapter = new DrawerAdapter();
         drawerListView.setAdapter(drawerAdapter);
@@ -135,12 +129,13 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
             } else {
                 Fragment fragment = null;
                 switch (drawerItem) {
+                    // TODO: change fragments according to selected drawer item
                     case HOME: {
-                        fragment = fragments.get(drawerItem.getValue());
+                        fragment = new DemoDrawerItemFragmentBuilder().build();
                         break;
                     }
                     case REPOS: {
-                        fragment = fragments.get(drawerItem.getValue());
+                        fragment = new ReposListFragmentBuilder().build();
                         break;
                     }
                     case SETTINGS:

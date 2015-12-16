@@ -11,7 +11,6 @@ import com.scottruth.timeoffandroid.module.GeneralErrorHelperModule;
 import com.scottruth.timeoffandroid.module.ReceiverModule;
 import com.scottruth.timeoffandroid.module.RestServiceModule;
 import com.scottruth.timeoffandroid.module.SessionInterceptor;
-import com.scottruth.timeoffandroid.ui.DrawerHeaderFragment;
 import com.scottruth.timeoffandroid.ui.MainActivity;
 import com.scottruth.timeoffandroid.ui.SettingsActivity;
 import com.scottruth.timeoffandroid.ui.SettingsFragment;
@@ -58,7 +57,6 @@ public interface ApplicationComponent {
 //    void inject(ValidatableFragment validatableFragment);
 
     void inject(DemoDrawerItemFragment demoDrawerItemFragment);
-    void inject(DrawerHeaderFragment drawerHeaderFragment);
     void inject(RepoDetailFragment repoDetailFragment);
     void inject(ReposListFragment reposListFragment);
     void inject(SettingsFragment settingsFragment);
