@@ -1,8 +1,5 @@
 package com.scottruth.timeoffandroid.ui.demo;
 
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +14,6 @@ import com.scottruth.timeoffandroid.TimeOffApplication;
 import com.scottruth.timeoffandroid.helper.CircleTransform;
 import com.scottruth.timeoffandroid.helper.PicassoHelper;
 import com.scottruth.timeoffandroid.model.demo.DemoRepo;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,8 +93,6 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHo
     public RepoItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Create a new view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_repo, parent, false);
-        parent.setBackgroundColor(Color.TRANSPARENT);
-        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         RepoItemViewHolder holder = new RepoItemViewHolder(view);
         return holder;
     }

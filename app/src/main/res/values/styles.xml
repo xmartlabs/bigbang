@@ -103,10 +103,11 @@
         <item name="android:paddingStart">16dp</item>
     </style>
 
-    <style name="TextView.HeaderTitle" parent="TextView">
+    <style name="TextView.DrawerHeaderTitle" parent="TextView">
         <item name="android:textSize">20sp</item>
     </style>
-    <style name="TextView.HeaderSubitle" parent="TextView">
+
+    <style name="TextView.DrawerHeaderSubtitle" parent="TextView">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/textColorSecondary</item>
     </style>

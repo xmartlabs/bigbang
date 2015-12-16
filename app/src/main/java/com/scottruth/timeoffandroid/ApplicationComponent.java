@@ -1,7 +1,5 @@
 package com.scottruth.timeoffandroid;
 
-import com.scottruth.timeoffandroid.controller.Controller;
-import com.scottruth.timeoffandroid.controller.ServiceController;
 import com.scottruth.timeoffandroid.controller.SessionController;
 import com.scottruth.timeoffandroid.controller.demo.DemoController;
 import com.scottruth.timeoffandroid.helper.DatabaseHelper;
@@ -13,21 +11,15 @@ import com.scottruth.timeoffandroid.module.GeneralErrorHelperModule;
 import com.scottruth.timeoffandroid.module.ReceiverModule;
 import com.scottruth.timeoffandroid.module.RestServiceModule;
 import com.scottruth.timeoffandroid.module.SessionInterceptor;
-import com.scottruth.timeoffandroid.ui.BaseActivity;
-import com.scottruth.timeoffandroid.ui.BaseAppCompatActivity;
-import com.scottruth.timeoffandroid.ui.BaseFragment;
 import com.scottruth.timeoffandroid.ui.DrawerHeaderFragment;
-import com.scottruth.timeoffandroid.ui.FragmentWithDrawer;
 import com.scottruth.timeoffandroid.ui.MainActivity;
 import com.scottruth.timeoffandroid.ui.SettingsActivity;
 import com.scottruth.timeoffandroid.ui.SettingsFragment;
-import com.scottruth.timeoffandroid.ui.SingleFragmentActivity;
-import com.scottruth.timeoffandroid.ui.ValidatableFragment;
-import com.scottruth.timeoffandroid.ui.demo.DemoDrawerItemFragment;
-import com.scottruth.timeoffandroid.ui.demo.RepoDetailActivity;
 import com.scottruth.timeoffandroid.ui.StartActivity;
 import com.scottruth.timeoffandroid.ui.WelcomeActivity;
 import com.scottruth.timeoffandroid.ui.WelcomeFragment;
+import com.scottruth.timeoffandroid.ui.demo.DemoDrawerItemFragment;
+import com.scottruth.timeoffandroid.ui.demo.RepoDetailActivity;
 import com.scottruth.timeoffandroid.ui.demo.RepoDetailFragment;
 import com.scottruth.timeoffandroid.ui.demo.ReposListFragment;
 

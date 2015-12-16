@@ -1,18 +1,15 @@
 package com.scottruth.timeoffandroid.helper;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.annimon.stream.Objects;
 import com.crashlytics.android.Crashlytics;
 import com.scottruth.timeoffandroid.TimeOffApplication;
 import com.scottruth.timeoffandroid.controller.SessionController;
-import com.scottruth.timeoffandroid.model.Session;
 import com.scottruth.timeoffandroid.service.AuthService;
 
 import java.io.IOException;
-import java.util.concurrent.CancellationException;
 
 import javax.inject.Inject;
 

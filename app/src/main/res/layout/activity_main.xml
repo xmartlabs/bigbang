@@ -45,11 +45,7 @@
         android:layout_gravity="start"
         android:layout_marginEnd="0dp">
 
-        <FrameLayout
-            android:id="@+id/drawerHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
+        <include layout="@layout/view_drawer_header" />
 
         <ListView
             android:id="@+id/drawer_listView"

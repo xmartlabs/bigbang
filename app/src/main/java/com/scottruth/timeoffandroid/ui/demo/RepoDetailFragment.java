@@ -16,7 +16,6 @@ import com.scottruth.timeoffandroid.ui.BaseFragment;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 // TODO: Just for demo purposes, delete this class in a real project
 

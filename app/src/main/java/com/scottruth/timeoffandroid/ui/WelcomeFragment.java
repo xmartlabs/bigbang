@@ -1,6 +1,5 @@
 package com.scottruth.timeoffandroid.ui;
 
-import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.scottruth.timeoffandroid.R;
 

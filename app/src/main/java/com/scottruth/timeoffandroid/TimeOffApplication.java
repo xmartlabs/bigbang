@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
-import com.scottruth.timeoffandroid.helper.GeneralErrorHelper;
 import com.scottruth.timeoffandroid.module.AndroidModule;
 import com.scottruth.timeoffandroid.module.ControllerModule;
 import com.scottruth.timeoffandroid.module.DatabaseModule;

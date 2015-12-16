@@ -3,8 +3,8 @@ package com.scottruth.timeoffandroid.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.scottruth.timeoffandroid.controller.demo.DemoController;
 import com.scottruth.timeoffandroid.controller.SessionController;
+import com.scottruth.timeoffandroid.controller.demo.DemoController;
 import com.scottruth.timeoffandroid.model.Session;
 
 import javax.inject.Inject;

@@ -22,7 +22,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Demo App"
-        style="@style/TextView.HeaderTitle"/>
+        style="@style/TextView.DrawerHeaderTitle"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -31,6 +31,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:text="https://www.xmartlabs.com"
-        style="@style/TextView.HeaderSubitle"/>
+        style="@style/TextView.DrawerHeaderSubtitle"/>
 
 </LinearLayout>

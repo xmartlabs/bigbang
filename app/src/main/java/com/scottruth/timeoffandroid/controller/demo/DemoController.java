@@ -7,8 +7,6 @@ import com.scottruth.timeoffandroid.TimeOffApplication;
 import com.scottruth.timeoffandroid.controller.ServiceController;
 import com.scottruth.timeoffandroid.model.demo.DemoRepo;
 import com.scottruth.timeoffandroid.service.demo.DemoService;
-import com.trello.rxlifecycle.FragmentEvent;
-import com.trello.rxlifecycle.RxLifecycle;
 
 import java.util.List;
 

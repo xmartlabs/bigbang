@@ -11,5 +11,6 @@
     <string name="drawer_close">Close</string>
     <string name="welcome_title">Welcome to Time Off app</string>
     <string name="drawer_item_icon">Icon</string>
+    <string name="filter_hint">Filter…</string>
 </resources>
 

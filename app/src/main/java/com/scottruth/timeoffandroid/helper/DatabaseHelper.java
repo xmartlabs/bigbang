@@ -7,7 +7,6 @@ import com.scottruth.timeoffandroid.controller.SessionController;
 import com.scottruth.timeoffandroid.model.Session;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * Created by santiago on 09/11/15.

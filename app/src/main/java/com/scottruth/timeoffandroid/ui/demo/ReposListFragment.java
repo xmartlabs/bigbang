@@ -2,18 +2,17 @@ package com.scottruth.timeoffandroid.ui.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.scottruth.timeoffandroid.R;
+import com.scottruth.timeoffandroid.TimeOffApplication;
 import com.scottruth.timeoffandroid.controller.demo.DemoController;
 import com.scottruth.timeoffandroid.model.demo.DemoRepo;
 import com.scottruth.timeoffandroid.ui.FragmentWithDrawer;
@@ -26,9 +25,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
 import butterknife.OnTextChanged;
 import timber.log.Timber;
 
@@ -62,9 +58,6 @@ public class ReposListFragment extends FragmentWithDrawer {
         reposReciclerView.setAdapter(reposAdapter);
         reposReciclerView.setHasFixedSize(true);
         reposReciclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        reposReciclerView.setClickable(true);
-        reposReciclerView.setFocusable(true);
-        reposReciclerView.setFocusableInTouchMode(true);
 
         String defaultFilter = filterEditText.getText().toString();
         filterRepositories(defaultFilter);
@@ -80,10 +73,7 @@ public class ReposListFragment extends FragmentWithDrawer {
     @Nullable
     @Override
     public String getTitle() {
-        if (getActivity() == null) {
-            return null;
-        }
-        return getActivity().getString(R.string.public_repos_title);
+        return TimeOffApplication.getContext().getString(R.string.public_repos_title);
     }
 
     @OnTextChanged(R.id.filter_editText)
@@ -96,7 +86,7 @@ public class ReposListFragment extends FragmentWithDrawer {
         demoController.getPublicRepositoriesFilteredBy(filter)
                 .<List<DemoRepo>>compose(RxLifecycle.bindUntilFragmentEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
                 .subscribe(
-                        repos -> reposAdapter.setItems(repos),
+                        reposAdapter::setItems,
                         error -> {
                             showAlertError(R.string.message_error_service_call);
                             Timber.d(error, "Error on service call");
