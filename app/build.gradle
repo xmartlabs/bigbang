@@ -33,9 +33,9 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '23.0.2'
     defaultConfig {
-        applicationId 'com.scottruth.timeoffandroid'
+        applicationId 'com.xmartlabs.template'
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
@@ -43,20 +43,37 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
-            def Properties properties = new Properties()
-            properties.load(new FileInputStream(file('keystore.properties')))
-            storePassword properties['store_password']
-            keyAlias properties['key_alias']
-            keyPassword properties['key_password']
+            def debugKeyStore = file('debug.keystore')
+            if (debugKeyStore.exists()) {
+                storeFile debugKeyStore
+            } else {
+                //noinspection GrUnresolvedAccess
+                logger.error('Debug keystore file not found')
+            }
         }
         release {
-            storeFile file('release.keystore')
-            def Properties properties = new Properties()
-            properties.load(new FileInputStream(file('keystore.properties')))
+            def releaseKeyStore = file('release.keystore')
+            if (releaseKeyStore.exists()) {
+                storeFile releaseKeyStore
+            } else {
+                //noinspection GrUnresolvedAccess
+                logger.error('Release keystore file not found')
+            }
+        }
+
+        def Properties properties = new Properties()
+        def propertiesFile = file('keystore.properties')
+        if (propertiesFile.exists()) {
+            properties.load(new FileInputStream(propertiesFile))
+            //noinspection GrUnresolvedAccess
             storePassword properties['store_password']
+            //noinspection GrUnresolvedAccess
             keyAlias properties['key_alias']
+            //noinspection GrUnresolvedAccess
             keyPassword properties['key_password']
+        } else {
+            //noinspection GrUnresolvedAccess
+            logger.error('Keystore properties file not found')
         }
     }
     buildTypes {

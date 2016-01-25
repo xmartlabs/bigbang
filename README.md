@@ -1,8 +1,8 @@
-# TimeOff for Android
+# Android Base Project
 
 ## Assets
 
-The configuration assets are in a [Google Drive folder](https://drive.google.com/a/xmartlabs.com/folderview?id=0B1qp8GiatkdiVXdUSVRfZGRQdnM&usp=sharing).
+The configuration assets are in a [Google Drive folder](put link).
 To access them, ask via email.
 
 The easiest way to copy them in the repo folder, is by downloading the GDrive folder and running the

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.scottruth.timeoffandroid">
+    package="com.xmartlabs.template">
 
     <permission
         android:name="${applicationId}.permission.C2D_MESSAGE"
@@ -15,11 +15,11 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".TimeOffApplication"
+        android:name=".BaseProjectApplication"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.StartActivity"
+            android:name="com.xmartlabs.template.ui.StartActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
 
@@ -30,24 +30,24 @@
         </activity>
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.xmartlabs.template.ui.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.demo.RepoDetailActivity"
+            android:name="com.xmartlabs.template.ui.demo.RepoDetailActivity"
             android:label=""
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.SettingsActivity"
+            android:name="com.xmartlabs.template.ui.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName="com.xmartlabs.template.ui.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.WelcomeActivity"
+            android:name="com.xmartlabs.template.ui.WelcomeActivity"
             android:label="@string/welcome_title"
             android:screenOrientation="portrait" />
 
