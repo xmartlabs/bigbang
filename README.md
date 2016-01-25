@@ -78,3 +78,11 @@ A Genymotion emulator (with Google Play Services installed) will have more probl
 than a mobile. Getting the last known location shouldn't throw null if location is enabled. See
 [the different answers and comments here](http://stackoverflow.com/questions/16830047/locationclient-getlastlocation-return-null)
 for more info.
+
+## Check for outdated libraries
+
+Run the following:
+
+```bash
+./gradlew dependencyUpdates
+```
