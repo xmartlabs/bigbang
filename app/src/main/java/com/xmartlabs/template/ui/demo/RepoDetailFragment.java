@@ -21,27 +21,26 @@ import butterknife.Bind;
 
 @FragmentWithArgs
 public class RepoDetailFragment extends BaseFragment {
-    @Arg(bundler = DemoRepoArgsBundler.class)
-    DemoRepo repo;
+  @Arg(bundler = DemoRepoArgsBundler.class)
+  DemoRepo repo;
 
-    @Inject
-    DemoService service;
+  @Inject
+  DemoService service;
 
-    @Bind(R.id.name_textView)
-    TextView nameTextView;
+  @Bind(R.id.name_textView)
+  TextView nameTextView;
 
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = super.onCreateView(inflater, container, savedInstanceState);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    nameTextView.setText(repo.getName());
 
-        nameTextView.setText(repo.getName());
+    return view;
+  }
 
-        return view;
-    }
-
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.fragment_demo_repo_details;
-    }
+  @Override
+  protected int getLayoutResId() {
+    return R.layout.fragment_demo_repo_details;
+  }
 }

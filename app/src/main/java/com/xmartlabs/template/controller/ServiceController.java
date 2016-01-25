@@ -9,10 +9,10 @@ import javax.inject.Inject;
  * To distinguish between controller that use the services, and those which don't.
  */
 public abstract class ServiceController extends Controller {
-    @Inject
-    GeneralErrorHelper generalErrorHelper;
+  @Inject
+  GeneralErrorHelper generalErrorHelper;
 
-    public GeneralErrorHelper getGeneralErrorHelper() {
-        return generalErrorHelper;
-    }
+  public GeneralErrorHelper getGeneralErrorHelper() {
+    return generalErrorHelper;
+  }
 }

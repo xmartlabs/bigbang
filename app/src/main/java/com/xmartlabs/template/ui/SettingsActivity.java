@@ -7,14 +7,14 @@ import android.support.annotation.NonNull;
  */
 @com.f2prateek.dart.Henson
 public class SettingsActivity extends SingleFragmentWithToolbarActivity {
-    @NonNull
-    @Override
-    protected BaseFragment createFragment() {
-        return new SettingsFragmentBuilder().build();
-    }
+  @NonNull
+  @Override
+  protected BaseFragment createFragment() {
+    return new SettingsFragmentBuilder().build();
+  }
 
-    @Override
-    protected boolean showNavigationIcon() {
-        return true;
-    }
+  @Override
+  protected boolean showNavigationIcon() {
+    return true;
+  }
 }

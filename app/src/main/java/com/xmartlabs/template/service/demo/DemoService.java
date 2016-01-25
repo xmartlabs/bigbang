@@ -12,13 +12,12 @@ import rx.Observable;
 
 /**
  * Created by remer on 10/12/2015.
+ * TODO: Just for example purpose. Delete this class and all its references in the real project
  */
 public interface DemoService {
-    // TODO: Just for example purpose. Delete this class and all its references in the real project
-
-    @GET("repositories")
-    @Headers({
-        "Accept: application/vnd.github.v3+json"
-    })
-    Observable<List<DemoRepo>> repositories();
+  @GET("repositories")
+  @Headers({
+      "Accept: application/vnd.github.v3+json"
+  })
+  Observable<List<DemoRepo>> repositories();
 }

@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        >
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                style="@style/Toolbar">
+                style="@style/Toolbar"
+                >
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/toolbar_tabLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TabLayout.Toolbar" />
+                    style="@style/TabLayout.Toolbar"
+                    />
+
             </android.support.v7.widget.Toolbar>
+
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
+
     </android.support.design.widget.CoordinatorLayout>
 
     <RelativeLayout
@@ -43,7 +53,8 @@
         android:background="@color/primaryBackground"
         android:clickable="true"
         android:layout_gravity="start"
-        android:layout_marginEnd="0dp">
+        android:layout_marginEnd="0dp"
+        >
 
         <include layout="@layout/view_drawer_header" />
 
@@ -52,6 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            style="@style/Drawer" />
+            style="@style/Drawer"
+            />
+
     </RelativeLayout>
+
 </android.support.v4.widget.DrawerLayout>

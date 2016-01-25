@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Parcel
 public class DemoOwner {
-    String login;
-    int id;
-    String avatar_url;
-    String gravatar_id;
-    String url;
-    String html_url;
+  String login;
+  int id;
+  String avatar_url;
+  String gravatar_id;
+  String url;
+  String html_url;
 
 //    // Data returned from Github endpoints
 //    {
@@ -44,5 +44,4 @@ public class DemoOwner {
 //        "type": "User",
 //        "site_admin": false
 //    }
-
 }

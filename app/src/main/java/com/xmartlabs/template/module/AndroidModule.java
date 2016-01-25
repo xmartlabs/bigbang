@@ -17,22 +17,22 @@ import dagger.Provides;
  */
 @Module
 public class AndroidModule {
-    private final BaseProjectApplication application;
+  private final BaseProjectApplication application;
 
-    public AndroidModule(BaseProjectApplication application) {
-        this.application = application;
-    }
+  public AndroidModule(BaseProjectApplication application) {
+    this.application = application;
+  }
 
-    @Provides
-    @Singleton
-    //@ForApplication // FIXME: doesn't work with this
-    public Context provideApplicationContext() {
-        return application;
-    }
+  @Provides
+  @Singleton
+  //@ForApplication // FIXME: doesn't work with this
+  public Context provideApplicationContext() {
+    return application;
+  }
 
-    @Provides
-    @Singleton
-    public SharedPreferences provideSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(application);
-    }
+  @Provides
+  @Singleton
+  public SharedPreferences provideSharedPreferences() {
+    return PreferenceManager.getDefaultSharedPreferences(application);
+  }
 }

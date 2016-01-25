@@ -13,15 +13,15 @@ import dagger.Provides;
  */
 @Module
 public class ControllerModule {
-    @Provides
-    @Singleton
-    public SessionController provideSessionController() {
-        return new SessionController();
-    }
+  @Provides
+  @Singleton
+  public SessionController provideSessionController() {
+    return new SessionController();
+  }
 
-    @Provides
-    @Singleton
-    public DemoController provideDemoController() {
-        return new DemoController();
-    }
+  @Provides
+  @Singleton
+  public DemoController provideDemoController() {
+    return new DemoController();
+  }
 }

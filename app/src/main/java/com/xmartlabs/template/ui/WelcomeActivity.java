@@ -7,9 +7,9 @@ import android.support.annotation.NonNull;
  */
 @com.f2prateek.dart.Henson
 public class WelcomeActivity extends SingleFragmentActivity {
-    @NonNull
-    @Override
-    protected BaseFragment createFragment() {
-        return new WelcomeFragmentBuilder().build();
-    }
+  @NonNull
+  @Override
+  protected BaseFragment createFragment() {
+    return new WelcomeFragmentBuilder().build();
+  }
 }

@@ -13,29 +13,29 @@ import com.xmartlabs.template.R;
  * Created by santiago on 31/08/15.
  */
 public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
-    @NonNull
-    protected abstract BaseFragment createFragment();
+  @NonNull
+  protected abstract BaseFragment createFragment();
 
-    @LayoutRes
-    protected int getLayoutResId() {
-        return R.layout.activity_fragment;
+  @LayoutRes
+  protected int getLayoutResId() {
+    return R.layout.activity_fragment;
+  }
+
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    setContentView(getLayoutResId());
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+    if (fragment == null) {
+      fragment = createFragment();
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(getLayoutResId());
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
-        if (fragment == null) {
-            fragment = createFragment();
-        }
-
-        fragmentManager
-                .beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit();
-    }
+    fragmentManager
+        .beginTransaction()
+        .add(R.id.fragment_container, fragment)
+        .commit();
+  }
 }

@@ -14,31 +14,31 @@ import butterknife.ButterKnife;
  * Created by santiago on 31/08/15.
  */
 public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentActivity {
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
+  @Bind(R.id.toolbar)
+  Toolbar toolbar;
 
-    protected int getLayoutResId() {
-        return R.layout.activity_fragment_with_toolbar;
+  protected int getLayoutResId() {
+    return R.layout.activity_fragment_with_toolbar;
+  }
+
+  @Override
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    ButterKnife.bind(this);
+
+    if (!showNavigationIcon()) {
+      toolbar.setNavigationIcon(null);
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
+    setSupportActionBar(toolbar);
+  }
 
-        if (!showNavigationIcon()) {
-            toolbar.setNavigationIcon(null);
-        }
+  @NonNull
+  public Toolbar getToolbar() {
+    return toolbar;
+  }
 
-        setSupportActionBar(toolbar);
-    }
-
-    @NonNull
-    public Toolbar getToolbar() {
-        return toolbar;
-    }
-
-    protected boolean showNavigationIcon() {
-        return false;
-    }
+  protected boolean showNavigationIcon() {
+    return false;
+  }
 }

@@ -1,10 +1,10 @@
 package com.xmartlabs.template.module;
 
+import com.squareup.okhttp.Interceptor;
+import com.squareup.okhttp.Response;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.model.Session;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
@@ -16,31 +16,31 @@ import lombok.val;
  * Created by santiago on 31/08/15.
  */
 public class SessionInterceptor implements Interceptor {
-    // TODO: used by HTTP headers
-//    private static final String HEADER_USER_ID = "user-id";
-//    private static final String HEADER_SESSION_TOKEN = "session-token";
+  // TODO: used by HTTP headers
+  //private static final String HEADER_USER_ID = "user-id";
+  //private static final String HEADER_SESSION_TOKEN = "session-token";
 
-    @Inject
-    SessionController sessionController;
+  @Inject
+  SessionController sessionController;
 
-    @Override
-    public Response intercept(Chain chain) throws IOException {
-        if (sessionController == null) {
-            BaseProjectApplication.getContext().inject(this); // Can't do this in constructor because it's called in a module.
-        }
+  @Override
+  public Response intercept(Chain chain) throws IOException {
+    if (sessionController == null) {
+      BaseProjectApplication.getContext().inject(this); // Can't do this in constructor because it's called in a module.
+    }
 
-        Session authResponse = sessionController.getSession();
+    Session authResponse = sessionController.getSession();
 
-        if (authResponse == null) {
-            return chain.proceed(chain.request());
-        } else {
-            val newRequest = chain.request().newBuilder()
-                    // TODO: Add auth token here if needed
+    if (authResponse == null) {
+      return chain.proceed(chain.request());
+    } else {
+      val newRequest = chain.request().newBuilder()
+          // TODO: Add auth token here if needed
 //                    .addHeader(HEADER_SESSION_TOKEN, authResponse.getFacebook().getAccess_token())
 //                    .addHeader(HEADER_USER_ID, authResponse.get_id())
-                    .build();
+          .build();
 
-            return chain.proceed(newRequest);
-        }
+      return chain.proceed(newRequest);
     }
+  }
 }

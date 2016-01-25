@@ -4,5 +4,5 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/primaryBackground"/>
+        android:color="@color/primaryBackground" />
 </shape>

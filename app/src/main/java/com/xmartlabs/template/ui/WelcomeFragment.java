@@ -8,8 +8,8 @@ import com.xmartlabs.template.R;
  */
 @FragmentWithArgs
 public class WelcomeFragment extends BaseFragment {
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.fragment_main;
-    }
+  @Override
+  protected int getLayoutResId() {
+    return R.layout.fragment_main;
+  }
 }

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/drawer_item_background">
+    android:background="@drawable/drawer_item_background"
+    >
 
     <TextView
         android:id="@android:id/text1"
@@ -11,5 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         style="@style/TextViewDrawerSecondaryItem"
-        tools:text="Hello" />
+        tools:text="Hello"
+        />
+
 </RelativeLayout>

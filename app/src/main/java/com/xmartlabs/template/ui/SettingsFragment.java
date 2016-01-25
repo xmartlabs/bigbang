@@ -8,8 +8,8 @@ import com.xmartlabs.template.R;
  */
 @FragmentWithArgs
 public class SettingsFragment extends ValidatableFragment {
-    @Override
-    protected int getLayoutResId() {
-        return R.layout.fragment_settings;
-    }
+  @Override
+  protected int getLayoutResId() {
+    return R.layout.fragment_settings;
+  }
 }

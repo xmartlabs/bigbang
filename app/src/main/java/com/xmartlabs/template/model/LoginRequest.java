@@ -11,5 +11,5 @@ import lombok.Data;
 @Builder
 @Data
 public class LoginRequest {
-    // TODO
+  // TODO
 }

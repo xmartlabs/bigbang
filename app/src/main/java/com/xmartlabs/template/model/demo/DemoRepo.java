@@ -9,10 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// TODO: Just for demo purposes, delete this class in a real project
-
 /**
- * Created by remer on 10/12/2015.
+ * Created by remer on 10/12/15.
+ * TODO: Just for demo purposes, delete this class in a real project
  */
 @AllArgsConstructor
 @Builder
@@ -20,37 +19,37 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Parcel
 public class DemoRepo {
-    int id;
-    String name;
-    String full_name;
-    DemoOwner owner;
-    String html_url;
-    String description;
-    boolean fork;
-    String url;
+  int id;
+  String name;
+  String full_name;
+  DemoOwner owner;
+  String html_url;
+  String description;
+  boolean fork;
+  String url;
 
-    public boolean match(String filter) {
-        if (StringUtils.stringIsNullOrEmpty(filter)) {
-            return true;
-        }
-
-        boolean matched = false;
-        String lowerCaseFilter = filter.toLowerCase();
-
-        if (!StringUtils.stringIsNullOrEmpty(name)) {
-            matched = matched || name.toLowerCase().contains(lowerCaseFilter);
-        }
-
-        if (!StringUtils.stringIsNullOrEmpty(full_name)) {
-            matched = matched || full_name.toLowerCase().contains(lowerCaseFilter);
-        }
-
-        if (!StringUtils.stringIsNullOrEmpty(description)) {
-            matched = matched || description.toLowerCase().contains(lowerCaseFilter);
-        }
-
-        return matched;
+  public boolean match(String filter) {
+    if (StringUtils.stringIsNullOrEmpty(filter)) {
+      return true;
     }
+
+    boolean matched = false;
+    String lowerCaseFilter = filter.toLowerCase();
+
+    if (!StringUtils.stringIsNullOrEmpty(name)) {
+      matched = matched || name.toLowerCase().contains(lowerCaseFilter);
+    }
+
+    if (!StringUtils.stringIsNullOrEmpty(full_name)) {
+      matched = matched || full_name.toLowerCase().contains(lowerCaseFilter);
+    }
+
+    if (!StringUtils.stringIsNullOrEmpty(description)) {
+      matched = matched || description.toLowerCase().contains(lowerCaseFilter);
+    }
+
+    return matched;
+  }
 
 //    // Data returned from Github endpoints
 //    {
