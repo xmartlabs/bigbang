@@ -1,5 +1,8 @@
 # Android Base Project
 
+This is the Xmartlabs' Android base project. Remember to follow [the style guide]
+(https://github.com/xmartlabs/Android-Style-Guide) when working on projects, and also when contributing here.
+
 ## Assets
 
 The configuration assets are in a [Google Drive folder](PUT LINK).
