@@ -58,7 +58,8 @@ apiKey=YOUR_API_KEY
 ### GCM
 
 Place the staging and production `google-services.json` files in `app/src/staging` and
-`app/src/production` respectively.
+`app/src/production` respectively. These are created using [a Google app]
+(https://developers.google.com/mobile/add?platform=android&cntapi=gcm).
 
 ## Warning `libpng warning: iCCP: Not recognizing known sRGB profile that has been edited` when building an APK
 
