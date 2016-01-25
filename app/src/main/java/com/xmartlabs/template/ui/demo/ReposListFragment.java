@@ -2,6 +2,7 @@ package com.xmartlabs.template.ui.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,10 +39,11 @@ public class ReposListFragment extends FragmentWithDrawer {
   @Bind(R.id.filter_editText)
   EditText filterEditText;
   @Bind(R.id.repos_recyclerView)
-  RecyclerView reposReciclerView;
+  RecyclerView reposRecyclerView;
 
   private DemoAdapter reposAdapter;
 
+  @NonNull
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -54,9 +56,9 @@ public class ReposListFragment extends FragmentWithDrawer {
       startActivity(intent);
     });
 
-    reposReciclerView.setAdapter(reposAdapter);
-    reposReciclerView.setHasFixedSize(true);
-    reposReciclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    reposRecyclerView.setAdapter(reposAdapter);
+    reposRecyclerView.setHasFixedSize(true);
+    reposRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     String defaultFilter = filterEditText.getText().toString();
     filterRepositories(defaultFilter);

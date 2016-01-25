@@ -35,6 +35,7 @@ public class DemoController extends ServiceController {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnError(getGeneralErrorHelper().getGeneralErrorAction())
+        .toObservable()
         .flatMap(Observable::from)
         .filter(repo -> repo.match(filter))
         .toList();

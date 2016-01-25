@@ -6,11 +6,12 @@ import com.xmartlabs.template.model.LoginRequest;
 import retrofit.http.Body;
 import retrofit.http.POST;
 import rx.Observable;
+import rx.Single;
 
 /**
  * Created by santiago on 31/08/15.
  */
 public interface AuthService {
   @POST("login")
-  Observable<AuthResponse> login(@Body LoginRequest loginRequest);
+  Single<AuthResponse> login(@Body LoginRequest loginRequest);
 }

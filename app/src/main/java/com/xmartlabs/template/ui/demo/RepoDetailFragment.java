@@ -1,6 +1,7 @@
 package com.xmartlabs.template.ui.demo;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class RepoDetailFragment extends BaseFragment {
   @Bind(R.id.name_textView)
   TextView nameTextView;
 
+  @NonNull
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = super.onCreateView(inflater, container, savedInstanceState);
