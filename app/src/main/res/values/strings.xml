@@ -1,6 +1,5 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="app_name">Time Off</string>
+    <string name="app_name">App name</string>
     <string name="loading">Loading…</string>
     <string name="message_error_service_call">Oops! Something went wrong, please try again.</string>
     <string name="show_repos_button">Public Repos from Github</string>
@@ -9,8 +8,7 @@
     <string name="home">Home</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="welcome_title">Welcome to Time Off app</string>
+    <string name="welcome_title">Welcome to the app</string>
     <string name="drawer_item_icon">Icon</string>
     <string name="filter_hint">Filter…</string>
 </resources>
-

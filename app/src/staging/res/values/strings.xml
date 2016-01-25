@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Time Off Staging</string>
+    <string name="app_name">App name STA</string>
     <string name="url_service">https://api.github.com/</string>
 </resources>
