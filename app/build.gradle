@@ -16,7 +16,6 @@ buildscript {
 apply plugin: 'com.android.application'
 
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'io.fabric'
@@ -133,7 +132,7 @@ dependencies {
     }
     compile 'com.f2prateek.dart:dart:2.0.0-RC1'
     compile 'com.f2prateek.dart:henson:2.0.0-RC1'
-    compile 'com.google.android.gms:play-services-gcm:8.3.0'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.google.dagger:dagger:2.0.2'
     compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -156,14 +155,18 @@ dependencies {
     provided 'org.projectlombok:lombok:1.16.6'
 }
 
+// Uncomment when having the google-services.json files
+/*apply plugin: 'com.google.gms.google-services'
+
 def appModuleRootFolder = '.'
 def srcDir = 'src'
+def googleServicesJsonFile = 'google-services.json'
 
 task switchToStaging(type: Copy) {
     //noinspection GrUnresolvedAccess
     outputs.upToDateWhen { false }
     def flavor = 'staging'
-    from "${srcDir}/$flavor/"
+    from "${srcDir}/$flavor/$googleServicesJsonFile"
     into "$appModuleRootFolder"
 }
 
@@ -171,7 +174,7 @@ task switchToProduction(type: Copy) {
     //noinspection GrUnresolvedAccess
     outputs.upToDateWhen { false }
     def flavor = 'production'
-    from "${srcDir}/$flavor/"
+    from "${srcDir}/$flavor/$googleServicesJsonFile"
     into "$appModuleRootFolder"
 }
 
@@ -184,4 +187,4 @@ afterEvaluate {
     processProductionDebugGoogleServices.dependsOn switchToProduction
     //noinspection GrUnresolvedAccess
     processProductionReleaseGoogleServices.dependsOn switchToProduction
-}
+}*/
