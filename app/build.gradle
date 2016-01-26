@@ -132,6 +132,7 @@ dependencies {
     }
     compile 'com.f2prateek.dart:dart:2.0.0-RC1'
     compile 'com.f2prateek.dart:henson:2.0.0-RC1'
+    compile 'com.github.mrmike:Ok2Curl:0.1.1'
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.google.dagger:dagger:2.0.2'

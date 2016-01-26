@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.StatFs;
 
 import com.annimon.stream.Objects;
+import com.moczul.ok2curl.CurlInterceptor;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.BuildConfig;
 import com.xmartlabs.template.BuildType;
@@ -51,7 +52,10 @@ public class OkHttpClientFactory {
     if (BuildConfig.DEBUG && !Objects.equals(BuildConfig.FLAVOR, BuildType.PRODUCTION.toString())) {
       HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Timber.tag("OkHttp").d(message));
       loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-      clientBuilder.addNetworkInterceptor(loggingInterceptor);
+      clientBuilder.addInterceptor(loggingInterceptor);
+
+      CurlInterceptor curlInterceptor = new CurlInterceptor();
+      clientBuilder.addInterceptor(curlInterceptor);
     }
   }
 
