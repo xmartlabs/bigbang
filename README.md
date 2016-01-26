@@ -94,3 +94,7 @@ Run the following:
 
 [Ok2Curl](https://github.com/mrmike/Ok2Curl) is added so all network activity logs a curl command to be reproduced
 easily if desired.
+
+## Use Google Play Services in Genymotion
+
+[Follow this StackOverflow answer](http://stackoverflow.com/a/20013322/1165181).
