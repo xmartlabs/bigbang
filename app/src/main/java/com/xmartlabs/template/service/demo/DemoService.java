@@ -4,9 +4,8 @@ import com.xmartlabs.template.model.demo.DemoRepo;
 
 import java.util.List;
 
-import retrofit.http.GET;
-import retrofit.http.Headers;
-import rx.Observable;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import rx.Single;
 
 /**
@@ -15,8 +14,6 @@ import rx.Single;
  */
 public interface DemoService {
   @GET("repositories")
-  @Headers({
-      "Accept: application/vnd.github.v3+json"
-  })
+  @Headers({"Accept: application/vnd.github.v3+json"})
   Single<List<DemoRepo>> repositories();
 }

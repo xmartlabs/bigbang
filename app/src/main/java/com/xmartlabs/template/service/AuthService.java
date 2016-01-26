@@ -3,9 +3,8 @@ package com.xmartlabs.template.service;
 import com.xmartlabs.template.model.AuthResponse;
 import com.xmartlabs.template.model.LoginRequest;
 
-import retrofit.http.Body;
-import retrofit.http.POST;
-import rx.Observable;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 import rx.Single;
 
 /**

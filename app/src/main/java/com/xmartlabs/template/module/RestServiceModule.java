@@ -1,6 +1,5 @@
 package com.xmartlabs.template.module;
 
-import com.squareup.okhttp.OkHttpClient;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.helper.GsonHelper;
@@ -11,9 +10,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import okhttp3.OkHttpClient;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
+import retrofit2.RxJavaCallAdapterFactory;
 
 /**
  * Created by santiago on 31/08/15.

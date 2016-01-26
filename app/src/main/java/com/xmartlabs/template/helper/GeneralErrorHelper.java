@@ -12,8 +12,8 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import retrofit.HttpException;
-import retrofit.Response;
+import retrofit2.HttpException;
+import retrofit2.Response;
 import rx.functions.Action1;
 import timber.log.Timber;
 
@@ -45,7 +45,7 @@ public class GeneralErrorHelper {
       if (Objects.equals(response.code(), 401)) {
         logOut();
       } else {
-        Crashlytics.setString(CRASHLYTICS_KEY_URL, response.raw().request().urlString());
+        Crashlytics.setString(CRASHLYTICS_KEY_URL, response.raw().request().url().toString());
         Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, response.code());
         Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, response.headers().toString());
 

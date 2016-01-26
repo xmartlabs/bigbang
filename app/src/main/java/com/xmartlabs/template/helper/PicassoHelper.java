@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
-import com.squareup.picasso.OkHttpDownloader;
+import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 import com.xmartlabs.template.module.OkHttpClientFactory;
 
@@ -15,7 +15,7 @@ import timber.log.Timber;
  * TODO: convert to module
  */
 public class PicassoHelper {
-  private static final OkHttpDownloader OK_HTTP_CLIENT = new OkHttpDownloader(OkHttpClientFactory.createPicassoOkHttpClient());
+  private static final OkHttp3Downloader OK_HTTP_CLIENT = new OkHttp3Downloader(OkHttpClientFactory.createPicassoOkHttpClient());
   private static final Picasso.Listener LISTENER = (picasso, uri, exception) -> {
     if (uri != null) {
       Crashlytics.setString(GeneralErrorHelper.CRASHLYTICS_KEY_URL, uri.toString());

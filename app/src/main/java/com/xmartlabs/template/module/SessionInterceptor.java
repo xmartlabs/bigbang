@@ -1,7 +1,5 @@
 package com.xmartlabs.template.module;
 
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Response;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.model.Session;
@@ -11,6 +9,8 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import lombok.val;
+import okhttp3.Interceptor;
+import okhttp3.Response;
 
 /**
  * Created by santiago on 31/08/15.
@@ -36,8 +36,8 @@ public class SessionInterceptor implements Interceptor {
     } else {
       val newRequest = chain.request().newBuilder()
           // TODO: Add auth token here if needed
-//                    .addHeader(HEADER_SESSION_TOKEN, authResponse.getFacebook().getAccess_token())
-//                    .addHeader(HEADER_USER_ID, authResponse.get_id())
+//        .addHeader(HEADER_SESSION_TOKEN, authResponse.getFacebook().getAccess_token())
+//        .addHeader(HEADER_USER_ID, authResponse.get_id())
           .build();
 
       return chain.proceed(newRequest);
