@@ -9,60 +9,42 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.helper.CircleTransform;
-import com.xmartlabs.template.helper.PicassoHelper;
 import com.xmartlabs.template.model.demo.DemoRepo;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by remer on 10/12/2015.
+ * Created by remer on 10/12/15.
  */
 public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHolder> {
-  public interface DemoAdapterOnItemClickListener {
-    void onItemClick(@NonNull DemoRepo repo, @NonNull RepoItemViewHolder repoView);
-  }
-
-  public static class RepoItemViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.name_textView)
-    TextView nameTextView;
-    @Bind(R.id.author_textView)
-    TextView authorTextView;
-    @Bind(R.id.imageView)
-    ImageView imageView;
-
-    DemoRepo repo;
-    DemoAdapterOnItemClickListener listener;
-
-    RepoItemViewHolder(View view) {
-      super(view);
-      ButterKnife.bind(this, view);
-    }
-
-    @OnClick(R.id.card_view)
-    @SuppressWarnings("unused")
-    void selectItem(View view) {
-      if (listener != null) {
-        listener.onItemClick(repo, this);
-      }
-    }
-  }
+  @Inject
+  Picasso picasso;
 
   private final List<DemoRepo> items;
   private DemoAdapterOnItemClickListener listener;
 
+  public interface DemoAdapterOnItemClickListener {
+    void onItemClick(@NonNull DemoRepo repo, @NonNull RepoItemViewHolder repoView);
+  }
+
   public DemoAdapter() {
     items = new ArrayList<>();
+    BaseProjectApplication.getContext().inject(this);
   }
 
   @NonNull
+  @SuppressWarnings("unused")
   public List<DemoRepo> getItems() {
     return items;
   }
@@ -91,8 +73,7 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHo
   @Override
   public RepoItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_demo_repo, parent, false);
-    RepoItemViewHolder holder = new RepoItemViewHolder(view);
-    return holder;
+    return new RepoItemViewHolder(view);
   }
 
   @Override
@@ -103,8 +84,7 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHo
     holder.repo = repo;
     holder.listener = listener;
 
-    PicassoHelper.getPicasso(BaseProjectApplication.getContext())
-        .load(repo.getOwner().getAvatar_url())
+    picasso.load(repo.getOwner().getAvatar_url())
         .placeholder(R.drawable.ic_action_action_polymer)
         .transform(new CircleTransform())
         .into(holder.imageView);
@@ -112,5 +92,30 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHo
 
   public void setListener(@Nullable DemoAdapterOnItemClickListener listener) {
     this.listener = listener;
+  }
+
+  public static class RepoItemViewHolder extends RecyclerView.ViewHolder {
+    @Bind(R.id.name_textView)
+    TextView nameTextView;
+    @Bind(R.id.author_textView)
+    TextView authorTextView;
+    @Bind(R.id.imageView)
+    ImageView imageView;
+
+    DemoRepo repo;
+    DemoAdapterOnItemClickListener listener;
+
+    RepoItemViewHolder(View view) {
+      super(view);
+      ButterKnife.bind(this, view);
+    }
+
+    @OnClick(R.id.card_view)
+    @SuppressWarnings("unused")
+    void selectItem(View view) {
+      if (listener != null) {
+        listener.onItemClick(repo, this);
+      }
+    }
   }
 }

@@ -8,6 +8,9 @@ import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.module.DatabaseModule;
 import com.xmartlabs.template.module.GeneralErrorHelperModule;
+import com.xmartlabs.template.module.GsonModule;
+import com.xmartlabs.template.module.OkHttpModule;
+import com.xmartlabs.template.module.PicassoModule;
 import com.xmartlabs.template.module.ReceiverModule;
 import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
@@ -17,6 +20,7 @@ import com.xmartlabs.template.ui.SettingsFragment;
 import com.xmartlabs.template.ui.StartActivity;
 import com.xmartlabs.template.ui.WelcomeActivity;
 import com.xmartlabs.template.ui.WelcomeFragment;
+import com.xmartlabs.template.ui.demo.DemoAdapter;
 import com.xmartlabs.template.ui.demo.DemoDrawerItemFragment;
 import com.xmartlabs.template.ui.demo.RepoDetailActivity;
 import com.xmartlabs.template.ui.demo.RepoDetailFragment;
@@ -35,6 +39,9 @@ import dagger.Component;
     ControllerModule.class,
     DatabaseModule.class,
     GeneralErrorHelperModule.class,
+    GsonModule.class,
+    OkHttpModule.class,
+    PicassoModule.class,
     ReceiverModule.class,
     RestServiceModule.class,
 })
@@ -61,6 +68,8 @@ public interface ApplicationComponent {
   void inject(ReposListFragment reposListFragment);
   void inject(SettingsFragment settingsFragment);
   void inject(WelcomeFragment welcomeFragment);
+
+  void inject(DemoAdapter demoAdapter);
 
 //    void inject(Controller controller);
 //    void inject(ServiceController serviceController);

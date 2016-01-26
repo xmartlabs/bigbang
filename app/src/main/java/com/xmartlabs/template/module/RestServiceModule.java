@@ -1,11 +1,13 @@
 package com.xmartlabs.template.module;
 
-import com.xmartlabs.template.BaseProjectApplication;
+import android.content.Context;
+
+import com.google.gson.Gson;
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.helper.GsonHelper;
 import com.xmartlabs.template.service.AuthService;
 import com.xmartlabs.template.service.demo.DemoService;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -20,39 +22,41 @@ import retrofit2.RxJavaCallAdapterFactory;
  */
 @Module
 public class RestServiceModule {
-  private static final GsonConverterFactory GSON_CONVERTER_FACTORY = GsonConverterFactory.create(GsonHelper.getGson());
-
-  private AuthService authService;
-
-  // TODO: Just for demo, delete next line in the real project
-  private DemoService demoService;
-
-  public RestServiceModule() {
-    OkHttpClient okHttpClient = OkHttpClientFactory.createServiceOkHttpClient();
-
-    RxJavaCallAdapterFactory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
-
-    Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(BaseProjectApplication.getContext().getString(R.string.url_service))
-        .client(okHttpClient)
-        .addConverterFactory(GSON_CONVERTER_FACTORY)
+  @Provides
+  @Singleton
+  public Retrofit provideRetrofit(Context context, @Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
+                                  RxJavaCallAdapterFactory rxJavaCallAdapterFactory,
+                                  GsonConverterFactory gsonConverterFactory) {
+    return new Retrofit.Builder()
         .addCallAdapterFactory(rxJavaCallAdapterFactory)
+        .addConverterFactory(gsonConverterFactory)
+        .baseUrl(context.getString(R.string.url_service))
+        .client(client)
         .build();
-
-    authService = retrofit.create(AuthService.class);
-    demoService = retrofit.create(DemoService.class);
   }
 
   @Provides
   @Singleton
-  public AuthService provideAuthService() {
-    return authService;
+  public RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
+    return RxJavaCallAdapterFactory.create();
   }
 
   @Provides
   @Singleton
-  public DemoService provideDemoService() {
-    // TODO: Just for demo, delete this method in the real project
-    return demoService;
+  public GsonConverterFactory provideGsonConverterFactory(Gson gson) {
+    return GsonConverterFactory.create(gson);
+  }
+
+  @Provides
+  @Singleton
+  public AuthService provideAuthService(Retrofit retrofit) {
+    return retrofit.create(AuthService.class);
+  }
+
+  // TODO: Just for demo, delete this method in the real project
+  @Provides
+  @Singleton
+  public DemoService provideDemoService(Retrofit retrofit) {
+    return retrofit.create(DemoService.class);
   }
 }

@@ -12,14 +12,9 @@ import dagger.Provides;
  */
 @Module
 public class GeneralErrorHelperModule {
-  private static GeneralErrorHelper generalErrorHelper; // To get the GeneralErrorHelper in Application.OnCreate.
-
   @Provides
   @Singleton
   public GeneralErrorHelper provideGeneralErrorHelper() {
-    if (generalErrorHelper == null) {
-      generalErrorHelper = new GeneralErrorHelper();
-    }
-    return generalErrorHelper;
+    return new GeneralErrorHelper();
   }
 }

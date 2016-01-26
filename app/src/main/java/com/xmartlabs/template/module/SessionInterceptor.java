@@ -16,10 +16,6 @@ import okhttp3.Response;
  * Created by santiago on 31/08/15.
  */
 public class SessionInterceptor implements Interceptor {
-  // TODO: used by HTTP headers
-  //private static final String HEADER_USER_ID = "user-id";
-  //private static final String HEADER_SESSION_TOKEN = "session-token";
-
   @Inject
   SessionController sessionController;
 
@@ -35,9 +31,7 @@ public class SessionInterceptor implements Interceptor {
       return chain.proceed(chain.request());
     } else {
       val newRequest = chain.request().newBuilder()
-          // TODO: Add auth token here if needed
-//        .addHeader(HEADER_SESSION_TOKEN, authResponse.getFacebook().getAccess_token())
-//        .addHeader(HEADER_USER_ID, authResponse.get_id())
+          //.addHeader("session", sessionInfo) // TODO: Add auth token here if needed
           .build();
 
       return chain.proceed(newRequest);

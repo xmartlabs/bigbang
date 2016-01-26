@@ -4,8 +4,8 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.xmartlabs.template.helper.GsonHelper;
 import com.xmartlabs.template.model.AuthResponse;
 import com.xmartlabs.template.model.Session;
 
@@ -19,6 +19,8 @@ import timber.log.Timber;
 public class SessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
+  @Inject
+  Gson gson;
   @Inject
   SharedPreferences sharedPreferences;
 
@@ -37,7 +39,7 @@ public class SessionController extends Controller {
     String sessionJsonString = sharedPreferences
         .getString(PREFERENCES_KEY_SESSION, null);
     try {
-      return GsonHelper.getGson().fromJson(sessionJsonString, Session.class);
+      return gson.fromJson(sessionJsonString, Session.class);
     } catch (JsonParseException e) {
       Timber.w(e, "Error while deserializing the stored session");
       deleteSession();
@@ -46,7 +48,7 @@ public class SessionController extends Controller {
   }
 
   public void setSession(@NonNull Session session) {
-    String sessionJsonString = GsonHelper.getGson().toJson(session);
+    String sessionJsonString = gson.toJson(session);
     sharedPreferences
         .edit()
         .putString(PREFERENCES_KEY_SESSION, sessionJsonString)
@@ -60,6 +62,7 @@ public class SessionController extends Controller {
         .apply();
   }
 
+  @SuppressWarnings("unused")
   public boolean isSessionAlive() {
     return sharedPreferences
         .contains(PREFERENCES_KEY_SESSION);
