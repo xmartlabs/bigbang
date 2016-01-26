@@ -8,4 +8,6 @@
     <dimen name="fab_margin_button">16dp</dimen>
     <dimen name="form_field_text_size">18dp</dimen>
     <dimen name="item_repo_padding">16dp</dimen>
+
+    <dimen name="spacing_normal">16dp</dimen>
 </resources>

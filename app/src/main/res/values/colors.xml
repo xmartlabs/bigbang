@@ -1,34 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">@color/orange</color>
-    <color name="secondary">@color/orange60</color>
+    <color name="primary">@color/blue</color>
+    <color name="primaryDark">@color/blueDark</color>
+    <color name="accent">@color/pink</color>
+    <color name="textPrimary">@color/black</color>
+    <color name="textSecondary">@color/gray</color>
+    <color name="divider">@color/grayLight</color>
+    <color name="background">@color/white</color>
 
-    <color name="primaryLight">@color/orange40</color>
-    <color name="secondaryLight">@color/orange20</color>
-
-    <color name="primaryDark">@color/orangeDark</color>
-    <color name="secondaryDark">@color/orangeDark60</color>
-
-    <color name="primaryBackground">@color/primary</color>
-    <color name="primaryBackgroundDark">@color/orangeDark</color>
-    <color name="primaryBackgroundLight">@color/grayLight</color>
-
-    <color name="textColorPrimary">@color/primary</color>
-    <color name="textColorSecondary">@color/secondary</color>
-
-    <color name="black">@android:color/black</color>
-    <color name="black00">#00000000</color>
-    <color name="black50">#77000000</color>
-    <color name="grayLight">#bbbbbb</color>
-    <color name="orange">#fff45537</color>
-    <color name="orange20">#33f45537</color>
-    <color name="orange40">#33f45537</color>
-    <color name="orange60">#99f45537</color>
-    <color name="orangeDark">#db4c31</color>
-    <color name="orangeDark60">#99db4c31</color>
+    <color name="black">#212121</color>
+    <color name="blue">#2196f3</color>
+    <color name="blueDark">#1976d2</color>
+    <!--color name="blueLight">#bbdef8</color-->
+    <color name="gray">#727272</color>
+    <color name="grayLight">#b6b6b6</color>
+    <color name="pink">#ff4081</color>
     <color name="white">@android:color/white</color>
-    <color name="white20">#33ffffff</color>
-    <color name="white40">#66ffffff</color>
-    <color name="white60">#99ffffff</color>
-    <color name="white70">#b3ffffff</color>
 </resources>

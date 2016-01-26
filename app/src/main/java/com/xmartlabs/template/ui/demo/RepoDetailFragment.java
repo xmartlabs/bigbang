@@ -43,6 +43,6 @@ public class RepoDetailFragment extends BaseFragment {
 
   @Override
   protected int getLayoutResId() {
-    return R.layout.fragment_demo_repo_details;
+    return R.layout.fragment_repo_details;
   }
 }

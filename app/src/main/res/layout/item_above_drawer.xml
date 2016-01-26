@@ -20,29 +20,16 @@
         />
 
     <TextView
-        android:id="@android:id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/drawer_item_indicator"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:paddingBottom="7dp"
-        android:paddingEnd="17dp"
-        android:paddingStart="17dp"
-        android:paddingTop="7dp"
-        android:textSize="16sp"
-        tools:text="324"
-        />
-
-    <TextView
         android:id="@android:id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="20dp"
         android:layout_toEndOf="@android:id/icon"
         android:layout_toStartOf="@android:id/text2"
-        style="@style/TextViewDrawerMainItem"
-        tools:text="Hello"
+        tools:text="Home"
+        style="@style/Drawer.AboveItem.TextView"
         />
 
 </RelativeLayout>

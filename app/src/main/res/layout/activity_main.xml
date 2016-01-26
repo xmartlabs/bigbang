@@ -30,7 +30,7 @@
                     android:id="@+id/toolbar_tabLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TabLayout.Toolbar"
+                    style="@style/Toolbar.TabLayout"
                     />
 
             </android.support.v7.widget.Toolbar>
@@ -50,19 +50,21 @@
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryBackground"
+        android:background="@color/background"
         android:clickable="true"
         android:layout_gravity="start"
-        android:layout_marginEnd="0dp"
         >
 
-        <include layout="@layout/view_drawer_header" />
+        <include
+            layout="@layout/view_drawer_header"
+            />
 
         <ListView
             android:id="@+id/drawer_listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:footerDividersEnabled="false"
             style="@style/Drawer"
             />
 

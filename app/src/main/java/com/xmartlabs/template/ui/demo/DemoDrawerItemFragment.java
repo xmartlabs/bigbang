@@ -14,7 +14,7 @@ import com.xmartlabs.template.ui.FragmentWithDrawer;
 public class DemoDrawerItemFragment extends FragmentWithDrawer {
   @Override
   protected int getLayoutResId() {
-    return R.layout.fragment_demo_drawer_item;
+    return R.layout.fragment_home;
   }
 
   @Nullable

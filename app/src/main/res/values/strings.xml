@@ -13,4 +13,9 @@
     <string name="welcome_title">Welcome to the app</string>
     <string name="drawer_item_icon">Icon</string>
     <string name="filter_hint">Filter…</string>
+    <string name="xmartlabs_url" translatable="false">https://www.xmartlabs.com</string>
+    <string name="circle">Circle</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="sample_text">Sample fragment within drawer</string>
+    <string name="sample_settings">TODO: show app settings!!!</string>
 </resources>

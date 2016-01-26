@@ -56,12 +56,6 @@ public class DrawerAdapter extends BaseAdapter {
           drawerAboveItemViewHolder.imageView.setImageResource(drawableResId);
         }
         drawerAboveItemViewHolder.textView.setText(drawerItem.toString());
-        if (drawerItem.getNewMessagesCount() > 0) {
-          drawerAboveItemViewHolder.indicator.setVisibility(View.VISIBLE);
-          drawerAboveItemViewHolder.indicator.setText(String.valueOf(drawerItem.getNewMessagesCount()));
-        } else {
-          drawerAboveItemViewHolder.indicator.setVisibility(View.GONE);
-        }
         break;
       case DIVIDER:
         if (convertView == null) {
@@ -98,10 +92,8 @@ public class DrawerAdapter extends BaseAdapter {
     ImageView imageView;
     @Bind(android.R.id.text1)
     TextView textView;
-    @Bind(android.R.id.text2)
-    TextView indicator;
 
-    DrawerAboveItemViewHolder(View view) {
+    DrawerAboveItemViewHolder(@NonNull View view) {
       ButterKnife.bind(this, view);
     }
   }
@@ -110,7 +102,7 @@ public class DrawerAdapter extends BaseAdapter {
     @Bind(android.R.id.text1)
     TextView textView;
 
-    DrawerBelowItemViewHolder(View view) {
+    DrawerBelowItemViewHolder(@NonNull View view) {
       ButterKnife.bind(this, view);
     }
   }

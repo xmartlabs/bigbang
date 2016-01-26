@@ -2,6 +2,7 @@ package com.xmartlabs.template.ui;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.annimon.stream.Objects;
 import com.f2prateek.dart.InjectExtra;
@@ -29,20 +31,23 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseAppCompatActivity implements ListView.OnItemClickListener {
   @Nullable
   @InjectExtra("initialDrawerItem")
   DrawerItem initialDrawerItem;
 
+  @Bind(R.id.toolbar)
+  Toolbar toolbar;
   @Bind(R.id.drawer)
   View drawer;
+  @Bind(R.id.website_textView)
+  TextView websiteTextView;
   @Bind(R.id.drawer_listView)
   ListView drawerListView;
   @Bind(R.id.activity_main_layout)
   DrawerLayout drawerLayout;
-  @Bind(R.id.toolbar)
-  Toolbar toolbar;
 
   @Inject
   SessionController sessionController;
@@ -81,6 +86,14 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
     displayDrawerView(initialDrawerItem);
 
     UiHelper.checkGooglePlayServicesAndShowAlertIfNeeded(this);
+  }
+
+  @OnClick(R.id.website_textView)
+  @SuppressWarnings("unused")
+  void visitWebsite() {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse(websiteTextView.getText().toString()));
+    startActivity(intent);
   }
 
   @Override
@@ -158,7 +171,7 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
   }
 
   private void selectDrawerItemIfSelectable(@NonNull DrawerItem drawerItem) {
-    if (drawerItem.getSelectable()) {
+    if (drawerItem.isSelectable()) {
       drawerListView.setItemChecked(drawerAdapter.getItemPosition(drawerItem), true);
 
       selectedDrawerItem = drawerItem;

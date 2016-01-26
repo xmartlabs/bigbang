@@ -68,7 +68,7 @@ public class ReposListFragment extends FragmentWithDrawer {
 
   @Override
   protected int getLayoutResId() {
-    return R.layout.fragment_demo_repos_list;
+    return R.layout.fragment_repos_list;
   }
 
   @Nullable
