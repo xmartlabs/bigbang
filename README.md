@@ -89,3 +89,8 @@ Run the following:
 ```bash
 ./gradlew dependencyUpdates
 ```
+
+## cURL
+
+[Ok2Curl](https://github.com/mrmike/Ok2Curl) is added so all network activity logs a curl command to be reproduced
+easily if desired.
