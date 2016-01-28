@@ -68,6 +68,44 @@ Place the staging and production `google-services.json` files in `app/src/stagin
 
 We recommend using [Genymotion](https://www.genymotion.com) emulator.
 
+## Useful plugins
+
+The plugins for Android Studio that we consider useful are:
+
+* .gitignore
+
+    For highlighting .gitignore files and finding unused paths in it.
+
+* Android ButterKnife Zelezny
+
+    For automatically binding views with ButterKnife.
+
+* Android Material Design Icon Generator
+
+    Used to add common icons to the projects. Icons come from the [Material Icons]
+    (https://design.google.com/icons/).
+
+* BashSupport
+
+    For code highlighting in bash script files.
+
+* Fabric for Android Studio
+
+    Mainly for Crashlytics Beta releases (AFAIK it's the only way to do this). Also for viewing crashes and other
+    Fabric stuff.
+
+* Genymotion
+
+    For quick access to Genymotion's emulators.
+
+* Lombok Plugin
+
+    In order to avoid receiving "Cannot resolve symbol/method" errors when using Lombok.
+
+* Markdown
+
+    Markdown language support.
+
 ## Warning `libpng warning: iCCP: Not recognizing known sRGB profile that has been edited` when building an APK
 
 This happens when unrecognised and unnecessary metadata is present in PNG files. To remove it (you
