@@ -106,6 +106,12 @@ The plugins for Android Studio that we consider useful are:
 
     Markdown language support.
 
+## Design tips
+
+You can find common color material combinations in [MaterialUp](https://www.materialpalette.com/), which is based on
+[Google 500 colors](https://www.google.com/design/spec/style/color.html). Also, [Color Hunt]
+(http://colorhunt.co/) can be used for general color combination inspiration.
+
 ## Warning `libpng warning: iCCP: Not recognizing known sRGB profile that has been edited` when building an APK
 
 This happens when unrecognised and unnecessary metadata is present in PNG files. To remove it (you
