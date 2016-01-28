@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
 
-import org.parceler.Parcel;
-
 import java.util.Locale;
 
 import lombok.Getter;
@@ -17,10 +15,10 @@ import lombok.Getter;
  */
 public enum DrawerItem {
   // TODO: define here the items for the drawer menu. Use next definitions as examples.
-  HOME(BaseProjectApplication.getContext().getString(R.string.home), R.drawable.ic_action_action_home, DrawerItemType.MAIN),
-  REPOS(BaseProjectApplication.getContext().getString(R.string.public_repos_title), R.drawable.ic_action_action_polymer, DrawerItemType.MAIN),
+  HOME(BaseProjectApplication.getContext().getString(R.string.home), R.drawable.ic_action_action_home, DrawerItemType.ABOVE),
+  REPOS(BaseProjectApplication.getContext().getString(R.string.public_repos_title), R.drawable.ic_action_action_polymer, DrawerItemType.ABOVE),
   __DIVIDED__(null, null, DrawerItemType.DIVIDER),
-  SETTINGS(BaseProjectApplication.getContext().getString(R.string.settings), null, DrawerItemType.SECONDARY);
+  SETTINGS(BaseProjectApplication.getContext().getString(R.string.settings), null, DrawerItemType.BELOW);
 
   @Nullable
   private final String text;
@@ -37,7 +35,7 @@ public enum DrawerItem {
     this.text = text;
     this.drawableResId = drawableResId;
     this.drawerItemType = drawerItemType;
-    selectable = drawerItemType == DrawerItemType.MAIN;
+    selectable = drawerItemType == DrawerItemType.ABOVE;
   }
 
   public int getValue() {

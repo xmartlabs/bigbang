@@ -55,19 +55,18 @@
         android:layout_gravity="start"
         >
 
-        <ListView
-            android:id="@+id/drawer_listView"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/drawer_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:footerDividersEnabled="false"
             style="@style/Drawer"
             />
 
         <include
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/drawer_listView"
+            android:layout_above="@id/drawer_recyclerView"
             android:layout_marginTop="45dp"
             layout="@layout/view_drawer_header"
             />

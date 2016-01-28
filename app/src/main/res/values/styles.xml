@@ -66,10 +66,8 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="Drawer" parent="Base.Widget.AppCompat.ListView">
-        <item name="android:choiceMode">singleChoice</item>
-        <item name="android:divider">@android:color/transparent</item>
-        <item name="android:dividerHeight">0dp</item>
+    <style name="Drawer">
+
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

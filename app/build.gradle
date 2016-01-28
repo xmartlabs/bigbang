@@ -155,6 +155,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
     //compile 'net.ltgt.dagger:bullet:1.0-SNAPSHOT' // Loaded from JitPack
     compile 'org.parceler:parceler-api:1.0.4'
+    compile 'org.solovyev.android.views:linear-layout-manager:0.5@aar'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided 'org.projectlombok:lombok:1.16.6'
 }

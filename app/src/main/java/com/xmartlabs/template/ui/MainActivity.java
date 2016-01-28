@@ -10,16 +10,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.annimon.stream.Objects;
 import com.f2prateek.dart.InjectExtra;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.controller.SessionController;
@@ -33,7 +32,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseAppCompatActivity implements ListView.OnItemClickListener {
+public class MainActivity extends BaseAppCompatActivity {
   @Nullable
   @InjectExtra("initialDrawerItem")
   DrawerItem initialDrawerItem;
@@ -44,8 +43,8 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
   View drawer;
   @Bind(R.id.website_textView)
   TextView websiteTextView;
-  @Bind(R.id.drawer_listView)
-  ListView drawerListView;
+  @Bind(R.id.drawer_recyclerView)
+  RecyclerView drawerRecyclerView;
   @Bind(R.id.activity_main_layout)
   DrawerLayout drawerLayout;
 
@@ -54,7 +53,6 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
 
   private DrawerAdapter drawerAdapter;
   private ActionBarDrawerToggle drawerToggle;
-  private DrawerItem selectedDrawerItem = null;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,10 +63,12 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
 
     setSupportActionBar(toolbar);
 
-    drawerAdapter = new DrawerAdapter();
-    drawerListView.setAdapter(drawerAdapter);
+    drawerAdapter = new DrawerAdapter(this::onItemClick);
+    drawerRecyclerView.setAdapter(drawerAdapter);
+    drawerRecyclerView.setHasFixedSize(true);
 
-    drawerListView.setOnItemClickListener(this);
+    final LinearLayoutManager layoutManager = new org.solovyev.android.views.llm.LinearLayoutManager(getContext());
+    drawerRecyclerView.setLayoutManager(layoutManager);
 
     drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
       @Override
@@ -126,15 +126,13 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
     drawerToggle.onConfigurationChanged(newConfig);
   }
 
-  @Override
-  public void onItemClick(@Nullable AdapterView<?> adapterView, @Nullable View view, int position, long id) {
-    DrawerItem item = drawerAdapter.getItem(position);
+  public void onItemClick(@NonNull DrawerItem item) {
     displayDrawerView(item);
   }
 
   public void displayDrawerView(@NonNull DrawerItem drawerItem) {
     if (drawerItem.getDrawerItemType() != DrawerItemType.DIVIDER) {
-      if (Objects.equals(selectedDrawerItem, drawerItem)) {
+      if (drawerAdapter.isSelected(drawerItem)) {
         drawerLayout.closeDrawer(drawer);
       } else {
         Fragment fragment = null;
@@ -163,20 +161,10 @@ public class MainActivity extends BaseAppCompatActivity implements ListView.OnIt
               .commit();
         }
 
-        selectDrawerItemIfSelectable(drawerItem);
+        drawerAdapter.selectItemIfSelectable(drawerItem);
 
         drawerLayout.closeDrawer(drawer);
       }
-    }
-  }
-
-  private void selectDrawerItemIfSelectable(@NonNull DrawerItem drawerItem) {
-    if (drawerItem.isSelectable()) {
-      drawerListView.setItemChecked(drawerAdapter.getItemPosition(drawerItem), true);
-
-      selectedDrawerItem = drawerItem;
-    } else {
-      drawerListView.setItemChecked(drawerAdapter.getItemPosition(selectedDrawerItem), true);
     }
   }
 }

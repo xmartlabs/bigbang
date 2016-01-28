@@ -1,14 +1,16 @@
 package com.xmartlabs.template.ui;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.xmartlabs.template.R;
+import com.annimon.stream.Objects;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,91 +21,148 @@ import butterknife.ButterKnife;
 /**
  * Created by santiago on 01/10/15.
  */
-public class DrawerAdapter extends BaseAdapter {
+public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItemViewHolder> {
+  @NonNull
   private final List<DrawerItem> items;
+  @NonNull
+  private final OnItemClickListener onItemClickListener;
+  @Nullable
+  private Integer selectedPosition;
 
-  public DrawerAdapter() {
+  public interface OnItemClickListener {
+    void onItemClick(@NonNull DrawerItem item);
+  }
+
+  public DrawerAdapter(@NonNull OnItemClickListener onItemClickListener) {
     items = Arrays.asList(DrawerItem.values());
+    this.onItemClickListener = onItemClickListener;
   }
 
   @Override
-  public int getCount() {
-    return items.size();
+  @NonNull
+  public DrawerItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+
+    DrawerItemType drawerItemType = DrawerItemType.fromInteger(viewType);
+
+    @LayoutRes
+    int layoutResId = drawerItemType.getLayoutResId();
+
+    View view = layoutInflater.inflate(layoutResId, parent, false);
+
+    switch (drawerItemType) {
+      case ABOVE:
+        return new DrawerAboveItemViewHolder(view);
+      case DIVIDER:
+        return new DrawerDividerItemViewHolder(view);
+      case BELOW:
+        return new DrawerBelowItemViewHolder(view);
+      default:
+        throw new IllegalArgumentException("Invalid drawer item type value");
+    }
+  }
+
+  @Override
+  public void onBindViewHolder(DrawerItemViewHolder holder, int position) {
+    final DrawerItem item = getItem(position);
+    DrawerItemType drawerItemType = item.getDrawerItemType();
+    switch (drawerItemType) {
+      case ABOVE:
+        DrawerAboveItemViewHolder aboveHolder = (DrawerAboveItemViewHolder) holder;
+
+        Integer drawableResId = item.getDrawableResId();
+        if (drawableResId != null) {
+          aboveHolder.imageView.setImageResource(drawableResId);
+        }
+        // fall through
+      case BELOW:
+        DrawerBelowItemViewHolder belowHolder = (DrawerBelowItemViewHolder) holder;
+
+        belowHolder.textView.setText(item.toString());
+        belowHolder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(item));
+        belowHolder.itemView.setSelected(Objects.equals(position, selectedPosition));
+        break;
+      default:
+    }
   }
 
   @NonNull
-  @Override
   public DrawerItem getItem(int position) {
     return items.get(position);
   }
 
   @Override
   public long getItemId(int position) {
-    return items.get(position).getValue();
+    DrawerItem drawerItem = getItem(position);
+    return drawerItem.getValue();
   }
 
   @Override
-  public View getView(int position, View convertView, ViewGroup parent) {
-    DrawerItem drawerItem = getItem(position);
-    switch (drawerItem.getDrawerItemType()) {
-      case MAIN:
-        if (convertView == null) {
-          convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_above_drawer, parent, false);
-        }
-        DrawerAboveItemViewHolder drawerAboveItemViewHolder = new DrawerAboveItemViewHolder(convertView);
-        Integer drawableResId = drawerItem.getDrawableResId();
-        if (drawableResId != null) {
-          drawerAboveItemViewHolder.imageView.setImageResource(drawableResId);
-        }
-        drawerAboveItemViewHolder.textView.setText(drawerItem.toString());
-        break;
-      case DIVIDER:
-        if (convertView == null) {
-          convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_divider_drawer, parent, false);
-        }
-        break;
-      case SECONDARY:
-        if (convertView == null) {
-          convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_below_drawer, parent, false);
-        }
-        DrawerBelowItemViewHolder drawerBelowItemViewHolder = new DrawerBelowItemViewHolder(convertView);
-        drawerBelowItemViewHolder.textView.setText(drawerItem.toString());
-        break;
-    }
-    return convertView;
+  public int getItemCount() {
+    return items.size();
   }
 
   @Override
   public int getItemViewType(int position) {
-    return getItem(position).getDrawerItemType().ordinal();
-  }
-
-  @Override
-  public int getViewTypeCount() {
-    return DrawerItemType.values().length;
+    DrawerItem drawerItem = getItem(position);
+    DrawerItemType drawerItemType = drawerItem.getDrawerItemType();
+    return drawerItemType.getValue();
   }
 
   public int getItemPosition(@NonNull DrawerItem drawerItem) {
     return drawerItem.getValue();
   }
 
-  static class DrawerAboveItemViewHolder {
-    @Bind(android.R.id.icon)
-    ImageView imageView;
-    @Bind(android.R.id.text1)
-    TextView textView;
+  public void selectItemIfSelectable(@NonNull DrawerItem item) {
+    if (selectedPosition != null) {
+      notifyItemChanged(selectedPosition);
+    }
+    if (item.isSelectable()) {
+      selectedPosition = getItemPosition(item);
+      notifyItemChanged(selectedPosition);
+    } else {
+      selectedPosition = null;
+    }
+  }
 
-    DrawerAboveItemViewHolder(@NonNull View view) {
+  @Nullable
+  public DrawerItem getSelected() {
+    return selectedPosition == null ? null : getItem(selectedPosition);
+  }
+
+  public boolean isSelected(@NonNull DrawerItem item) {
+    DrawerItem selectedItem = getSelected();
+    return Objects.equals(item, selectedItem);
+  }
+
+  static class DrawerItemViewHolder extends RecyclerView.ViewHolder {
+    DrawerItemViewHolder(@NonNull View view) {
+      super(view);
       ButterKnife.bind(this, view);
     }
   }
 
-  static class DrawerBelowItemViewHolder {
+  static class DrawerAboveItemViewHolder extends DrawerBelowItemViewHolder {
+    @Bind(android.R.id.icon)
+    ImageView imageView;
+
+    DrawerAboveItemViewHolder(@NonNull View view) {
+      super(view);
+    }
+  }
+
+  static class DrawerDividerItemViewHolder extends DrawerItemViewHolder {
+    DrawerDividerItemViewHolder(@NonNull View view) {
+      super(view);
+    }
+  }
+
+  static class DrawerBelowItemViewHolder extends DrawerItemViewHolder {
     @Bind(android.R.id.text1)
     TextView textView;
 
     DrawerBelowItemViewHolder(@NonNull View view) {
-      ButterKnife.bind(this, view);
+      super(view);
     }
   }
 }
