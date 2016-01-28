@@ -98,3 +98,8 @@ easily if desired.
 ## Use Google Play Services in Genymotion
 
 [Follow this StackOverflow answer](http://stackoverflow.com/a/20013322/1165181).
+
+## Asset Studio
+
+[Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html) should be used when trying to
+generate icons for different screen densities.
