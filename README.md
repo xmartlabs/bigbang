@@ -64,6 +64,10 @@ Place the staging and production `google-services.json` files in `app/src/stagin
 `app/src/production` respectively. These are created using [a Google app]
 (https://developers.google.com/mobile/add?platform=android&cntapi=gcm).
 
+## Genymotion
+
+We recommend using [Genymotion](https://www.genymotion.com) emulator.
+
 ## Warning `libpng warning: iCCP: Not recognizing known sRGB profile that has been edited` when building an APK
 
 This happens when unrecognised and unnecessary metadata is present in PNG files. To remove it (you
