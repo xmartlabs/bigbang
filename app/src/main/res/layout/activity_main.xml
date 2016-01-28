@@ -55,10 +55,6 @@
         android:layout_gravity="start"
         >
 
-        <include
-            layout="@layout/view_drawer_header"
-            />
-
         <ListView
             android:id="@+id/drawer_listView"
             android:layout_width="match_parent"
@@ -66,6 +62,14 @@
             android:layout_alignParentBottom="true"
             android:footerDividersEnabled="false"
             style="@style/Drawer"
+            />
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/drawer_listView"
+            android:layout_marginTop="45dp"
+            layout="@layout/view_drawer_header"
             />
 
     </RelativeLayout>
