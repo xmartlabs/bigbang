@@ -72,23 +72,33 @@ We recommend using [Genymotion](https://www.genymotion.com) emulator.
 
 The plugins for Android Studio that we consider useful are:
 
-* .gitignore: For highlighting .gitignore files and finding unused paths in it.
+<dl>
+    <dt>.gitignore</dt>
+    <dd>For highlighting .gitignore files and finding unused paths in it.</dd>
+    
+    <dt>Android ButterKnife Zelezny</dt>
+    <dd>For automatically binding views with ButterKnife.</dd>
+    
+    <dt>Android Material Design Icon Generator</dt>
+    <dd>Used to add common icons to the projects. Icons come from the <a href="https://design.google.com/icons/">
+    Material Icons</a>.</dd>
 
-* Android ButterKnife Zelezny: For automatically binding views with ButterKnife.
+    <dt>BashSupport</dt>
+    <dd>For code highlighting in bash script files.</dd>
 
-* Android Material Design Icon Generator: Used to add common icons to the projects. Icons come from the [Material Icons]
-(https://design.google.com/icons/).
+    <dt>Fabric for Android Studio</dt>
+    <dd>Mainly for Crashlytics Beta releases (AFAIK it's the only way to do this). Also for viewing
+    crashes and other Fabric stuff.</dd>
 
-* BashSupport: For code highlighting in bash script files.
+    <dt>Genymotion</dt>
+    <dd>For quick access to Genymotion's emulators.</dd>
 
-* Fabric for Android Studio: Mainly for Crashlytics Beta releases (AFAIK it's the only way to do this). Also for viewing
-crashes and other Fabric stuff.
+    <dt>Lombok Plugin</dt>
+    <dd>In order to avoid receiving "Cannot resolve symbol/method" errors when using Lombok.</dd>
 
-* Genymotion: For quick access to Genymotion's emulators.
-
-* Lombok Plugin: In order to avoid receiving "Cannot resolve symbol/method" errors when using Lombok.
-
-* Markdown: Markdown language support.
+    <dt>Markdown</dt>
+    <dd>Markdown language support.</dd>
+</dl>
 
 ## Design tips
 
