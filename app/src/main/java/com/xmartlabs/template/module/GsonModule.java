@@ -2,6 +2,7 @@ package com.xmartlabs.template.module;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.xmartlabs.template.BuildConfig;
 
 import java.util.Date;
 
@@ -18,8 +19,14 @@ public class GsonModule {
   @Provides
   @Singleton
   public Gson provideGson() {
-    return new GsonBuilder()
-        .registerTypeAdapter(Date.class, new GsonUtcDateAdapter())
+    GsonBuilder gsonBuilder = new GsonBuilder()
+        .registerTypeAdapter(Date.class, new GsonUtcDateAdapter());
+
+    if (BuildConfig.DEBUG) {
+      gsonBuilder.setPrettyPrinting();
+    }
+
+    return gsonBuilder
         .create();
   }
 }
