@@ -139,6 +139,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.google.dagger:dagger:2.0.2'
     compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.1'
+    compile 'com.hannesdorfmann.fragmentargs:bundler-parceler:3.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.jakewharton.timber:timber:4.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'

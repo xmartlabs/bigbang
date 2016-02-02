@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
+import com.hannesdorfmann.fragmentargs.bundler.ParcelerArgsBundler;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.model.demo.DemoRepo;
 import com.xmartlabs.template.service.demo.DemoService;
@@ -22,7 +23,7 @@ import butterknife.Bind;
 
 @FragmentWithArgs
 public class RepoDetailFragment extends BaseFragment {
-  @Arg(bundler = DemoRepoArgsBundler.class)
+  @Arg(bundler = ParcelerArgsBundler.class)
   DemoRepo repo;
 
   @Inject
