@@ -145,3 +145,24 @@ easily if desired.
 
 [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html) should be used when trying to
 generate icons for different screen densities.
+
+## 10 non-intuitive and helpful keymaps
+
+These are not common keymaps in other IDEs and programs, and they are helpful too.
+
+| Description                            | Mac                         | Non-Mac                    |
+| -------------------------------------- | --------------------------- | -------------------------- |
+| Cut or copy current line               | `⌘ X` / `⌘ V`               | `Ctrl + X/C`               |
+| Extract variable, field or method      | `⌘ ⌥ V` / `⌘ ⌥ F` / `⌘ ⌥ M` | `Ctrl + Shift + V/F/M`     |
+| File structure popup                   | `⌘ F12`                     | `Ctrl + F12`               |
+| Generate code                          | `⌘ N`                       | `Alt + Insert`             |
+| Go to declaration                      | `⌘ Click`, `⌘ B`            | `Ctrl + Click`, `Ctrl + B` |
+| Go to previous or next method          | `^ ↑` / `^ ↓`               | `Alt + Up/Down`            |
+| Move line up or down                   | `⌘ ⇧ ↑` / `⌘ ⇧ ↓`           | `Ctrl + Shift + Up/Down`   |
+| Rename                                 | `⇧ F6`                      | `Shift + F6`               |
+| Search everywhere                      | `Double ⇧`                  | `Double Shift`             |
+| Show intention actions and quick-fixes | `⌥ ⏎`                       | `Alt + Enter`              |
+
+Take into account that some may conflict with OS ones. For more, check out the [IntelliJ IDEA Default Keymap]
+(https://resources.jetbrains.com/assets/products/intellij-idea/IntelliJIDEA_ReferenceCard.pdf) or the [IntelliJ IDEA Mac
+OS X Default Keymap](https://resources.jetbrains.com/assets/products/intellij-idea/IntelliJIDEA_ReferenceCard_mac.pdf).
