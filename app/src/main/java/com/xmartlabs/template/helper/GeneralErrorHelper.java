@@ -12,8 +12,8 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import retrofit2.HttpException;
 import retrofit2.Response;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.functions.Action1;
 import timber.log.Timber;
 
