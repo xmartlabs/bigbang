@@ -151,6 +151,7 @@ public class MainActivity extends BaseAppCompatActivity {
                 .build();
             startActivity(intent);
             break;
+          default:
         }
 
         if (fragment != null) {

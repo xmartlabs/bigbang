@@ -7,6 +7,11 @@
 
     <item
         android:drawable="@color/primaryDark"
+        android:state_selected="true"
+        />
+
+    <item
+        android:drawable="@color/primaryDark"
         android:state_activated="true"
         />
 

@@ -114,14 +114,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
   }
 
   public void selectItemIfSelectable(@NonNull DrawerItem item) {
-    if (selectedPosition != null) {
-      notifyItemChanged(selectedPosition);
-    }
     if (item.isSelectable()) {
+      if (selectedPosition != null) {
+        notifyItemChanged(selectedPosition);
+      }
       selectedPosition = getItemPosition(item);
       notifyItemChanged(selectedPosition);
-    } else {
-      selectedPosition = null;
     }
   }
 
