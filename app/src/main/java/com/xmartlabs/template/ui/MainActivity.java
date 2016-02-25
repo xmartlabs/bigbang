@@ -67,7 +67,7 @@ public class MainActivity extends BaseAppCompatActivity {
     drawerRecyclerView.setAdapter(drawerAdapter);
     drawerRecyclerView.setHasFixedSize(true);
 
-    final LinearLayoutManager layoutManager = new org.solovyev.android.views.llm.LinearLayoutManager(getContext());
+    final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     drawerRecyclerView.setLayoutManager(layoutManager);
 
     drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
