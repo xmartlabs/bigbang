@@ -85,7 +85,7 @@ public class ReposListFragment extends FragmentWithDrawer {
 
   private void filterRepositories(@Nullable String filter) {
     demoController.getPublicRepositoriesFilteredBy(filter)
-        .<List<DemoRepo>>compose(RxLifecycle.bindUntilFragmentEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
+        .<List<DemoRepo>>compose(RxLifecycle.bindUntilEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
         .subscribe(
             reposAdapter::setItems,
             error -> {
