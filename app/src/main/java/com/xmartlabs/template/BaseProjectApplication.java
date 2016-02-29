@@ -26,7 +26,6 @@ public class BaseProjectApplication extends Application {
   private BulletApplicationComponent bullet;
 
   public BaseProjectApplication() {
-    super();
     instance = this;
   }
 

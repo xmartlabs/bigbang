@@ -1,7 +1,8 @@
 package com.xmartlabs.template.module;
 
+import com.xmartlabs.template.controller.AuthController;
+import com.xmartlabs.template.controller.RepoController;
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.controller.demo.DemoController;
 
 import javax.inject.Singleton;
 
@@ -15,13 +16,19 @@ import dagger.Provides;
 public class ControllerModule {
   @Provides
   @Singleton
-  public SessionController provideSessionController() {
-    return new SessionController();
+  public AuthController provideAuthController() {
+    return new AuthController();
   }
 
   @Provides
   @Singleton
-  public DemoController provideDemoController() {
-    return new DemoController();
+  public RepoController provideRepoController() {
+    return new RepoController();
+  }
+
+  @Provides
+  @Singleton
+  public SessionController provideSessionController() {
+    return new SessionController();
   }
 }

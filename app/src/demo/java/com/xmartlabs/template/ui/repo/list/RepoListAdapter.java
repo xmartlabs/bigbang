@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.demo;
+package com.xmartlabs.template.ui.repo.list;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.helper.CircleTransform;
-import com.xmartlabs.template.model.demo.DemoRepo;
+import com.xmartlabs.template.model.Repo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,36 +27,36 @@ import butterknife.OnClick;
 /**
  * Created by remer on 10/12/15.
  */
-public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHolder> {
+public class RepoListAdapter extends RecyclerView.Adapter<RepoListAdapter.RepoItemViewHolder> {
   @Inject
   Picasso picasso;
 
-  private final List<DemoRepo> items;
+  private final List<Repo> items;
   private DemoAdapterOnItemClickListener listener;
 
   public interface DemoAdapterOnItemClickListener {
-    void onItemClick(@NonNull DemoRepo repo, @NonNull RepoItemViewHolder repoView);
+    void onItemClick(@NonNull Repo repo, @NonNull RepoItemViewHolder repoView);
   }
 
-  public DemoAdapter() {
+  public RepoListAdapter() {
     items = new ArrayList<>();
     BaseProjectApplication.getContext().inject(this);
   }
 
   @NonNull
   @SuppressWarnings("unused")
-  public List<DemoRepo> getItems() {
+  public List<Repo> getItems() {
     return items;
   }
 
-  public void setItems(@NonNull List<DemoRepo> items) {
+  public void setItems(@NonNull List<Repo> items) {
     this.items.clear();
     this.items.addAll(items);
     notifyDataSetChanged();
   }
 
   @NonNull
-  public DemoRepo getItem(int position) {
+  public Repo getItem(int position) {
     return items.get(position);
   }
 
@@ -78,7 +78,7 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHo
 
   @Override
   public void onBindViewHolder(RepoItemViewHolder holder, int position) {
-    DemoRepo repo = getItem(position);
+    Repo repo = getItem(position);
     holder.nameTextView.setText(repo.getName());
     holder.authorTextView.setText(repo.getOwner().getLogin());
     holder.repo = repo;
@@ -102,7 +102,7 @@ public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.RepoItemViewHo
     @Bind(R.id.imageView)
     ImageView imageView;
 
-    DemoRepo repo;
+    Repo repo;
     DemoAdapterOnItemClickListener listener;
 
     RepoItemViewHolder(View view) {

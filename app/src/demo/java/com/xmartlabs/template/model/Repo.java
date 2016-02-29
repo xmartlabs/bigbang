@@ -1,4 +1,4 @@
-package com.xmartlabs.template.model.demo;
+package com.xmartlabs.template.model;
 
 import com.xmartlabs.template.helper.StringUtils;
 
@@ -11,44 +11,44 @@ import lombok.NoArgsConstructor;
 
 /**
  * Created by remer on 10/12/15.
- * TODO: Just for demo purposes, delete this class in a real project
  */
 @AllArgsConstructor
 @Builder
 @Data
 @NoArgsConstructor
 @Parcel
-public class DemoRepo {
+public class Repo {
   int id;
   String name;
   String full_name;
-  DemoOwner owner;
+  Owner owner;
   String html_url;
   String description;
   boolean fork;
   String url;
 
-  public boolean match(String filter) {
+  public boolean matches(String filter) {
     if (StringUtils.stringIsNullOrEmpty(filter)) {
       return true;
     }
 
-    boolean matched = false;
+    boolean matches = false;
     String lowerCaseFilter = filter.toLowerCase();
 
     if (!StringUtils.stringIsNullOrEmpty(name)) {
-      matched = matched || name.toLowerCase().contains(lowerCaseFilter);
+      //noinspection ConstantConditions
+      matches = matches || name.toLowerCase().contains(lowerCaseFilter);
     }
 
     if (!StringUtils.stringIsNullOrEmpty(full_name)) {
-      matched = matched || full_name.toLowerCase().contains(lowerCaseFilter);
+      matches = matches || full_name.toLowerCase().contains(lowerCaseFilter);
     }
 
     if (!StringUtils.stringIsNullOrEmpty(description)) {
-      matched = matched || description.toLowerCase().contains(lowerCaseFilter);
+      matches = matches || description.toLowerCase().contains(lowerCaseFilter);
     }
 
-    return matched;
+    return matches;
   }
 
 //    // Data returned from Github endpoints

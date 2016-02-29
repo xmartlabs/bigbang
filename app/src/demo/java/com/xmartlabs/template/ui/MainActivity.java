@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,8 +22,7 @@ import com.f2prateek.dart.InjectExtra;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.helper.UiHelper;
-import com.xmartlabs.template.ui.demo.DemoDrawerItemFragmentBuilder;
-import com.xmartlabs.template.ui.demo.ReposListFragmentBuilder;
+import com.xmartlabs.template.ui.repo.list.RepoListFragmentBuilder;
 
 import javax.inject.Inject;
 
@@ -34,7 +32,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseAppCompatActivity {
   @Nullable
-  @InjectExtra("initialDrawerItem")
+  @InjectExtra
   DrawerItem initialDrawerItem;
 
   @Bind(R.id.toolbar)
@@ -70,7 +68,7 @@ public class MainActivity extends BaseAppCompatActivity {
     final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
     drawerRecyclerView.setLayoutManager(layoutManager);
 
-    drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
+    drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close) {
       @Override
       public void onDrawerSlide(View drawerView, float slideOffset) {
         super.onDrawerSlide(drawerView, slideOffset);
@@ -78,12 +76,12 @@ public class MainActivity extends BaseAppCompatActivity {
       }
     };
 
-    drawerLayout.setDrawerListener(drawerToggle);
+    drawerLayout.addDrawerListener(drawerToggle);
 
     if (initialDrawerItem == null) {
       initialDrawerItem = DrawerItem.HOME;
     }
-    displayDrawerView(initialDrawerItem);
+    displayDrawerItemView(initialDrawerItem);
 
     UiHelper.checkGooglePlayServicesAndShowAlertIfNeeded(this);
   }
@@ -107,7 +105,7 @@ public class MainActivity extends BaseAppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_settings:
-        displayDrawerView(DrawerItem.SETTINGS);
+        displayDrawerItemView(DrawerItem.SETTINGS);
         return true;
       default:
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
@@ -126,24 +124,22 @@ public class MainActivity extends BaseAppCompatActivity {
     drawerToggle.onConfigurationChanged(newConfig);
   }
 
-  public void onItemClick(@NonNull DrawerItem item) {
-    displayDrawerView(item);
+  public void onItemClick(@NonNull DrawerItem drawerItem) {
+    displayDrawerItemView(drawerItem);
   }
 
-  public void displayDrawerView(@NonNull DrawerItem drawerItem) {
+  public void displayDrawerItemView(@NonNull DrawerItem drawerItem) {
     if (drawerItem.getDrawerItemType() != DrawerItemType.DIVIDER) {
-      if (drawerAdapter.isSelected(drawerItem)) {
-        drawerLayout.closeDrawer(drawer);
-      } else {
-        Fragment fragment = null;
+      if (!drawerAdapter.isSelected(drawerItem)) {
+        FragmentWithDrawer fragmentWithDrawer = null;
         switch (drawerItem) {
           // TODO: change fragments according to selected drawer item
           case HOME: {
-            fragment = new DemoDrawerItemFragmentBuilder().build();
+            fragmentWithDrawer = new HomeFragmentBuilder().build();
             break;
           }
           case REPOS: {
-            fragment = new ReposListFragmentBuilder().build();
+            fragmentWithDrawer = new RepoListFragmentBuilder().build();
             break;
           }
           case SETTINGS:
@@ -154,18 +150,18 @@ public class MainActivity extends BaseAppCompatActivity {
           default:
         }
 
-        if (fragment != null) {
+        if (fragmentWithDrawer != null) {
           FragmentManager fragmentManager = getSupportFragmentManager();
           fragmentManager
               .beginTransaction()
-              .replace(R.id.fragment_container, fragment)
+              .replace(R.id.fragment_container, fragmentWithDrawer)
               .commit();
+          toolbar.setTitle(fragmentWithDrawer.getTitle());
         }
 
         drawerAdapter.selectItemIfSelectable(drawerItem);
-
-        drawerLayout.closeDrawer(drawer);
       }
+      drawerLayout.closeDrawer(drawer);
     }
   }
 }

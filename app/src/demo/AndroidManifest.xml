@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xmartlabs.template">
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:name=".BaseProjectApplication"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:launchMode="singleTop"
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:label=""
+            android:name=".ui.repo.detail.RepoDetailActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:label="@string/settings"
+            android:name=".ui.SettingsActivity"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait"
+            />
+    </application>
+</manifest>

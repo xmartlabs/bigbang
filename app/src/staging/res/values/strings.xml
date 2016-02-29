@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name" translatable="false">Base project STA</string>
-    <string name="url_service" translatable="false">https://api.github.com/</string>
+    <string name="url_service" translatable="false">TODO</string>
 </resources>

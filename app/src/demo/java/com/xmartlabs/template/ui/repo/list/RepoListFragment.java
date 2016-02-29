@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.demo;
+package com.xmartlabs.template.ui.repo.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +16,9 @@ import com.trello.rxlifecycle.FragmentEvent;
 import com.trello.rxlifecycle.RxLifecycle;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.controller.demo.DemoController;
-import com.xmartlabs.template.model.demo.DemoRepo;
+import com.xmartlabs.template.controller.RepoController;
 import com.xmartlabs.template.ui.FragmentWithDrawer;
 import com.xmartlabs.template.ui.Henson;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,26 +26,24 @@ import butterknife.Bind;
 import butterknife.OnTextChanged;
 import timber.log.Timber;
 
-// TODO: Just for demo purposes, delete this class in a real project
-
 @FragmentWithArgs
-public class ReposListFragment extends FragmentWithDrawer {
+public class RepoListFragment extends FragmentWithDrawer {
   @Inject
-  DemoController demoController;
+  RepoController repoController;
 
   @Bind(R.id.filter_editText)
   EditText filterEditText;
   @Bind(R.id.repos_recyclerView)
   RecyclerView reposRecyclerView;
 
-  private DemoAdapter reposAdapter;
+  private RepoListAdapter reposAdapter;
 
   @NonNull
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = super.onCreateView(inflater, container, savedInstanceState);
 
-    reposAdapter = new DemoAdapter();
+    reposAdapter = new RepoListAdapter();
     reposAdapter.setListener((repo, repoView) -> {
       Intent intent = Henson.with(getActivity()).gotoRepoDetailActivity()
           .repo(repo)
@@ -68,13 +63,13 @@ public class ReposListFragment extends FragmentWithDrawer {
 
   @Override
   protected int getLayoutResId() {
-    return R.layout.fragment_repos_list;
+    return R.layout.fragment_repo_list;
   }
 
   @Nullable
   @Override
   public String getTitle() {
-    return BaseProjectApplication.getContext().getString(R.string.public_repos_title);
+    return BaseProjectApplication.getContext().getString(R.string.repo_list_title);
   }
 
   @OnTextChanged(R.id.filter_editText)
@@ -84,8 +79,8 @@ public class ReposListFragment extends FragmentWithDrawer {
   }
 
   private void filterRepositories(@Nullable String filter) {
-    demoController.getPublicRepositoriesFilteredBy(filter)
-        .<List<DemoRepo>>compose(RxLifecycle.bindUntilEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
+    repoController.getPublicRepositoriesFilteredBy(filter)
+        .compose(RxLifecycle.bindUntilEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
         .subscribe(
             reposAdapter::setItems,
             error -> {

@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.demo;
+package com.xmartlabs.template.ui.repo.detail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,23 +11,21 @@ import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.hannesdorfmann.fragmentargs.bundler.ParcelerArgsBundler;
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.model.demo.DemoRepo;
-import com.xmartlabs.template.service.demo.DemoService;
+import com.xmartlabs.template.model.Repo;
+import com.xmartlabs.template.service.RepoService;
 import com.xmartlabs.template.ui.BaseFragment;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 
-// TODO: Just for demo purposes, delete this class in a real project
-
 @FragmentWithArgs
 public class RepoDetailFragment extends BaseFragment {
   @Arg(bundler = ParcelerArgsBundler.class)
-  DemoRepo repo;
+  Repo repo;
 
   @Inject
-  DemoService service;
+  RepoService service;
 
   @Bind(R.id.name_textView)
   TextView nameTextView;

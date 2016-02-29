@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.demo;
+package com.xmartlabs.template.ui;
 
 import android.support.annotation.Nullable;
 
@@ -11,7 +11,7 @@ import com.xmartlabs.template.ui.FragmentWithDrawer;
  * Created by remer on 14/12/15.
  */
 @FragmentWithArgs
-public class DemoDrawerItemFragment extends FragmentWithDrawer {
+public class HomeFragment extends FragmentWithDrawer {
   @Override
   protected int getLayoutResId() {
     return R.layout.fragment_home;
@@ -20,6 +20,6 @@ public class DemoDrawerItemFragment extends FragmentWithDrawer {
   @Nullable
   @Override
   public String getTitle() {
-    return BaseProjectApplication.getContext().getString(R.string.public_repos_title);
+    return BaseProjectApplication.getContext().getString(R.string.home);
   }
 }

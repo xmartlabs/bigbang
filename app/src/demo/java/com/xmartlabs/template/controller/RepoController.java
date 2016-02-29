@@ -1,12 +1,11 @@
-package com.xmartlabs.template.controller.demo;
+package com.xmartlabs.template.controller;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.xmartlabs.template.BaseProjectApplication;
-import com.xmartlabs.template.controller.ServiceController;
-import com.xmartlabs.template.model.demo.DemoRepo;
-import com.xmartlabs.template.service.demo.DemoService;
+import com.xmartlabs.template.model.Repo;
+import com.xmartlabs.template.service.RepoService;
 
 import java.util.List;
 
@@ -18,26 +17,24 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by remer on 10/12/2015.
- * TODO: Just for demo purposes, delete this class in a real project
  */
-public class DemoController extends ServiceController {
+public class RepoController extends ServiceController {
   @Inject
-  DemoService demoService;
+  RepoService repoService;
 
-  public DemoController() {
-    super();
+  public RepoController() {
     BaseProjectApplication.getContext().inject(this);
   }
 
   @NonNull
-  public Observable<List<DemoRepo>> getPublicRepositoriesFilteredBy(@Nullable String filter) {
-    return demoService.repositories()
+  public Observable<List<Repo>> getPublicRepositoriesFilteredBy(@Nullable String filter) {
+    return repoService.repositories()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .doOnError(getGeneralErrorHelper().getGeneralErrorAction())
         .toObservable()
         .flatMap(Observable::from)
-        .filter(repo -> repo.match(filter))
+        .filter(repo -> repo.matches(filter))
         .toList();
   }
 }

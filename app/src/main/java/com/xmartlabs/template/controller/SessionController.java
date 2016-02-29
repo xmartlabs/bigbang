@@ -24,6 +24,7 @@ public class SessionController extends Controller {
   @Inject
   SharedPreferences sharedPreferences;
 
+  @SuppressWarnings("unused")
   public Session setSession(@NonNull AuthResponse authResponse) {
     Session session = getSession();
     if (session == null) {

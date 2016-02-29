@@ -46,4 +46,31 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+    <RelativeLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:clickable="true"
+        android:layout_gravity="start"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/drawer_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            style="@style/Drawer"
+            />
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/drawer_recyclerView"
+            android:layout_marginTop="45dp"
+            layout="@layout/view_drawer_header"
+            />
+
+    </RelativeLayout>
+
 </android.support.v4.widget.DrawerLayout>

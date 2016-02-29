@@ -5,7 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.service.AuthService;
-import com.xmartlabs.template.service.demo.DemoService;
+import com.xmartlabs.template.service.RepoService;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -56,7 +56,7 @@ public class RestServiceModule {
   // TODO: Just for demo, delete this method in the real project
   @Provides
   @Singleton
-  public DemoService provideDemoService(Retrofit retrofit) {
-    return retrofit.create(DemoService.class);
+  public RepoService provideRepoService(Retrofit retrofit) {
+    return retrofit.create(RepoService.class);
   }
 }

@@ -18,7 +18,7 @@
             android:id="@+id/filter_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/filter_hint"
+            android:hint="@string/filter"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:layout_marginStart="@dimen/spacing_normal"

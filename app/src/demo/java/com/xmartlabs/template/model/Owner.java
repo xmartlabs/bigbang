@@ -1,4 +1,4 @@
-package com.xmartlabs.template.model.demo;
+package com.xmartlabs.template.model;
 
 import org.parceler.Parcel;
 
@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 
 /**
  * Created by remer on 10/12/2015.
- * TODO: Just for demo purposes, delete this class in a real project
  */
 @AllArgsConstructor
 @Builder
 @Data
 @NoArgsConstructor
 @Parcel
-public class DemoOwner {
+public class Owner {
   String login;
   int id;
   String avatar_url;

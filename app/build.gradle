@@ -86,12 +86,13 @@ android {
     }
     productFlavors {
         production {
-            //noinspection GrUnresolvedAccess
-            applicationId = defaultConfig.applicationId
+
         }
         staging {
-            //noinspection GrUnresolvedAccess
-            applicationId = defaultConfig.applicationId + '.staging'
+            applicationIdSuffix '.staging'
+        }
+        demo {
+            applicationIdSuffix '.demo'
         }
     }
     compileOptions {
