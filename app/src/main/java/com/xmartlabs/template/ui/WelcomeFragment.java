@@ -7,7 +7,6 @@ import com.trello.rxlifecycle.FragmentEvent;
 import com.trello.rxlifecycle.RxLifecycle;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.controller.AuthController;
-import com.xmartlabs.template.model.AuthResponse;
 
 import javax.inject.Inject;
 

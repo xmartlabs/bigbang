@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.trello.rxlifecycle.components.support.RxFragment;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
@@ -21,6 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by santiago on 15/09/15.
  */
+@FragmentWithArgs
 public abstract class BaseFragment extends RxFragment {
   @Nullable
   private ProgressDialog progressDialog;

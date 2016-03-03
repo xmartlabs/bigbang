@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.controller.RepoController;
 import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
@@ -16,8 +15,6 @@ import javax.inject.Inject;
 public class StartActivity extends BaseActivity {
   @Inject
   AuthController authController;
-  @Inject
-  RepoController repoController;
   @Inject
   SessionController sessionController;
 

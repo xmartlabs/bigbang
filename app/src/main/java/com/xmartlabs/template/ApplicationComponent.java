@@ -2,7 +2,6 @@ package com.xmartlabs.template;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.controller.RepoController;
 import com.xmartlabs.template.helper.DatabaseHelper;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
@@ -15,17 +14,10 @@ import com.xmartlabs.template.module.PicassoModule;
 import com.xmartlabs.template.module.ReceiverModule;
 import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
-import com.xmartlabs.template.ui.HomeFragment;
 import com.xmartlabs.template.ui.MainActivity;
-import com.xmartlabs.template.ui.SettingsActivity;
-import com.xmartlabs.template.ui.SettingsFragment;
 import com.xmartlabs.template.ui.StartActivity;
 import com.xmartlabs.template.ui.WelcomeActivity;
 import com.xmartlabs.template.ui.WelcomeFragment;
-import com.xmartlabs.template.ui.repo.list.RepoListAdapter;
-import com.xmartlabs.template.ui.repo.detail.RepoDetailActivity;
-import com.xmartlabs.template.ui.repo.detail.RepoDetailFragment;
-import com.xmartlabs.template.ui.repo.list.RepoListFragment;
 
 import javax.inject.Singleton;
 
@@ -56,28 +48,19 @@ public interface ApplicationComponent {
 //    void inject(SingleFragmentActivity singleFragmentActivity);
 
   void inject(MainActivity mainActivity);
-  void inject(RepoDetailActivity repoDetailActivity);
   void inject(StartActivity startActivity);
-  void inject(SettingsActivity settingsActivity);
   void inject(WelcomeActivity welcomeActivity);
 
 //    void inject(BaseFragment baseFragment);
 //    void inject(FragmentWithDrawer fragmentWithDrawer);
 //    void inject(ValidatableFragment validatableFragment);
 
-  void inject(HomeFragment homeFragment);
-  void inject(RepoDetailFragment repoDetailFragment);
-  void inject(RepoListFragment repoListFragment);
-  void inject(SettingsFragment settingsFragment);
   void inject(WelcomeFragment welcomeFragment);
-
-  void inject(RepoListAdapter repoListAdapter);
 
 //    void inject(Controller controller);
 //    void inject(ServiceController serviceController);
 
   void inject(AuthController authController);
-  void inject(RepoController repoController);
   void inject(SessionController sessionController);
 
   void inject(SessionInterceptor sessionInterceptor);

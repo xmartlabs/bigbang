@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'io.fabric'
+//apply plugin: 'io.fabric' // TODO: uncomment when having set the Fabric API key
 apply plugin: 'me.tatarka.retrolambda'
 
 repositories {
@@ -91,9 +91,6 @@ android {
         staging {
             applicationIdSuffix '.staging'
         }
-        demo {
-            applicationIdSuffix '.demo'
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -114,12 +111,12 @@ android {
 dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.5.4'
     androidTestCompile 'org.mockito:mockito-core:2.0.43-beta'
-    apt 'com.f2prateek.dart:dart-processor:2.0.0-RC1'
-    //apt 'com.f2prateek.dart:henson-processor:2.0.0-RC1' // Loaded from JitPack
+    apt 'com.f2prateek.dart:dart-processor:2.0.0'
+    apt 'com.f2prateek.dart:henson-processor:2.0.0'
     apt 'com.google.dagger:dagger-compiler:2.0.2'
-    apt 'com.github.f2prateek.dart:henson-processor:8f01ce218d'
     apt 'com.github.xmartlabs.bullet:bullet-compiler:33b6c17e9e'
-    apt 'com.hannesdorfmann.fragmentargs:processor:3.0.1'
+    apt 'com.github.xmartlabs.fragmentargs:processor:6069e90db2'
+    //apt 'com.hannesdorfmann.fragmentargs:processor:3.0.1' // Loaded from JitPack
     //apt 'net.ltgt.dagger:bullet-compiler:1.0-SNAPSHOT' // Loaded from JitPack
     apt 'org.parceler:parceler:1.0.4'
     apt 'org.projectlombok:lombok:1.16.6'
@@ -128,12 +125,12 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.android.support:support-v13:23.2.0'
-    compile 'com.annimon:stream:1.0.6'
+    compile 'com.annimon:stream:1.0.7'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true
     }
-    compile 'com.f2prateek.dart:dart:2.0.0-RC1'
-    compile 'com.f2prateek.dart:henson:2.0.0-RC1'
+    compile 'com.f2prateek.dart:dart:2.0.0'
+    compile 'com.f2prateek.dart:henson:2.0.0'
     compile 'com.github.mrmike:Ok2Curl:0.2.2'
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile 'com.github.xmartlabs.bullet:bullet:33b6c17e9e'
