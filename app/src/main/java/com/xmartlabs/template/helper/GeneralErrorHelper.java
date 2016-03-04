@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import lombok.Getter;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.functions.Action1;
@@ -37,7 +38,8 @@ public class GeneralErrorHelper {
     BaseProjectApplication.getContext().inject(this);
   }
 
-  private final Action1<Throwable> generalErrorAction = t -> {
+  @Getter
+  final Action1<Throwable> generalErrorAction = t -> {
     if (t instanceof HttpException) {
       HttpException httpException = (HttpException) t;
       Response<?> response = httpException.response();
@@ -67,11 +69,11 @@ public class GeneralErrorHelper {
     // TODO: take the user to an activity
   }
 
-  public Action1<Throwable> getGeneralErrorAction() {
-    return generalErrorAction;
-  }
-
-  // If this is not done after log out, the log out sessionInterceptor could not catch the session token.
+  /**
+   * Triggers the actions that need to be done after logging out.
+   *
+   * If this is not done after log out, the log out sessionInterceptor could not catch the session token.
+   */
   public void finishLogOut() {
     dismissNotifications();
     // TODO: remove data from database too
