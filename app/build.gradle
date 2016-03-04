@@ -116,8 +116,7 @@ dependencies {
     apt 'com.f2prateek.dart:henson-processor:2.0.0'
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     apt 'com.github.xmartlabs.bullet:bullet-compiler:33b6c17e9e'
-    apt 'com.github.xmartlabs.fragmentargs:processor:6069e90db2'
-    //apt 'com.hannesdorfmann.fragmentargs:processor:3.0.1' // Loaded from JitPack
+    apt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
     //apt 'net.ltgt.dagger:bullet-compiler:1.0-SNAPSHOT' // Loaded from JitPack
     apt 'org.parceler:parceler:1.0.4'
     apt 'org.projectlombok:lombok:1.16.6'
@@ -137,8 +136,8 @@ dependencies {
     compile 'com.github.xmartlabs.bullet:bullet:33b6c17e9e'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.google.dagger:dagger:2.0.2'
-    compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.1'
-    compile 'com.hannesdorfmann.fragmentargs:bundler-parceler:3.0.1'
+    compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.2'
+    compile 'com.hannesdorfmann.fragmentargs:bundler-parceler:3.0.2'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.jakewharton.timber:timber:4.1.1'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
