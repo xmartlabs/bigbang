@@ -2,6 +2,8 @@
 
 This is the Xmartlabs' Android base project. Remember to follow [the style guide]
 (https://github.com/xmartlabs/Android-Style-Guide) when working on projects, and also when contributing here.
+An example usage of this project lays in [the demo branch]
+(https://github.com/xmartlabs/Android-Base-Project/tree/demo).
 
 ## Assets
 
