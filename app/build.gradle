@@ -155,7 +155,7 @@ dependencies {
     //compile 'net.ltgt.dagger:bullet:1.0-SNAPSHOT' // Loaded from JitPack
     compile 'org.parceler:parceler-api:1.0.4'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    provided 'org.projectlombok:lombok:1.16.6'
+    provided 'org.projectlombok:lombok:1.16.8'
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0'
 }
