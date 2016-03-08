@@ -50,14 +50,7 @@ public class BaseProjectApplication extends Application {
 
     ApplicationComponent component = DaggerApplicationComponent.builder()
         .androidModule(new AndroidModule(this))
-        .controllerModule(new ControllerModule())
-        .databaseModule(new DatabaseModule())
         .generalErrorHelperModule(new GeneralErrorHelperModule())
-        .gsonModule(new GsonModule())
-        .okHttpModule(new OkHttpModule())
-        .picassoModule(new PicassoModule())
-        .receiverModule(new ReceiverModule())
-        .restServiceModule(new RestServiceModule())
         .build();
     bullet = new BulletApplicationComponent(component);
   }
