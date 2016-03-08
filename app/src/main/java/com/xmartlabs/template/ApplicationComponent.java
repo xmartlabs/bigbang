@@ -1,6 +1,8 @@
 package com.xmartlabs.template;
 
 import com.xmartlabs.template.controller.AuthController;
+import com.xmartlabs.template.controller.Controller;
+import com.xmartlabs.template.controller.ServiceController;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.helper.DatabaseHelper;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
@@ -14,8 +16,14 @@ import com.xmartlabs.template.module.PicassoModule;
 import com.xmartlabs.template.module.ReceiverModule;
 import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
+import com.xmartlabs.template.ui.BaseActivity;
+import com.xmartlabs.template.ui.BaseAppCompatActivity;
+import com.xmartlabs.template.ui.BaseFragment;
+import com.xmartlabs.template.ui.FragmentWithDrawer;
 import com.xmartlabs.template.ui.MainActivity;
+import com.xmartlabs.template.ui.SingleFragmentActivity;
 import com.xmartlabs.template.ui.StartActivity;
+import com.xmartlabs.template.ui.ValidatableFragment;
 import com.xmartlabs.template.ui.WelcomeActivity;
 import com.xmartlabs.template.ui.WelcomeFragment;
 
@@ -39,26 +47,22 @@ import dagger.Component;
     RestServiceModule.class,
 })
 public interface ApplicationComponent {
-  // FIXME: DON'T inject base classes. Dagger may use the base class definition to inject the
-  // dependencies in some cases instead of the concrete class making injected members be always null
-  // Bullet is not working sometimes, so we leave it like this.
-
-//    void inject(BaseActivity baseActivity);
-//    void inject(BaseAppCompatActivity baseAppCompatActivity);
-//    void inject(SingleFragmentActivity singleFragmentActivity);
+  void inject(BaseActivity baseActivity);
+  void inject(BaseAppCompatActivity baseAppCompatActivity);
+  void inject(SingleFragmentActivity singleFragmentActivity);
 
   void inject(MainActivity mainActivity);
   void inject(StartActivity startActivity);
   void inject(WelcomeActivity welcomeActivity);
 
-//    void inject(BaseFragment baseFragment);
-//    void inject(FragmentWithDrawer fragmentWithDrawer);
-//    void inject(ValidatableFragment validatableFragment);
+  void inject(BaseFragment baseFragment);
+  void inject(FragmentWithDrawer fragmentWithDrawer);
+  void inject(ValidatableFragment validatableFragment);
 
   void inject(WelcomeFragment welcomeFragment);
 
-//    void inject(Controller controller);
-//    void inject(ServiceController serviceController);
+  void inject(Controller controller);
+  void inject(ServiceController serviceController);
 
   void inject(AuthController authController);
   void inject(SessionController sessionController);

@@ -1,19 +1,15 @@
 package com.xmartlabs.template.ui;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by santiago on 20/10/15.
  */
 public abstract class ValidatableFragment extends BaseFragment {
-  private boolean submitOnStop = true;
-
-  @SuppressWarnings("unused")
-  public boolean isSubmitOnStop() {
-    return submitOnStop;
-  }
-
-  public void setSubmitOnStop(boolean submitOnStop) {
-    this.submitOnStop = submitOnStop;
-  }
+  @Getter
+  @Setter
+  boolean submitOnStop = true;
 
   public boolean validateFields() {
     return true;

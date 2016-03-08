@@ -16,14 +16,11 @@ public abstract class FragmentWithDrawer extends ValidatableFragment {
     return null;
   }
 
-  public boolean hasIconsActionMenuView() {
-    return getTitle() == null;
-  }
-
   public boolean hasTabLayout() {
     return false;
   }
 
+  @SuppressWarnings("unused")
   public boolean scrollToolbar() {
     return hasTabLayout();
   }
