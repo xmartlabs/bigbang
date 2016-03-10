@@ -114,9 +114,10 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-core:2.0.43-beta'
     apt 'com.f2prateek.dart:dart-processor:2.0.0'
     apt 'com.f2prateek.dart:henson-processor:2.0.0'
+    apt 'com.github.xmartlabs.bullet:bullet-compiler:fc1dea8084'
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     apt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
-    apt 'net.ltgt.dagger:bullet-compiler:1.0-SNAPSHOT'
+    //apt 'net.ltgt.dagger:bullet-compiler:1.0-SNAPSHOT' // Loaded from JitPack
     apt 'org.parceler:parceler:1.0.4'
     apt 'org.projectlombok:lombok:1.16.6'
     compile 'com.android.support:appcompat-v7:23.2.0'
