@@ -5,14 +5,7 @@ import android.app.Application;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 import com.xmartlabs.template.module.AndroidModule;
-import com.xmartlabs.template.module.ControllerModule;
-import com.xmartlabs.template.module.DatabaseModule;
 import com.xmartlabs.template.module.GeneralErrorHelperModule;
-import com.xmartlabs.template.module.GsonModule;
-import com.xmartlabs.template.module.OkHttpModule;
-import com.xmartlabs.template.module.PicassoModule;
-import com.xmartlabs.template.module.ReceiverModule;
-import com.xmartlabs.template.module.RestServiceModule;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
