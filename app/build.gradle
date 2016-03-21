@@ -5,10 +5,10 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
-        classpath 'com.google.gms:google-services:2.0.0-beta6'
+        classpath 'com.google.gms:google-services:2.1.0-alpha3'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'io.fabric.tools:gradle:1.21.4'
+        classpath 'io.fabric.tools:gradle:1.21.5'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
@@ -111,7 +111,7 @@ android {
 
 dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.5.4'
-    androidTestCompile 'org.mockito:mockito-core:2.0.43-beta'
+    androidTestCompile 'org.mockito:mockito-core:2.0.44-beta'
     apt 'com.f2prateek.dart:dart-processor:2.0.0'
     apt 'com.f2prateek.dart:henson-processor:2.0.0'
     apt 'com.github.tbroyer.bullet:bullet-compiler:e5044b53df'
@@ -125,13 +125,13 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.android.support:support-v13:23.2.0'
-    compile 'com.annimon:stream:1.0.7'
+    compile 'com.annimon:stream:1.0.8'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true
     }
     compile 'com.f2prateek.dart:dart:2.0.0'
     compile 'com.f2prateek.dart:henson:2.0.0'
-    compile 'com.github.mrmike:Ok2Curl:0.2.2'
+    compile 'com.github.mrmike:Ok2Curl:0.2.3'
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile 'com.github.tbroyer.bullet:bullet:e5044b53df'
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
@@ -144,14 +144,14 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.squareup.okio:okio:1.6.0'
     //compile 'com.squareup.picasso:picasso:2.5.2' // Loaded from JitPack in order to use OkHttp3
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
     compile 'com.trello:rxlifecycle:0.5.0'
     compile 'com.trello:rxlifecycle-components:0.5.0'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'io.reactivex:rxandroid:1.1.0@aar'
-    compile 'io.reactivex:rxjava:1.1.1'
+    compile 'io.reactivex:rxjava:1.1.2'
     //compile 'net.ltgt.dagger:bullet:1.0-SNAPSHOT' // Loaded from JitPack
     compile 'org.parceler:parceler-api:1.0.4'
     compile fileTree(include: ['*.jar'], dir: 'libs')
