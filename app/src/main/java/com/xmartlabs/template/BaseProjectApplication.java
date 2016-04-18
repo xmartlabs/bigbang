@@ -4,10 +4,12 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.GeneralErrorHelperModule;
 
 import io.fabric.sdk.android.Fabric;
+import rx.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
 /**
@@ -40,6 +42,7 @@ public class BaseProjectApplication extends Application {
       Timber.plant(new Timber.DebugTree());
     }
     Timber.plant(new CrashlyticsTree());
+    registerRxErrorHandler();
 
     ApplicationComponent component = DaggerApplicationComponent.builder()
         .androidModule(new AndroidModule(this))
@@ -50,5 +53,9 @@ public class BaseProjectApplication extends Application {
 
   public <T> T inject(final T t) {
     return bullet.inject(t);
+  }
+
+  private void registerRxErrorHandler() {
+    RxJavaPlugins.getInstance().registerErrorHandler(GeneralErrorHelper.getRxErrorHandler());
   }
 }
