@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.annimon.stream.Objects;
 import com.crashlytics.android.Crashlytics;
 import com.xmartlabs.template.BaseProjectApplication;
-import com.xmartlabs.template.common.LoggedException;
+import com.xmartlabs.template.common.AlreadyLoggedException;
 import com.xmartlabs.template.controller.SessionController;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class GeneralErrorHelper {
   SessionController sessionController;
 
   @Getter
-  private static final RxJavaErrorHandler rxErrorHandler = new RxJavaErrorHandler() {
+  private final RxJavaErrorHandler rxErrorHandler = new RxJavaErrorHandler() {
     @Override
     public void handleError(Throwable error) {
       super.handleError(error);
@@ -49,7 +49,7 @@ public class GeneralErrorHelper {
     BaseProjectApplication.getContext().inject(this);
   }
 
-  private static void logCrashlyticsError(Response<?> response) {
+  private void logCrashlyticsError(Response<?> response) {
     String url = response.raw().request().url().toString();
     int resultCode = response.code();
     String headers = response.headers().toString();
@@ -59,11 +59,11 @@ public class GeneralErrorHelper {
     Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, headers);
     try {
       body = response.errorBody().string();
+      Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, body);
     } catch (IOException e) {
       Timber.w(e, "Couldn't read error body");
     }
-    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, body);
-    Timber.d("Set Crashlytics keys - result code = %d, headers = %s, url = %s, body = %s",
+    Timber.d("Crashlytics keys - result code = %d, headers = %s, url = %s, body = %s",
         resultCode,
         headers,
         url,
@@ -71,7 +71,7 @@ public class GeneralErrorHelper {
     );
   }
 
-  private static void clearCrashlyticsKeys() {
+  private void clearCrashlyticsKeys() {
     Crashlytics.setString(CRASHLYTICS_KEY_URL, null);
     Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, -1);
     Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, null);
@@ -79,11 +79,11 @@ public class GeneralErrorHelper {
   }
 
   @Getter
-  final static Action1<Throwable> generalErrorAction = t -> {
+  final Action1<Throwable> generalErrorAction = t -> {
     if (t instanceof HttpException) {
       HttpException httpException = (HttpException) t;
       Response<?> response = httpException.response();
-      if (t.getCause() instanceof LoggedException) {
+      if (t.getCause() instanceof AlreadyLoggedException) {
         return;
       }
 
@@ -93,14 +93,14 @@ public class GeneralErrorHelper {
         logCrashlyticsError(response);
         Timber.e(t, null);
         clearCrashlyticsKeys();
-        httpException.initCause(new LoggedException());
+        httpException.initCause(new AlreadyLoggedException());
       }
     } else {
       Timber.e(t, null);
     }
   };
 
-  private static void logOut() {
+  private void logOut() {
     finishLogOut();
     // TODO: take the user to an activity
   }
@@ -110,12 +110,12 @@ public class GeneralErrorHelper {
    *
    * If this is not done after log out, the log out sessionInterceptor could not catch the session token.
    */
-  public static void finishLogOut() {
+  public void finishLogOut() {
     dismissNotifications();
     // TODO: remove data from database too
   }
 
-  public static void dismissNotifications() {
+  public void dismissNotifications() {
     // TODO
   }
 }

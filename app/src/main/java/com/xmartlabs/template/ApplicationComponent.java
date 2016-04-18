@@ -47,6 +47,8 @@ import dagger.Component;
     RestServiceModule.class,
 })
 public interface ApplicationComponent {
+  void inject(BaseProjectApplication baseProjectApplication);
+
   void inject(BaseActivity baseActivity);
   void inject(BaseAppCompatActivity baseAppCompatActivity);
   void inject(SingleFragmentActivity singleFragmentActivity);
