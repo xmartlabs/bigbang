@@ -27,15 +27,19 @@ public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
 
     setContentView(getLayoutResId());
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+    Fragment fragment = getSingleFragment();
     if (fragment == null) {
       fragment = createFragment();
+      getSupportFragmentManager()
+          .beginTransaction()
+          .add(R.id.fragment_container, fragment)
+          .commit();
     }
+  }
 
-    fragmentManager
-        .beginTransaction()
-        .add(R.id.fragment_container, fragment)
-        .commit();
+  @Nullable
+  protected Fragment getSingleFragment() {
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    return fragmentManager.findFragmentById(R.id.fragment_container);
   }
 }
