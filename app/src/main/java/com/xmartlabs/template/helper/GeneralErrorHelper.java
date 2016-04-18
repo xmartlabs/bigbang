@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.annimon.stream.Objects;
 import com.crashlytics.android.Crashlytics;
 import com.xmartlabs.template.BaseProjectApplication;
+import com.xmartlabs.template.common.AlreadyLoggedException;
 import com.xmartlabs.template.controller.SessionController;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import lombok.Getter;
 import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.functions.Action1;
+import rx.plugins.RxJavaErrorHandler;
 import timber.log.Timber;
 
 /**
@@ -34,8 +36,46 @@ public class GeneralErrorHelper {
   @Inject
   SessionController sessionController;
 
+  @Getter
+  private final RxJavaErrorHandler rxErrorHandler = new RxJavaErrorHandler() {
+    @Override
+    public void handleError(Throwable error) {
+      super.handleError(error);
+      generalErrorAction.call(error);
+    }
+  };
+
   public GeneralErrorHelper() {
     BaseProjectApplication.getContext().inject(this);
+  }
+
+  private void logCrashlyticsError(Response<?> response) {
+    String url = response.raw().request().url().toString();
+    int resultCode = response.code();
+    String headers = response.headers().toString();
+    String body = null;
+    Crashlytics.setString(CRASHLYTICS_KEY_URL, url);
+    Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, resultCode);
+    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, headers);
+    try {
+      body = response.errorBody().string();
+      Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, body);
+    } catch (IOException e) {
+      Timber.w(e, "Couldn't read error body");
+    }
+    Timber.d("Crashlytics keys - result code = %d, headers = %s, url = %s, body = %s",
+        resultCode,
+        headers,
+        url,
+        body
+    );
+  }
+
+  private void clearCrashlyticsKeys() {
+    Crashlytics.setString(CRASHLYTICS_KEY_URL, null);
+    Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, -1);
+    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, null);
+    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, null);
   }
 
   @Getter
@@ -43,21 +83,17 @@ public class GeneralErrorHelper {
     if (t instanceof HttpException) {
       HttpException httpException = (HttpException) t;
       Response<?> response = httpException.response();
+      if (t.getCause() instanceof AlreadyLoggedException) {
+        return;
+      }
 
       if (Objects.equals(response.code(), 401)) {
         logOut();
       } else {
-        Crashlytics.setString(CRASHLYTICS_KEY_URL, response.raw().request().url().toString());
-        Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, response.code());
-        Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, response.headers().toString());
-
-        try {
-          Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, response.errorBody().string());
-        } catch (IOException e) {
-          Timber.e(e, "Couldn't read error body");
-        }
-
+        logCrashlyticsError(response);
         Timber.e(t, null);
+        clearCrashlyticsKeys();
+        httpException.initCause(new AlreadyLoggedException());
       }
     } else {
       Timber.e(t, null);
