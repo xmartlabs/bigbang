@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.GeneralErrorHelperModule;
@@ -36,20 +37,14 @@ public class BaseProjectApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-
-    CrashlyticsCore crashlyticsCore = new CrashlyticsCore.Builder()
-        .disabled(BuildConfig.DEBUG)
-        .build();
-    Crashlytics crashlytics = new Crashlytics.Builder().core(crashlyticsCore).build();
-    Fabric.with(this, crashlytics);
-
-    if (BuildConfig.DEBUG) {
-      Timber.plant(new Timber.DebugTree());
-    }
-    Timber.plant(new CrashlyticsTree());
-
+    initializeLogging();
     initializeInjections();
-    registerRxErrorHandler();
+    initializeDataBase();
+    initializeRxErrorHandler();
+  }
+
+  private void initializeDataBase() {
+    FlowManager.init(this);
   }
 
   private void initializeInjections() {
@@ -61,11 +56,24 @@ public class BaseProjectApplication extends Application {
     inject(this);
   }
 
+  private void initializeLogging() {
+    CrashlyticsCore crashlyticsCore = new CrashlyticsCore.Builder()
+        .disabled(BuildConfig.DEBUG)
+        .build();
+    Crashlytics crashlytics = new Crashlytics.Builder().core(crashlyticsCore).build();
+    Fabric.with(this, crashlytics);
+
+    if (BuildConfig.DEBUG) {
+      Timber.plant(new Timber.DebugTree());
+    }
+    Timber.plant(new CrashlyticsTree());
+  }
+
   public <T> T inject(final T t) {
     return bullet.inject(t);
   }
 
-  private void registerRxErrorHandler() {
+  private void initializeRxErrorHandler() {
     RxJavaPlugins.getInstance().registerErrorHandler(generalErrorHelper.getRxErrorHandler());
   }
 }
