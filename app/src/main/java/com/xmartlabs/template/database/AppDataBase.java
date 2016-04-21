@@ -3,7 +3,7 @@ package com.xmartlabs.template.database;
 import com.raizlabs.android.dbflow.annotation.Database;
 
 /**
- * Created by mirland on 20/04/2016.
+ * Created by mirland on 20/04/16.
  */
 @Database(name = AppDataBase.NAME, version = AppDataBase.VERSION)
 public class AppDataBase {

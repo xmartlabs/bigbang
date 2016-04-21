@@ -22,13 +22,14 @@ import dagger.Provides;
 public class GsonModule {
   @Provides
   @Singleton
+  @SuppressWarnings("unused")
   public Gson provideGson() {
     GsonBuilder gsonBuilder = new GsonBuilder()
         .setExclusionStrategies(new ExclusionStrategy() {
           @Override
-          public boolean shouldSkipField(FieldAttributes f) {
-            return f.getDeclaredClass().equals(ModelAdapter.class)
-                || f.getAnnotation(GsonExclude.class) != null;
+          public boolean shouldSkipField(FieldAttributes fieldAttributes) {
+            return fieldAttributes.getDeclaredClass().equals(ModelAdapter.class)
+                || fieldAttributes.getAnnotation(GsonExclude.class) != null;
           }
 
           @Override
