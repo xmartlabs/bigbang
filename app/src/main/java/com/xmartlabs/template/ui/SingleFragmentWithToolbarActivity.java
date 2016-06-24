@@ -7,14 +7,14 @@ import android.support.v7.widget.Toolbar;
 
 import com.xmartlabs.template.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by santiago on 31/08/15.
  */
 public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentActivity {
-  @Bind(R.id.toolbar)
+  @BindView(R.id.toolbar)
   Toolbar toolbar;
 
   protected int getLayoutResId() {
