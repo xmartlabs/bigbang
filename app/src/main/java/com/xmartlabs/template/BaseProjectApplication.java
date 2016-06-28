@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
@@ -44,7 +45,7 @@ public class BaseProjectApplication extends Application {
   }
 
   private void initializeDataBase() {
-    FlowManager.init(this);
+    FlowManager.init(new FlowConfig.Builder(this).build());
   }
 
   private void initializeInjections() {
