@@ -4,7 +4,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
@@ -31,7 +31,7 @@ repositories {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.0'
+    buildToolsVersion '24.0.1'
     defaultConfig {
         applicationId 'com.xmartlabs.template'
         minSdkVersion 17
@@ -108,24 +108,22 @@ android {
     }
 }
 
-final ANDROID_SUPPORT_VERSION = '24.0.0'
+final ANDROID_SUPPORT_VERSION = '24.1.1'
 final BULLET_VERSION = 'e5044b53df'
-final BUTTER_KNIFE_VERSION = '8.1.0'
-final DAGGER_VERSION = '2.5'
+final BUTTER_KNIFE_VERSION = '8.2.1'
+final DAGGER_VERSION = '2.6'
 final DART_VERSION = '2.0.0'
-final DB_FLOW_VERSION = '3.0.1'
+final DB_FLOW_VERSION = '3.1.1'
 final FRAGMENT_ARGS_VERSION = '3.0.2'
-final LOMBOK_VERSION = '1.16.8'
-final OK_HTTP_VERSION = '3.3.1'
-final OKIO_VERSION = '1.8.0'
+final LOMBOK_VERSION = '1.16.10'
+final OK_HTTP_VERSION = '3.4.1'
+final OKIO_VERSION = '1.9.0'
 final PARCELER_VERSION = '1.1.5'
 final RETROFIT_VERSION = '2.1.0'
 final RX_LIFECYCLE_VERSION = '0.6.1'
-final FIREBASE_VERSION = '9.0.2'
+final FIREBASE_VERSION = '9.2.1'
 
 dependencies {
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.5.4'
-    androidTestCompile 'org.mockito:mockito-core:2.0.70-beta'
     apt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
     apt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${DB_FLOW_VERSION}"
@@ -141,13 +139,13 @@ dependencies {
     compile "com.android.support:design:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:recyclerview-v7:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:support-v13:${ANDROID_SUPPORT_VERSION}"
-    compile 'com.annimon:stream:1.0.9'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
+    compile 'com.annimon:stream:1.1.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
     }
     compile "com.f2prateek.dart:dart:${DART_VERSION}"
     compile "com.f2prateek.dart:henson:${DART_VERSION}"
-    compile 'com.github.mrmike:Ok2Curl:0.2.3'
+    compile 'com.github.mrmike:Ok2Curl:0.2.5'
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${DB_FLOW_VERSION}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${DB_FLOW_VERSION}"
     compile 'com.github.square.picasso:picasso:8c16e8564e'
@@ -170,47 +168,13 @@ dependencies {
     compile "com.trello:rxlifecycle:${RX_LIFECYCLE_VERSION}"
     compile "com.trello:rxlifecycle-components:${RX_LIFECYCLE_VERSION}"
     compile 'com.viewpagerindicator:library:2.4.1@aar'
-    compile 'io.reactivex:rxandroid:1.2.1@aar'
-    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.8'
     //compile 'net.ltgt.dagger:bullet:1.0-SNAPSHOT' // Loaded from JitPack
     compile "org.parceler:parceler-api:${PARCELER_VERSION}"
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided "org.projectlombok:lombok:${LOMBOK_VERSION}"
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.1'
 }
 
-apply plugin: 'com.google.gms.google-services'
-
-/*apply plugin: 'com.google.gms.google-services'
-
-def appModuleRootFolder = '.'
-def srcDir = 'src'
-def googleServicesJsonFile = 'google-services.json'
-
-task switchToStaging(type: Copy) {
-    //noinspection GrUnresolvedAccess
-    outputs.upToDateWhen { false }
-    def flavor = 'staging'
-    from "${srcDir}/$flavor/$googleServicesJsonFile"
-    into "$appModuleRootFolder"
-}
-
-task switchToProduction(type: Copy) {
-    //noinspection GrUnresolvedAccess
-    outputs.upToDateWhen { false }
-    def flavor = 'production'
-    from "${srcDir}/$flavor/$googleServicesJsonFile"
-    into "$appModuleRootFolder"
-}
-
-afterEvaluate {
-    //noinspection GrUnresolvedAccess
-    processStagingDebugGoogleServices.dependsOn switchToStaging
-    //noinspection GrUnresolvedAccess
-    processStagingReleaseGoogleServices.dependsOn switchToStaging
-    //noinspection GrUnresolvedAccess
-    processProductionDebugGoogleServices.dependsOn switchToProduction
-    //noinspection GrUnresolvedAccess
-    processProductionReleaseGoogleServices.dependsOn switchToProduction
-}*/
+//apply plugin: 'com.google.gms.google-services' // TODO: enable when adding google-services.json
