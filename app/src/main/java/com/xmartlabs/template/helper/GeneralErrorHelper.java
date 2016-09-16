@@ -95,7 +95,7 @@ public class GeneralErrorHelper {
       ServiceExceptionWithMessage exceptionWithMessage = t instanceof ServiceExceptionWithMessage
           ? (ServiceExceptionWithMessage) t
           : new ServiceExceptionWithMessage((HttpException) t);
-      // TODO: Handle service error response here
+      // TODO: Handle service error response here like logging out if 401
       logCrashlyticsError(exceptionWithMessage);
       Timber.e(t, null);
     }

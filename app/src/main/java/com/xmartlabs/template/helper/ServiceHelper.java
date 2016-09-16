@@ -7,7 +7,7 @@ import com.annimon.stream.Objects;
 import retrofit2.Response;
 
 /**
- * Created by medina on 9/16/16.
+ * Created by medina on 16/09/2016.
  */
 public class ServiceHelper {
   public static boolean isRequestOf(Response<?> response, String lastPaths) {

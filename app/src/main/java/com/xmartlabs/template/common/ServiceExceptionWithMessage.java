@@ -14,7 +14,7 @@ import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 
 /**
- * Created by medina on 9/16/16.
+ * Created by medina on 16/09/2016.
  */
 @Getter
 public class ServiceExceptionWithMessage extends RuntimeException {
