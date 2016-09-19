@@ -14,7 +14,7 @@ import com.xmartlabs.template.module.GeneralErrorHelperModule;
 import javax.inject.Inject;
 
 import io.fabric.sdk.android.Fabric;
-import rx.plugins.RxJavaPlugins;
+import rx.plugins.RxJavaHooks;
 import timber.log.Timber;
 
 /**
@@ -81,6 +81,6 @@ public class BaseProjectApplication extends Application {
   }
 
   private void initializeRxErrorHandler() {
-    RxJavaPlugins.getInstance().registerErrorHandler(generalErrorHelper.getRxErrorHandler());
+    RxJavaHooks.setOnError(generalErrorHelper.getGeneralErrorAction());
   }
 }

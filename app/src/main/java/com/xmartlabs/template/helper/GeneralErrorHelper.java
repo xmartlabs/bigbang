@@ -4,20 +4,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.annimon.stream.Objects;
+import com.annimon.stream.Stream;
 import com.crashlytics.android.Crashlytics;
 import com.xmartlabs.template.BaseProjectApplication;
-import com.xmartlabs.template.common.AlreadyLoggedException;
+import com.xmartlabs.template.BuildConfig;
+import com.xmartlabs.template.common.ServiceExceptionWithMessage;
 import com.xmartlabs.template.controller.SessionController;
 
-import java.io.IOException;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
 import lombok.Getter;
-import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
+import rx.exceptions.CompositeException;
 import rx.functions.Action1;
-import rx.plugins.RxJavaErrorHandler;
 import timber.log.Timber;
 
 /**
@@ -29,6 +30,10 @@ public class GeneralErrorHelper {
   private static final String CRASHLYTICS_KEY_STATUS_CODE = "status_code";
   public static final String CRASHLYTICS_KEY_URL = "url";
 
+  private final StackTraceElement DUMMY_STACK_TRACE_ELEMENT = new StackTraceElement("", "", null, -1);
+  private final StackTraceElement[] DUMMY_STACK_TRACE_ELEMENT_ARRAY =
+      new StackTraceElement[] {DUMMY_STACK_TRACE_ELEMENT};
+
   @Inject
   Context applicationContext;
   @Inject
@@ -37,38 +42,42 @@ public class GeneralErrorHelper {
   SessionController sessionController;
 
   @Getter
-  private final RxJavaErrorHandler rxErrorHandler = new RxJavaErrorHandler() {
-    @Override
-    public void handleError(Throwable error) {
-      super.handleError(error);
-      generalErrorAction.call(error);
+  final Action1<Throwable> generalErrorAction = t -> {
+    if (t instanceof CompositeException) {
+      CompositeException compositeException = (CompositeException) t;
+      Stream.of(compositeException.getExceptions())
+          .forEach(this::handleException);
+    } else {
+      handleException(t);
     }
+    markExceptionAsHandled(t);
   };
 
   public GeneralErrorHelper() {
     BaseProjectApplication.getContext().inject(this);
   }
 
-  private void logCrashlyticsError(Response<?> response) {
-    String url = response.raw().request().url().toString();
-    int resultCode = response.code();
-    String headers = response.headers().toString();
-    String body = null;
+  private void logCrashlyticsError(ServiceExceptionWithMessage exceptionWithMessage) {
+    String url = ServiceHelper.getUrl(exceptionWithMessage.getResponse().raw());
+    int resultCode = exceptionWithMessage.getCode();
+    String headers = exceptionWithMessage.getResponse().headers().toString();
+    String body = exceptionWithMessage.getErrorBody();
     Crashlytics.setString(CRASHLYTICS_KEY_URL, url);
     Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, resultCode);
     Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, headers);
-    try {
-      body = response.errorBody().string();
-      Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, body);
-    } catch (IOException e) {
-      Timber.w(e, "Couldn't read error body");
-    }
-    Timber.d("Crashlytics keys - result code = %d, headers = %s, url = %s, body = %s",
+    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, body);
+    String message = String.format(Locale.US, "Crashlytics keys - result code = %d, headers = %s, url = %s, body = %s",
         resultCode,
         headers,
         url,
         body
     );
+
+    if (BuildConfig.DEBUG) {
+      Timber.e(message);
+    } else {
+      Timber.d(message);
+    }
   }
 
   private void clearCrashlyticsKeys() {
@@ -78,44 +87,25 @@ public class GeneralErrorHelper {
     Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, null);
   }
 
-  @Getter
-  final Action1<Throwable> generalErrorAction = t -> {
-    if (t instanceof HttpException) {
-      HttpException httpException = (HttpException) t;
-      Response<?> response = httpException.response();
-      if (t.getCause() instanceof AlreadyLoggedException) {
+  private void handleException(Throwable t) {
+    if (t instanceof HttpException || t instanceof ServiceExceptionWithMessage) {
+      if (exceptionIsAlreadyBeingHandled(t)) {
         return;
       }
-
-      if (Objects.equals(response.code(), 401)) {
-        logOut();
-      } else {
-        logCrashlyticsError(response);
-        Timber.e(t, null);
-        clearCrashlyticsKeys();
-        httpException.initCause(new AlreadyLoggedException());
-      }
-    } else {
+      ServiceExceptionWithMessage exceptionWithMessage = t instanceof ServiceExceptionWithMessage
+          ? (ServiceExceptionWithMessage) t
+          : new ServiceExceptionWithMessage((HttpException) t);
+      // TODO: Handle service error response here like logging out if 401
+      logCrashlyticsError(exceptionWithMessage);
       Timber.e(t, null);
     }
-  };
-
-  private void logOut() {
-    finishLogOut();
-    // TODO: take the user to an activity
   }
 
-  /**
-   * Triggers the actions that need to be done after logging out.
-   *
-   * If this is not done after log out, the log out sessionInterceptor could not catch the session token.
-   */
-  public void finishLogOut() {
-    dismissNotifications();
-    // TODO: remove data from database too
+  private boolean exceptionIsAlreadyBeingHandled(Throwable t) {
+    return Objects.equals(t.getStackTrace(), DUMMY_STACK_TRACE_ELEMENT_ARRAY);
   }
 
-  public void dismissNotifications() {
-    // TODO
+  private void markExceptionAsHandled(Throwable t) {
+    t.setStackTrace(DUMMY_STACK_TRACE_ELEMENT_ARRAY);
   }
 }
