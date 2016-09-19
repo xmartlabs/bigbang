@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
@@ -38,14 +39,11 @@ public class BaseProjectApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    initializeLogging();
+    initializeThreeTenABP();
     initializeInjections();
     initializeDataBase();
     initializeRxErrorHandler();
-  }
-
-  private void initializeDataBase() {
-    FlowManager.init(new FlowConfig.Builder(this).build());
+    initializeLogging(); // Crashlytics initialization should go at the end.
   }
 
   private void initializeInjections() {
@@ -55,6 +53,14 @@ public class BaseProjectApplication extends Application {
         .build();
     bullet = new BulletApplicationComponent(component);
     inject(this);
+  }
+
+  private void initializeDataBase() {
+    FlowManager.init(new FlowConfig.Builder(this).build());
+  }
+
+  private void initializeThreeTenABP() {
+    AndroidThreeTen.init(this);
   }
 
   private void initializeLogging() {

@@ -31,7 +31,7 @@ repositories {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.1'
+    buildToolsVersion '24.0.2'
     defaultConfig {
         applicationId 'com.xmartlabs.template'
         minSdkVersion 17
@@ -157,6 +157,7 @@ dependencies {
     compile "com.hannesdorfmann.fragmentargs:annotation:${FRAGMENT_ARGS_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${FRAGMENT_ARGS_VERSION}"
     compile "com.jakewharton:butterknife:${BUTTER_KNIFE_VERSION}"
+    compile 'com.jakewharton.threetenabp:threetenabp:1.0.4'
     compile 'com.jakewharton.timber:timber:4.1.2'
     compile "com.squareup.okhttp3:okhttp:${OK_HTTP_VERSION}"
     compile "com.squareup.okhttp3:logging-interceptor:${OK_HTTP_VERSION}"
