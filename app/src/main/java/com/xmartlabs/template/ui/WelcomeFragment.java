@@ -3,8 +3,8 @@ package com.xmartlabs.template.ui;
 import android.content.Intent;
 
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
-import com.trello.rxlifecycle.FragmentEvent;
 import com.trello.rxlifecycle.RxLifecycle;
+import com.trello.rxlifecycle.android.FragmentEvent;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.model.LoginRequest;

@@ -8,4 +8,6 @@
     <string name="close">Close</string>
     <string name="welcome">Welcome</string>
     <string name="log_in">Log in</string>
+    <string name="field_required">Field required</string>
+    <string name="the_email_not_valid">The email is not valid</string>
 </resources>

@@ -106,6 +106,9 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 final ANDROID_SUPPORT_VERSION = '24.1.1'
@@ -120,7 +123,7 @@ final OK_HTTP_VERSION = '3.4.1'
 final OKIO_VERSION = '1.9.0'
 final PARCELER_VERSION = '1.1.5'
 final RETROFIT_VERSION = '2.1.0'
-final RX_LIFECYCLE_VERSION = '0.6.1'
+final RX_LIFECYCLE_VERSION = '0.7.0'
 final FIREBASE_VERSION = '9.2.1'
 
 dependencies {
@@ -169,10 +172,12 @@ dependencies {
     compile "com.trello:rxlifecycle:${RX_LIFECYCLE_VERSION}"
     compile "com.trello:rxlifecycle-components:${RX_LIFECYCLE_VERSION}"
     compile 'com.viewpagerindicator:library:2.4.1@aar'
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.8'
     //compile 'net.ltgt.dagger:bullet:1.0-SNAPSHOT' // Loaded from JitPack
     compile "org.parceler:parceler-api:${PARCELER_VERSION}"
+    compile 'org.apache.commons:commons-lang3:3.4'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided "org.projectlombok:lombok:${LOMBOK_VERSION}"
     testCompile 'junit:junit:4.12'
