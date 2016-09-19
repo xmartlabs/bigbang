@@ -10,12 +10,20 @@ import com.xmartlabs.template.BaseProjectApplication;
  * Created by medina on 16/09/2016.
  */
 public class SystemServiceHelper {
+  /**
+   * Uses the <code>ConnectivityManager</code> class to determine weather the device is connected to the internet or not
+   * @return true if the device is connected to the internet
+   */
   public static boolean hasNetworkConnection() {
     ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     return connectivityManager.getActiveNetworkInfo() != null &&
         connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
   }
 
+  /**
+   * Copies the <code>text</code> to the clipboard by means of the <code>ClipboardManager</code>
+   * @param text the text to be copied
+   */
   public static void copyTextToClipboard(@NonNull String text) {
     if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
       //noinspection deprecation

@@ -10,30 +10,25 @@ import retrofit2.Response;
  * Created by medina on 19/09/2016.
  */
 public class ServiceHelper {
-  public static boolean isRequestOf(Response<?> response, String lastPaths) {
-    return isRequestOf(response.raw(), lastPaths);
-  }
-
-  public static boolean isRequestOf(okhttp3.Response response, String lastPaths) {
-    String[] responseUrl = getUrl(response).split("/");
-
-    if (lastPaths.contains("/") && responseUrl.length > 1) {
-      String[] lastPathsArray = lastPaths.split("/");
-      return Objects.equals(responseUrl[responseUrl.length - 2], lastPathsArray[0]);
-    } else {
-      String actualLastPath = responseUrl[responseUrl.length - 1];
-      if (actualLastPath.contains("?")) {
-        actualLastPath = actualLastPath.substring(0, actualLastPath.indexOf("?"));
-      }
-
-      return Objects.equals(actualLastPath, lastPaths);
-    }
-  }
-
+  /**
+   * Retrieves the URL of the request
+   * @param response the response from which the URL will be extracted
+   * @return the requested URL
+   */
   public static String getUrl(okhttp3.Response response) {
     return response.request().url().toString();
   }
 
+  /**
+   * Replaces all instances of the <code>parameter</code>, in the form of {parameter} with the given <code>value</code>
+   * For instance:
+   * Given <code>url</code>: http://google.com/{query}, <code>parameter</code>: query and <code>value</code>: test
+   * Returns: http://google.com/test
+   * @param url the url to replace the parameter
+   * @param parameter the parameter to be replaced
+   * @param value the value to replace the parameter
+   * @return the <code>url</code> with all the instances of {<code>parameter</code>} replaced with <code>value</code>
+   */
   public static String addParameterToUrl(@NonNull String url, @NonNull String parameter, @NonNull String value) {
     return url.replaceAll(
         String.format("(.*)\\{%s\\}(.*)", parameter),
@@ -41,6 +36,14 @@ public class ServiceHelper {
     );
   }
 
+  /**
+   * Adds a parameter to the end of the URL, with the following form:
+   * Given <code>url</code>: http://google.com and <code>parameterId</code>: query
+   * Returns: http://google.com/{query}
+   * @param url The URL to add the parameter to
+   * @param parameterId the name of the parameter
+   * @return the <code>url</code> with the appended parameter
+   */
   public static String addParameterNameToEndOfUrl(@NonNull String url, @NonNull String parameterId) {
     return url + "/{" + parameterId + "}";
   }

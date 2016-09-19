@@ -18,12 +18,11 @@ import static org.junit.Assert.assertThat;
 public class ServiceHelperTest {
   private static final String REQUEST_URL = "https://github.com/xmartlabs/Android-Base-Project";
 
-  private Request request;
   private Response response;
 
   @Before
   public void setUp() {
-    request = new Request.Builder()
+    Request request = new Request.Builder()
         .url(REQUEST_URL)
         .build();
     response = new Response.Builder()
@@ -58,15 +57,5 @@ public class ServiceHelperTest {
 
     String expectedResult = REQUEST_URL + "/replacedTest/replacedTest2";
     assertThat(parametrizedUrl, equalTo(expectedResult));
-  }
-
-  @Test
-  public void isRequestOf() {
-    assertThat(ServiceHelper.isRequestOf(response, "xmartlabs/Android-Base-Project"), equalTo(true));
-  }
-
-  @Test
-  public void isRequestOfFalse() {
-    assertThat(ServiceHelper.isRequestOf(response, "xmartlabs"), equalTo(false));
   }
 }
