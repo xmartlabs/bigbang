@@ -27,6 +27,11 @@ import com.squareup.picasso.Transformation;
  * Created by julian on 13/6/21.
  */
 public class CircleTransform implements Transformation {
+  /**
+   * Rounds the given <code>source</code> into a circle and crops out the data outside of it
+   * @param source the <code>Bitmap</code> instance to be rounded
+   * @return a new <code>Bitmap</code> instance, the rounded representation of the <code>source</code>
+   */
   @Override
   public Bitmap transform(Bitmap source) {
     int size = Math.min(source.getWidth(), source.getHeight());

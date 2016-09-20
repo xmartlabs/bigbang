@@ -11,10 +11,20 @@ import java.util.Comparator;
  * Created by medina on 19/09/2016.
  */
 public class CollectionHelper {
+  /**
+   * Checks weather or not a collection is null or empty
+   * @param collection the <code>Collection</code> instance to be checked
+   * @return true if the <code>collection</code> is null or empty
+   */
   public static boolean isNullOrEmpty(@Nullable Collection collection) {
     return collection == null || collection.isEmpty();
   }
 
+  /**
+   * Returns a desc <code>Comparator</code> of any <code>Comparable</code> type
+   * @param <T> the type of the <code>Comparator</code>, which must implement the <code>Comparable</code> interface
+   * @return the <code>Comparator</code> instance
+   */
   @CheckResult
   @NonNull
   @SuppressWarnings("unused")

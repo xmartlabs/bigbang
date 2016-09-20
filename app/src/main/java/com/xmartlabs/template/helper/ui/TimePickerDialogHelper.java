@@ -23,12 +23,27 @@ public class TimePickerDialogHelper {
   @Setter
   OnDateSetListener listener;
 
+  /**
+   * Creates a <code>TimePickerDialog</code> instance without specifying the initial date
+   * @param context to retrieve the time format (12 or 24 hour)
+   * @param listener to listen for a date selection
+   * @param clock to retrieve the calendar from
+   * @return a new instance of <code>TimePickerDialog</code>
+   */
   @NonNull
   @SuppressWarnings("unused")
   public static TimePickerDialog createDialog(@NonNull Context context, @Nullable OnDateSetListener listener, @NonNull Clock clock) {
     return createDialog(context, null, listener, clock);
   }
 
+  /**
+   * Creates a <code>TimePickerDialog</code> instance
+   * @param context to retrieve the time format (12 or 24 hour)
+   * @param date the initial date
+   * @param listener to listen for a date selection
+   * @param clock to retrieve the calendar from
+   * @return a new instance of <code>TimePickerDialog</code>
+   */
   @NonNull
   public static TimePickerDialog createDialog(@NonNull Context context, @Nullable Date date, @Nullable OnDateSetListener listener, @NonNull Clock clock) {
     Calendar calendar = DateHelper.getCalendarFromClock(clock);

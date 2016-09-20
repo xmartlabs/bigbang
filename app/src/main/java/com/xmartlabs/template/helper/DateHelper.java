@@ -84,10 +84,10 @@ public class DateHelper {
     }
   }
 
-  private static Calendar addOrRemoveGmtOffset(Calendar cal, boolean add) {
+  private static Calendar addOrRemoveGmtOffset(Calendar calendar, boolean add) {
     int factor = add ? 1 : -1;
-    Date date = cal.getTime();
-    TimeZone timeZone = cal.getTimeZone();
+    Date date = calendar.getTime();
+    TimeZone timeZone = calendar.getTimeZone();
     long msFromEpochGmt = date.getTime();
     int offsetFromUtc = timeZone.getOffset(msFromEpochGmt);
     Calendar gmtCal = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
@@ -96,14 +96,29 @@ public class DateHelper {
     return gmtCal;
   }
 
-  public static Calendar convertToGmt(Calendar cal) {
-    return addOrRemoveGmtOffset(cal, true);
+  /**
+   * Converts a <code>Calendar</code> instance to GMT time
+   * @param calendar the calendar instance to be converted
+   * @return a new <code>Calendar</code> instance in GTM time
+   */
+  public static Calendar convertToGmt(Calendar calendar) {
+    return addOrRemoveGmtOffset(calendar, true);
   }
 
-  public static Calendar convertFromGmt(Calendar cal) {
-    return addOrRemoveGmtOffset(cal, false);
+  /**
+   * Converts a <code>Calendar</code> instance from GMT time
+   * @param calendar the calendar instance to be converted
+   * @return a new <code>Calendar</code> instance converted from GMT time
+   */
+  public static Calendar convertFromGmt(Calendar calendar) {
+    return addOrRemoveGmtOffset(calendar, false);
   }
 
+  /**
+   * Converts a <code>Date</code> instance to GMT time
+   * @param date the date instance to be converted
+   * @return the <code>date</code> instance converted to GMT
+   */
   @NonNull
   public static Date convertToGmt(Date date) {
     try {
@@ -142,6 +157,13 @@ public class DateHelper {
     }
   }
 
+  /**
+   * Sets the <code>newDate</code> year, month and day of month onto <code>oldDateAndTime</code>
+   * @param oldDateAndTime the date to update
+   * @param newDate the new date that will be used to update <code>oldDateAndTime</code>
+   * @return a new <code>Date</code> instance with the time parameters of the <code>oldDateAndTime</code> and the
+   * date parameters of the <code>newDate</code>
+   */
   @NonNull
   public static Date setDateButKeepTime(@NonNull Date oldDateAndTime, @NonNull Date newDate) {
     Calendar oldDateAndTimeCalendar = DateUtils.toCalendar(oldDateAndTime);
@@ -157,10 +179,15 @@ public class DateHelper {
     return oldDateAndTimeCalendar.getTime();
   }
 
+  /**
+   * Sets the <code>newTime</code> hour, minute, second and millisecond parameters onto <code>oldDateAndTime</code>
+   * @param oldDateAndTime the date whose time parameters will be updated
+   * @param newTime the new date whose time parameters will be used to update <code>oldDateAndTime</code>
+   * @return a new <code>Date</code> instance with the date parameters of the <code>oldDateAndTime</code> and the
+   * time parameters of the <code>newDate</code>
+   */
   @NonNull
   public static Date setTimeButKeepDate(@NonNull Date oldDateAndTime, @NonNull Date newTime) {
-    //return setDateButKeepTime(newTime, oldDateAndTime); // This could keep more information from newTime than desired.
-
     Calendar oldDateAndTimeCalendar = DateUtils.toCalendar(oldDateAndTime);
 
     Calendar newTimeCalendar = DateUtils.toCalendar(newTime);
@@ -172,11 +199,21 @@ public class DateHelper {
     return oldDateAndTimeCalendar.getTime();
   }
 
+  /**
+   * Sets the <code>date</code> to the first second of the day it's in
+   * @param date the date to update
+   * @return a new <code>Date</code>, same day as <code>date</code> but starting at the first second of the day
+   */
   @NonNull
   public static Date toFirstSecond(@NonNull Date date) {
     return DateUtils.truncate(date, Calendar.DATE);
   }
 
+  /**
+   * Sets the <code>date</code> to the last second of the day it's in
+   * @param date the date to update
+   * @return a new <code>Date</code>, same day as <code>date</code> but starting at the last second of the day
+   */
   @NonNull
   public static Date toLastSecond(@NonNull Date date) {
     Date followingDay = getFollowingDay(date);
@@ -185,18 +222,33 @@ public class DateHelper {
     return calendar.getTime();
   }
 
+  /**
+   * Retrieves the date from the <code>clock</code> and set's it <code>toFirstSecond</code>
+   * @param clock to be used to retrieve today's date
+   * @return the today <code>Date</code> instance
+   */
   @NonNull
   public static Date getToday(Clock clock) {
     Date now = getDateFromClock(clock);
     return toFirstSecond(now);
   }
 
+  /**
+   * Retrieves the date from the <code>clock</code> and then adds a day to it
+   * @param clock to be used to retrieve tomorrow's date
+   * @return the tomorrow <code>Date</code> instance
+   */
   @NonNull
   public static Date getTomorrow(Clock clock) {
     Date now = getDateFromClock(clock);
     return getFollowingDay(now);
   }
 
+  /**
+   * Given a <code>Date</code>, returns the following day
+   * @param date the original date
+   * @return a new <code>Date</code> instance representation of the day after <code>date</code>
+   */
   @NonNull
   public static Date getFollowingDay(@NonNull Date date) {
     Date today = toFirstSecond(date);
@@ -205,12 +257,22 @@ public class DateHelper {
     return tomorrow.getTime();
   }
 
+  /**
+   * Retrieves the date from the <code>clock</code> and then subtract a day from it
+   * @param clock to be used to retrieve tomorrow's date
+   * @return the tomorrow <code>Date</code> instance
+   */
   @NonNull
   public static Date getYesterday(Clock clock) {
     Date now = getDateFromClock(clock);
     return getPreviousDay(now);
   }
 
+  /**
+   * Given a <code>Date</code>, returns the previous day
+   * @param date the original date
+   * @return a new <code>Date</code> instance representation of the day before <code>date</code>
+   */
   @NonNull
   public static Date getPreviousDay(@NonNull Date date) {
     Date today = toFirstSecond(date);
@@ -219,18 +281,38 @@ public class DateHelper {
     return yesterday.getTime();
   }
 
+  /**
+   * Checks weather the given <code>date</code> is today or not
+   * @param date the date to check
+   * @param clock to be used to retrieve today's date
+   * @return true if the date given by the <code>clock</code> is the same as <code>date</code>
+   */
   public static boolean isToday(Date date, Clock clock) {
     Date truncatedDate = toFirstSecond(date);
     Date today = getToday(clock);
     return Objects.equals(truncatedDate, today);
   }
 
+  /**
+   * Checks weather the given <code>date</code> is yesterday or not
+   * @param date the date to check
+   * @param clock to be used to retrieve today's date
+   * @return true if the date given by the <code>clock</code> minus one day is the same as <code>date</code>
+   */
   public static boolean isYesterday(Date date, Clock clock) {
     Date truncatedDate = toFirstSecond(date);
     Date yesterday = getYesterday(clock);
     return Objects.equals(truncatedDate, yesterday);
   }
 
+  /**
+   * Checks weather the <code>startTime</code> and <code>endTime</code> are the same day, <code>startTime</code> is
+   * the first second and <code>endTime</code> is the last second
+   * @param startTime the start of the day
+   * @param endTime the end of the day
+   * @return true if <code>startTime</code> is the first second of the same day as <code>endTime</code>, which in turn
+   * should be the last second of the day
+   */
   public static boolean isAllDay(Calendar startTime, Calendar endTime) {
     startTime = DateUtils.truncate(startTime, Calendar.MINUTE);
     endTime = DateUtils.truncate(endTime, Calendar.MINUTE);
@@ -244,6 +326,11 @@ public class DateHelper {
         && !endTime.before(endDateTime);
   }
 
+  /**
+   * Retrieves the first day of the <code>date</code> week
+   * @param date the date whose week's first day we want to retrieve
+   * @return a <code>Date</code> instance representing the first day of the <code>date</code> week
+   */
   public static Date getFirstDayOfWeek(Date date) {
     Calendar calendar = Calendar.getInstance();
     calendar.setFirstDayOfWeek(Calendar.MONDAY);
@@ -255,10 +342,20 @@ public class DateHelper {
     return calendar.getTime();
   }
 
+  /**
+   * Retrieves the first day of the <code>date</code> week
+   * @param date the date whose week's first day we want to retrieve
+   * @return a <code>Date</code> instance representing the first day of the <code>date</code> week
+   */
   public static LocalDate getFirstDayOfWeek(LocalDate date) {
     return date.with(DayOfWeek.MONDAY);
   }
 
+  /**
+   * Retrieves the last day of the <code>date</code> week
+   * @param date the date whose week's last day we want to retrieve
+   * @return a <code>Date</code> instance representing the last day of the <code>date</code> week
+   */
   public static Date getLastDayOfWeek(Date date) {
     Calendar calendar = Calendar.getInstance();
     calendar.setFirstDayOfWeek(Calendar.MONDAY);
@@ -270,6 +367,11 @@ public class DateHelper {
     return calendar.getTime();
   }
 
+  /**
+   * Retrieves a <code>Calendar</code> instance from the <code>clock</code>
+   * @param clock to be used to retrieve the <code>Calendar</code> instance
+   * @return a new <code>Calendar</code> instance representing the clock's time
+   */
   @NonNull
   public static Calendar getCalendarFromClock(Clock clock) {
     Calendar calendar = Calendar.getInstance();
@@ -277,41 +379,37 @@ public class DateHelper {
     return calendar;
   }
 
+  /**
+   * Retrieves a <code>Date</code> instance from the <code>clock</code>
+   * @param clock to be used to retrieve the <code>Date</code> instance
+   * @return a new <code>Date</code> omstamce representing the clock's time
+   */
   @NonNull
   public static Date getDateFromClock(Clock clock) {
     return new Date(clock.millis());
   }
 
-  @NonNull
-  public static String getFriendlyStringForDateRange(Date startDate, Date endDate) {
-    if (isSameDayIncludingMidnight(startDate, endDate)) {
-      return DATE_SHORT_FORMAT.format(startDate);
-    } else if (Objects.equals(DateUtils.truncate(startDate, Calendar.MONTH), DateUtils.truncate(endDate, Calendar.MONTH))) {
-      return String.format(
-          Locale.getDefault(),
-          "%s%s%s %s",
-          DATE_DAY_FORMAT.format(startDate),
-          DATE_SEPARATOR,
-          DATE_DAY_FORMAT.format(endDate),
-          DATE_SHORT_MONTH_NAME_FORMAT.format(startDate)
-      );
-    } else {
-      return String.format(
-          Locale.getDefault(),
-          "%s%s%s",
-          DATE_SHORT_FORMAT.format(startDate),
-          DATE_SEPARATOR,
-          DATE_SHORT_FORMAT.format(endDate)
-      );
-    }
-  }
-
+  /**
+   * Checks weather or not the <code>startDate</code> is the same day as <code>endDate</code>, including the midnight
+   * time
+   * @param startDate the date to check
+   * @param endDate the date to check against to
+   * @return true if <code>startDate</code> is the same date as <code>endDate</code> or <code>endDate</code> is the
+   * midnight of the next day
+   */
   public static boolean isSameDayIncludingMidnight(Date startDate, Date endDate) {
     return DateUtils.isSameDay(startDate, endDate)
         || DateUtils.isSameDay(startDate, DateUtils.addSeconds(endDate, -10));
   }
 
-  // http://stackoverflow.com/a/14015299/5170805
+  /**
+   * Creates a <code>DateFormat</code> which removes the year component from it.
+   * For instance, given 10/06/2010 it yields 10/06
+   *
+   * Extracted from: http://stackoverflow.com/a/14015299/5170805
+   * @param dateFormat the <code>DateFormat</code> from which the year component will be extracted
+   * @return a new <code>DateFormat</code> in which the year is removed from the pattern
+   */
   @NonNull
   public static DateFormat getRemoveYearsToDateFormat(DateFormat dateFormat) {
     SimpleDateFormat simpleDateFormat = (SimpleDateFormat) dateFormat.clone();
@@ -320,36 +418,77 @@ public class DateHelper {
     return simpleDateFormat;
   }
 
+  /**
+   * Convert's an instance of the <code>LocalDate</code> Java 8 Time backport to a <code>Date</code> instance
+   * @param localDate the date to be converted
+   * @return a new <code>Date</code> instance representing the same date as <code>localDate</code>
+   */
   @NonNull
   public static Date localDateToDate(@NonNull LocalDate localDate) {
     return localDateToDate(localDate, ZoneId.systemDefault());
   }
 
+  /**
+   * Convert's an instance of the <code>LocalDate</code> Java 8 Time backport to a <code>Date</code> instance,
+   * using the rules given by <code>zoneId</code>
+   * @param localDate the date to be converted
+   * @param zoneId the rules to be used
+   * @return a new <code>Date</code> instance representing the same date as <code>localDate</code> using the
+   * <code>zoneId</code> rules
+   */
   @NonNull
   public static Date localDateToDate(@NonNull LocalDate localDate, @NonNull ZoneId zoneId) {
     return DateTimeUtils.toDate(localDate.atStartOfDay(zoneId).toInstant());
   }
 
+  /**
+   * Convert's a <code>Date</code> to an instance of Java 8 Time backport <code>LocalDate</code>
+   * @param date the date to be converted
+   * @return a new <code>LocalDate</code> instance representing the same date as <code>date</code>
+   */
   @NonNull
   public static LocalDate dateToLocalDate(@NonNull Date date) {
     return dateToZonedDateTime(date).toLocalDate();
   }
 
+  /**
+   * Convert's a <code>Date</code> to an instance of Java 8 Time backport <code>LocalDateTime</code>
+   * @param date the date to be converted
+   * @return a new <code>LocalDateTime</code> instance representing the same date as <code>date</code>
+   */
   @NonNull
   public static LocalDateTime dateToLocalDateTime(@NonNull Date date) {
     return dateToZonedDateTime(date).toLocalDateTime();
   }
 
+  /**
+   * Convert's a <code>Calendar</code> to an instance of Java 8 Time backport <code>ZonedDateTime</code>
+   * @param calendar the date to be converted
+   * @return a new <code>ZonedDateTime</code> instance representing the same date as <code>calendar</code>, using the
+   * system default's <code>ZoneId</code>
+   */
   @NonNull
   public static ZonedDateTime calendarToZonedDateTime(@NonNull Calendar calendar) {
     return DateTimeUtils.toInstant(calendar).atZone(ZoneId.systemDefault());
   }
 
+  /**
+   * Convert's a <code>Date</code> to an instance of Java 8 Time backport <code>ZonedDateTime</code>
+   * @param date the date to be converted
+   * @return a new <code>ZonedDateTime</code> instance representing the same date as <code>date</code>, using the
+   * system default's <code>ZoneId</code>
+   */
   @NonNull
   private static ZonedDateTime dateToZonedDateTime(@NonNull Date date) {
     return DateTimeUtils.toInstant(date).atZone(ZoneId.systemDefault());
   }
 
+  /**
+   * Retrieves a list of days (<code>LocalDate</code>s) between <code>startDate</code> and <code>endDate</code>
+   * @param startDate the date before the list should start
+   * @param endDate the date after the list should end
+   * @return the list between, but not including, <code>startDate</code> and <code>endDate</code>
+   */
   @NonNull
   public static List<LocalDate> getListOfDaysBetweenTwoDates(LocalDate startDate, LocalDate endDate) {
     LocalDate endLocalDate = endDate.plusDays(1);
@@ -358,42 +497,14 @@ public class DateHelper {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Retrieves a list of days (<code>LocalDate</code>s) between <code>startDate</code> and <code>endDate</code>
+   * @param startDate the date before the list should start
+   * @param endDate the date after the list should end
+   * @return the list between, but not including, <code>startDate</code> and <code>endDate</code>
+   */
   @NonNull
   public static List<LocalDate> getListOfDaysBetweenTwoDates(Date startDate, Date endDate) {
     return getListOfDaysBetweenTwoDates(dateToLocalDate(startDate), dateToLocalDate(endDate));
-  }
-
-  @CheckResult
-  @NonNull
-  public static String durationToHoursMinutesString(Duration duration) {
-    long hours = duration.toHours();
-    long minutes = duration.minusHours(hours).toMinutes();
-    if (minutes == 0) {
-      return String.format(Locale.getDefault(), "%dh", hours);
-    } else {
-      return String.format(Locale.getDefault(), "%dh %dm", hours, minutes);
-    }
-  }
-
-  public static boolean startAndEndDateShouldBeFromSameDay(Date startTime, Date endTime) {
-    final Calendar startTimeCalendar = Calendar.getInstance();
-    startTimeCalendar.setTime(startTime);
-    final Calendar endTimeCalendar = Calendar.getInstance();
-    endTimeCalendar.setTime(endTime);
-
-    int startTimeHour = startTimeCalendar.get(Calendar.HOUR_OF_DAY);
-    int endTimeHour = endTimeCalendar.get(Calendar.HOUR_OF_DAY);
-
-    if (startTimeHour == endTimeHour) {
-      int startTimeMinute = startTimeCalendar.get(Calendar.MINUTE);
-      int endTimeHourMinute = endTimeCalendar.get(Calendar.MINUTE);
-      if (startTimeMinute >= endTimeHourMinute) {
-        return false;
-      }
-    } else if (startTimeHour > endTimeHour) {
-      return false;
-    }
-
-    return true;
   }
 }

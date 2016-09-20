@@ -21,12 +21,25 @@ public class DatePickerDialogHelper {
   @Setter
   OnDateSetListener listener;
 
+  /**
+   * Creates a <code>DatePickerDialog</code> instance
+   * @param listener to be triggered when the user selects a date
+   * @param clock to get the <code>Calendar</code> from
+   * @return the <code>DatePickerDialog</code> created instance
+   */
   @SuppressWarnings("unused")
   @NonNull
   public static DatePickerDialog createDialog(@Nullable OnDateSetListener listener, @NonNull Clock clock) {
     return createDialog(null, listener, clock);
   }
 
+  /**
+   * Creates a <code>DatePickerDialog</code> instance with the <code>date</code> selected
+   * @param date the selected start date
+   * @param listener to be triggered when the user selects a date
+   * @param clock to get the <code>Calendar</code> from
+   * @return the <code>DatePickerDialog</code> created instance
+   */
   @NonNull
   public static DatePickerDialog createDialog(@Nullable Date date, @Nullable OnDateSetListener listener,
                                               @NonNull Clock clock) {

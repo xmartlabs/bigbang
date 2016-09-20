@@ -16,6 +16,12 @@ import java.util.List;
 public class DrawHelper {
   private static final Path PATH = new Path();
 
+  /**
+   * Draws a path in the canvas using the <code>points</code> list, drawing a line between consecutive points
+   * @param canvas the canvas to draw the path
+   * @param paint the style of the path
+   * @param points the points in the path.
+   */
   public static void drawPath(@NonNull Canvas canvas, @NonNull Paint paint, @NonNull List<Point> points) {
     if (points.size() < 2) {
       return;
