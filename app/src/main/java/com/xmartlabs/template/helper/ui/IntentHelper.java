@@ -110,7 +110,7 @@ public class IntentHelper {
   }
 
   /**
-   * Checks weather or not the device has a camera
+   * Checks whether or not the device has a camera
    * @return true if the device has a camera
    */
   public static boolean deviceHasCameraAbility() {

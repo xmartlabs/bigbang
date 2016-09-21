@@ -282,7 +282,7 @@ public class DateHelper {
   }
 
   /**
-   * Checks weather the given <code>date</code> is today or not
+   * Checks whether the given <code>date</code> is today or not
    * @param date the date to check
    * @param clock to be used to retrieve today's date
    * @return true if the date given by the <code>clock</code> is the same as <code>date</code>
@@ -294,7 +294,7 @@ public class DateHelper {
   }
 
   /**
-   * Checks weather the given <code>date</code> is yesterday or not
+   * Checks whether the given <code>date</code> is yesterday or not
    * @param date the date to check
    * @param clock to be used to retrieve today's date
    * @return true if the date given by the <code>clock</code> minus one day is the same as <code>date</code>
@@ -306,7 +306,7 @@ public class DateHelper {
   }
 
   /**
-   * Checks weather the <code>startTime</code> and <code>endTime</code> are the same day, <code>startTime</code> is
+   * Checks whether the <code>startTime</code> and <code>endTime</code> are the same day, <code>startTime</code> is
    * the first second and <code>endTime</code> is the last second
    * @param startTime the start of the day
    * @param endTime the end of the day
@@ -390,7 +390,7 @@ public class DateHelper {
   }
 
   /**
-   * Checks weather or not the <code>startDate</code> is the same day as <code>endDate</code>, including the midnight
+   * Checks whether or not the <code>startDate</code> is the same day as <code>endDate</code>, including midnight
    * time
    * @param startDate the date to check
    * @param endDate the date to check against to
@@ -419,7 +419,7 @@ public class DateHelper {
   }
 
   /**
-   * Convert's an instance of the <code>LocalDate</code> Java 8 Time backport to a <code>Date</code> instance
+   * Convert an instance of the <code>LocalDate</code> Java 8 Time backport to a <code>Date</code> instance
    * @param localDate the date to be converted
    * @return a new <code>Date</code> instance representing the same date as <code>localDate</code>
    */
@@ -429,7 +429,7 @@ public class DateHelper {
   }
 
   /**
-   * Convert's an instance of the <code>LocalDate</code> Java 8 Time backport to a <code>Date</code> instance,
+   * Convert an instance of the <code>LocalDate</code> Java 8 Time backport to a <code>Date</code> instance,
    * using the rules given by <code>zoneId</code>
    * @param localDate the date to be converted
    * @param zoneId the rules to be used
@@ -442,7 +442,7 @@ public class DateHelper {
   }
 
   /**
-   * Convert's a <code>Date</code> to an instance of Java 8 Time backport <code>LocalDate</code>
+   * Convert a <code>Date</code> to an instance of Java 8 Time backport <code>LocalDate</code>
    * @param date the date to be converted
    * @return a new <code>LocalDate</code> instance representing the same date as <code>date</code>
    */
@@ -452,7 +452,7 @@ public class DateHelper {
   }
 
   /**
-   * Convert's a <code>Date</code> to an instance of Java 8 Time backport <code>LocalDateTime</code>
+   * Convert a <code>Date</code> to an instance of Java 8 Time backport <code>LocalDateTime</code>
    * @param date the date to be converted
    * @return a new <code>LocalDateTime</code> instance representing the same date as <code>date</code>
    */
@@ -462,7 +462,7 @@ public class DateHelper {
   }
 
   /**
-   * Convert's a <code>Calendar</code> to an instance of Java 8 Time backport <code>ZonedDateTime</code>
+   * Convert a <code>Calendar</code> to an instance of Java 8 Time backport <code>ZonedDateTime</code>
    * @param calendar the date to be converted
    * @return a new <code>ZonedDateTime</code> instance representing the same date as <code>calendar</code>, using the
    * system default's <code>ZoneId</code>
@@ -473,7 +473,7 @@ public class DateHelper {
   }
 
   /**
-   * Convert's a <code>Date</code> to an instance of Java 8 Time backport <code>ZonedDateTime</code>
+   * Convert a <code>Date</code> to an instance of Java 8 Time backport <code>ZonedDateTime</code>
    * @param date the date to be converted
    * @return a new <code>ZonedDateTime</code> instance representing the same date as <code>date</code>, using the
    * system default's <code>ZoneId</code>

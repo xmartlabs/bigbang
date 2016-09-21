@@ -88,7 +88,7 @@ public class UiHelper {
   }
 
   /**
-   * Checks weather the given <code>EditText</code> is an email field or not
+   * Checks whether the given <code>EditText</code> is an email field or not
    * @param editText the <code>EditText</code> to check
    * @return true if the <code>editText</code> input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS
    */
@@ -98,7 +98,7 @@ public class UiHelper {
   }
 
   /**
-   * Checks weather the given <code>CharSequence</code> is a valid email address
+   * Checks whether the given <code>CharSequence</code> is a valid email address
    * @param target the <code>CharSequence</code> to check
    * @return true if the <code>target</code> is a valid email
    */
@@ -125,7 +125,7 @@ public class UiHelper {
    * Validates that the given <code>fields</code> and put the appropriate error messages if needed
    * The method {@link #validateField(EditText, boolean)} is applied to each of the <code>fields</code>
    * @param fields the fields to validate
-   * @param hideErrorLayout weather or not to enable the error on the fields
+   * @param hideErrorLayout whether or not to enable the error on the fields
    */
   public static void validateFieldsAndPutErrorMessages(List<EditText> fields, boolean hideErrorLayout) {
     Stream.of(fields)
@@ -135,7 +135,7 @@ public class UiHelper {
   /**
    * Validates that <code>editText</code> is valid and sets the error in the <code>TextInputLayout</code>, if any
    * @param editText the <code>EditText</code> to validate
-   * @param hideErrorLayout weather or not to enable the error on the given <code>EditText</code>
+   * @param hideErrorLayout whether or not to enable the error on the given <code>EditText</code>
    * @return true if <code>editText</code> is valid using {@link #isValidField(EditText)}
    */
   public static boolean validateField(EditText editText, boolean hideErrorLayout) {

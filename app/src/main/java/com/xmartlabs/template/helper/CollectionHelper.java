@@ -12,7 +12,7 @@ import java.util.Comparator;
  */
 public class CollectionHelper {
   /**
-   * Checks weather or not a collection is null or empty
+   * Checks whether or not a collection is null or empty
    * @param collection the <code>Collection</code> instance to be checked
    * @return true if the <code>collection</code> is null or empty
    */

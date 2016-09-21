@@ -11,7 +11,7 @@ import com.xmartlabs.template.BaseProjectApplication;
  */
 public class SystemServiceHelper {
   /**
-   * Uses the <code>ConnectivityManager</code> class to determine weather the device is connected to the internet or not
+   * Uses the <code>ConnectivityManager</code> class to determine whether the device is connected to the internet or not
    * @return true if the device is connected to the internet
    */
   public static boolean hasNetworkConnection() {

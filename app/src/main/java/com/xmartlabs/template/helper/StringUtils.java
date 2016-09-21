@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 public class StringUtils {
 
   /**
-   * Checks weather the given string is null or empty
+   * Checks whether the given string is null or empty
    * @param string the string to check
    * @return true if <code>string</code> is null or empty
    */
@@ -18,7 +18,7 @@ public class StringUtils {
   }
 
   /**
-   * Checks weather the given char sequence is null or empty
+   * Checks whether the given char sequence is null or empty
    * @param string the char sequence to check
    * @return true if <code>string</code> is null or empty
    */
