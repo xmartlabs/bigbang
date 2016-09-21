@@ -39,6 +39,7 @@ android {
         applicationId 'com.xmartlabs.template'
         minSdkVersion 17
         targetSdkVersion 24
+        testInstrumentationRunner 'com.franklin.app.TestRunner'
         versionCode 1
         versionName '0.1.0'
     }
@@ -114,22 +115,60 @@ android {
     }
 }
 
-final ANDROID_SUPPORT_VERSION = '24.1.1'
+final ANDROID_SUPPORT_VERSION = '24.2.0'
+final ANDROID_SUPPORT_TEST_VERSION = '0.5'
 final BULLET_VERSION = 'e5044b53df'
 final BUTTER_KNIFE_VERSION = '8.2.1'
 final DAGGER_VERSION = '2.6'
 final DART_VERSION = '2.0.0'
 final DB_FLOW_VERSION = '3.1.1'
+final ESPRESSO_VERSION = '2.2.2'
 final FRAGMENT_ARGS_VERSION = '3.0.2'
+final JSR305_VERSION = '3.0.1'
 final LOMBOK_VERSION = '1.16.10'
+final MOCKITO_VERSION = '1.10.19'
 final OK_HTTP_VERSION = '3.4.1'
 final OKIO_VERSION = '1.9.0'
 final PARCELER_VERSION = '1.1.5'
+final REST_MOCK_VERSION = '0.1.3'
 final RETROFIT_VERSION = '2.1.0'
 final RX_LIFECYCLE_VERSION = '0.7.0'
 final FIREBASE_VERSION = '9.2.1'
 
 dependencies {
+    androidTestApt "com.github.tbroyer.bullet:bullet-compiler:${BULLET_VERSION}"
+    androidTestApt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    androidTestCompile "com.android.support:support-annotations:${ANDROID_SUPPORT_VERSION}"
+    androidTestCompile "com.android.support.test:rules:${ANDROID_SUPPORT_TEST_VERSION}"
+    androidTestCompile("com.android.support.test:runner:${ANDROID_SUPPORT_TEST_VERSION}") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${ESPRESSO_VERSION}") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:${ESPRESSO_VERSION}"
+    androidTestCompile "com.github.andrzejchm.RESTMock:android:${REST_MOCK_VERSION}"
+    androidTestCompile("com.github.andrzejchm.RESTMock:core:${REST_MOCK_VERSION}") {
+        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
+    }
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    androidTestCompile 'com.crittercism.dexmaker:dexmaker:1.4'
+    androidTestCompile 'com.crittercism.dexmaker:dexmaker-dx:1.4'
+    androidTestCompile 'com.crittercism.dexmaker:dexmaker-mockito:1.4'
+    androidTestCompile "com.google.code.findbugs:jsr305:${JSR305_VERSION}" // Added to prevent dependencies conflict between main and test
+    androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    androidTestCompile "com.squareup.okhttp3:okhttp:${OK_HTTP_VERSION}" // Added to prevent dependencies conflict between main and test
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:${OK_HTTP_VERSION}" // Added to prevent dependencies conflict between main and test
+    androidTestCompile "com.squareup.okio:okio:${OKIO_VERSION}" // Added to prevent dependencies conflict between main and test
+    androidTestCompile "org.mockito:mockito-core:${MOCKITO_VERSION}"
     apt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
     apt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${DB_FLOW_VERSION}"
@@ -164,7 +203,7 @@ dependencies {
     compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${FRAGMENT_ARGS_VERSION}"
     compile "com.jakewharton:butterknife:${BUTTER_KNIFE_VERSION}"
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.4'
-    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.jakewharton.timber:timber:4.3.0'
     compile "com.squareup.okhttp3:okhttp:${OK_HTTP_VERSION}"
     compile "com.squareup.okhttp3:logging-interceptor:${OK_HTTP_VERSION}"
     compile "com.squareup.okio:okio:${OKIO_VERSION}"

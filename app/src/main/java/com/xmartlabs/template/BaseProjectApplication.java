@@ -13,6 +13,7 @@ import com.xmartlabs.template.module.GeneralErrorHelperModule;
 
 import javax.inject.Inject;
 
+import bullet.ObjectGraph;
 import io.fabric.sdk.android.Fabric;
 import rx.plugins.RxJavaHooks;
 import timber.log.Timber;
@@ -23,7 +24,7 @@ import timber.log.Timber;
 public class BaseProjectApplication extends Application {
   private static BaseProjectApplication instance;
 
-  private BulletApplicationComponent bullet;
+  private ObjectGraph bullet;
 
   @Inject
   GeneralErrorHelper generalErrorHelper;
@@ -47,12 +48,19 @@ public class BaseProjectApplication extends Application {
   }
 
   private void initializeInjections() {
-    ApplicationComponent component = DaggerApplicationComponent.builder()
-        .androidModule(new AndroidModule(this))
-        .generalErrorHelperModule(new GeneralErrorHelperModule())
-        .build();
-    bullet = new BulletApplicationComponent(component);
+    ApplicationComponent component = createComponent();
+    bullet = createBullet(component);
     inject(this);
+  }
+
+  protected ApplicationComponent createComponent() {
+    return DaggerApplicationComponent.builder()
+        .androidModule(new AndroidModule(this))
+        .build();
+  }
+
+  protected ObjectGraph createBullet(ApplicationComponent component) {
+    return new BulletApplicationComponent(component);
   }
 
   private void initializeDataBase() {
