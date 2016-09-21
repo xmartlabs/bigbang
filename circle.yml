@@ -1,0 +1,14 @@
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui -a --filter tools
+    - echo y | android update sdk --no-ui -a --filter platform-tools
+    - echo y | android update sdk --no-ui -a --filter android-24
+    - echo y | android update sdk --no-ui -a --filter build-tools-24.0.2
+    - echo y | android update sdk --no-ui -a --filter extra-google-google_play_services
+    - echo y | android update sdk --no-ui -a --filter extra-google-m2repository
+    - echo y | android update sdk --no-ui -a --filter extra-android-m2repository
+
+test:
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
