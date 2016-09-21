@@ -241,12 +241,4 @@ public class DateHelperTest {
 
     Assert.assertEquals(expected, actual);
   }
-
-  @Test
-  public void durationToHoursMinutesString() {
-    Duration duration = Duration.of(36, ChronoUnit.HOURS).plusMinutes(25).plusSeconds(24);
-    String actual = DateHelper.durationToHoursMinutesString(duration);
-    String expected = "36h 25m";
-    Assert.assertEquals(expected, actual);
-  }
 }
