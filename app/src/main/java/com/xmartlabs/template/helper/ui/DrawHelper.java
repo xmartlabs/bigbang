@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * Created by medina on 19/09/2016.
  */
+@SuppressWarnings("unused")
 public class DrawHelper {
   private static final Path PATH = new Path();
 

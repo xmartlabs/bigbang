@@ -9,6 +9,7 @@ import com.xmartlabs.template.BaseProjectApplication;
 /**
  * Created by medina on 16/09/2016.
  */
+@SuppressWarnings("unused")
 public class SystemServiceHelper {
   /**
    * Uses the <code>ConnectivityManager</code> class to determine whether the device is connected to the internet or not

@@ -24,6 +24,7 @@ import java.util.Locale;
 /**
  * Created by santiago on 04/09/15.
  */
+@SuppressWarnings("unused")
 public class UiHelper {
   /**
    * Displays an alert if the Google Play Services are not enabled

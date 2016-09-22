@@ -24,6 +24,7 @@ import timber.log.Timber;
 /**
  * Created by santiago on 12/10/15.
  */
+@SuppressWarnings("unused")
 public class GeneralErrorHelper {
   private static final String CRASHLYTICS_KEY_RESPONSE_BODY = "response_body";
   private static final String CRASHLYTICS_KEY_RESPONSE_HEADERS = "response_headers";

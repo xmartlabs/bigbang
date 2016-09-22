@@ -10,6 +10,7 @@ import java.util.Comparator;
 /**
  * Created by medina on 19/09/2016.
  */
+@SuppressWarnings("unused")
 public class CollectionHelper {
   /**
    * Checks whether or not a collection is null or empty

@@ -26,6 +26,7 @@ import com.squareup.picasso.Transformation;
 /**
  * Created by julian on 13/6/21.
  */
+@SuppressWarnings("unused")
 public class CircleTransform implements Transformation {
   /**
    * Rounds the given <code>source</code> into a circle and crops out the data outside of it

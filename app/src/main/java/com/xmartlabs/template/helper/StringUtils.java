@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 /**
  * Created by remer on 10/5/15.
  */
+@SuppressWarnings("unused")
 public class StringUtils {
 
   /**

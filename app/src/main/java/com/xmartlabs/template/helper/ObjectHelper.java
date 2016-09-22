@@ -12,6 +12,7 @@ import javax.inject.Singleton;
 /**
  * Created by medina on 16/09/2016.
  */
+@SuppressWarnings("unused")
 @Singleton
 public class ObjectHelper {
   private final Gson gson;
