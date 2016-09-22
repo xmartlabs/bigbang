@@ -9,7 +9,6 @@ import org.hamcrest.Matcher;
 /**
  * Created by medina on 21/09/2016.
  */
-
 public class ViewActions {
   public static ViewAction nestedScrollViewScrollTo() {
     return android.support.test.espresso.action.ViewActions.actionWithAssertions(

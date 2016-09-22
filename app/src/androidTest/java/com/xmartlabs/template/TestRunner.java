@@ -8,6 +8,8 @@ import android.support.test.espresso.IdlingResource;
 import android.support.test.runner.AndroidJUnitRunner;
 
 import com.jakewharton.espresso.OkHttp3IdlingResource;
+import com.xmartlabs.template.common.ImmediateNewThreadScheduler;
+import com.xmartlabs.template.module.MockClockModule;
 import com.xmartlabs.template.module.OkHttpModule;
 
 import java.util.Locale;
@@ -26,7 +28,6 @@ import rx.plugins.RxJavaHooks;
 /**
  * Created by medina on 21/09/2016.
  */
-
 public class TestRunner extends AndroidJUnitRunner {
   @Getter
   private static AndroidAssetsFileParser androidAssetsFileParser;
@@ -44,9 +45,8 @@ public class TestRunner extends AndroidJUnitRunner {
   public void onCreate(Bundle arguments) {
     super.onCreate(arguments);
 
-    //TimeZone.setDefault(MockClockModule.DEFAULT_TIME_ZONE);
-
-    //RxJavaHooks.setOnIOScheduler(scheduler -> new ImmediateNewThreadScheduler());
+    TimeZone.setDefault(MockClockModule.DEFAULT_TIME_ZONE);
+    RxJavaHooks.setOnIOScheduler(scheduler -> new ImmediateNewThreadScheduler());
   }
 
   @Override

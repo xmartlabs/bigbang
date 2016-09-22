@@ -1,6 +1,8 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
+final APP_PACKAGE = 'com.xmartlabs.template'
+
 buildscript {
     repositories {
         jcenter()
@@ -39,7 +41,7 @@ android {
         applicationId 'com.xmartlabs.template'
         minSdkVersion 17
         targetSdkVersion 24
-        testInstrumentationRunner 'com.franklin.app.TestRunner'
+        testInstrumentationRunner "${APP_PACKAGE}.TestRunner"
         versionCode 1
         versionName '0.1.0'
     }
