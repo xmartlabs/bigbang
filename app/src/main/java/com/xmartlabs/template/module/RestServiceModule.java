@@ -29,7 +29,7 @@ public class RestServiceModule {
     return new Retrofit.Builder()
         .addCallAdapterFactory(rxJavaCallAdapterFactory)
         .addConverterFactory(gsonConverterFactory)
-        .baseUrl(context.getString(R.string.url_service))
+        .baseUrl(getBaseUrl(context))
         .client(client)
         .build();
   }
@@ -50,5 +50,9 @@ public class RestServiceModule {
   @Singleton
   public AuthService provideAuthService(Retrofit retrofit) {
     return retrofit.create(AuthService.class);
+  }
+
+  protected String getBaseUrl(Context context) {
+    return context.getString(R.string.url_service);
   }
 }
