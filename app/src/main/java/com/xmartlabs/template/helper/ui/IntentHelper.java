@@ -18,6 +18,7 @@ import lombok.val;
 /**
  * Created by medina on 19/09/2016.
  */
+@SuppressWarnings("unused")
 public class IntentHelper {
   /**
    * Creates an intent to make phone calls

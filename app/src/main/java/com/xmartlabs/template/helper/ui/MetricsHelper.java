@@ -10,6 +10,7 @@ import com.xmartlabs.template.R;
 /**
  * Created by medina on 16/09/2016.
  */
+@SuppressWarnings("unused")
 public class MetricsHelper {
   /**
    * Converts the <code>dp</code> value to pixels dimension

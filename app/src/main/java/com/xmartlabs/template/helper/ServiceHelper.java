@@ -9,6 +9,7 @@ import retrofit2.Response;
 /**
  * Created by medina on 19/09/2016.
  */
+@SuppressWarnings("unused")
 public class ServiceHelper {
   /**
    * Retrieves the URL of the request

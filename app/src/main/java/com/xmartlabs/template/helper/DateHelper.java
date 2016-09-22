@@ -37,6 +37,7 @@ import java.util.TimeZone;
  * Based on the version of Ralf Gehrer <ralf@ecotastic.de>
  * This class contains date parsing for human and machine readable dates.
  */
+@SuppressWarnings("unused")
 public class DateHelper {
   private static final String DATE_COMPLETE = "yyyy-MMM-dd HH:mm:ss";
   @SuppressWarnings("SpellCheckingInspection")

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 /**
  * Created by santiago on 09/11/15.
  */
+@SuppressWarnings("unused")
 public class DatabaseHelper {
   @Inject
   SessionController sessionController;

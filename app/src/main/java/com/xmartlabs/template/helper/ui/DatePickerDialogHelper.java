@@ -17,6 +17,7 @@ import lombok.Setter;
 /**
  * Created by medina on 19/09/2016.
  */
+@SuppressWarnings("unused")
 public class DatePickerDialogHelper {
   @Setter
   OnDateSetListener listener;
