@@ -49,7 +49,7 @@ public class MetricsHelper {
    */
   @Dimension(unit = Dimension.DP)
   public static int dimResToPxInt(@DimenRes int dimenId) {
-    return dpToPxInt(getContext().getResources().getDimension(dimenId));
+    return (int) getContext().getResources().getDimension(dimenId);
   }
 
   /**
