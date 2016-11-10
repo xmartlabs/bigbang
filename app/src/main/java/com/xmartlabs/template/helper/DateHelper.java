@@ -69,7 +69,7 @@ public class DateHelper {
   }
 
   /**
-   * Gets the android device mdedium date format
+   * Gets the android device medium date format
    *
    * @return DateTimeFormatter formatted on the right way
    */
@@ -114,37 +114,6 @@ public class DateHelper {
     } catch (Exception e) {
       return null;
     }
-  }
-
-  /**
-   * Sets the <code>newDate</code> year, month and day of month onto <code>oldDateAndTime</code>
-   *
-   * @param oldDateAndTime the date to update
-   * @param newDate        the new date that will be used to update <code>oldDateAndTime</code>
-   * @return a new <code>LocalDateTime</code> instance with the time parameters of the <code>oldDateAndTime</code> and
-   * the
-   * date parameters of the <code>newDate</code>
-   */
-  @NonNull
-  public static LocalDateTime setDateButKeepTime(@NonNull LocalDateTime oldDateAndTime, @NonNull LocalDateTime newDate) {
-    LocalDate date = LocalDate.from(newDate);
-    LocalTime time = LocalTime.from(oldDateAndTime);
-    return LocalDateTime.of(date, time);
-  }
-
-  /**
-   * Sets the <code>newTime</code> hour, minute, second and millisecond parameters onto <code>oldDateAndTime</code>
-   *
-   * @param oldDateAndTime the date whose time parameters will be updated
-   * @param newTime        the new date whose time parameters will be used to update <code>oldDateAndTime</code>
-   * @return a new <code>LocalDateTime</code> instance with the date parameters of the <code>oldDateAndTime</code> and
-   * the time parameters of the <code>newDate</code>
-   */
-  @NonNull
-  public static LocalDateTime setTimeButKeepDate(@NonNull LocalDateTime oldDateAndTime, @NonNull LocalDateTime newTime) {
-    LocalDate date = LocalDate.from(oldDateAndTime);
-    LocalTime time = LocalTime.from(newTime);
-    return LocalDateTime.of(date, time);
   }
 
   /**
