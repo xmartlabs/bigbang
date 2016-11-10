@@ -1,6 +1,5 @@
 package com.xmartlabs.template.helper;
 
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
@@ -22,9 +21,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.temporal.ChronoUnit;
 import org.threeten.bp.temporal.TemporalAccessor;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -44,11 +41,8 @@ public class DateHelper {
   private static final String DATE_SHORT = "EEEE, MMM d";
 
   public static final String DATE_ISO_8601 = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-  public static final DateTimeFormatter DEVICE_TIME_FORMAT = getDeviceTimeFormat();
 
   private static final DateTimeFormatter DATE_COMPLETE_FORMAT = DateTimeFormatter.ofPattern(DATE_COMPLETE, Locale.US);
-  public static final DateTimeFormatter DATE_LONG_FORMAT = getDeviceLongDateFormat();
-  public static final DateTimeFormatter DATE_MEDIUM_FORMAT = getDeviceMediumDateFormat();
   public static final DateTimeFormatter DATE_ISO_8601_FORMAT = DateTimeFormatter.ofPattern(DATE_ISO_8601, Locale.US);
   public static final DateTimeFormatter DATE_SHORT_FORMAT = DateTimeFormatter.ofPattern(DATE_SHORT, Locale.US);
   public static final DateTimeFormatter DATE_SHORT_MONTH_NAME_FORMAT = DateTimeFormatter.ofPattern("MMM", Locale.US);
@@ -69,7 +63,7 @@ public class DateHelper {
    *
    * @return DateTimeFormatter formatted on the right way
    */
-  private static DateTimeFormatter getDeviceTimeFormat() {
+  public static DateTimeFormatter getDeviceTimeFormat() {
     SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getTimeFormat(BaseProjectApplication.getContext());
     return DateTimeFormatter.ofPattern(timeFormat.toPattern());
   }
@@ -79,7 +73,7 @@ public class DateHelper {
    *
    * @return DateTimeFormatter formatted on the right way
    */
-  private static DateTimeFormatter getDeviceMediumDateFormat() {
+  public static DateTimeFormatter getDeviceMediumDateFormat() {
     SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getMediumDateFormat(BaseProjectApplication.getContext());
     return DateTimeFormatter.ofPattern(timeFormat.toPattern());
   }
@@ -89,7 +83,7 @@ public class DateHelper {
    *
    * @return DateTimeFormatter formatted on the right way
    */
-  private static DateTimeFormatter getDeviceLongDateFormat() {
+  public static DateTimeFormatter getDeviceLongDateFormat() {
     SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getLongDateFormat(BaseProjectApplication.getContext());
     return DateTimeFormatter.ofPattern(timeFormat.toPattern());
   }
@@ -144,8 +138,7 @@ public class DateHelper {
    * @param oldDateAndTime the date whose time parameters will be updated
    * @param newTime        the new date whose time parameters will be used to update <code>oldDateAndTime</code>
    * @return a new <code>LocalDateTime</code> instance with the date parameters of the <code>oldDateAndTime</code> and
-   * the
-   * time parameters of the <code>newDate</code>
+   * the time parameters of the <code>newDate</code>
    */
   @NonNull
   public static LocalDateTime setTimeButKeepDate(@NonNull LocalDateTime oldDateAndTime, @NonNull LocalDateTime newTime) {
