@@ -2,6 +2,7 @@ package com.xmartlabs.template.helper;
 
 import android.support.annotation.NonNull;
 
+import com.annimon.stream.Objects;
 import com.google.gson.Gson;
 
 import java.util.UUID;
@@ -56,6 +57,17 @@ public class ObjectHelper {
    */
   public static int compare(int x, int y) {
     return (x < y) ? -1 : ((x == y) ? 0 : 1);
+  }
+
+
+  /**
+   * Checks whether the given classes are equals
+   * @param class1 the first class to compare
+   * @param class2 the second class to compare
+   * @return true if <code>string</code> is null or empty
+   */
+  public static boolean areSameClass(Class class1, Class class2) {
+    return Objects.equals(class1.getName(), class2.getName());
   }
 }
 
