@@ -1,6 +1,7 @@
 package com.xmartlabs.template.controller;
 
 import android.content.SharedPreferences;
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -11,6 +12,8 @@ import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 
+import rx.Completable;
+import rx.Single;
 import timber.log.Timber;
 
 /**
@@ -24,14 +27,20 @@ public class SessionController extends Controller {
   @Inject
   SharedPreferences sharedPreferences;
 
-  @SuppressWarnings("unused")
-  public Session setSession(@NonNull AuthResponse authResponse) {
+  @CheckResult
+  public Single<Session> setSession(@NonNull AuthResponse authResponse) {
+    final Session session = getSessionFromAuthInformation(authResponse);
+    return setSession(session)
+            .toSingle(() -> session);
+  }
+
+  @NonNull
+  private Session getSessionFromAuthInformation(@NonNull AuthResponse authResponse) {
     Session session = getSession();
     if (session == null) {
       session = new Session();
     }
     session.updateSession(authResponse);
-    setSession(session);
     return session;
   }
 
@@ -48,12 +57,20 @@ public class SessionController extends Controller {
     }
   }
 
-  public void setSession(@NonNull Session session) {
-    String sessionJsonString = gson.toJson(session);
-    sharedPreferences
-        .edit()
-        .putString(PREFERENCES_KEY_SESSION, sessionJsonString)
-        .apply();
+  @CheckResult
+  public Completable setSession(@NonNull Session session) {
+    return Completable.create(subscriber -> {
+      String sessionJsonString = gson.toJson(session);
+      boolean committed = sharedPreferences
+              .edit()
+              .putString(PREFERENCES_KEY_SESSION, sessionJsonString)
+              .commit();
+      if (committed) {
+        subscriber.onCompleted();
+      } else {
+        subscriber.onError(new RuntimeException("The session change could not be committed"));
+      }
+    });
   }
 
   public void deleteSession() {
