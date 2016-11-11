@@ -9,7 +9,6 @@ import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
-import com.xmartlabs.template.module.GeneralErrorHelperModule;
 
 import javax.inject.Inject;
 
