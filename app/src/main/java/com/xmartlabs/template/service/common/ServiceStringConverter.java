@@ -20,9 +20,9 @@ public class ServiceStringConverter extends Converter.Factory {
   public Converter<?, String> stringConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
     if (type instanceof Class) {
       if (Objects.equals(type, LocalDate.class)) {
-        return value -> String.valueOf(((LocalDate) value).atStartOfDay(ZoneOffset.UTC).toEpochSecond());
+        return value -> String.valueOf(((LocalDate) value).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
       } else if (Objects.equals(type, LocalDateTime.class)) {
-        return value -> String.valueOf(((LocalDateTime) value).toEpochSecond(ZoneOffset.UTC));
+        return value -> String.valueOf(((LocalDateTime) value).toInstant(ZoneOffset.UTC).toEpochMilli());
       }
     }
     return super.stringConverter(type, annotations, retrofit);

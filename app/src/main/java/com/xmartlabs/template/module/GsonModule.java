@@ -1,6 +1,5 @@
 package com.xmartlabs.template.module;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.google.gson.ExclusionStrategy;
@@ -10,13 +9,11 @@ import com.google.gson.GsonBuilder;
 import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.xmartlabs.template.BuildConfig;
 import com.xmartlabs.template.common.GsonExclude;
-import com.xmartlabs.template.service.adapter.EpochSecondsLocalDateAdapter;
-import com.xmartlabs.template.service.adapter.EpochSecondsLocalDateTimeAdapter;
+import com.xmartlabs.template.service.adapter.EpochMillisecondsLocalDateAdapter;
+import com.xmartlabs.template.service.adapter.EpochMillisecondsLocalDateTimeAdapter;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
-
-import java.util.Date;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -43,8 +40,8 @@ public class GsonModule {
   @SuppressWarnings("unused")
   Gson provideServiceGson(GsonBuilder gsonBuilder) {
     gsonBuilder
-        .registerTypeAdapter(LocalDateTime.class, new EpochSecondsLocalDateTimeAdapter())
-        .registerTypeAdapter(LocalDate.class, new EpochSecondsLocalDateAdapter());
+        .registerTypeAdapter(LocalDateTime.class, new EpochMillisecondsLocalDateTimeAdapter())
+        .registerTypeAdapter(LocalDate.class, new EpochMillisecondsLocalDateAdapter());
 
     return gsonBuilder.create();
   }

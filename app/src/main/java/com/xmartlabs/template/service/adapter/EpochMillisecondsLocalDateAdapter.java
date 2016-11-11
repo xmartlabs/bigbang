@@ -8,8 +8,8 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.xmartlabs.template.helper.StringUtils;
 
+import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneOffset;
 
 import java.lang.reflect.Type;
@@ -19,12 +19,12 @@ import timber.log.Timber;
 /**
  * Created by mirland on 24/08/16.
  */
-public class EpochSecondsLocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
+public class EpochMillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
   @Override
   public synchronized JsonElement serialize(LocalDate date, Type type,
                                             JsonSerializationContext jsonSerializationContext) {
     if (date != null) {
-      return new JsonPrimitive(date.atStartOfDay(ZoneOffset.UTC).toEpochSecond());
+      return new JsonPrimitive(date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
     }
     return null;
   }
@@ -35,7 +35,7 @@ public class EpochSecondsLocalDateAdapter implements JsonSerializer<LocalDate>, 
     String dateAsString = jsonElement.getAsString();
     if (!StringUtils.stringIsNullOrEmpty(dateAsString)) {
       try {
-        return LocalDateTime.ofEpochSecond(Long.valueOf(dateAsString), 0, ZoneOffset.UTC).toLocalDate();
+        return Instant.ofEpochMilli(Long.valueOf(dateAsString)).atZone(ZoneOffset.UTC).toLocalDate();
       } catch (Exception e) {
         Timber.e(e, "Date cannot be parsed, date='%s'", dateAsString);
       }

@@ -8,6 +8,7 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.xmartlabs.template.helper.StringUtils;
 
+import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneOffset;
 
@@ -18,12 +19,12 @@ import timber.log.Timber;
 /**
  * Created by santiago on 06/09/16.
  */
-public class EpochSecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+public class EpochMillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
   @Override
   public synchronized JsonElement serialize(LocalDateTime dateTime, Type type,
                                             JsonSerializationContext jsonSerializationContext) {
     if (dateTime != null) {
-      return new JsonPrimitive(dateTime.atOffset(ZoneOffset.UTC).toEpochSecond());
+      return new JsonPrimitive(dateTime.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli());
     }
     return null;
   }
@@ -34,7 +35,7 @@ public class EpochSecondsLocalDateTimeAdapter implements JsonSerializer<LocalDat
     String dateTimeAsString = jsonElement.getAsString();
     if (!StringUtils.stringIsNullOrEmpty(dateTimeAsString)) {
       try {
-        return LocalDateTime.ofEpochSecond(Long.valueOf(dateTimeAsString), 0, ZoneOffset.UTC);
+        return Instant.ofEpochMilli(Long.valueOf(dateTimeAsString)).atZone(ZoneOffset.UTC).toLocalDateTime();
       } catch (Exception e) {
         Timber.e(e, "DateTime cannot be parsed, dateTime='%s'", dateTimeAsString);
       }
