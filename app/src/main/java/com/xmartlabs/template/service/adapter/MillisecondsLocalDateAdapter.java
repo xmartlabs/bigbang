@@ -19,7 +19,7 @@ import timber.log.Timber;
 /**
  * Created by mirland on 24/08/16.
  */
-public class EpochMillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
+public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
   @Override
   public synchronized JsonElement serialize(LocalDate date, Type type,
                                             JsonSerializationContext jsonSerializationContext) {

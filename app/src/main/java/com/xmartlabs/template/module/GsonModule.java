@@ -9,8 +9,8 @@ import com.google.gson.GsonBuilder;
 import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.xmartlabs.template.BuildConfig;
 import com.xmartlabs.template.common.GsonExclude;
-import com.xmartlabs.template.service.adapter.EpochMillisecondsLocalDateAdapter;
-import com.xmartlabs.template.service.adapter.EpochMillisecondsLocalDateTimeAdapter;
+import com.xmartlabs.template.service.adapter.MillisecondsLocalDateAdapter;
+import com.xmartlabs.template.service.adapter.MillisecondsLocalDateTimeAdapter;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
@@ -40,8 +40,8 @@ public class GsonModule {
   @SuppressWarnings("unused")
   Gson provideServiceGson(GsonBuilder gsonBuilder) {
     gsonBuilder
-        .registerTypeAdapter(LocalDateTime.class, new EpochMillisecondsLocalDateTimeAdapter())
-        .registerTypeAdapter(LocalDate.class, new EpochMillisecondsLocalDateAdapter());
+        .registerTypeAdapter(LocalDateTime.class, new MillisecondsLocalDateTimeAdapter())
+        .registerTypeAdapter(LocalDate.class, new MillisecondsLocalDateAdapter());
 
     return gsonBuilder.create();
   }
