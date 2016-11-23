@@ -87,13 +87,25 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    flavorDimensions 'version', 'env'
     productFlavors {
         //noinspection GroovyMissingReturnStatement
         production {
-
+            dimension 'env'
         }
+
         staging {
+            dimension 'env'
             applicationIdSuffix '.staging'
+        }
+
+        lollipopAndAbove {
+            dimension 'version'
+            minSdkVersion 21 // For faster multidex compilation
+        }
+
+        allVersions {
+            dimension 'version'
         }
     }
     compileOptions {
