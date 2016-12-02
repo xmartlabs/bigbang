@@ -1,6 +1,7 @@
 package com.xmartlabs.template.model;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import org.parceler.Parcel;
 
@@ -19,6 +20,8 @@ public class Session extends AuthResponse {
   public static final int CURRENT_DATABASE_VERSION = 1;
 
   Integer databaseVersion;
+  @Nullable
+  String gcmToken;
 
   public void updateSession(@NonNull AuthResponse authResponse) {
   }

@@ -47,5 +47,43 @@
             android:name="io.fabric.ApiKey"
             android:value="TODO -- @string/key_fabric"
             />
+
+        <!--Add GCM -->
+        <!--<service
+            android:exported="false"
+            android:name=".gcm.GcmService">
+
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:exported="true"
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.xmartlabs.template" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:exported="false"
+            android:name=".gcm.GcmInstanceIDListenerService">
+
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:exported="false"
+            android:name=".gcm.RegistrationIntentService"
+            /> -->
+
     </application>
 </manifest>
