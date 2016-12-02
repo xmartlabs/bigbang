@@ -34,7 +34,7 @@ public class WelcomeFragment extends BaseFragment {
         .compose(RxLifecycle.bindUntilEvent(lifecycle(), FragmentEvent.DESTROY_VIEW))
         .toSingle()
         .subscribe(
-            authResponse -> {
+            session -> {
               Intent intent = Henson.with(getActivity()).gotoMainActivity().build();
               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
               startActivity(intent);

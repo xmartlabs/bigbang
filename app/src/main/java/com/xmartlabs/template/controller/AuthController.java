@@ -2,7 +2,6 @@ package com.xmartlabs.template.controller;
 
 import android.support.annotation.NonNull;
 
-import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.model.AuthResponse;
 import com.xmartlabs.template.model.LoginRequest;
 import com.xmartlabs.template.model.Session;
@@ -21,14 +20,12 @@ public class AuthController extends ServiceController {
   @Inject
   SessionController sessionController;
 
-  public Single<AuthResponse> login(LoginRequest loginRequest) {
+  public Single<Session> login(LoginRequest loginRequest) {
     // TODO
     //authService.login();
     return Single.just(new AuthResponse())
-        .doOnSuccess(authResponse -> {
-          Session session = sessionController.setSession(authResponse);
-          setLoginInfo(session);
-        });
+            .flatMap(sessionController::setSession)
+            .doOnSuccess(this::setLoginInfo);
   }
 
   public void setLoginInfo(@NonNull Session session) {
