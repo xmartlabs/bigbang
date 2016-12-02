@@ -2,6 +2,7 @@ package com.xmartlabs.template.helper;
 
 import android.support.annotation.NonNull;
 
+import com.annimon.stream.Objects;
 import com.google.gson.Gson;
 
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class ObjectHelper {
   }
 
   /**
-   * Generates a random UUID using the <code>UUID</code> class
+   * Generates a random UUID using the <code>UUID</code> class.
    * @return the string form of the generated UUID
    */
   public String generateUUID() {
@@ -32,11 +33,11 @@ public class ObjectHelper {
 
   /**
    * Uses <code>Gson</code> to perform a deep copy of the <code>object</code>, which should result in an object of type
-   * <code>resultClass</code>
-   * @param object the object to copy
-   * @param resultClass the resulting class type of the copied object
-   * @param <T> the type of the resulting copied object
-   * @return a new instance of type T copied from <code>object</code>
+   * <code>resultClass</code>.
+   * @param object the object to copy.
+   * @param resultClass the resulting class type of the copied object.
+   * @param <T> the type of the resulting copied object.
+   * @return a new instance of type T copied from <code>object</code>.
    */
   public <T> T deepCopy(Object object, @NonNull Class<T> resultClass) {
     String json = gson.toJson(object);
@@ -50,9 +51,9 @@ public class ObjectHelper {
    *   <li>0 if <code>x</code> == <code>y</code></li>
    *   <li>1 if <code>x</code> > <code>y</code></li>
    * </ul>
-   * @param x the first int to compare
-   * @param y the second int to compare
-   * @return the difference between <code>x</code> and <code>y</code> as explained above
+   * @param x the first int to compare.
+   * @param y the second int to compare.
+   * @return the difference between <code>x</code> and <code>y</code> as explained above.
    */
   public static int compare(int x, int y) {
     return (x < y) ? -1 : ((x == y) ? 0 : 1);
