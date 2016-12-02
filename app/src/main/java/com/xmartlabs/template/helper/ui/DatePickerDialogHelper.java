@@ -7,6 +7,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.xmartlabs.template.helper.DateHelper;
 
 import org.threeten.bp.Clock;
+import org.threeten.bp.LocalDate;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,9 +20,6 @@ import lombok.Setter;
  */
 @SuppressWarnings("unused")
 public class DatePickerDialogHelper {
-  @Setter
-  OnDateSetListener listener;
-
   /**
    * Creates a <code>DatePickerDialog</code> instance
    * @param listener to be triggered when the user selects a date
@@ -30,47 +28,36 @@ public class DatePickerDialogHelper {
    */
   @SuppressWarnings("unused")
   @NonNull
-  public static DatePickerDialog createDialog(@Nullable OnDateSetListener listener, @NonNull Clock clock) {
+  public static DatePickerDialog createDialog(@Nullable OnLocalDateSetListener listener, @NonNull Clock clock) {
     return createDialog(null, listener, clock);
   }
 
   /**
-   * Creates a <code>DatePickerDialog</code> instance with the <code>date</code> selected
-   * @param date the selected start date
-   * @param listener to be triggered when the user selects a date
+   * Creates a <code>DatePickerDialog</code> instance with the <code>localDate</code> selected
+   * @param localDate the selected start localDate
+   * @param listener to be triggered when the user selects a localDate
    * @param clock to get the <code>Calendar</code> from
    * @return the <code>DatePickerDialog</code> created instance
    */
   @NonNull
-  public static DatePickerDialog createDialog(@Nullable Date date, @Nullable OnDateSetListener listener,
+  public static DatePickerDialog createDialog(@Nullable LocalDate localDate, @Nullable OnLocalDateSetListener listener,
                                               @NonNull Clock clock) {
-    Calendar calendar = DateHelper.getCalendarFromClock(clock);
-    if (date != null) {
-      calendar.setTime(date);
+    if (localDate == null) {
+      localDate = LocalDate.now(clock);
     }
 
     DatePickerDialog.OnDateSetListener dialogCallBack = (view, year, monthOfYear, dayOfMonth) -> {
-      Date newDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
-      Date newDateAndTime;
-      if (date == null) {
-        newDateAndTime = newDate;
-      } else {
-        newDateAndTime = DateHelper.setDateButKeepTime(date, newDate);
-      }
+      LocalDate date = LocalDate.of(year, monthOfYear + 1, dayOfMonth);
       if (listener != null) {
-        listener.onDateSet(newDateAndTime);
+        listener.onDateSet(date);
       }
     };
 
-    int year = calendar.get(Calendar.YEAR);
-    int monthOfYear = calendar.get(Calendar.MONTH);
-    int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
     DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
         dialogCallBack,
-        year,
-        monthOfYear,
-        dayOfMonth
+        localDate.getYear(),
+        localDate.getMonthValue() - 1,
+        localDate.getDayOfMonth()
     );
     datePickerDialog.dismissOnPause(true);
     return datePickerDialog;
