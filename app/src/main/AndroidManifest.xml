@@ -43,9 +43,5 @@
             android:screenOrientation="portrait"
             />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="TODO -- @string/key_fabric"
-            />
     </application>
 </manifest>
