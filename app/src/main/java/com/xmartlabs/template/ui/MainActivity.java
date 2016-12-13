@@ -1,6 +1,7 @@
 package com.xmartlabs.template.ui;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
@@ -15,7 +16,7 @@ import butterknife.Unbinder;
  * Created by santiago on 03/03/16.
  */
 @HensonNavigable
-public class MainActivity extends BaseAppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity<IView, BasePresenter<IView>> {
   private Unbinder unbinder;
 
   @BindView(R.id.toolbar)
@@ -35,5 +36,11 @@ public class MainActivity extends BaseAppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     unbinder.unbind();
+  }
+
+  @NonNull
+  @Override
+  protected BasePresenter<IView> createPresenter() {
+    return new BasePresenter<>();
   }
 }

@@ -12,7 +12,8 @@ import com.xmartlabs.template.R;
 /**
  * Created by santiago on 31/08/15.
  */
-public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
+public abstract class SingleFragmentActivity<V extends IView, P extends IPresenter<V>>
+    extends BaseAppCompatActivity<V, P> {
   @NonNull
   protected abstract BaseFragment createFragment();
 

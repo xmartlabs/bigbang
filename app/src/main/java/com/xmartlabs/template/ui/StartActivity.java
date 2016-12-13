@@ -2,6 +2,7 @@ package com.xmartlabs.template.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
@@ -12,7 +13,7 @@ import javax.inject.Inject;
 /**
  * Created by santiago on 31/08/15.
  */
-public class StartActivity extends BaseActivity {
+public class StartActivity extends BaseActivity<IView, BasePresenter<IView>> {
   @Inject
   AuthController authController;
   @Inject
@@ -34,5 +35,11 @@ public class StartActivity extends BaseActivity {
 
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     getContext().startActivity(intent);
+  }
+
+  @NonNull
+  @Override
+  protected BasePresenter<IView> createPresenter() {
+    return new BasePresenter<>();
   }
 }

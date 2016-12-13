@@ -21,10 +21,15 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by santiago on 15/09/15.
+ * Fragment that uses a {@link IPresenter} to implement the MVP pattern
+ * The fragments that inherit from this class will conform the V part of the said pattern
+ * @param <V> The contract that provides the public API for the presenter to invoke view related methods
+ * @param <P> The presenter that coordinates the view
  */
 @FragmentWithArgs
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment<V extends IView, P extends IPresenter<V>> extends RxFragment implements IView {
+  private P presenter;
+
   private Unbinder unbinder;
   @Nullable
   private ProgressDialog progressDialog;
@@ -44,7 +49,8 @@ public abstract class BaseFragment extends RxFragment {
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(getLayoutResId(), container, false);
     unbinder = ButterKnife.bind(this, view);
-
+    presenter = createPresenter();
+    presenter.attachView((V)this);
     return view;
   }
 
@@ -68,6 +74,7 @@ public abstract class BaseFragment extends RxFragment {
   @Override
   public void onDestroyView() {
     super.onDestroyView();
+    presenter.detachView();
     unbinder.unbind();
   }
 
@@ -105,4 +112,28 @@ public abstract class BaseFragment extends RxFragment {
       removeItselfFromParentFragment();
     }
   }
+
+  /**
+   * Returns the presenter instance
+   * @return the presenter instance
+   */
+  public P getPresenter() {
+    return presenter;
+  }
+
+  /**
+   * Sets the presenter instance
+   * @param presenter the presenter instance. It cannot be null.
+   */
+  public void setPresenter(@NonNull P presenter) {
+    this.presenter = presenter;
+  }
+
+  /**
+   * Creates the presenter instance
+   *
+   * @return the created presenter instance
+   */
+  @NonNull
+  protected abstract P createPresenter();
 }

@@ -14,4 +14,10 @@ public class WelcomeActivity extends SingleFragmentActivity {
   protected BaseFragment createFragment() {
     return new WelcomeFragmentBuilder().build();
   }
+
+  @NonNull
+  @Override
+  protected BasePresenter<IView> createPresenter() {
+    return new BasePresenter<>();
+  }
 }
