@@ -7,13 +7,16 @@ import android.support.annotation.NonNull;
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.model.Session;
+import com.xmartlabs.template.ui.mvp.BaseMvpActivity;
+import com.xmartlabs.template.ui.mvp.BaseMvpPresenter;
+import com.xmartlabs.template.ui.mvp.MvpView;
 
 import javax.inject.Inject;
 
 /**
  * Created by santiago on 31/08/15.
  */
-public class StartActivity extends BaseActivity<IView, BasePresenter<IView>> {
+public class StartActivity extends BaseMvpActivity<MvpView, BaseMvpPresenter<MvpView>> {
   @Inject
   AuthController authController;
   @Inject
@@ -39,7 +42,7 @@ public class StartActivity extends BaseActivity<IView, BasePresenter<IView>> {
 
   @NonNull
   @Override
-  protected BasePresenter<IView> createPresenter() {
-    return new BasePresenter<>();
+  protected BaseMvpPresenter<MvpView> createPresenter() {
+    return new BaseMvpPresenter<>();
   }
 }

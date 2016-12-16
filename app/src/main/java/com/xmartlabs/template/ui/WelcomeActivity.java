@@ -3,6 +3,7 @@ package com.xmartlabs.template.ui;
 import android.support.annotation.NonNull;
 
 import com.f2prateek.dart.HensonNavigable;
+import com.xmartlabs.template.ui.mvp.BaseMvpFragment;
 
 /**
  * Created by santiago on 31/08/15.
@@ -11,13 +12,7 @@ import com.f2prateek.dart.HensonNavigable;
 public class WelcomeActivity extends SingleFragmentActivity {
   @NonNull
   @Override
-  protected BaseFragment createFragment() {
+  protected BaseMvpFragment createFragment() {
     return new WelcomeFragmentBuilder().build();
-  }
-
-  @NonNull
-  @Override
-  protected BasePresenter<IView> createPresenter() {
-    return new BasePresenter<>();
   }
 }

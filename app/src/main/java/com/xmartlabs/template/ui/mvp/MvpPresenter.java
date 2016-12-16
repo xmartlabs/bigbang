@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.template.ui.mvp;
 
 import android.support.annotation.UiThread;
 
@@ -6,7 +6,7 @@ import android.support.annotation.UiThread;
  * The base interface that defines a presenter in the MVP patterns
  * @param <V> The view type to be attached to this presenter
  */
-public interface IPresenter<V extends IView> {
+public interface MvpPresenter<V extends MvpView> {
   /**
    * Sets the view to this presenter instance
    * @param view the view to be attached to this presenter

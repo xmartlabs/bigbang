@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.template.ui.mvp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,13 +21,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Fragment that uses a {@link IPresenter} to implement the MVP pattern
+ * Fragment that uses a {@link MvpPresenter} to implement the MVP pattern
  * The fragments that inherit from this class will conform the V part of the said pattern
  * @param <V> The contract that provides the public API for the presenter to invoke view related methods
  * @param <P> The presenter that coordinates the view
  */
 @FragmentWithArgs
-public abstract class BaseFragment<V extends IView, P extends IPresenter<V>> extends RxFragment implements IView {
+public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends RxFragment implements MvpView {
   private P presenter;
 
   private Unbinder unbinder;
@@ -98,7 +98,7 @@ public abstract class BaseFragment<V extends IView, P extends IPresenter<V>> ext
   }
 
   protected void removeItselfFromActivity() {
-    ((BaseAppCompatActivity) getActivity()).removeFragment(this);
+    ((BaseMvpAppCompatActivity) getActivity()).removeFragment(this);
   }
 
   protected void removeItselfFromParentFragment() {

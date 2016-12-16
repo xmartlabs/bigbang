@@ -18,7 +18,6 @@ import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
-import com.xmartlabs.template.ui.BaseFragment;
 import com.xmartlabs.template.ui.FragmentWithDrawer;
 import com.xmartlabs.template.ui.MainActivity;
 import com.xmartlabs.template.ui.SingleFragmentActivity;
@@ -48,6 +47,10 @@ import dagger.Component;
 })
 public interface ApplicationComponent {
   void inject(BaseProjectApplication baseProjectApplication);
+
+  void inject(BaseActivity baseActivity);
+  void inject(BaseAppCompatActivity baseAppCompatActivity);
+  void inject(SingleFragmentActivity singleFragmentActivity);
 
   void inject(MainActivity mainActivity);
   void inject(StartActivity startActivity);

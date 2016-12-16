@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.template.ui.mvp;
 
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
@@ -6,7 +6,7 @@ import android.support.annotation.UiThread;
 import java.lang.ref.WeakReference;
 
 /**
- * A base implementation of a {@link IPresenter} that uses a <b>WeakReference</b> for
+ * A base implementation of a {@link MvpPresenter} that uses a <b>WeakReference</b> for
  * referring to the attached view.
  *
  * Note that you should always check {@link #isViewAttached()} before calling {@link #getView()},
@@ -14,9 +14,9 @@ import java.lang.ref.WeakReference;
  * This could be the case of any network related work, when the view gets detached between the call and the
  * server response.
  *
- * @param <V> the type of the {@link IView}
+ * @param <V> the type of the {@link MvpView}
  */
-public class BasePresenter<V extends IView> implements IPresenter<V> {
+public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
   private WeakReference<V> viewReference;
 
   @Override

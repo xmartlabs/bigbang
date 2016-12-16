@@ -8,14 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.xmartlabs.template.R;
+import com.xmartlabs.template.ui.mvp.BaseMvpFragment;
 
 /**
  * Created by santiago on 31/08/15.
  */
-public abstract class SingleFragmentActivity<V extends IView, P extends IPresenter<V>>
-    extends BaseAppCompatActivity<V, P> {
+public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
   @NonNull
-  protected abstract BaseFragment createFragment();
+  protected abstract BaseMvpFragment createFragment();
 
   @LayoutRes
   protected int getLayoutResId() {
