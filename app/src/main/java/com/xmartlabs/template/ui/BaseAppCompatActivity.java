@@ -28,16 +28,15 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
   }
 
   /**
-   * Removes the given fragment from the view
+   * Removes the given fragment from the view.
+   *
    * @param fragment the fragment to be removed
    */
   public void removeFragment(@NonNull Fragment fragment) {
     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
   }
 
-  /**
-   * Hides the keyboard, if visible
-   */
+  /** Hides the keyboard, if visible */
   protected void hideKeyboard() {
     InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
     View currentFocus = this.getCurrentFocus();

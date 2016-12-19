@@ -4,21 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.f2prateek.dart.Dart;
-import com.trello.rxlifecycle.components.RxActivity;
-import com.xmartlabs.template.BaseProjectApplication;
+import com.xmartlabs.template.ui.BaseActivity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Activity that uses a {@link MvpPresenter} to implement the MVP pattern
- * The activities that inherit from this class will conform the V part of the said pattern
- * @param <V> The contract that provides the public API for the presenter to invoke view related methods
- * @param <P> The presenter that coordinates the view
+ * Activity that uses a {@link MvpPresenter} to implement the MVP pattern The activities that inherit from this class
+ * will conform the V part of the said pattern.
+ *
+ * @param <V> the contract that provides the public API for the presenter to invoke view related methods
+ * @param <P> the presenter that coordinates the view
  */
-public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends RxActivity implements MvpView {
+public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends BaseActivity implements MvpView {
   @Setter(AccessLevel.PROTECTED)
   @Getter(AccessLevel.PROTECTED)
   private P presenter;
@@ -30,8 +29,6 @@ public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Dart.inject(this);
-    BaseProjectApplication.getContext().inject(this);
     presenter = createPresenter();
     presenter.attachView(getView());
   }
@@ -43,7 +40,8 @@ public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<
   }
 
   /**
-   * Retrieves this class instance as an MVP view (V)
+   * Retrieves this class instance as an MVP view (V).
+   *
    * @return the MVP view
    */
   @NonNull
@@ -53,7 +51,7 @@ public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<
   }
 
   /**
-   * Creates the presenter instance
+   * Creates the presenter instance.
    *
    * @return the created presenter instance
    */

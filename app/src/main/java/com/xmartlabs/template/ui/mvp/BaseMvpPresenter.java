@@ -34,7 +34,8 @@ public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
 
   /**
    * Checks if the view is currently attached to the presenter.
-   * This method should always be called before calling {@link #getView()}
+   * This method should always be called before calling {@link #getView()}.
+   *
    * @return whether the view is currently attached to the presenter
    */
   @UiThread
@@ -44,6 +45,7 @@ public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
 
   /**
    * Gets the attached view.
+   *
    * @return the view instance, if attached. Otherwise, it returns <code>null</code>
    */
   @UiThread

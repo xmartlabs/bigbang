@@ -24,10 +24,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Fragment that uses a {@link MvpPresenter} to implement the MVP pattern
- * The fragments that inherit from this class will conform the V part of the said pattern
- * @param <V> The contract that provides the public API for the presenter to invoke view related methods
- * @param <P> The presenter that coordinates the view
+ * Fragment that uses a {@link MvpPresenter} to implement the MVP pattern. The fragments that inherit from this class
+ * will conform the V part of the said pattern.
+ *
+ * @param <V> the contract that provides the public API for the presenter to invoke view related methods
+ * @param <P> the presenter that coordinates the view
  */
 @FragmentWithArgs
 public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends RxFragment implements MvpView {
@@ -55,7 +56,7 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<
     unbinder = ButterKnife.bind(this, view);
     presenter = createPresenter();
     //noinspection unchecked
-    presenter.attachView((V)this);
+    presenter.attachView((V) this);
     return view;
   }
 
@@ -119,7 +120,7 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<
   }
 
   /**
-   * Creates the presenter instance
+   * Creates the presenter instance.
    *
    * @return the created presenter instance
    */

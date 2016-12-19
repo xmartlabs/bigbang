@@ -29,7 +29,8 @@ import com.squareup.picasso.Transformation;
 @SuppressWarnings("unused")
 public class CircleTransform implements Transformation {
   /**
-   * Rounds the given <code>source</code> into a circle and crops out the data outside of it
+   * Rounds the given <code>source</code> into a circle and crops out the data outside of it.
+   *
    * @param source the <code>Bitmap</code> instance to be rounded
    * @return a new <code>Bitmap</code> instance, the rounded representation of the <code>source</code>
    */
