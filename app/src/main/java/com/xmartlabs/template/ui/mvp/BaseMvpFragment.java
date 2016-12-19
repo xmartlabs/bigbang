@@ -19,6 +19,9 @@ import com.xmartlabs.template.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Fragment that uses a {@link MvpPresenter} to implement the MVP pattern
@@ -28,8 +31,9 @@ import butterknife.Unbinder;
  */
 @FragmentWithArgs
 public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends RxFragment implements MvpView {
+  @Getter(AccessLevel.PROTECTED)
+  @Setter(AccessLevel.PROTECTED)
   private P presenter;
-
   private Unbinder unbinder;
   @Nullable
   private ProgressDialog progressDialog;
@@ -50,6 +54,7 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<
     View view = inflater.inflate(getLayoutResId(), container, false);
     unbinder = ButterKnife.bind(this, view);
     presenter = createPresenter();
+    //noinspection unchecked
     presenter.attachView((V)this);
     return view;
   }
@@ -111,22 +116,6 @@ public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<
     } else {
       removeItselfFromParentFragment();
     }
-  }
-
-  /**
-   * Returns the presenter instance
-   * @return the presenter instance
-   */
-  public P getPresenter() {
-    return presenter;
-  }
-
-  /**
-   * Sets the presenter instance
-   * @param presenter the presenter instance. It cannot be null.
-   */
-  public void setPresenter(@NonNull P presenter) {
-    this.presenter = presenter;
   }
 
   /**

@@ -2,21 +2,17 @@ package com.xmartlabs.template.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.model.Session;
-import com.xmartlabs.template.ui.mvp.BaseMvpActivity;
-import com.xmartlabs.template.ui.mvp.BaseMvpPresenter;
-import com.xmartlabs.template.ui.mvp.MvpView;
 
 import javax.inject.Inject;
 
 /**
  * Created by santiago on 31/08/15.
  */
-public class StartActivity extends BaseMvpActivity<MvpView, BaseMvpPresenter<MvpView>> {
+public class StartActivity extends BaseActivity {
   @Inject
   AuthController authController;
   @Inject
@@ -38,11 +34,5 @@ public class StartActivity extends BaseMvpActivity<MvpView, BaseMvpPresenter<Mvp
 
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     getContext().startActivity(intent);
-  }
-
-  @NonNull
-  @Override
-  protected BaseMvpPresenter<MvpView> createPresenter() {
-    return new BaseMvpPresenter<>();
   }
 }

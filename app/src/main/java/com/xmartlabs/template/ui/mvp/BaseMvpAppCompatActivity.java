@@ -12,6 +12,10 @@ import com.f2prateek.dart.Dart;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.xmartlabs.template.BaseProjectApplication;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * AppCompactActivity that uses a {@link MvpPresenter} to implement the MVP pattern
  * The activities that inherit from this class will conform the V part of the said pattern
@@ -20,8 +24,10 @@ import com.xmartlabs.template.BaseProjectApplication;
  */
 public abstract class BaseMvpAppCompatActivity<V extends MvpView, P extends MvpPresenter<V>> extends RxAppCompatActivity
     implements MvpView {
-
+  @Getter(AccessLevel.PROTECTED)
+  @Setter(AccessLevel.PROTECTED)
   private P presenter;
+
   protected Context getContext() {
     return this;
   }
@@ -58,22 +64,6 @@ public abstract class BaseMvpAppCompatActivity<V extends MvpView, P extends MvpP
     if (currentFocus != null) {
       inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
     }
-  }
-
-  /**
-   * Returns the presenter instance
-   * @return the presenter instance
-   */
-  public P getPresenter() {
-    return presenter;
-  }
-
-  /**
-   * Sets the presenter instance
-   * @param presenter the presenter instance. It cannot be null.
-   */
-  public void setPresenter(@NonNull P presenter) {
-    this.presenter = presenter;
   }
 
   /**
