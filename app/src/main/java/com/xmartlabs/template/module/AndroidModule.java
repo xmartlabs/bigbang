@@ -24,13 +24,13 @@ public class AndroidModule {
 
   @Provides
   @Singleton
-  public Context provideApplicationContext() {
+  Context provideApplicationContext() {
     return application;
   }
 
   @Provides
   @Singleton
-  public SharedPreferences provideSharedPreferences() {
+  SharedPreferences provideSharedPreferences() {
     return PreferenceManager.getDefaultSharedPreferences(application);
   }
 }

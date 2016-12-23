@@ -13,7 +13,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -25,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestServiceModule {
   @Provides
   @Singleton
-  public Retrofit provideRetrofit(Context context, @Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
+  Retrofit provideRetrofit(Context context, @Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
                                   RxJavaCallAdapterFactory rxJavaCallAdapterFactory,
                                   GsonConverterFactory gsonConverterFactory,
                                   ServiceStringConverter serviceStringConverter) {
@@ -40,26 +39,26 @@ public class RestServiceModule {
 
   @Provides
   @Singleton
-  public RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
+  RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
     return RxJavaCallAdapterFactory.create();
   }
 
   @Provides
   @Singleton
-  public GsonConverterFactory provideGsonConverterFactory(Gson gson) {
+  GsonConverterFactory provideGsonConverterFactory(@Named(GsonModule.SERVICE_GSON_NAME) Gson gson) {
     return GsonConverterFactory.create(gson);
   }
 
   @Provides
   @Singleton
-  public AuthService provideAuthService(Retrofit retrofit) {
+  AuthService provideAuthService(Retrofit retrofit) {
     return retrofit.create(AuthService.class);
   }
 
 
   @Provides
   @Singleton
-  public ServiceStringConverter provideStringConverter() {
+  ServiceStringConverter provideStringConverter() {
     return new ServiceStringConverter();
   }
 

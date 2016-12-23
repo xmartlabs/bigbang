@@ -26,7 +26,7 @@ import dagger.Provides;
  */
 @Module
 public class GsonModule {
-  public static final String SERVICE_GSON_NAME = "ServiceGson";
+  static final String SERVICE_GSON_NAME = "ServiceGson";
 
   @Provides
   @Singleton

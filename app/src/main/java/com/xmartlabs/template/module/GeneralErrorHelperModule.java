@@ -14,7 +14,7 @@ import dagger.Provides;
 public class GeneralErrorHelperModule {
   @Provides
   @Singleton
-  public GeneralErrorHelper provideGeneralErrorHelper() {
+  GeneralErrorHelper provideGeneralErrorHelper() {
     return new GeneralErrorHelper();
   }
 }
