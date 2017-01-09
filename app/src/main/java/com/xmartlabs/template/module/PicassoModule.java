@@ -29,13 +29,13 @@ public class PicassoModule {
 
   @Provides
   @Singleton
-  public Picasso providePicasso(Picasso.Builder picassoBuilder) {
+  Picasso providePicasso(Picasso.Builder picassoBuilder) {
     return picassoBuilder.build();
   }
 
   @Provides
   @Singleton
-  public Picasso.Builder providePicassoBuilder(Context context, OkHttp3Downloader downloader) {
+  Picasso.Builder providePicassoBuilder(Context context, OkHttp3Downloader downloader) {
     return new Picasso.Builder(context)
         .downloader(downloader)
         //.indicatorsEnabled(BuildConfig.DEBUG)
@@ -44,7 +44,7 @@ public class PicassoModule {
 
   @Provides
   @Singleton
-  public OkHttp3Downloader provideOkHttpDownloader(@Named(OkHttpModule.CLIENT_PICASSO) OkHttpClient client) {
+  OkHttp3Downloader provideOkHttpDownloader(@Named(OkHttpModule.CLIENT_PICASSO) OkHttpClient client) {
     return new OkHttp3Downloader(client);
   }
 }

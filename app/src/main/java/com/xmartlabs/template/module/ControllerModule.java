@@ -15,13 +15,13 @@ import dagger.Provides;
 public class ControllerModule {
   @Provides
   @Singleton
-  public AuthController provideAuthController() {
+  AuthController provideAuthController() {
     return new AuthController();
   }
 
   @Provides
   @Singleton
-  public SessionController provideSessionController() {
+  SessionController provideSessionController() {
     return new SessionController();
   }
 }
