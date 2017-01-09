@@ -10,7 +10,8 @@ import android.support.annotation.Nullable;
 public class StringUtils {
 
   /**
-   * Checks whether the given string is null or empty
+   * Checks whether the given string is null or empty.
+   *
    * @param string the string to check
    * @return true if <code>string</code> is null or empty
    */
@@ -19,7 +20,8 @@ public class StringUtils {
   }
 
   /**
-   * Checks whether the given char sequence is null or empty
+   * Checks whether the given char sequence is null or empty.
+   *
    * @param string the char sequence to check
    * @return true if <code>string</code> is null or empty
    */
@@ -28,7 +30,8 @@ public class StringUtils {
   }
 
   /**
-   * Changes the first letter of the given word to uppercase
+   * Changes the first letter of the given word to uppercase.
+   *
    * @param word the word to capitalize
    * @return a new <code>string</code> instance with the first letter in uppercase
    */

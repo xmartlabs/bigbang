@@ -13,7 +13,8 @@ import java.util.Comparator;
 @SuppressWarnings("unused")
 public class CollectionHelper {
   /**
-   * Checks whether or not a collection is null or empty
+   * Checks whether or not a collection is null or empty.
+   *
    * @param collection the <code>Collection</code> instance to be checked
    * @return true if the <code>collection</code> is null or empty
    */
@@ -22,7 +23,8 @@ public class CollectionHelper {
   }
 
   /**
-   * Returns a desc <code>Comparator</code> of any <code>Comparable</code> type
+   * Returns a desc <code>Comparator</code> of any <code>Comparable</code> type.
+   *
    * @param <T> the type of the <code>Comparator</code>, which must implement the <code>Comparable</code> interface
    * @return the <code>Comparator</code> instance
    */

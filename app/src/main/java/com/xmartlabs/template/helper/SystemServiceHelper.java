@@ -12,7 +12,8 @@ import com.xmartlabs.template.BaseProjectApplication;
 @SuppressWarnings("unused")
 public class SystemServiceHelper {
   /**
-   * Uses the <code>ConnectivityManager</code> class to determine whether the device is connected to the internet or not
+   * Uses the <code>ConnectivityManager</code> class to determine whether the device is connected to the internet or not.
+   *
    * @return true if the device is connected to the internet
    */
   public static boolean hasNetworkConnection() {
@@ -22,7 +23,8 @@ public class SystemServiceHelper {
   }
 
   /**
-   * Copies the <code>text</code> to the clipboard by means of the <code>ClipboardManager</code>
+   * Copies the <code>text</code> to the clipboard by means of the <code>ClipboardManager</code>.
+   *
    * @param text the text to be copied
    */
   public static void copyTextToClipboard(@NonNull String text) {
