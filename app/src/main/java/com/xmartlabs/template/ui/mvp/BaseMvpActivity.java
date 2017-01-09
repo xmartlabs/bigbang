@@ -18,8 +18,8 @@ import lombok.Setter;
  * @param <P> the presenter that coordinates the view
  */
 public abstract class BaseMvpActivity<V extends MvpView, P extends MvpPresenter<V>> extends BaseActivity implements MvpView {
-  @Setter(AccessLevel.PROTECTED)
   @Getter(AccessLevel.PROTECTED)
+  @Setter(AccessLevel.PROTECTED)
   private P presenter;
 
   protected Context getContext() {
