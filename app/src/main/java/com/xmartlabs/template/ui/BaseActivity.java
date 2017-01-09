@@ -8,7 +8,7 @@ import com.trello.rxlifecycle.components.RxActivity;
 import com.xmartlabs.template.BaseProjectApplication;
 
 /**
- * Created by santiago on 31/08/15.
+ * Created by diegomedina24 on 12/16/16.
  */
 public abstract class BaseActivity extends RxActivity {
   protected Context getContext() {
@@ -19,7 +19,6 @@ public abstract class BaseActivity extends RxActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Dart.inject(this);
-
     BaseProjectApplication.getContext().inject(this);
   }
 }

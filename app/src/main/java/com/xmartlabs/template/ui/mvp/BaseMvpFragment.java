@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.template.ui.mvp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -19,12 +19,22 @@ import com.xmartlabs.template.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * Created by santiago on 15/09/15.
+ * Fragment that uses a {@link MvpPresenter} to implement the MVP pattern. The fragments that inherit from this class
+ * will conform the V part of the said pattern.
+ *
+ * @param <V> the contract that provides the public API for the presenter to invoke view related methods
+ * @param <P> the presenter that coordinates the view
  */
 @FragmentWithArgs
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends RxFragment implements MvpView {
+  @Getter(AccessLevel.PROTECTED)
+  @Setter(AccessLevel.PROTECTED)
+  private P presenter;
   private Unbinder unbinder;
   @Nullable
   private ProgressDialog progressDialog;
@@ -44,7 +54,9 @@ public abstract class BaseFragment extends RxFragment {
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(getLayoutResId(), container, false);
     unbinder = ButterKnife.bind(this, view);
-
+    presenter = createPresenter();
+    //noinspection unchecked
+    presenter.attachView((V) this);
     return view;
   }
 
@@ -68,6 +80,7 @@ public abstract class BaseFragment extends RxFragment {
   @Override
   public void onDestroyView() {
     super.onDestroyView();
+    presenter.detachView();
     unbinder.unbind();
   }
 
@@ -91,7 +104,7 @@ public abstract class BaseFragment extends RxFragment {
   }
 
   protected void removeItselfFromActivity() {
-    ((BaseAppCompatActivity) getActivity()).removeFragment(this);
+    ((BaseMvpAppCompatActivity) getActivity()).removeFragment(this);
   }
 
   protected void removeItselfFromParentFragment() {
@@ -105,4 +118,12 @@ public abstract class BaseFragment extends RxFragment {
       removeItselfFromParentFragment();
     }
   }
+
+  /**
+   * Creates the presenter instance.
+   *
+   * @return the created presenter instance
+   */
+  @NonNull
+  protected abstract P createPresenter();
 }

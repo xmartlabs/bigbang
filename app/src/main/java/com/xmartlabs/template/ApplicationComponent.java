@@ -18,7 +18,6 @@ import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
-import com.xmartlabs.template.ui.BaseFragment;
 import com.xmartlabs.template.ui.FragmentWithDrawer;
 import com.xmartlabs.template.ui.MainActivity;
 import com.xmartlabs.template.ui.SingleFragmentActivity;
@@ -57,7 +56,6 @@ public interface ApplicationComponent {
   void inject(StartActivity startActivity);
   void inject(WelcomeActivity welcomeActivity);
 
-  void inject(BaseFragment baseFragment);
   void inject(FragmentWithDrawer fragmentWithDrawer);
   void inject(ValidatableFragment validatableFragment);
 
