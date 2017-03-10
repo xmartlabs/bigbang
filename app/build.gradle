@@ -29,9 +29,30 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
+def getSignInformation = { keystorePath, keystorePropertyPath ->
+    def keyStore = file(keystorePath)
+    if (!keyStore.exists()) {
+        logger.error("Keystore file not found, path=${keyStore.absolutePath}")
+        return
+    }
+    def propertiesFile = file(keystorePropertyPath)
+    if (!propertiesFile.exists()) {
+        logger.error("Keystore properties file not found, path=${propertiesFile.absolutePath}")
+        return
+    }
+    def Properties properties = new Properties()
+    properties.load(new FileInputStream(propertiesFile))
+    return [
+            storeFile    : keyStore,
+            storePassword: properties["store_password"],
+            keyAlias     : properties["key_alias"],
+            keyPassword  : properties["key_password"]
+    ]
+}
+
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId 'com.xmartlabs.template'
         minSdkVersion 17
@@ -41,38 +62,25 @@ android {
         versionName '0.1.0'
     }
     signingConfigs {
+        //noinspection GroovyMissingReturnStatement
         debug {
-            def debugKeyStore = file('debug.keystore')
-            if (debugKeyStore.exists()) {
-                storeFile debugKeyStore
-            } else {
-                //noinspection GrUnresolvedAccess
-                logger.error('Debug keystore file not found')
+            def signInformation = getSignInformation("debug.keystore", "keystore.properties")
+            if (signInformation != null) {
+                storeFile signInformation.storeFile
+                storePassword signInformation.storePassword
+                keyAlias signInformation.keyAlias
+                keyPassword signInformation.keyPassword
             }
         }
+        //noinspection GroovyMissingReturnStatement
         release {
-            def releaseKeyStore = file('release.keystore')
-            if (releaseKeyStore.exists()) {
-                storeFile releaseKeyStore
-            } else {
-                //noinspection GrUnresolvedAccess
-                logger.error('Release keystore file not found')
+            def signInformation = getSignInformation("release.keystore", "keystore.properties")
+            if (signInformation != null) {
+                storeFile signInformation.storeFile
+                storePassword signInformation.storePassword
+                keyAlias signInformation.keyAlias
+                keyPassword signInformation.keyPassword
             }
-        }
-
-        def Properties properties = new Properties()
-        def propertiesFile = file('keystore.properties')
-        if (propertiesFile.exists()) {
-            properties.load(new FileInputStream(propertiesFile))
-            //noinspection GrUnresolvedAccess
-            storePassword properties['store_password']
-            //noinspection GrUnresolvedAccess
-            keyAlias properties['key_alias']
-            //noinspection GrUnresolvedAccess
-            keyPassword properties['key_password']
-        } else {
-            //noinspection GrUnresolvedAccess
-            logger.error('Keystore properties file not found')
         }
     }
     buildTypes {
