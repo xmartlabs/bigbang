@@ -7,6 +7,9 @@ import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.xmartlabs.template.common.rx.OnCompletableSubscribeWithErrorHandle;
+import com.xmartlabs.template.common.rx.OnObservableSubscribeWithErrorHandle;
+import com.xmartlabs.template.common.rx.OnSingleSubscribeWithErrorHandle;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 
@@ -87,7 +90,13 @@ public class BaseProjectApplication extends Application {
     return bullet.inject(t);
   }
 
+  @SuppressWarnings("unchecked")
   private void initializeRxErrorHandler() {
-    RxJavaHooks.setOnError(generalErrorHelper.getGeneralErrorAction());
+    RxJavaHooks.setOnCompletableCreate(onSubscribe ->
+        new OnCompletableSubscribeWithErrorHandle(onSubscribe, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaHooks.setOnSingleCreate(onSubscribe ->
+        new OnSingleSubscribeWithErrorHandle<>(onSubscribe, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaHooks.setOnObservableCreate(onSubscribe ->
+        new OnObservableSubscribeWithErrorHandle(onSubscribe, generalErrorHelper.getGeneralErrorAction()));
   }
 }
