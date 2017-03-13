@@ -1,7 +1,9 @@
 package com.xmartlabs.template.module;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.annimon.stream.Objects;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -31,7 +33,9 @@ public class GsonModule {
   @Provides
   @Singleton
   Gson provideGson(GsonBuilder gsonBuilder) {
-    return gsonBuilder.create();
+    return gsonBuilder
+        .setExclusionStrategies(getExclusionStrategy(null))
+        .create();
   }
 
   @Named(SERVICE_GSON_NAME)
@@ -40,21 +44,21 @@ public class GsonModule {
   @SuppressWarnings("unused")
   Gson provideServiceGson(GsonBuilder gsonBuilder) {
     gsonBuilder
+        .setExclusionStrategies(getExclusionStrategy(GsonExclude.Strategy.SERVICE))
         .registerTypeAdapter(LocalDateTime.class, new MillisecondsLocalDateTimeAdapter())
         .registerTypeAdapter(LocalDate.class, new MillisecondsLocalDateAdapter());
 
     return gsonBuilder.create();
   }
 
-  @NonNull
-  @Provides
-  @Singleton
-  ExclusionStrategy provideGsonExclusionStrategy() {
+  private ExclusionStrategy getExclusionStrategy(@Nullable GsonExclude.Strategy strategy) {
     return new ExclusionStrategy() {
       @Override
       public boolean shouldSkipField(FieldAttributes fieldAttributes) {
         return fieldAttributes.getDeclaredClass().equals(ModelAdapter.class)
-            || fieldAttributes.getAnnotation(GsonExclude.class) != null;
+            || (fieldAttributes.getAnnotation(GsonExclude.class) != null
+            && (Objects.equals(fieldAttributes.getAnnotation(GsonExclude.class).strategy(), GsonExclude.Strategy.ALL)
+            || Objects.equals(fieldAttributes.getAnnotation(GsonExclude.class).strategy(), strategy)));
       }
 
       @Override
@@ -66,9 +70,8 @@ public class GsonModule {
 
   @NonNull
   @Provides
-  GsonBuilder provideCommonGsonBuilder(ExclusionStrategy exclusionStrategy) {
-    GsonBuilder gsonBuilder = new GsonBuilder()
-        .setExclusionStrategies(exclusionStrategy);
+  GsonBuilder provideCommonGsonBuilder() {
+    GsonBuilder gsonBuilder = new GsonBuilder();
     if (BuildConfig.DEBUG) {
       gsonBuilder.setPrettyPrinting();
     }
