@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.annimon.stream.Optional;
 import com.xmartlabs.template.R;
 
 /**
@@ -17,37 +18,37 @@ public class RecyclerViewEmptySupport extends RecyclerView {
   @Nullable
   private View emptyView;
   @IdRes
-  private int emptyViewID;
+  private int emptyViewId;
 
   private final RecyclerView.AdapterDataObserver emptyObserver = new AdapterDataObserver() {
     @Override
     public void onChanged() {
       super.onChanged();
-      checkViewVisibility();
+      showCorrectView();
     }
 
     @Override
     public void onItemRangeInserted(int positionStart, int itemCount) {
       super.onItemRangeInserted(positionStart, itemCount);
-      checkViewVisibility();
+      showCorrectView();
     }
 
     @Override
     public void onItemRangeRemoved(int positionStart, int itemCount) {
       super.onItemRangeRemoved(positionStart, itemCount);
-      checkViewVisibility();
+      showCorrectView();
     }
 
     @Override
     public void onItemRangeChanged(int positionStart, int itemCount) {
       super.onItemRangeChanged(positionStart, itemCount);
-      checkViewVisibility();
+      showCorrectView();
     }
 
     @Override
     public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
       super.onItemRangeMoved(fromPosition, toPosition, itemCount);
-      checkViewVisibility();
+      showCorrectView();
     }
   };
 
@@ -67,23 +68,21 @@ public class RecyclerViewEmptySupport extends RecyclerView {
 
   private void bindAttributes(Context context, AttributeSet attrs) {
     TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.Commons, 0, 0);
-    emptyViewID = attributes.getResourceId(R.styleable.Commons_emptyView, -1);
+    emptyViewId = attributes.getResourceId(R.styleable.Commons_emptyView, -1);
     attributes.recycle();
   }
 
   private void initializeEmptyView() {
-    if (emptyViewID != -1) {
-      post(() -> {
-        View view = getRootView().findViewById(emptyViewID);
-        if (view != null) {
-          emptyView = view;
-          checkViewVisibility();
-        }
-      });
+    if (emptyViewId > 0) {
+      post(() -> Optional.ofNullable(getRootView().findViewById(emptyViewId))
+          .ifPresent(view -> {
+            emptyView = view;
+            showCorrectView();
+          }));
     }
   }
 
-  private void checkViewVisibility() {
+  private void showCorrectView() {
     Adapter<?> adapter = getAdapter();
     if (adapter != null && emptyView != null) {
       if (adapter.getItemCount() == 0) {
