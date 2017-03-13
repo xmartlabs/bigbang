@@ -1,4 +1,4 @@
-package com.xmartlabs.template.common;
+package com.xmartlabs.template.common.exeption;
 
 import android.support.annotation.Nullable;
 
@@ -17,7 +17,7 @@ import retrofit2.adapter.rxjava.HttpException;
  * Created by medina on 16/09/2016.
  */
 @Getter
-public class ServiceExceptionWithMessage extends RuntimeException {
+public final class ServiceExceptionWithMessage extends RuntimeException {
   private final int code;
   private final String message;
   @Nullable
@@ -46,5 +46,9 @@ public class ServiceExceptionWithMessage extends RuntimeException {
 
   public ServiceExceptionWithMessage(HttpException exception) {
     this(exception.response());
+  }
+
+  public int getErrorListSize() {
+    return 0; // TODO mirland 10/03/17:
   }
 }
