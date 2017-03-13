@@ -8,10 +8,16 @@ import com.annimon.stream.Stream;
 import com.crashlytics.android.Crashlytics;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.BuildConfig;
-import com.xmartlabs.template.common.ServiceExceptionWithMessage;
+import com.xmartlabs.template.common.exeption.EntityNotFoundException;
+import com.xmartlabs.template.common.exeption.ServiceExceptionWithMessage;
 import com.xmartlabs.template.controller.SessionController;
 
+import java.net.ConnectException;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CancellationException;
 
 import javax.inject.Inject;
 
@@ -25,12 +31,18 @@ import timber.log.Timber;
  * Created by santiago on 12/10/15.
  */
 @SuppressWarnings("unused")
-public class GeneralErrorHelper {
+public final class GeneralErrorHelper {
   private static final String CRASHLYTICS_KEY_RESPONSE_BODY = "response_body";
   private static final String CRASHLYTICS_KEY_RESPONSE_HEADERS = "response_headers";
   private static final String CRASHLYTICS_KEY_STATUS_CODE = "status_code";
   public static final String CRASHLYTICS_KEY_URL = "url";
 
+  private final List<Class<?>> UNTRACKED_CLASSES = Arrays.asList(
+      CancellationException.class,
+      ConnectException.class,
+      EntityNotFoundException.class,
+      UnknownHostException.class
+  );
   private final StackTraceElement DUMMY_STACK_TRACE_ELEMENT = new StackTraceElement("", "", null, -1);
   private final StackTraceElement[] DUMMY_STACK_TRACE_ELEMENT_ARRAY =
       new StackTraceElement[] {DUMMY_STACK_TRACE_ELEMENT};
@@ -74,11 +86,7 @@ public class GeneralErrorHelper {
         body
     );
 
-    if (BuildConfig.DEBUG) {
-      Timber.e(message);
-    } else {
-      Timber.d(message);
-    }
+    Timber.e(message);
   }
 
   private void clearCrashlyticsKeys() {
@@ -88,18 +96,38 @@ public class GeneralErrorHelper {
     Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, null);
   }
 
-  private void handleException(Throwable t) {
-    if (t instanceof HttpException || t instanceof ServiceExceptionWithMessage) {
-      if (exceptionIsAlreadyBeingHandled(t)) {
+  private void handleException(Throwable throwable) {
+    if (!shouldHandleThrowable(throwable)) {
+      if (BuildConfig.DEBUG) {
+        Timber.e(throwable, "Untracked exception");
+      } else {
+        Timber.d(throwable, "Untracked exception");
+      }
+      return;
+    }
+
+    if (throwable instanceof HttpException || throwable instanceof ServiceExceptionWithMessage) {
+      if (exceptionIsAlreadyBeingHandled(throwable)) {
         return;
       }
-      ServiceExceptionWithMessage exceptionWithMessage = t instanceof ServiceExceptionWithMessage
-          ? (ServiceExceptionWithMessage) t
-          : new ServiceExceptionWithMessage((HttpException) t);
-      // TODO: Handle service error response here like logging out if 401
+      ServiceExceptionWithMessage exceptionWithMessage = throwable instanceof ServiceExceptionWithMessage
+          ? (ServiceExceptionWithMessage) throwable
+          : new ServiceExceptionWithMessage((HttpException) throwable);
       logCrashlyticsError(exceptionWithMessage);
-      Timber.e(t, null);
+    } else {
+      Timber.e(throwable);
     }
+  }
+
+  private boolean shouldHandleThrowable(Throwable throwable) {
+    return !(exceptionIsAlreadyBeingHandled(throwable)
+        || UNTRACKED_CLASSES.contains(throwable.getClass())
+        || (throwable instanceof ServiceExceptionWithMessage
+        && !shouldHandleServiceExceptionWithMessage((ServiceExceptionWithMessage) throwable)));
+  }
+
+  private boolean shouldHandleServiceExceptionWithMessage(ServiceExceptionWithMessage exception) {
+    return exception.getErrorListSize() <= 0;
   }
 
   private boolean exceptionIsAlreadyBeingHandled(Throwable t) {
