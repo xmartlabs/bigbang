@@ -1,7 +1,6 @@
 package com.xmartlabs.template.ui;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -11,23 +10,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.annimon.stream.Optional;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.trello.rxlifecycle.components.support.RxFragment;
 import com.xmartlabs.template.BaseProjectApplication;
-import com.xmartlabs.template.R;
-import com.xmartlabs.template.ui.mvp.BaseMvpAppCompatActivity;
+import com.xmartlabs.template.ui.common.BaseProgressDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by diegomedina24 on 20/3/17.
+ * Base Fragment implementation with the following functionality:
+ * <ul>
+ *   <li>Inflate the view given a layout resource</li>
+ *   <li>Bind the view layout elements with ButterKnife</li>
+ *   <li>Ability to show/hide a progress dialog of your choosing (providing it extends from <code>BaseProgressDialog</code></li>
+ *   <li>If the activity that holds this Fragment extends from <code>BaseAppCompatActivity</code>, allows the instance
+ *       to be removed</li>
+ *   <li>Ability to remove itself from parent fragment</li>
+ *   <li>Proper cleanup on detach/destroy</li>
+ * </ul>
  */
 public abstract class BaseFragment extends RxFragment {
   private Unbinder unbinder;
   @Nullable
-  private ProgressDialog progressDialog;
+  private BaseProgressDialog progressDialog;
 
+  /**
+   * Used to inflate the view layout/elements
+   * @return the layout resource from which to inflate the view
+   */
   @LayoutRes
   protected abstract int getLayoutResId();
 
@@ -49,17 +61,24 @@ public abstract class BaseFragment extends RxFragment {
   @Override
   public void onAttach(Activity activity) {
     super.onAttach(activity);
-    progressDialog = new ProgressDialog(activity);
-    progressDialog.setCancelable(false);
-    progressDialog.setMessage(getString(R.string.loading));
+    progressDialog = createProgressDialog();
+  }
+
+  /**
+   * To be used to show/hide a progress dialog.
+   * The dialog must extend from BaseProgressDialog
+   * @return the BaseProgressDialog instance to be shown upon request
+   */
+  @Nullable
+  protected BaseProgressDialog createProgressDialog() {
+    return null;
   }
 
   @Override
   public void onDetach() {
     super.onDetach();
-    if (progressDialog != null) {
-      progressDialog.dismiss();
-    }
+    Optional.ofNullable(progressDialog)
+        .ifPresent(BaseProgressDialog::dismiss);
     progressDialog = null;
   }
 
@@ -69,6 +88,10 @@ public abstract class BaseFragment extends RxFragment {
     unbinder.unbind();
   }
 
+  /**
+   * Show a simple alert with an ok button
+   * @param stringResId the message to be shown in the alert
+   */
   protected void showAlertError(int stringResId) {
     new AlertDialog.Builder(getContext())
         .setMessage(stringResId)
@@ -76,31 +99,42 @@ public abstract class BaseFragment extends RxFragment {
         .show();
   }
 
+  /**
+   * Shows a progress dialog, provided the method <code>createProgressDialog</code> return an object that isn't null
+   */
   public void showProgressDialog() {
-    if (progressDialog != null) {
-      progressDialog.show();
-    }
+    Optional.ofNullable(progressDialog)
+        .ifPresent(BaseProgressDialog::show);
   }
 
+  /**
+   * Hides the progress dialog shown with <code>showProgressDialog</code>, if such a dialog was ever shown (and exists)
+   */
   public void hideProgressDialog() {
-    if (progressDialog != null) {
-      progressDialog.hide();
-    }
+    Optional.ofNullable(progressDialog)
+        .ifPresent(BaseProgressDialog::hide);
   }
 
+  /**
+   * Removes the Fragment from the <code>BaseAppCompatActivity</code> Activity
+   */
   protected void removeItselfFromActivity() {
-    ((BaseMvpAppCompatActivity) getActivity()).removeFragment(this);
+    ((BaseAppCompatActivity) getActivity()).removeFragment(this);
   }
 
+  /**
+   * Removes the Fragment from it's parent one
+   */
   protected void removeItselfFromParentFragment() {
     getParentFragment().getChildFragmentManager().beginTransaction().remove(this).commit();
   }
 
+  /**
+   * If the Fragment is contained within another Fragment, removes this from that Fragment
+   * In other case, removes the Fragment from the <code>BaseAppCompatActivity</code> Activity
+   */
   protected void removeItselfFromParent() {
-    if (getParentFragment() == null) {
-      removeItselfFromActivity();
-    } else {
-      removeItselfFromParentFragment();
-    }
+    Optional.ofNullable(getParentFragment())
+        .ifPresentOrElse(parent -> removeItselfFromParentFragment(), this::removeItselfFromActivity);
   }
 }
