@@ -10,7 +10,6 @@ import android.support.annotation.RequiresPermission;
 import android.support.annotation.StringRes;
 
 import com.xmartlabs.template.BaseProjectApplication;
-import com.xmartlabs.template.R;
 import com.xmartlabs.template.helper.StringUtils;
 
 import lombok.val;
