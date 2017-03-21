@@ -55,7 +55,7 @@ public final class GeneralErrorHelper {
   SessionController sessionController;
 
   @Getter
-  final Consumer<Throwable> generalErrorAction = t -> {
+  final Consumer<? super Throwable> generalErrorAction = t -> {
     if (t instanceof CompositeException) {
       CompositeException compositeException = (CompositeException) t;
       Stream.of(compositeException.getExceptions())

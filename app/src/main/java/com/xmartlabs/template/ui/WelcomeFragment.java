@@ -9,7 +9,6 @@ import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.xmartlabs.template.R;
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.model.LoginRequest;
-import com.xmartlabs.template.model.Session;
 import com.xmartlabs.template.ui.mvp.BaseMvpFragment;
 import com.xmartlabs.template.ui.mvp.BaseMvpPresenter;
 import com.xmartlabs.template.ui.mvp.MvpView;
@@ -17,7 +16,6 @@ import com.xmartlabs.template.ui.mvp.MvpView;
 import javax.inject.Inject;
 
 import butterknife.OnClick;
-import io.reactivex.Single;
 
 /**
  * Created by santiago on 31/08/15.

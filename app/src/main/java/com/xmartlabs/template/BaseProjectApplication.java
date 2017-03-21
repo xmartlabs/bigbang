@@ -7,6 +7,11 @@ import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.xmartlabs.template.common.rx.CompletableObserverWithErrorHandling;
+import com.xmartlabs.template.common.rx.FlowableObserverWithErrorHandling;
+import com.xmartlabs.template.common.rx.MaybeObserverWithErrorHandling;
+import com.xmartlabs.template.common.rx.ObservableObserverWithErrorHandling;
+import com.xmartlabs.template.common.rx.SingleObserverWithErrorHandling;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 
@@ -90,5 +95,15 @@ public class BaseProjectApplication extends Application {
   @SuppressWarnings("unchecked")
   private void initializeRxErrorHandler() {
     RxJavaPlugins.setErrorHandler(generalErrorHelper.getGeneralErrorAction());
+    RxJavaPlugins.setOnSingleSubscribe((single, singleObserver) ->
+        new SingleObserverWithErrorHandling<>(singleObserver, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
+        new ObservableObserverWithErrorHandling<>(observer, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaPlugins.setOnMaybeSubscribe((maybe, maybeObserver) ->
+        new MaybeObserverWithErrorHandling<>(maybeObserver, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaPlugins.setOnFlowableSubscribe((flowable, subscriber) ->
+        new FlowableObserverWithErrorHandling<>(subscriber, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
+        new CompletableObserverWithErrorHandling(completableObserver, generalErrorHelper.getGeneralErrorAction()));
   }
 }

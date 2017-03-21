@@ -1,0 +1,40 @@
+package com.xmartlabs.template.common.rx;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import lombok.RequiredArgsConstructor;
+
+/**
+ * Created by diegomedina24 on 21/3/17.
+ */
+@RequiredArgsConstructor
+public final class ObservableObserverWithErrorHandling<T> implements Observer<T> {
+  private final Observer<T> observer;
+  private final Consumer<? super Throwable> onErrorCallback;
+
+  @Override
+  public void onSubscribe(Disposable d) {
+    observer.onSubscribe(d);
+  }
+
+  @Override
+  public void onNext(T t) {
+    observer.onNext(t);
+  }
+
+  @Override
+  public void onError(Throwable e) {
+    try {
+      onErrorCallback.accept(e);
+    } catch (Exception exception) {
+      observer.onError(exception);
+    }
+    observer.onError(e);
+  }
+
+  @Override
+  public void onComplete() {
+    observer.onComplete();
+  }
+}
