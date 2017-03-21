@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.R;
 
@@ -31,7 +31,8 @@ import lombok.Setter;
  * @param <P> the presenter that coordinates the view
  */
 @FragmentWithArgs
-public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends RxFragment implements MvpView {
+public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends RxFragment
+    implements MvpView {
   @Getter(AccessLevel.PROTECTED)
   @Setter(AccessLevel.PROTECTED)
   private P presenter;

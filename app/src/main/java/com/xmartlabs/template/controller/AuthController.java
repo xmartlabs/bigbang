@@ -9,7 +9,7 @@ import com.xmartlabs.template.service.AuthService;
 
 import javax.inject.Inject;
 
-import rx.Single;
+import io.reactivex.Single;
 
 /**
  * Created by santiago on 01/03/16.

@@ -28,7 +28,7 @@ public class DatabaseHelper {
     if (session.getDatabaseVersion() == null || session.getDatabaseVersion() != Session.CURRENT_DATABASE_VERSION) { // Drop even if downgrading the version.
       deleteAll();
       session.setDatabaseVersion(Session.CURRENT_DATABASE_VERSION);
-      sessionController.setSession(session).await();
+      sessionController.setSession(session).blockingAwait();
     }
   }
 }

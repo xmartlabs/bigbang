@@ -7,9 +7,6 @@ import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
-import com.xmartlabs.template.common.rx.OnCompletableSubscribeWithErrorHandle;
-import com.xmartlabs.template.common.rx.OnObservableSubscribeWithErrorHandle;
-import com.xmartlabs.template.common.rx.OnSingleSubscribeWithErrorHandle;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 
@@ -17,7 +14,7 @@ import javax.inject.Inject;
 
 import bullet.ObjectGraph;
 import io.fabric.sdk.android.Fabric;
-import rx.plugins.RxJavaHooks;
+import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
 /**
@@ -92,11 +89,6 @@ public class BaseProjectApplication extends Application {
 
   @SuppressWarnings("unchecked")
   private void initializeRxErrorHandler() {
-    RxJavaHooks.setOnCompletableCreate(onSubscribe ->
-        new OnCompletableSubscribeWithErrorHandle(onSubscribe, generalErrorHelper.getGeneralErrorAction()));
-    RxJavaHooks.setOnSingleCreate(onSubscribe ->
-        new OnSingleSubscribeWithErrorHandle<>(onSubscribe, generalErrorHelper.getGeneralErrorAction()));
-    RxJavaHooks.setOnObservableCreate(onSubscribe ->
-        new OnObservableSubscribeWithErrorHandle(onSubscribe, generalErrorHelper.getGeneralErrorAction()));
+    RxJavaPlugins.setErrorHandler(generalErrorHelper.getGeneralErrorAction());
   }
 }

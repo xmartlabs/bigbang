@@ -12,8 +12,8 @@ import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 
-import rx.Completable;
-import rx.Single;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 import timber.log.Timber;
 
 /**
@@ -66,7 +66,7 @@ public class SessionController extends Controller {
               .putString(PREFERENCES_KEY_SESSION, sessionJsonString)
               .commit();
       if (committed) {
-        subscriber.onCompleted();
+        subscriber.onComplete();
       } else {
         subscriber.onError(new RuntimeException("The session change could not be committed"));
       }

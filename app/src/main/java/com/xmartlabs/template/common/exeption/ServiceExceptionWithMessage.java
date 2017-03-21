@@ -10,8 +10,8 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import lombok.Getter;
+import retrofit2.HttpException;
 import retrofit2.Response;
-import retrofit2.adapter.rxjava.HttpException;
 
 /**
  * Created by medina on 16/09/2016.
