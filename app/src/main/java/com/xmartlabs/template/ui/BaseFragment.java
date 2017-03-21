@@ -24,8 +24,8 @@ import butterknife.Unbinder;
  * <ul>
  *   <li>Inflate the view given a layout resource</li>
  *   <li>Bind the view layout elements with ButterKnife</li>
- *   <li>Ability to show/hide a progress dialog of your choosing (providing it extends from <code>BaseProgressDialog</code></li>
- *   <li>If the activity that holds this Fragment extends from <code>BaseAppCompatActivity</code>, allows the instance
+ *   <li>Ability to show/hide a progress dialog of your choosing (providing it extends from {@link BaseProgressDialog}</li>
+ *   <li>If the activity that holds this Fragment extends from {@link BaseAppCompatActivity}, allows the instance
  *       to be removed</li>
  *   <li>Ability to remove itself from parent fragment</li>
  *   <li>Proper cleanup on detach/destroy</li>
@@ -33,8 +33,8 @@ import butterknife.Unbinder;
  */
 public abstract class BaseFragment extends RxFragment {
   private Unbinder unbinder;
-  @Nullable
-  private BaseProgressDialog progressDialog;
+  @NonNull
+  private Optional<BaseProgressDialog> progressDialog = Optional.empty();
 
   /**
    * Used to inflate the view layout/elements
@@ -61,11 +61,11 @@ public abstract class BaseFragment extends RxFragment {
   @Override
   public void onAttach(Activity activity) {
     super.onAttach(activity);
-    progressDialog = createProgressDialog();
+    progressDialog = Optional.ofNullable(createProgressDialog());
   }
 
   /**
-   * To be used to show/hide a progress dialog.
+   * Creates a BaseProgressDialog instance to be used to show/hide a progress dialog.
    * The dialog must extend from BaseProgressDialog
    * @return the BaseProgressDialog instance to be shown upon request
    */
@@ -77,9 +77,8 @@ public abstract class BaseFragment extends RxFragment {
   @Override
   public void onDetach() {
     super.onDetach();
-    Optional.ofNullable(progressDialog)
-        .ifPresent(BaseProgressDialog::dismiss);
-    progressDialog = null;
+    progressDialog.ifPresent(BaseProgressDialog::dismiss);
+    progressDialog = Optional.empty();
   }
 
   @Override
@@ -99,39 +98,29 @@ public abstract class BaseFragment extends RxFragment {
         .show();
   }
 
-  /**
-   * Shows a progress dialog, provided the method <code>createProgressDialog</code> return an object that isn't null
-   */
+  /** Shows a progress dialog, provided the method {@link #createProgressDialog()} return an object that isn't null */
   public void showProgressDialog() {
-    Optional.ofNullable(progressDialog)
-        .ifPresent(BaseProgressDialog::show);
+    progressDialog.ifPresent(BaseProgressDialog::show);
   }
 
-  /**
-   * Hides the progress dialog shown with <code>showProgressDialog</code>, if such a dialog was ever shown (and exists)
-   */
+  /** Hides the progress dialog shown with {@link #showProgressDialog()}, if such a dialog was ever shown (and exists) */
   public void hideProgressDialog() {
-    Optional.ofNullable(progressDialog)
-        .ifPresent(BaseProgressDialog::hide);
+    progressDialog.ifPresent(BaseProgressDialog::hide);
   }
 
-  /**
-   * Removes the Fragment from the <code>BaseAppCompatActivity</code> Activity
-   */
+  /** Removes the Fragment from the {@link BaseAppCompatActivity} Activity */
   protected void removeItselfFromActivity() {
     ((BaseAppCompatActivity) getActivity()).removeFragment(this);
   }
 
-  /**
-   * Removes the Fragment from it's parent one
-   */
+  /** Removes the Fragment from its parent */
   protected void removeItselfFromParentFragment() {
     getParentFragment().getChildFragmentManager().beginTransaction().remove(this).commit();
   }
 
   /**
-   * If the Fragment is contained within another Fragment, removes this from that Fragment
-   * In other case, removes the Fragment from the <code>BaseAppCompatActivity</code> Activity
+   * If the Fragment is contained within another Fragment, it removes the former
+   * Otherwise, removes the Fragment from the {@link BaseAppCompatActivity} Activity
    */
   protected void removeItselfFromParent() {
     Optional.ofNullable(getParentFragment())
