@@ -5,6 +5,7 @@ import org.reactivestreams.Subscription;
 
 import io.reactivex.functions.Consumer;
 import lombok.RequiredArgsConstructor;
+import timber.log.Timber;
 
 /**
  * Created by diegomedina24 on 21/3/17.
@@ -29,7 +30,7 @@ public final class FlowableObserverWithErrorHandling<T> implements Subscriber<T>
     try {
       onErrorCallback.accept(t);
     } catch (Exception exception) {
-      subscriber.onError(exception);
+      Timber.e(exception);
     }
     subscriber.onError(t);
   }

@@ -4,6 +4,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import lombok.RequiredArgsConstructor;
+import timber.log.Timber;
 
 /**
  * Created by diegomedina24 on 21/3/17.
@@ -28,7 +29,7 @@ public final class ObservableObserverWithErrorHandling<T> implements Observer<T>
     try {
       onErrorCallback.accept(e);
     } catch (Exception exception) {
-      observer.onError(exception);
+      Timber.e(exception);
     }
     observer.onError(e);
   }

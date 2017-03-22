@@ -94,7 +94,6 @@ public class BaseProjectApplication extends Application {
 
   @SuppressWarnings("unchecked")
   private void initializeRxErrorHandler() {
-    RxJavaPlugins.setErrorHandler(generalErrorHelper.getGeneralErrorAction());
     RxJavaPlugins.setOnSingleSubscribe((single, singleObserver) ->
         new SingleObserverWithErrorHandling<>(singleObserver, generalErrorHelper.getGeneralErrorAction()));
     RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->

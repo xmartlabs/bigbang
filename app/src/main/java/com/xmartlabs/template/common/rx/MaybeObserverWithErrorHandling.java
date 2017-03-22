@@ -4,6 +4,7 @@ import io.reactivex.MaybeObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import lombok.RequiredArgsConstructor;
+import timber.log.Timber;
 
 /**
  * Created by diegomedina24 on 21/3/17.
@@ -28,7 +29,7 @@ public final class MaybeObserverWithErrorHandling<T> implements MaybeObserver<T>
     try {
       onErrorCallback.accept(e);
     } catch (Exception exception) {
-      maybeObserver.onError(exception);
+      Timber.e(exception);
     }
     maybeObserver.onError(e);
   }
