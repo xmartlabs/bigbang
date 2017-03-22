@@ -21,10 +21,10 @@ import java.util.concurrent.CancellationException;
 
 import javax.inject.Inject;
 
+import io.reactivex.exceptions.CompositeException;
+import io.reactivex.functions.Consumer;
 import lombok.Getter;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.exceptions.CompositeException;
-import rx.functions.Action1;
+import retrofit2.HttpException;
 import timber.log.Timber;
 
 /**
@@ -55,7 +55,7 @@ public final class GeneralErrorHelper {
   SessionController sessionController;
 
   @Getter
-  final Action1<Throwable> generalErrorAction = t -> {
+  final Consumer<? super Throwable> generalErrorAction = t -> {
     if (t instanceof CompositeException) {
       CompositeException compositeException = (CompositeException) t;
       Stream.of(compositeException.getExceptions())

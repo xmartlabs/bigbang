@@ -21,9 +21,9 @@ import javax.inject.Named;
 import io.appflate.restmock.RESTMockServerStarter;
 import io.appflate.restmock.android.AndroidAssetsFileParser;
 import io.appflate.restmock.android.AndroidLogger;
+import io.reactivex.plugins.RxJavaPlugins;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
-import rx.plugins.RxJavaHooks;
 
 /**
  * Created by medina on 21/09/2016.
@@ -46,7 +46,7 @@ public class TestRunner extends AndroidJUnitRunner {
     super.onCreate(arguments);
 
     TimeZone.setDefault(MockClockModule.DEFAULT_TIME_ZONE);
-    RxJavaHooks.setOnIOScheduler(scheduler -> new ImmediateNewThreadScheduler());
+    RxJavaPlugins.setIoSchedulerHandler(scheduler -> new ImmediateNewThreadScheduler());
   }
 
   @Override

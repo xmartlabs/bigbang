@@ -9,7 +9,6 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.xmartlabs.template.ui.BaseFragment;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -20,8 +19,8 @@ import lombok.Setter;
  * @param <P> the presenter that coordinates the view
  */
 @FragmentWithArgs
-public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends BaseFragment implements MvpView {
-  @Getter(AccessLevel.PROTECTED)
+public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends BaseFragment
+    implements MvpView {
   @Setter(AccessLevel.PROTECTED)
   private P presenter;
 
