@@ -14,7 +14,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -25,9 +25,9 @@ public class RestServiceModule {
   @Provides
   @Singleton
   Retrofit provideRetrofit(Context context, @Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
-                                  RxJavaCallAdapterFactory rxJavaCallAdapterFactory,
-                                  GsonConverterFactory gsonConverterFactory,
-                                  ServiceStringConverter serviceStringConverter) {
+                           RxJava2CallAdapterFactory rxJavaCallAdapterFactory,
+                           GsonConverterFactory gsonConverterFactory,
+                           ServiceStringConverter serviceStringConverter) {
     return new Retrofit.Builder()
         .addCallAdapterFactory(rxJavaCallAdapterFactory)
         .addConverterFactory(gsonConverterFactory)
@@ -39,8 +39,8 @@ public class RestServiceModule {
 
   @Provides
   @Singleton
-  RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
-    return RxJavaCallAdapterFactory.create();
+  RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
+    return RxJava2CallAdapterFactory.create();
   }
 
   @Provides
