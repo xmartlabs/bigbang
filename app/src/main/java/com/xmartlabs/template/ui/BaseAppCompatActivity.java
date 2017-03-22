@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.f2prateek.dart.Dart;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.xmartlabs.template.BaseProjectApplication;
 
 /**

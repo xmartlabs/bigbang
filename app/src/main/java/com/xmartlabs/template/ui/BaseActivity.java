@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.f2prateek.dart.Dart;
-import com.trello.rxlifecycle.components.RxActivity;
+import com.trello.rxlifecycle2.components.RxActivity;
 import com.xmartlabs.template.BaseProjectApplication;
 
 /**

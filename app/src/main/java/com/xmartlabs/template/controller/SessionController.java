@@ -13,7 +13,7 @@ import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 
-import rx.Single;
+import io.reactivex.Single;
 import timber.log.Timber;
 
 /**

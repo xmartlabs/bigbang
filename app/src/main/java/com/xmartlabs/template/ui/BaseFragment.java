@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.annimon.stream.Optional;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.xmartlabs.template.BaseProjectApplication;
 import com.xmartlabs.template.ui.common.BaseProgressDialog;
 
