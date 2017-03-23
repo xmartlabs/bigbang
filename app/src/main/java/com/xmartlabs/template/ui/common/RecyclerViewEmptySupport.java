@@ -13,7 +13,8 @@ import com.xmartlabs.template.R;
 import com.xmartlabs.template.helper.function.Function;
 
 /**
- * {@link RecyclerView} subclass that automatically handles empty state
+ * {@link RecyclerView} subclass that automatically handles empty state.
+ *
  * A {@link RecyclerView} is in an empty state when its adapter holds zero items,
  * or if the callback function {@link #isInEmptyState} is set and returns true.
  *
@@ -79,7 +80,8 @@ public class RecyclerViewEmptySupport extends RecyclerView {
   }
 
   /**
-   * Extracts the resource id from the {@link RecyclerView} attributes, if present
+   * Extracts the resource id from the {@link RecyclerView} attributes, if present.
+   *
    * @param context The Context the view is running in, through which it can
    *        access the current theme, resources, etc.
    * @param attrs The attributes of the XML tag that is inflating the view.
@@ -90,7 +92,7 @@ public class RecyclerViewEmptySupport extends RecyclerView {
     attributes.recycle();
   }
 
-  /** Initializes the empty view using the resource identifier {@link #emptyViewId}, if it exists */
+  /** Initializes the empty view using the resource identifier {@link #emptyViewId}, if it exists. */
   private void initializeEmptyView() {
     if (emptyViewId > 0) {
       post(() -> Optional.ofNullable(getRootView().findViewById(emptyViewId))
@@ -102,11 +104,12 @@ public class RecyclerViewEmptySupport extends RecyclerView {
   }
 
   /**
-   * If the empty view is present, this method decides if its time to show it or not.
+   * Decides which view should be visible (recycler view or empty view) and shows it
+   *
    * To do that, it checks for the presence of {@link #isInEmptyState} callback and uses it to determine whether or not
    * the empty view should be shown.
    * If the callback was not set, then it uses the adapter item count information, where zero elements means the empty
-   * state should be shown
+   * state should be shown.
    */
   private void showCorrectView() {
     Adapter<?> adapter = getAdapter();
@@ -133,9 +136,10 @@ public class RecyclerViewEmptySupport extends RecyclerView {
 
   /**
    * Sets the empty view.
-   * If null, the {@link #showCorrectView()} method will yield no further effect,
-   * unless the {@link #emptyViewId} was set and the {@link #resetState()}
-   * is called
+   *
+   * If null, the {@link #showCorrectView()} method will yield no further effect, unless the {@link #emptyViewId} was
+   * set and the {@link #resetState()} is called.
+   *
    * @param emptyView the empty view to show on empty state
    */
   public void setEmptyView(@Nullable View emptyView) {
@@ -143,8 +147,10 @@ public class RecyclerViewEmptySupport extends RecyclerView {
   }
 
   /**
-   * Sets the empty state callback check
-   * The callback will be called each time a decision is to be made to whether show or hide the empty view
+   * Sets the empty state callback check.
+   *
+   * The callback will be called each time a decision is to be made to whether show or hide the empty view.
+   *
    * @param isInEmptyState the callback function to determine if the recycler view is in an empty state
    */
   public void setIsInEmptyState(@Nullable Function<RecyclerView, Boolean> isInEmptyState) {
@@ -154,9 +160,10 @@ public class RecyclerViewEmptySupport extends RecyclerView {
 
   /**
    * Resets the state of the recycler view.
+   *
    * If no empty view is present, an attempt to retrieve it from the resource id will be made.
    * If it's already present, then the recycler view will check whether or not is in an empty state and act
-   * accordingly (show/hide the empty view/itself)
+   * accordingly (show/hide the empty view/itself).
    */
   public void resetState() {
     Optional.ofNullable(emptyView)

@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 /**
- * Implementation of {@link Subscriber} that calls a {@link Consumer} function {@code onError}
- * To be used as a FlowableSubscribe hook with RxJavaPlugins
+ * Implementation of {@link Subscriber} that calls a {@link Consumer} function {@code onError}.
+ * To be used as a FlowableSubscribe hook with RxJavaPlugins.
  */
 @RequiredArgsConstructor
 public final class FlowableObserverWithErrorHandling<T> implements Subscriber<T> {

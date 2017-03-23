@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 /**
- * Implementation of {@link SingleObserver} that calls a {@link Consumer} function {@code onError}
- * To be used as a SingleObserver hook with RxJavaPlugins
+ * Implementation of {@link SingleObserver} that calls a {@link Consumer} function {@code onError}.
+ * To be used as a SingleObserver hook with RxJavaPlugins.
  */
 @RequiredArgsConstructor
 public final class SingleObserverWithErrorHandling<T> implements SingleObserver<T> {

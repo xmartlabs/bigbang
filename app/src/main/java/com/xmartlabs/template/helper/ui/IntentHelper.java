@@ -17,7 +17,8 @@ import lombok.val;
 @SuppressWarnings("unused")
 public class IntentHelper {
   /**
-   * Creates an intent to make phone calls
+   * Creates an intent to make phone calls.
+   *
    * @param phoneNumber the number to call
    * @return the created intent
    */
@@ -30,7 +31,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send SMS messages
+   * Creates an intent to send SMS messages.
+   *
    * @param phoneNumber the number to send the message to
    * @param chooserTitle the title of the app chooser
    * @return the created intent
@@ -43,7 +45,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send emails
+   * Creates an intent to send emails.
+   *
    * @param email the email address to send the email to
    * @param chooserTitle the title of the app chooser
    * @return the created intent
@@ -54,7 +57,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send emails
+   * Creates an intent to send emails.
+   *
    * @param email the email address to send the email to
    * @param subject the subject of the email
    * @param body the body of the email
@@ -68,7 +72,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send emails, including a file
+   * Creates an intent to send emails, including a file.
+   *
    * @param email the email address to send the email to
    * @param subject the subject of the email
    * @param body the body of the email
@@ -97,7 +102,8 @@ public class IntentHelper {
   }
 
   /**
-   * Checks if there's any app that can handle the {@link Intent}
+   * Checks if there's any app that can handle the {@link Intent}.
+   *
    * @param intent the intent to check
    * @return true if there's an app that can handle the {@code intent}
    */
@@ -107,7 +113,8 @@ public class IntentHelper {
   }
 
   /**
-   * Checks whether or not the device has a camera
+   * Checks whether or not the device has a camera.
+   *
    * @return true if the device has a camera
    */
   public static boolean deviceHasCameraAbility() {
@@ -116,7 +123,8 @@ public class IntentHelper {
   }
 
   /**
-   * Retrieves the string resource with {@code messageRes} id
+   * Retrieves the string resource with {@code messageRes} id.
+   *
    * @param messageRes the id of the string resource
    * @return the retrieved string
    */

@@ -24,7 +24,8 @@ import java.util.Locale;
 @SuppressWarnings("unused")
 public class UiHelper {
   /**
-   * Displays an alert if the Google Play Services are not enabled
+   * Displays an alert if the Google Play Services are not enabled.
+   *
    * @param activity the activity to use to check the availability of the Google Play Services
    * @return true if the Google Play Services are available
    */
@@ -43,7 +44,8 @@ public class UiHelper {
   }
 
   /**
-   * Retrieves the object in the {@code adapter} at the {@code spinner} position
+   * Retrieves the object in the {@code adapter} at the {@code spinner} position.
+   *
    * @param spinner the spinner to retrieve the position from
    * @param adapter the adapter to retrieve the object from
    * @param <T> the type of the object held by the adapter
@@ -57,7 +59,8 @@ public class UiHelper {
   }
 
   /**
-   * Retrieves the URL of the drawable with {@code drawableResId} id in the given {@code context}
+   * Retrieves the URL of the drawable with {@code drawableResId} id in the given {@code context}.
+   *
    * @param context the context from which to retrieve the resource
    * @param drawableResId the id of the drawable resource
    * @return the URL of the drawable
@@ -76,7 +79,9 @@ public class UiHelper {
 
   /**
    * Validates that the field is not empty and, if it's an email field, validates that the email given is valid.
-   * A field is said to be an email field if it's input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+   *
+   * A field is said to be an email field if it's input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS.
+   *
    * @param editText the {@link EditText} instance to validate
    * @return true if the field has content and, in case of an email field, that the content matches a valid email
    */
@@ -86,7 +91,8 @@ public class UiHelper {
   }
 
   /**
-   * Checks whether the given <code>EditText</code> is an email field or not
+   * Checks whether the given <code>EditText</code> is an email field or not.
+   *
    * @param editText the {@link EditText} to check
    * @return true if the {@link EditText} input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS
    */
@@ -96,7 +102,8 @@ public class UiHelper {
   }
 
   /**
-   * Checks whether the given {@link CharSequence} is a valid email address
+   * Checks whether the given {@link CharSequence} is a valid email address.
+   *
    * @param target the {@link CharSequence} to check
    * @return true if the {@code target} is a valid email
    */
@@ -105,7 +112,8 @@ public class UiHelper {
   }
 
   /**
-   * Retrieves the {@link TextInputLayout} of the given {@code editText}
+   * Retrieves the {@link TextInputLayout} of the given {@code editText}.
+   *
    * @param editText the {@link EditText} instance from which the {@link TextInputLayout} will be retrieved
    * @return the {@link TextInputLayout} of the {@code editText}
    */
@@ -120,8 +128,10 @@ public class UiHelper {
   }
 
   /**
-   * Validates that the given {@code fields} and put the appropriate error messages if needed
-   * The method {@link #validateField(EditText, boolean)} is applied to each of the {@code fields}
+   * Validates that the given {@code fields} and put the appropriate error messages if needed.
+   *
+   * The method {@link #validateField(EditText, boolean)} is applied to each of the {@code fields}.
+   *
    * @param fields the fields to validate
    * @param hideErrorLayout whether or not to enable the error on the fields
    */
@@ -131,7 +141,8 @@ public class UiHelper {
   }
 
   /**
-   * Validates that {@code editText} is valid and sets the error in the {@link TextInputLayout}, if any
+   * Validates that {@code editText} is valid and sets the error in the {@link TextInputLayout}, if any.
+   *
    * @param editText the {@link EditText} to validate
    * @param hideErrorLayout whether or not to enable the error on the given {@link EditText}
    * @return true if {@code editText} is valid using {@link #isValidField(EditText)}

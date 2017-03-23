@@ -10,9 +10,7 @@ import com.xmartlabs.template.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * {@link SingleFragmentActivity} with {@link Toolbar} support.
- */
+/** {@link SingleFragmentActivity} with {@link Toolbar} support. */
 public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentActivity {
   @BindView(R.id.toolbar)
   Toolbar toolbar;
@@ -34,7 +32,7 @@ public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentAc
   }
 
   /**
-   * Retrieves the {@link Toolbar}
+   * Retrieves the {@link Toolbar}.
    * @return the {@link Toolbar}
    */
   @NonNull
@@ -43,7 +41,7 @@ public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentAc
   }
 
   /**
-   * Used to instruct the {@link Toolbar} to show/hide the navigation icon
+   * Used to instruct the {@link Toolbar} to show/hide the navigation icon.
    * @return whether or not to show the navigation icon
    */
   protected boolean showNavigationIcon() {

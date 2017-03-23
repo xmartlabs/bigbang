@@ -8,7 +8,8 @@ import com.xmartlabs.template.BaseProjectApplication;
 @SuppressWarnings("unused")
 public class ColorHelper {
   /**
-   * Retrieves the Hex string representation of the color resource
+   * Retrieves the Hex string representation of the color resource.
+   *
    * @param colorResId the id of the color resource
    * @return the Hex string representation of the color resource
    */

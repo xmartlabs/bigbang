@@ -15,7 +15,7 @@ import org.threeten.bp.LocalTime;
 @SuppressWarnings("unused")
 public class TimePickerDialogHelper {
   /**
-   * Creates a {@link TimePickerDialog} instance without specifying the initial date
+   * Creates a {@link TimePickerDialog} instance without specifying the initial date.
    *
    * @param context  to retrieve the time format (12 or 24 hour)
    * @param listener to listen for a date selection
@@ -30,7 +30,7 @@ public class TimePickerDialogHelper {
   }
 
   /**
-   * Creates a {@link TimePickerDialog} instance
+   * Creates a {@link TimePickerDialog} instance.
    *
    * @param context   to retrieve the time format (12 or 24 hour)
    * @param localTime the initial localTime

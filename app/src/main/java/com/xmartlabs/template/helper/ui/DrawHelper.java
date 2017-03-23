@@ -15,7 +15,8 @@ public class DrawHelper {
   private static final Path PATH = new Path();
 
   /**
-   * Draws a path in the canvas using the {@code points} list, drawing a line between consecutive points
+   * Draws a path in the canvas using the {@code points} list, drawing a line between consecutive points.
+   *
    * @param canvas the canvas to draw the path
    * @param paint the style of the path
    * @param points the points in the path.

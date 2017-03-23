@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 /**
- * Implementation of {@link MaybeObserver} that calls a {@link Consumer} function {@code onError}
- * To be used as a MaybeSubscribe hook with RxJavaPlugins
+ * Implementation of {@link MaybeObserver} that calls a {@link Consumer} function {@code onError}.
+ * To be used as a MaybeSubscribe hook with RxJavaPlugins.
  */
 @RequiredArgsConstructor
 public final class MaybeObserverWithErrorHandling<T> implements MaybeObserver<T> {

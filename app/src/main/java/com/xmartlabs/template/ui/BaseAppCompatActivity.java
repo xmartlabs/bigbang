@@ -17,7 +17,7 @@ import bullet.ObjectGraph;
 
 /**
  * A base AppCompatActivity that inherits from {@link RxActivity} and performs {@link Dart} and {@link ObjectGraph}
- * injections in the {@link #onCreate(Bundle)} lifecycle method
+ * injections in the {@link #onCreate(Bundle)} lifecycle method.
  */
 public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
   protected Context getContext() {
@@ -40,7 +40,7 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
   }
 
-  /** Hides the keyboard, if visible */
+  /** Hides the keyboard, if visible. */
   protected void hideKeyboard() {
     InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
     View currentFocus = this.getCurrentFocus();

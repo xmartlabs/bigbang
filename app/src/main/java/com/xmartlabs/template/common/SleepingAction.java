@@ -5,9 +5,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Scheduler;
 import io.reactivex.functions.Action;
 
-/**
- * Copied from rx.internal.schedulers.SleepingAction
- */
+/** Copied from rx.internal.schedulers.SleepingAction. */
 class SleepingAction implements Runnable {
   private final Action underlying;
   private final Scheduler.Worker innerScheduler;

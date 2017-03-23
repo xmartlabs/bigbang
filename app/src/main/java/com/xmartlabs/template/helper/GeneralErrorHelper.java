@@ -27,7 +27,6 @@ import lombok.Getter;
 import retrofit2.HttpException;
 import timber.log.Timber;
 
-
 @SuppressWarnings("unused")
 public final class GeneralErrorHelper {
   private static final String CRASHLYTICS_KEY_RESPONSE_BODY = "response_body";

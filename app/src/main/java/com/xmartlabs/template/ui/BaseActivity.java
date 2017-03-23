@@ -11,7 +11,7 @@ import bullet.ObjectGraph;
 
 /**
  * A base Activity that inherits from {@link RxActivity} and performs {@link Dart} and {@link ObjectGraph} injections
- * in the {@link #onCreate(Bundle)} lifecycle method
+ * in the {@link #onCreate(Bundle)} lifecycle method.
  */
 public abstract class BaseActivity extends RxActivity {
   protected Context getContext() {

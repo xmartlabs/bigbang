@@ -19,9 +19,7 @@ import java.lang.reflect.Type;
 
 import timber.log.Timber;
 
-/**
- * {@link Gson} type adapter that serializes {@link LocalDateTime} objects to a millisecond format
- */
+/** {@link Gson} type adapter that serializes {@link LocalDateTime} objects to a millisecond format */
 public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
   @Override
   public synchronized JsonElement serialize(LocalDateTime dateTime, Type type,
@@ -36,9 +34,9 @@ public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDat
                                                 JsonDeserializationContext jsonDeserializationContext) {
     return Optional.ofNullable(jsonElement.getAsString())
         .filter(str -> !StringUtils.isNullOrEmpty(str))
-        .map(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDateTime())
+        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDateTime())
             .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
-            .get())
+            .getOptional())
         .orElse(null);
   }
 }

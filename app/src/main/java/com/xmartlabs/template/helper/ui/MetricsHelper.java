@@ -10,7 +10,8 @@ import com.xmartlabs.template.R;
 @SuppressWarnings("unused")
 public class MetricsHelper {
   /**
-   * Converts the {@code dp} value to pixels dimension
+   * Converts the {@code dp} value to pixels dimension.
+   *
    * @param dp the value in dp dimension
    * @return the converted {@code dp} value to pixels
    */
@@ -20,7 +21,8 @@ public class MetricsHelper {
   }
 
   /**
-   * Converts the {@code sp} value to pixels dimension
+   * Converts the {@code sp} value to pixels dimension.
+   *
    * @param sp the value in sp dimension
    * @return the converted {@code sp} value to pixels
    */
@@ -30,7 +32,8 @@ public class MetricsHelper {
   }
 
   /**
-   * Converts the {@code dp} value to pixels dimension
+   * Converts the {@code dp} value to pixels dimension.
+   *
    * @param dp the value in dp dimension
    * @return the converted {@code dp} value to integer pixels
    */
@@ -40,7 +43,8 @@ public class MetricsHelper {
   }
 
   /**
-   * Converts the given {@code dimenId} resource to pixels
+   * Converts the given {@code dimenId} resource to pixels.
+   *
    * @param dimenId the resource to convert
    * @return the converted {@code dimenId} resource value to integer pixels
    */
@@ -50,7 +54,8 @@ public class MetricsHelper {
   }
 
   /**
-   * Converts the {@code px} value to dp
+   * Converts the {@code px} value to dp.
+   *
    * @param px the value in pixels to convert to dp
    * @return the converted {@code px} value to dp
    */
@@ -60,7 +65,8 @@ public class MetricsHelper {
   }
 
   /**
-   * Retrieves the toolbar height of the current app theme
+   * Retrieves the toolbar height of the current app theme.
+   *
    * @return the toolbar height of the current app theme
    */
   public static int getToolbarHeight() {
@@ -72,6 +78,7 @@ public class MetricsHelper {
 
   /**
    * Calculates the Euclidean distance.
+   *
    * @param x1 the x coordinate of the first point
    * @param y1 the y coordinate of the first point
    * @param x2 the x coordinate of the second point

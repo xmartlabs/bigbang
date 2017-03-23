@@ -13,7 +13,8 @@ import org.threeten.bp.LocalDate;
 @SuppressWarnings("unused")
 public class DatePickerDialogHelper {
   /**
-   * Creates a {@link DatePickerDialog} instance
+   * Creates a {@link DatePickerDialog} instance.
+   *
    * @param listener to be triggered when the user selects a date
    * @param clock to get the current date
    * @return the {@link DatePickerDialog} created instance
@@ -25,7 +26,8 @@ public class DatePickerDialogHelper {
   }
 
   /**
-   * Creates a {@link DatePickerDialog} instance with the <code>localDate</code> selected
+   * Creates a {@link DatePickerDialog} instance with the <code>localDate</code> selected.
+   *
    * @param localDate the selected start localDate
    * @param listener to be triggered when the user selects a localDate
    * @param clock to get the current date

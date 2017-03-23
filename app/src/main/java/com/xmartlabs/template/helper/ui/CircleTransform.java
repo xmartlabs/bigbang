@@ -27,8 +27,9 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 /**
- * Transforms a {@link Bitmap} rounding its content
- * There's an option to add an outer border of any size and color
+ * Transforms a {@link Bitmap} rounding its content.
+ *
+ * There's an option to add an outer border of any size and color.
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,9 +37,9 @@ import lombok.NoArgsConstructor;
 public class CircleTransform implements Transformation {
   private static final String KEY = "circle";
 
-  /** The border width. 0 will mean no border is rendered **/
+  /** The border width. 0 will mean no border is rendered. **/
   private float strokeWidth;
-  /** The fill color of the border, if any **/
+  /** The fill color of the border, if any. **/
   private int strokeColor;
 
   /**
