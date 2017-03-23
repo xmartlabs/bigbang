@@ -10,15 +10,12 @@ import com.annimon.stream.Stream;
 
 import java.util.List;
 
-/**
- * Created by medina on 19/09/2016.
- */
 @SuppressWarnings("unused")
 public class DrawHelper {
   private static final Path PATH = new Path();
 
   /**
-   * Draws a path in the canvas using the <code>points</code> list, drawing a line between consecutive points
+   * Draws a path in the canvas using the {@code points} list, drawing a line between consecutive points
    * @param canvas the canvas to draw the path
    * @param paint the style of the path
    * @param points the points in the path.

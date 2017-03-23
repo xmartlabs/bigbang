@@ -9,11 +9,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.f2prateek.dart.Dart;
+import com.trello.rxlifecycle2.components.RxActivity;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.xmartlabs.template.BaseProjectApplication;
 
+import bullet.ObjectGraph;
+
 /**
- * Created by diegomedina24 on 12/16/16.
+ * A base AppCompatActivity that inherits from {@link RxActivity} and performs {@link Dart} and {@link ObjectGraph}
+ * injections in the {@link #onCreate(Bundle)} lifecycle method
  */
 public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
   protected Context getContext() {

@@ -12,9 +12,6 @@ import lombok.val;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-/**
- * Created by santiago on 31/08/15.
- */
 public class SessionInterceptor implements Interceptor {
   @Inject
   SessionController sessionController;

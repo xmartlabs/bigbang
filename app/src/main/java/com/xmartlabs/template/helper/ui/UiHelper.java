@@ -21,9 +21,6 @@ import com.xmartlabs.template.R;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by santiago on 04/09/15.
- */
 @SuppressWarnings("unused")
 public class UiHelper {
   /**
@@ -46,7 +43,7 @@ public class UiHelper {
   }
 
   /**
-   * Retrieves the object in the <code>adapter</code> at the <code>spinner</code> position
+   * Retrieves the object in the {@code adapter} at the {@code spinner} position
    * @param spinner the spinner to retrieve the position from
    * @param adapter the adapter to retrieve the object from
    * @param <T> the type of the object held by the adapter
@@ -60,7 +57,7 @@ public class UiHelper {
   }
 
   /**
-   * Retrieves the URL of the drawable with <code>drawableResId</code> id in the given <code>context</code>
+   * Retrieves the URL of the drawable with {@code drawableResId} id in the given {@code context}
    * @param context the context from which to retrieve the resource
    * @param drawableResId the id of the drawable resource
    * @return the URL of the drawable
@@ -80,7 +77,7 @@ public class UiHelper {
   /**
    * Validates that the field is not empty and, if it's an email field, validates that the email given is valid.
    * A field is said to be an email field if it's input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-   * @param editText the <code>EditText</code> instance to validate
+   * @param editText the {@link EditText} instance to validate
    * @return true if the field has content and, in case of an email field, that the content matches a valid email
    */
   public static boolean isValidField(EditText editText) {
@@ -90,8 +87,8 @@ public class UiHelper {
 
   /**
    * Checks whether the given <code>EditText</code> is an email field or not
-   * @param editText the <code>EditText</code> to check
-   * @return true if the <code>editText</code> input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+   * @param editText the {@link EditText} to check
+   * @return true if the {@link EditText} input type is TYPE_TEXT_VARIATION_EMAIL_ADDRESS
    */
   public static boolean isEmailField(EditText editText) {
     return (editText.getInputType() & InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) ==
@@ -99,18 +96,18 @@ public class UiHelper {
   }
 
   /**
-   * Checks whether the given <code>CharSequence</code> is a valid email address
-   * @param target the <code>CharSequence</code> to check
-   * @return true if the <code>target</code> is a valid email
+   * Checks whether the given {@link CharSequence} is a valid email address
+   * @param target the {@link CharSequence} to check
+   * @return true if the {@code target} is a valid email
    */
   public static boolean isValidEmail(CharSequence target) {
     return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
   }
 
   /**
-   * Retrieves the <code>TextInputLayout</code> of the given <code>editText</code>
-   * @param editText the <code>EditText</code> instance from which the <code>TextInputLayout</code> will be retrieved
-   * @return the <code>TextInputLayout</code> of the <code>editText</code>
+   * Retrieves the {@link TextInputLayout} of the given {@code editText}
+   * @param editText the {@link EditText} instance from which the {@link TextInputLayout} will be retrieved
+   * @return the {@link TextInputLayout} of the {@code editText}
    */
   @Nullable
   public static TextInputLayout getTextInputLayout(EditText editText) {
@@ -123,8 +120,8 @@ public class UiHelper {
   }
 
   /**
-   * Validates that the given <code>fields</code> and put the appropriate error messages if needed
-   * The method {@link #validateField(EditText, boolean)} is applied to each of the <code>fields</code>
+   * Validates that the given {@code fields} and put the appropriate error messages if needed
+   * The method {@link #validateField(EditText, boolean)} is applied to each of the {@code fields}
    * @param fields the fields to validate
    * @param hideErrorLayout whether or not to enable the error on the fields
    */
@@ -134,10 +131,10 @@ public class UiHelper {
   }
 
   /**
-   * Validates that <code>editText</code> is valid and sets the error in the <code>TextInputLayout</code>, if any
-   * @param editText the <code>EditText</code> to validate
-   * @param hideErrorLayout whether or not to enable the error on the given <code>EditText</code>
-   * @return true if <code>editText</code> is valid using {@link #isValidField(EditText)}
+   * Validates that {@code editText} is valid and sets the error in the {@link TextInputLayout}, if any
+   * @param editText the {@link EditText} to validate
+   * @param hideErrorLayout whether or not to enable the error on the given {@link EditText}
+   * @return true if {@code editText} is valid using {@link #isValidField(EditText)}
    */
   public static boolean validateField(EditText editText, boolean hideErrorLayout) {
     boolean isValid = UiHelper.isValidField(editText);

@@ -3,12 +3,14 @@ package com.xmartlabs.template.common.rx;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import io.reactivex.CompletableObserver;
 import io.reactivex.functions.Consumer;
 import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 /**
- * Created by diegomedina24 on 21/3/17.
+ * Implementation of {@link Subscriber} that calls a {@link Consumer} function {@code onError}
+ * To be used as a FlowableSubscribe hook with RxJavaPlugins
  */
 @RequiredArgsConstructor
 public final class FlowableObserverWithErrorHandling<T> implements Subscriber<T> {

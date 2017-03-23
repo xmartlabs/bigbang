@@ -12,9 +12,7 @@ import java.lang.reflect.Type;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-/**
- * Created by mirland on 10/11/16.
- */
+
 public class ServiceStringConverter extends Converter.Factory {
   @Override
   public Converter<?, String> stringConverter(Type type, Annotation[] annotations, Retrofit retrofit) {

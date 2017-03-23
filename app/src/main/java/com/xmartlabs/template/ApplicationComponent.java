@@ -18,21 +18,14 @@ import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
-import com.xmartlabs.template.ui.FragmentWithDrawer;
 import com.xmartlabs.template.ui.MainActivity;
 import com.xmartlabs.template.ui.SingleFragmentActivity;
 import com.xmartlabs.template.ui.StartActivity;
-import com.xmartlabs.template.ui.ValidatableFragment;
-import com.xmartlabs.template.ui.WelcomeActivity;
-import com.xmartlabs.template.ui.WelcomeFragment;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by santiago on 06/10/15.
- */
 @Singleton
 @Component(modules = {
     AndroidModule.class,
@@ -54,12 +47,6 @@ public interface ApplicationComponent {
 
   void inject(MainActivity mainActivity);
   void inject(StartActivity startActivity);
-  void inject(WelcomeActivity welcomeActivity);
-
-  void inject(FragmentWithDrawer fragmentWithDrawer);
-  void inject(ValidatableFragment validatableFragment);
-
-  void inject(WelcomeFragment welcomeFragment);
 
   void inject(Controller controller);
   void inject(ServiceController serviceController);

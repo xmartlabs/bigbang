@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.xmartlabs.template.helper;
+package com.xmartlabs.template.helper.ui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -23,16 +23,29 @@ import android.graphics.Paint;
 
 import com.squareup.picasso.Transformation;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 /**
- * Created by julian on 13/6/21.
+ * Transforms a {@link Bitmap} rounding its content
+ * There's an option to add an outer border of any size and color
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @SuppressWarnings("unused")
 public class CircleTransform implements Transformation {
+  private static final String KEY = "circle";
+
+  /** The border width. 0 will mean no border is rendered **/
+  private float strokeWidth;
+  /** The fill color of the border, if any **/
+  private int strokeColor;
+
   /**
-   * Rounds the given <code>source</code> into a circle and crops out the data outside of it.
+   * Rounds the given {@code source} into a circle and crops out the data outside of it.
    *
-   * @param source the <code>Bitmap</code> instance to be rounded
-   * @return a new <code>Bitmap</code> instance, the rounded representation of the <code>source</code>
+   * @param source the {@link Bitmap} instance to be rounded
+   * @return a new {@link Bitmap} instance, the rounded representation of the {@code source}
    */
   @Override
   public Bitmap transform(Bitmap source) {
@@ -54,8 +67,18 @@ public class CircleTransform implements Transformation {
     paint.setShader(shader);
     paint.setAntiAlias(true);
 
-    float r = size / 2f;
-    canvas.drawCircle(r, r, r, paint);
+    float center = size / 2f;
+    float radius = center - strokeWidth;
+    canvas.drawCircle(center, center, radius, paint);
+
+    if (strokeWidth > 0) {
+      Paint strokePaint = new Paint();
+      strokePaint.setColor(strokeColor);
+      strokePaint.setStyle(Paint.Style.STROKE);
+      strokePaint.setAntiAlias(true);
+      strokePaint.setStrokeWidth(strokeWidth);
+      canvas.drawCircle(center, center, radius, strokePaint);
+    }
 
     squaredBitmap.recycle();
     return bitmap;
@@ -63,6 +86,6 @@ public class CircleTransform implements Transformation {
 
   @Override
   public String key() {
-    return "circle";
+    return KEY;
   }
 }

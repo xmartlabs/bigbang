@@ -23,9 +23,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by santiago on 23/10/15.
- */
 @Module
 public class GsonModule {
   static final String SERVICE_GSON_NAME = "ServiceGson";

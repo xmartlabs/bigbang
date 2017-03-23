@@ -6,7 +6,6 @@ import io.reactivex.Scheduler;
 import io.reactivex.functions.Action;
 
 /**
- * Created by medina on 22/09/2016.
  * Copied from rx.internal.schedulers.SleepingAction
  */
 class SleepingAction implements Runnable {

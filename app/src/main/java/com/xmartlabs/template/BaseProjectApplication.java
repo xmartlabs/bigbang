@@ -22,9 +22,6 @@ import io.fabric.sdk.android.Fabric;
 import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
-/**
- * Created by remer on 08/12/15.
- */
 public class BaseProjectApplication extends Application {
   private static BaseProjectApplication instance;
 

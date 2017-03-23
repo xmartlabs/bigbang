@@ -9,9 +9,6 @@ import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 
-/**
- * Created by santiago on 31/08/15.
- */
 public class StartActivity extends BaseActivity {
   @Inject
   AuthController authController;
@@ -26,7 +23,7 @@ public class StartActivity extends BaseActivity {
 
     Intent intent;
     if (session == null) {
-      intent = Henson.with(getContext()).gotoWelcomeActivity().build();
+      intent = Henson.with(getContext()).gotoMainActivity().build();
     } else {
       intent = Henson.with(getContext()).gotoMainActivity().build();
       authController.setLoginInfo(session);

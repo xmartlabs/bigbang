@@ -5,9 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.xmartlabs.template.BaseProjectApplication;
 
-/**
- * Created by medina on 19/09/2016.
- */
 @SuppressWarnings("unused")
 public class ColorHelper {
   /**
