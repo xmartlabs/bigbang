@@ -7,9 +7,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.subscriptions.BooleanSubscription;
 
-/**
- * Created by medina on 22/09/2016.
- */
 public class ImmediateNewThreadScheduler extends Scheduler {
   @Override
   public Scheduler.Worker createWorker() {

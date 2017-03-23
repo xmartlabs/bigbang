@@ -4,9 +4,6 @@ import com.xmartlabs.template.module.AndroidModule;
 
 import bullet.ObjectGraph;
 
-/**
- * Created by medina on 21/09/2016.
- */
 public class TestApplication extends BaseProjectApplication {
   @Override
   protected ApplicationComponent createComponent() {

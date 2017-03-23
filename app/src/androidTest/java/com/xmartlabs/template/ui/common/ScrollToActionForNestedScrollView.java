@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 
 /**
- * Created by medina on 21/09/2016.
  * Copied from ScrollToAction
  */
 public class ScrollToActionForNestedScrollView implements ViewAction {

@@ -372,7 +372,7 @@ public class DateHelper {
     LocalDate endLocalDate = endDate.plusDays(1);
     return Stream.iterate(startDate, day -> day.plusDays(1))
         .limit(startDate.until(endLocalDate, ChronoUnit.DAYS))
-        .collect(Collectors.toList());
+        .toList();
   }
 
   /**

@@ -3,7 +3,6 @@ package com.xmartlabs.template.common.rx;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-import io.reactivex.CompletableObserver;
 import io.reactivex.functions.Consumer;
 import lombok.RequiredArgsConstructor;
 import timber.log.Timber;

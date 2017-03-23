@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.ui.mvp.BaseMvpFragment;
 
 /**
  * An extension of {@link BaseAppCompatActivity} that holds a single {@link Fragment}
