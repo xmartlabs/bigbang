@@ -22,11 +22,9 @@ public class SessionInterceptor implements Interceptor {
     }
 
     Request request = sessionController.getSession()
-        .map(session -> {
-          return chain.request().newBuilder()
+        .map(session ->  chain.request().newBuilder()
               //.addHeader("session", sessionInfo) // TODO: Add auth token here if needed
-              .build();
-        })
+              .build())
         .orElse(chain.request());
     return chain.proceed(request);
   }
