@@ -1,5 +1,7 @@
 package com.xmartlabs.template.log;
 
+import android.util.Log;
+
 import com.annimon.stream.Stream;
 
 import java.util.List;
@@ -8,10 +10,17 @@ import lombok.Builder;
 import lombok.Singular;
 import timber.log.Timber;
 
+/**
+ * Subclass of {@link Timber.DebugTree} that allows the captured exception/events to be logged with any user-defined
+ * Logger, such as Crashlytics, Sentry, etc.
+ */
 @Builder
 public class LoggerTree extends Timber.DebugTree {
+  /** {@link Logger} instances that can log any captured exception/event. **/
   @Singular
   private final List<Logger> loggers;
+  /** {@link Log} priorities that will be excluding from logging */
+  @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
   private final List<Integer> excludedPriorities;
 
   @Override
@@ -19,6 +28,7 @@ public class LoggerTree extends Timber.DebugTree {
     if (excludedPriorities.contains(priority)) {
       return;
     }
+
     LogInfo logInfo = LogInfo.builder()
         .priority(priority)
         .tag(tag)
