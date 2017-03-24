@@ -7,10 +7,11 @@ import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 /**
- * Created by diegomedina24 on 21/3/17.
+ * Implementation of {@link Observer} that calls a {@link Consumer} function {@code onError}.
+ * To be used as an Observer hook with RxJavaPlugins.
  */
 @RequiredArgsConstructor
-public final class ObservableObserverWithErrorHandling<T> implements Observer<T> {
+public final class ObserverWithErrorHandling<T> implements Observer<T> {
   private final Observer<T> observer;
   private final Consumer<? super Throwable> onErrorCallback;
 

@@ -25,9 +25,6 @@ import io.reactivex.plugins.RxJavaPlugins;
 import lombok.Getter;
 import okhttp3.OkHttpClient;
 
-/**
- * Created by medina on 21/09/2016.
- */
 public class TestRunner extends AndroidJUnitRunner {
   @Getter
   private static AndroidAssetsFileParser androidAssetsFileParser;

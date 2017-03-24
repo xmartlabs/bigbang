@@ -15,9 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * Created by santiago on 03/03/16.
- */
 @HensonNavigable
 public class MainActivity extends BaseMvpAppCompatActivity<MvpView, BaseMvpPresenter<MvpView>> {
   private Unbinder unbinder;

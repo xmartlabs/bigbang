@@ -8,15 +8,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.ui.mvp.BaseMvpFragment;
 
 /**
- * Created by santiago on 31/08/15.
+ * An extension of {@link BaseAppCompatActivity} that holds a single {@link Fragment}.
+ *
+ * The fragment is to be created through {@link #createFragment()} method, and will be added in the
+ * {@link #onCreate(Bundle)} lifecycle method.
  */
 public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
+  /**
+   * Used to create the {@link Fragment} held and shown by this Activity.
+   * @return the Fragment instance to be shown
+   */
   @NonNull
-  protected abstract BaseMvpFragment createFragment();
+  protected abstract BaseFragment createFragment();
 
+  /**
+   * Used to specify the layout of the Activity.
+   * When overriding this method, be sure to include a container view in the layout with the id {@code fragment_container},
+   * otherwise the Activity won't be able to add the Fragment in a proper way.
+   * @return the layout resource id of the Activity
+   */
   @LayoutRes
   protected int getLayoutResId() {
     return R.layout.activity_fragment;
@@ -38,6 +50,10 @@ public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
     }
   }
 
+  /**
+   * Retrieves the currently held Fragment.
+   * @return the Fragment held by this Activity
+   */
   @Nullable
   protected Fragment getSingleFragment() {
     FragmentManager fragmentManager = getSupportFragmentManager();

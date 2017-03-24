@@ -7,8 +7,11 @@ import com.f2prateek.dart.Dart;
 import com.trello.rxlifecycle2.components.RxActivity;
 import com.xmartlabs.template.BaseProjectApplication;
 
+import bullet.ObjectGraph;
+
 /**
- * Created by diegomedina24 on 12/16/16.
+ * A base Activity that inherits from {@link RxActivity} and performs {@link Dart} and {@link ObjectGraph} injections
+ * in the {@link #onCreate(Bundle)} lifecycle method.
  */
 public abstract class BaseActivity extends RxActivity {
   protected Context getContext() {

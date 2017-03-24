@@ -20,7 +20,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static org.hamcrest.Matchers.allOf;
 
 /**
- * Created by medina on 21/09/2016.
  * Copied from http://stackoverflow.com/a/34673382/1165181.
  */
 public class MaterialPickerDialogActions {

@@ -7,9 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-/**
- * Created by mirland on 20/04/16.
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = false)

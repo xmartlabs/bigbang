@@ -13,9 +13,6 @@ import java.util.Locale;
 
 import static android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull;
 
-/**
- * Created by medina on 21/09/2016.
- */
 public class RecyclerViewAssertions {
   public static Matcher<View> countIs(int count) {
     return new TypeSafeMatcher<View>() {

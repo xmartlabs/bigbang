@@ -15,9 +15,6 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
-/**
- * Created by santiago on 26/01/16.
- */
 @Module
 public class PicassoModule {
   private static final Picasso.Listener LISTENER = (picasso, uri, exception) -> {
