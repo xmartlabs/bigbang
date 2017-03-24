@@ -1,6 +1,7 @@
 package com.xmartlabs.template.ui;
 
 import android.graphics.Rect;
+import android.support.annotation.Dimension;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -49,28 +50,20 @@ import lombok.Builder;
 public class RecyclerViewGridSpacingDecoration extends RecyclerView.ItemDecoration {
   private static final int FIRST_ROW_GROUP = 0;
 
-  /**
-   * Top spacing for the first row.
-   * If null, {@link #itemSpacing} will be used.
-   */
+  /** Top spacing for the first row. If null, {@link #itemSpacing} will be used. */
+  @Dimension(unit = Dimension.PX)
   @Nullable
   private Integer firstRowTopSpacing;
-  /**
-   * Bottom spacing for the last row.
-   * If null, {@link #itemSpacing} will be used.
-   */
+  /** Bottom spacing for the last row. If null, {@link #itemSpacing} will be used. */
+  @Dimension(unit = Dimension.PX)
   @Nullable
   private Integer lastRowBottomSpacing;
-  /**
-   * Left spacing for the first column.
-   * If null, {@link #itemSpacing} will be used.
-   */
+  /** Left spacing for the first column. If null, {@link #itemSpacing} will be used. */
+  @Dimension(unit = Dimension.PX)
   @Nullable
   private Integer firstColumnLeftSpacing;
-  /**
-   * Right spacing for the last column.
-   * If null, {@link #itemSpacing} will be used.
-   */
+  /** Right spacing for the last column. If null, {@link #itemSpacing} will be used. */
+  @Dimension(unit = Dimension.PX)
   @Nullable
   private Integer lastColumnRightSpacing;
   /**
@@ -80,7 +73,8 @@ public class RecyclerViewGridSpacingDecoration extends RecyclerView.ItemDecorati
    */
   @Nullable
   private BiConsumer<Rect, RecyclerView> setItemOffsetConsumer;
-  /** The spacing for every item border (top, right, bottom, left), unless one of the above spacings apply. */
+  /** The default spacing for every item (top, right, bottom, left), unless one of the above spacings apply. */
+  @Dimension(unit = Dimension.PX)
   private int itemSpacing;
 
   private List<Integer> firstColumns = new ArrayList<>();
