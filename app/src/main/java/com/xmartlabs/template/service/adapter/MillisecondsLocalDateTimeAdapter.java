@@ -1,5 +1,8 @@
 package com.xmartlabs.template.service.adapter;
 
+import com.annimon.stream.Exceptional;
+import com.annimon.stream.Optional;
+import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -16,30 +19,24 @@ import java.lang.reflect.Type;
 
 import timber.log.Timber;
 
-/**
- * Created by santiago on 06/09/16.
- */
+/** {@link Gson} type adapter that serializes {@link LocalDateTime} objects to a millisecond format */
 public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
   @Override
   public synchronized JsonElement serialize(LocalDateTime dateTime, Type type,
                                             JsonSerializationContext jsonSerializationContext) {
-    if (dateTime != null) {
-      return new JsonPrimitive(dateTime.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli());
-    }
-    return null;
+    return Optional.ofNullable(dateTime)
+        .map(date -> new JsonPrimitive(date.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()))
+        .orElse(null);
   }
 
   @Override
   public synchronized LocalDateTime deserialize(JsonElement jsonElement, Type type,
                                                 JsonDeserializationContext jsonDeserializationContext) {
-    String dateTimeAsString = jsonElement.getAsString();
-    if (!StringUtils.stringIsNullOrEmpty(dateTimeAsString)) {
-      try {
-        return Instant.ofEpochMilli(Long.valueOf(dateTimeAsString)).atZone(ZoneOffset.UTC).toLocalDateTime();
-      } catch (Exception e) {
-        Timber.e(e, "DateTime cannot be parsed, dateTime='%s'", dateTimeAsString);
-      }
-    }
-    return null;
+    return Optional.ofNullable(jsonElement.getAsString())
+        .filter(str -> !StringUtils.isNullOrEmpty(str))
+        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDateTime())
+            .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
+            .getOptional())
+        .orElse(null);
   }
 }

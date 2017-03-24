@@ -11,9 +11,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by medina on 22/09/2016.
- */
 @Module
 public class MockClockModule {
   private static final String DEFAULT_TIME_ZONE_STRING = "GMT-03:00";

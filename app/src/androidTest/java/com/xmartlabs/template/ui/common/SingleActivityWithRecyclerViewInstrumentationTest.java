@@ -24,9 +24,6 @@ import static io.appflate.restmock.utils.RequestMatchers.pathContains;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 
-/**
- * Created by medina on 21/09/2016.
- */
 @RunWith(AndroidJUnit4.class)
 public abstract class SingleActivityWithRecyclerViewInstrumentationTest<T extends Activity>
     extends SingleActivityInstrumentationTest<T> {

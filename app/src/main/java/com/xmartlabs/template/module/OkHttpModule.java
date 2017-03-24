@@ -22,9 +22,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
-/**
- * Created by santiago on 31/08/15.
- */
 @Module
 public class OkHttpModule {
   private static final int MIN_DISK_CACHE_SIZE = 10 * 1024 * 1024; // 10MB

@@ -8,9 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-/**
- * Created by santiago on 23/10/15.
- */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Parcel

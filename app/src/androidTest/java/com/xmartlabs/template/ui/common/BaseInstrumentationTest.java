@@ -21,9 +21,7 @@ import javax.inject.Inject;
 
 import io.appflate.restmock.RESTMockServer;
 import lombok.Getter;
-/**
- * Created by medina on 21/09/2016.
- */
+
 @RunWith(AndroidJUnit4.class)
 public abstract class BaseInstrumentationTest {
   @Getter
