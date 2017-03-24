@@ -11,9 +11,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by santiago on 17/09/15.
- */
 @Module
 public class AndroidModule {
   private final BaseProjectApplication application;

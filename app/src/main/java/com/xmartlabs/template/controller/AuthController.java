@@ -11,9 +11,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 
-/**
- * Created by santiago on 01/03/16.
- */
 public class AuthController extends ServiceController {
   @Inject
   AuthService authService;

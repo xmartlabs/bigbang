@@ -13,9 +13,6 @@ import lombok.Getter;
 import retrofit2.HttpException;
 import retrofit2.Response;
 
-/**
- * Created by medina on 16/09/2016.
- */
 @Getter
 public final class ServiceExceptionWithMessage extends RuntimeException {
   private final int code;
