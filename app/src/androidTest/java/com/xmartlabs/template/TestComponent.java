@@ -14,9 +14,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by medina on 21/09/2016.
- */
 @Component(modules = {
     AndroidModule.class,
     ControllerModule.class,

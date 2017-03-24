@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * Created by medina on 21/09/2016.
  * Copied from https://medium.com/@_rpiel/recyclerview-and-espresso-a-complicated-story-3f6f4179652e#.dm9yzv52b.
  */
 public class RecyclerItemViewAssertion<A> implements ViewAssertion {

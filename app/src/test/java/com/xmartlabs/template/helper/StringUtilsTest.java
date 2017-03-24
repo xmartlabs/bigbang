@@ -12,17 +12,17 @@ import static org.junit.Assert.assertThat;
 public class StringUtilsTest {
   @Test
   public void nullString() {
-    Assert.assertTrue(StringUtils.stringIsNullOrEmpty(null));
+    Assert.assertTrue(StringUtils.isNullOrEmpty(null));
   }
 
   @Test
   public void emptyString() {
-    Assert.assertTrue(StringUtils.stringIsNullOrEmpty(""));
+    Assert.assertTrue(StringUtils.isNullOrEmpty(""));
   }
 
   @Test
   public void length3String() {
-    Assert.assertFalse(StringUtils.stringIsNullOrEmpty("abc"));
+    Assert.assertFalse(StringUtils.isNullOrEmpty("abc"));
   }
 
   @Test

@@ -37,7 +37,7 @@ public abstract class BaseFragment extends RxFragment {
   private Optional<BaseProgressDialog> progressDialog = Optional.empty();
 
   /**
-   * Used to inflate the view layout/elements
+   * Used to inflate the view layout/elements.
    * @return the layout resource from which to inflate the view
    */
   @LayoutRes
@@ -66,7 +66,7 @@ public abstract class BaseFragment extends RxFragment {
 
   /**
    * Creates a BaseProgressDialog instance to be used to show/hide a progress dialog.
-   * The dialog must extend from BaseProgressDialog
+   * The dialog must extend from BaseProgressDialog.
    * @return the BaseProgressDialog instance to be shown upon request
    */
   @Nullable
@@ -88,7 +88,7 @@ public abstract class BaseFragment extends RxFragment {
   }
 
   /**
-   * Show a simple alert with an ok button
+   * Show a simple alert with an ok button.
    * @param stringResId the message to be shown in the alert
    */
   protected void showAlertError(int stringResId) {
@@ -98,17 +98,17 @@ public abstract class BaseFragment extends RxFragment {
         .show();
   }
 
-  /** Shows a progress dialog, provided the method {@link #createProgressDialog()} return an object that isn't null */
+  /** Shows a progress dialog, provided the method {@link #createProgressDialog()} return an object that isn't null. */
   public void showProgressDialog() {
     progressDialog.ifPresent(BaseProgressDialog::show);
   }
 
-  /** Hides the progress dialog shown with {@link #showProgressDialog()}, if such a dialog was ever shown (and exists) */
+  /** Hides the progress dialog shown with {@link #showProgressDialog()}, if such a dialog was ever shown (and exists). */
   public void hideProgressDialog() {
     progressDialog.ifPresent(BaseProgressDialog::hide);
   }
 
-  /** Removes the Fragment from the {@link BaseAppCompatActivity} Activity */
+  /** Removes the Fragment from the {@link BaseAppCompatActivity} Activity. */
   protected void removeItselfFromActivity() {
     ((BaseAppCompatActivity) getActivity()).removeFragment(this);
   }
@@ -119,8 +119,8 @@ public abstract class BaseFragment extends RxFragment {
   }
 
   /**
-   * If the Fragment is contained within another Fragment, it removes the former
-   * Otherwise, removes the Fragment from the {@link BaseAppCompatActivity} Activity
+   * If the Fragment is contained within another Fragment, it removes the former.
+   * Otherwise, removes the Fragment from the {@link BaseAppCompatActivity} Activity.
    */
   protected void removeItselfFromParent() {
     Optional.ofNullable(getParentFragment())

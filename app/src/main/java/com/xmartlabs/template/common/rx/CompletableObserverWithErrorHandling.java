@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 import timber.log.Timber;
 
 /**
- * Created by diegomedina24 on 21/3/17.
+ * Implementation of {@link CompletableObserver} that calls a {@link Consumer} function {@code onError}.
+ * To be used as a CompletableSubscribe hook with RxJavaPlugins.
  */
 @RequiredArgsConstructor
 public final class CompletableObserverWithErrorHandling implements CompletableObserver {
