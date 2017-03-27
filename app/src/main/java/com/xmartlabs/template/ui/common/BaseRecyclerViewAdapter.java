@@ -1,9 +1,5 @@
 package com.xmartlabs.template.ui.common;
 
-/**
- * Created by mike on 21/03/2017.
- */
-
 import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.MainThread;
@@ -42,17 +38,19 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
 
   /**
    * Used to inflate the view layout/elements.
-   * @param parent the parent viewgroup
-   * @param layoutResId  the layout resource id
+   *
+   * @param parent      the parent viewgroup
+   * @param layoutResId the layout resource id
    * @return the inflated view
    */
   protected View inflateView(@NonNull ViewGroup parent, @LayoutRes int layoutResId) {
-    LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-    return layoutInflater.inflate(layoutResId, parent, false);
+    return LayoutInflater.from(parent.getContext()).inflate(layoutResId, parent, false);
   }
 
   /**
-   * Used to set the items data for the recycler view and notifying any registered observers that the data set has changed.
+   * Used to set the items data for the recycler view and notifying any registered observers that the data set has
+   * changed.
+   *
    * @param items the items that will be the data for the recycler view
    */
   @MainThread
@@ -63,6 +61,7 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
 
   /**
    * Used to set the items data for the recycler view in form of an array and calls {@link #setItems(List)}
+   *
    * @param items array of items that will be the data for the recycler view
    */
   @MainThread
@@ -72,6 +71,7 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
 
   /**
    * Used to remove an item from the data and any registered observers of its removal
+   *
    * @param item the item to be removed
    */
   @MainThread
@@ -84,7 +84,9 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
   }
 
   /**
-   * Used to add items to the data for the recycler view and notifies any registered observers that the data set has changed.
+   * Used to add items to the data for the recycler view and notifies any registered observers that the data set has
+   * changed.
+   *
    * @param items the items that will be the data for the recycler view
    */
   @MainThread
@@ -107,6 +109,7 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
 
   /**
    * Used to get all the items count, including dividers
+   *
    * @return number of total items
    */
   @Override
@@ -118,9 +121,9 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
     return getItemCountWithoutDividers() + dividerLines;
   }
 
-
   /**
    * Used to get only the items count from the data
+   *
    * @return number of total items from the data
    */
   protected int getItemCountWithoutDividers() {
@@ -130,7 +133,8 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
   /**
    * Used to bind the data and divider items with the recycler view
    * Gets each item into the correct view holder for the specified position
-   * @param holder the view holder from the recycler view
+   *
+   * @param holder   the view holder from the recycler view
    * @param position the position of the item among all the items of the recyclerview
    */
   @CallSuper
@@ -143,35 +147,58 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
     }
   }
 
+  /**
+   * Used to bind the item with the view holder taking the position into account
+   */
   protected void onBindViewHolder(@NonNull VH holder, @Nullable T item, int position) {
 
   }
 
+  /**
+   * Used to bind the item with the view holder
+   */
   protected void onBindItemViewHolder(@NonNull VH holder, @Nullable T item) {
 
   }
 
   /**
    * Used to get the item position according just to the data items
+   *
    * @param position of all the items that compose the recycler view
    */
   protected int getRealItemPosition(int position) {
     return hasDividers() ? position / 2 : position;
   }
 
+  /**
+   * Used to get the item type
+   *
+   * @param position of the item among all items conforming the recycler view
+   */
   @Override
   public int getItemViewType(int position) {
     return isADividerPosition(position) ? ITEM_TYPE_DIVIDER : ITEM_TYPE_ITEM;
   }
 
+  /**
+   * Used to get if the position in question is a divider
+   *
+   * @param position of recycler view item
+   */
   protected boolean isADividerPosition(int position) {
     return (hasDividers() && position % 2 == 1) || (hasEndDivider() && position == getItemCount());
   }
 
+  /**
+   * Used to check if the recycler view has dividers
+   */
   protected boolean hasDividers() {
     return false;
   }
 
+  /**
+   * Used to check if the recycler view has an end divider
+   */
   protected boolean hasEndDivider() {
     return false;
   }

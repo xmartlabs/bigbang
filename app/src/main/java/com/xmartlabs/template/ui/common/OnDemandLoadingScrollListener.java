@@ -12,6 +12,10 @@ import lombok.Setter;
 /**
  * Created by mirland on 01/02/17.
  */
+
+/**
+ * An OnDemandLoadingScrollListener for recycler view pagination
+ */
 public abstract class OnDemandLoadingScrollListener extends RecyclerView.OnScrollListener {
   private int previousTotal;
   private boolean loading = true;

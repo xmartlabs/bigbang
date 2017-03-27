@@ -4,12 +4,13 @@ import android.support.annotation.Dimension;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
+
 import com.xmartlabs.template.helper.ui.MetricsHelper;
 
 import lombok.Setter;
 
 /**
- * Created by mike on 22/03/2017.
+ * An OnDemandLoadingScrollListener for recycler view pagination
  */
 public abstract class OnDemandRecyclerViewScrollListener implements NestedScrollView.OnScrollChangeListener {
   private static final int DEFAULT_VISIBLE_THRESHOLD_DP = 100;
@@ -30,6 +31,9 @@ public abstract class OnDemandRecyclerViewScrollListener implements NestedScroll
     loadNextPage(page);
   }
 
+  /**
+   * Used to reset to the initial nested scroll view values
+   */
   public void resetStatus() {
     enabled = true;
     visibleThreshold = MetricsHelper.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP);
@@ -38,6 +42,15 @@ public abstract class OnDemandRecyclerViewScrollListener implements NestedScroll
     page = 1;
   }
 
+  /**
+   * Called when the scroll position of the nested scroll view changes.
+   *
+   * @param nestedScrollView The view whose scroll position has changed.
+   * @param scrollX          Current horizontal scroll origin.
+   * @param scrollY          Current vertical scroll origin.
+   * @param oldScrollX       Previous horizontal scroll origin.
+   * @param oldScrollY       Previous vertical scroll origin.
+   */
   @Override
   public void onScrollChange(@NonNull NestedScrollView nestedScrollView, int scrollX, int scrollY,
                              int oldScrollX, int oldScrollY) {
@@ -54,5 +67,10 @@ public abstract class OnDemandRecyclerViewScrollListener implements NestedScroll
     }
   }
 
+  /**
+   * Called when the scroll position of the nested scroll view reaches the end of the current page.
+   *
+   * @param page The next page to be loaded.
+   */
   protected abstract void loadNextPage(int page);
 }
