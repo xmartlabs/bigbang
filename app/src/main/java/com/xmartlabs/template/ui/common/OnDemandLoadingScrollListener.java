@@ -3,6 +3,7 @@ package com.xmartlabs.template.ui.common;
 /**
  * Created by mike on 22/03/2017.
  */
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
