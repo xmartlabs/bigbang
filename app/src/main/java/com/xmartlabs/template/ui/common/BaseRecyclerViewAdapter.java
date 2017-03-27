@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * A Base Recycler View Adapter with already implemented simple functionality such as
+ * A Base Recycler View Adapter with already implemented functions such as
  * Setting, removing, adding, getting items count.
  */
 @AllArgsConstructor
