@@ -10,10 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import lombok.Setter;
 
 /**
- * Created by mirland on 01/02/17.
- */
-
-/**
  * An OnDemandLoadingScrollListener for recycler view pagination
  */
 public abstract class OnDemandLoadingScrollListener extends RecyclerView.OnScrollListener {
