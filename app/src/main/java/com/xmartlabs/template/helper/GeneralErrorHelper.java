@@ -67,30 +67,19 @@ public final class GeneralErrorHelper {
     BaseProjectApplication.getContext().inject(this);
   }
 
-  private void logCrashlyticsError(ServiceExceptionWithMessage exceptionWithMessage) {
+  private void logError(ServiceExceptionWithMessage exceptionWithMessage) {
     String url = ServiceHelper.getUrl(exceptionWithMessage.getResponse().raw());
     int resultCode = exceptionWithMessage.getCode();
     String headers = exceptionWithMessage.getResponse().headers().toString();
     String body = exceptionWithMessage.getErrorBody();
-    Crashlytics.setString(CRASHLYTICS_KEY_URL, url);
-    Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, resultCode);
-    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, headers);
-    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, body);
-    String message = String.format(Locale.US, "Crashlytics keys - result code = %d, headers = %s, url = %s, body = %s",
+
+    String message = String.format(Locale.US, "result code = %d, headers = %s, url = %s, body = %s",
         resultCode,
         headers,
         url,
         body
     );
-
     Timber.e(message);
-  }
-
-  private void clearCrashlyticsKeys() {
-    Crashlytics.setString(CRASHLYTICS_KEY_URL, null);
-    Crashlytics.setInt(CRASHLYTICS_KEY_STATUS_CODE, -1);
-    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_HEADERS, null);
-    Crashlytics.setString(CRASHLYTICS_KEY_RESPONSE_BODY, null);
   }
 
   private void handleException(Throwable throwable) {
@@ -110,7 +99,7 @@ public final class GeneralErrorHelper {
       ServiceExceptionWithMessage exceptionWithMessage = throwable instanceof ServiceExceptionWithMessage
           ? (ServiceExceptionWithMessage) throwable
           : new ServiceExceptionWithMessage((HttpException) throwable);
-      logCrashlyticsError(exceptionWithMessage);
+      logError(exceptionWithMessage);
     } else {
       Timber.e(throwable);
     }

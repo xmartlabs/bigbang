@@ -1,9 +1,11 @@
 package com.xmartlabs.template.log;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.annimon.stream.Stream;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Builder;
@@ -24,7 +26,8 @@ public class LoggerTree extends Timber.DebugTree {
   private final List<Integer> excludedPriorities;
 
   @Override
-  protected void log(int priority, String tag, String message, Throwable t) {
+  protected void log(int priority, @Nullable String tag, @Nullable String message,
+                     @Nullable Throwable t) {
     if (excludedPriorities.contains(priority)) {
       return;
     }
