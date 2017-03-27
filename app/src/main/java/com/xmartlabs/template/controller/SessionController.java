@@ -3,7 +3,6 @@ package com.xmartlabs.template.controller;
 import android.content.SharedPreferences;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.annimon.stream.Exceptional;
 import com.annimon.stream.Optional;

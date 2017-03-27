@@ -1,4 +1,4 @@
-package com.xmartlabs.template.common;
+package com.xmartlabs.template.service.gson;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
