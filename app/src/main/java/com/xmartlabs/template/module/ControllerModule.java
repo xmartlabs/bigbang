@@ -2,6 +2,7 @@ package com.xmartlabs.template.module;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.template.controller.SharedPreferenceController;
 
 import javax.inject.Singleton;
 
@@ -20,5 +21,11 @@ public class ControllerModule {
   @Singleton
   SessionController provideSessionController() {
     return new SessionController();
+  }
+
+  @Provides
+  @Singleton
+  SharedPreferenceController provideSharedPreferenceController() {
+    return new SharedPreferenceController();
   }
 }

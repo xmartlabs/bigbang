@@ -21,7 +21,7 @@ public class AuthController extends ServiceController {
     // TODO
     //authService.login();
     return Single.just(new AuthResponse())
-            .flatMap(sessionController::setSession)
+            .map(sessionController::setSession)
             .doOnSuccess(this::setLoginInfo);
   }
 
