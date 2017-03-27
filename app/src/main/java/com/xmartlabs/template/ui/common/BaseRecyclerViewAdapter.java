@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xmartlabs.template.helper.CollectionHelper;
-import com.xmartlabs.template.ui.BaseAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
