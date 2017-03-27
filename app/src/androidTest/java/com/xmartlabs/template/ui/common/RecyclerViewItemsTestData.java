@@ -9,9 +9,6 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 
-/**
- * Created by medina on 21/09/2016.
- */
 @Builder
 @Data
 public class RecyclerViewItemsTestData {

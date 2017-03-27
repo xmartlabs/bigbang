@@ -14,13 +14,11 @@ import com.xmartlabs.template.helper.StringUtils;
 
 import lombok.val;
 
-/**
- * Created by medina on 19/09/2016.
- */
 @SuppressWarnings("unused")
 public class IntentHelper {
   /**
-   * Creates an intent to make phone calls
+   * Creates an intent to make phone calls.
+   *
    * @param phoneNumber the number to call
    * @return the created intent
    */
@@ -33,7 +31,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send SMS messages
+   * Creates an intent to send SMS messages.
+   *
    * @param phoneNumber the number to send the message to
    * @param chooserTitle the title of the app chooser
    * @return the created intent
@@ -46,7 +45,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send emails
+   * Creates an intent to send emails.
+   *
    * @param email the email address to send the email to
    * @param chooserTitle the title of the app chooser
    * @return the created intent
@@ -57,7 +57,8 @@ public class IntentHelper {
   }
 
   /**
-   * Creates an intent to send emails
+   * Creates an intent to send emails.
+   *
    * @param email the email address to send the email to
    * @param subject the subject of the email
    * @param body the body of the email
@@ -66,12 +67,13 @@ public class IntentHelper {
    */
   @NonNull
   public static Intent getSendEmailIntent(@NonNull String email, @Nullable String subject, @Nullable String body,
-                                          String chooserTitle) {
+                                          @Nullable String chooserTitle) {
     return getSendEmailIntent(email, subject, body, null, chooserTitle);
   }
 
   /**
-   * Creates an intent to send emails, including a file
+   * Creates an intent to send emails, including a file.
+   *
    * @param email the email address to send the email to
    * @param subject the subject of the email
    * @param body the body of the email
@@ -81,18 +83,18 @@ public class IntentHelper {
    */
   @NonNull
   public static Intent getSendEmailIntent(@NonNull String email, @Nullable String subject, @Nullable String body,
-                                          @Nullable String filePath, String chooserTitle) {
+                                          @Nullable String filePath, @Nullable String chooserTitle) {
     val intent = new Intent(Intent.ACTION_SEND);
     intent.setType("message/rfc822");
     intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
-    if (!StringUtils.stringIsNullOrEmpty(subject)) {
+    if (!StringUtils.isNullOrEmpty(subject)) {
       intent.putExtra(Intent.EXTRA_SUBJECT, subject);
     }
-    if (!StringUtils.stringIsNullOrEmpty(body)) {
+    if (!StringUtils.isNullOrEmpty(body)) {
       intent.putExtra(Intent.EXTRA_TEXT, subject);
     }
 
-    if (!StringUtils.stringIsNullOrEmpty(filePath)) {
+    if (!StringUtils.isNullOrEmpty(filePath)) {
       intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
     }
 
@@ -100,17 +102,19 @@ public class IntentHelper {
   }
 
   /**
-   * Checks if there's any app that can handle the intent
+   * Checks if there's any app that can handle the {@link Intent}.
+   *
    * @param intent the intent to check
-   * @return true if there's an app that can handle the <code>intent</code>
+   * @return true if there's an app that can handle the {@code intent}
    */
-  public static boolean deviceHasAnyAbility(@NonNull Intent intent) {
+  public static boolean canDeviceHandleIntent(@NonNull Intent intent) {
     return BaseProjectApplication.getContext()
         .getPackageManager().queryIntentActivities(intent, 0).size() > 0;
   }
 
   /**
-   * Checks whether or not the device has a camera
+   * Checks whether or not the device has a camera.
+   *
    * @return true if the device has a camera
    */
   public static boolean deviceHasCameraAbility() {
@@ -119,7 +123,8 @@ public class IntentHelper {
   }
 
   /**
-   * Retrieves the string resource with <code>messageRes</code> id
+   * Retrieves the string resource with {@code messageRes} id.
+   *
    * @param messageRes the id of the string resource
    * @return the retrieved string
    */

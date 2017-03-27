@@ -3,9 +3,6 @@ package com.xmartlabs.template.helper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-/**
- * Created by remer on 10/5/15.
- */
 @SuppressWarnings("unused")
 public class StringUtils {
 
@@ -13,9 +10,9 @@ public class StringUtils {
    * Checks whether the given string is null or empty.
    *
    * @param string the string to check
-   * @return true if <code>string</code> is null or empty
+   * @return true if {@code string} is null or empty
    */
-  public static boolean stringIsNullOrEmpty(@Nullable String string) {
+  public static boolean isNullOrEmpty(@Nullable String string) {
     return string == null || string.isEmpty();
   }
 
@@ -23,9 +20,9 @@ public class StringUtils {
    * Checks whether the given char sequence is null or empty.
    *
    * @param string the char sequence to check
-   * @return true if <code>string</code> is null or empty
+   * @return true if {@code string} is null or empty
    */
-  public static boolean stringIsNullOrEmpty(@Nullable CharSequence string) {
+  public static boolean isNullOrEmpty(@Nullable CharSequence string) {
     return string == null || string.length() == 0;
   }
 
@@ -33,7 +30,7 @@ public class StringUtils {
    * Changes the first letter of the given word to uppercase.
    *
    * @param word the word to capitalize
-   * @return a new <code>string</code> instance with the first letter in uppercase
+   * @return a new {@code string} instance with the first letter in uppercase
    */
   @NonNull
   public static String capitalizeWord(@NonNull String word) {

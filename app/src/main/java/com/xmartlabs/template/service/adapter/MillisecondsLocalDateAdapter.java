@@ -1,5 +1,8 @@
 package com.xmartlabs.template.service.adapter;
 
+import com.annimon.stream.Exceptional;
+import com.annimon.stream.Optional;
+import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -16,30 +19,24 @@ import java.lang.reflect.Type;
 
 import timber.log.Timber;
 
-/**
- * Created by mirland on 24/08/16.
- */
+/** {@link Gson} type adapter that serializes {@link LocalDate} objects to a millisecond format. */
 public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
   @Override
   public synchronized JsonElement serialize(LocalDate date, Type type,
                                             JsonSerializationContext jsonSerializationContext) {
-    if (date != null) {
-      return new JsonPrimitive(date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
-    }
-    return null;
+    return Optional.ofNullable(date)
+        .map(theDate -> new JsonPrimitive(theDate.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()))
+        .orElse(null);
   }
 
   @Override
   public synchronized LocalDate deserialize(JsonElement jsonElement, Type type,
                                             JsonDeserializationContext jsonDeserializationContext) {
-    String dateAsString = jsonElement.getAsString();
-    if (!StringUtils.stringIsNullOrEmpty(dateAsString)) {
-      try {
-        return Instant.ofEpochMilli(Long.valueOf(dateAsString)).atZone(ZoneOffset.UTC).toLocalDate();
-      } catch (Exception e) {
-        Timber.e(e, "Date cannot be parsed, date='%s'", dateAsString);
-      }
-    }
-    return null;
+    return Optional.ofNullable(jsonElement.getAsString())
+        .filter(str -> !StringUtils.isNullOrEmpty(str))
+        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDate())
+            .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
+            .getOptional())
+        .orElse(null);
   }
 }

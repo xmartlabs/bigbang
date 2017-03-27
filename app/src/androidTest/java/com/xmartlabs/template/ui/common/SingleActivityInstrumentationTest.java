@@ -31,9 +31,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static org.hamcrest.Matchers.allOf;
 
-/**
- * Created by medina on 21/09/2016.
- */
 @RunWith(AndroidJUnit4.class)
 public abstract class SingleActivityInstrumentationTest<T extends Activity> extends BaseInstrumentationTest {
   protected static final String EMPTY_LIST_JSON_PATH = "jsons/list_empty.json";

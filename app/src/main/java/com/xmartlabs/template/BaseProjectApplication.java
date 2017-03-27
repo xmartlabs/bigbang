@@ -10,7 +10,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.template.common.rx.CompletableObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.FlowableObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.MaybeObserverWithErrorHandling;
-import com.xmartlabs.template.common.rx.ObservableObserverWithErrorHandling;
+import com.xmartlabs.template.common.rx.ObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.SingleObserverWithErrorHandling;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
@@ -22,9 +22,6 @@ import io.fabric.sdk.android.Fabric;
 import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
-/**
- * Created by remer on 08/12/15.
- */
 public class BaseProjectApplication extends Application {
   private static BaseProjectApplication instance;
 
@@ -97,7 +94,7 @@ public class BaseProjectApplication extends Application {
     RxJavaPlugins.setOnSingleSubscribe((single, singleObserver) ->
         new SingleObserverWithErrorHandling<>(singleObserver, generalErrorHelper.getGeneralErrorAction()));
     RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
-        new ObservableObserverWithErrorHandling<>(observer, generalErrorHelper.getGeneralErrorAction()));
+        new ObserverWithErrorHandling<>(observer, generalErrorHelper.getGeneralErrorAction()));
     RxJavaPlugins.setOnMaybeSubscribe((maybe, maybeObserver) ->
         new MaybeObserverWithErrorHandling<>(maybeObserver, generalErrorHelper.getGeneralErrorAction()));
     RxJavaPlugins.setOnFlowableSubscribe((flowable, subscriber) ->

@@ -1,7 +1,5 @@
 package com.xmartlabs.template.common.exeption;
 
-/**
- * Created by mirland on 18/01/17.
- */
+/** To be thrown if an entity cannot be recovered from the database. */
 public final class EntityNotFoundException extends RuntimeException {
 }

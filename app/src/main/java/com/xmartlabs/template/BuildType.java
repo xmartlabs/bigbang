@@ -1,8 +1,5 @@
 package com.xmartlabs.template;
 
-/**
- * Created by santiago on 31/08/15.
- */
 public enum BuildType {
   STAGING,
   PRODUCTION;
