@@ -77,9 +77,9 @@ public class RecyclerViewGridSpacingDecoration extends RecyclerView.ItemDecorati
   @Dimension(unit = Dimension.PX)
   private int itemSpacing;
 
-  private List<Integer> firstColumns = new ArrayList<>();
+  private final List<Integer> firstColumns = new ArrayList<>();
   private int biggestFirstColumn;
-  private List<Integer> lastColumns = new ArrayList<>();
+  private final List<Integer> lastColumns = new ArrayList<>();
   private int biggestLastColumn;
 
   @Override
@@ -218,9 +218,9 @@ public class RecyclerViewGridSpacingDecoration extends RecyclerView.ItemDecorati
    * calling {@link GridLayoutManager.SpanSizeLookup#invalidateSpanIndexCache()}.
    */
   public void invalidateCache() {
-    firstColumns = new ArrayList<>();
+    firstColumns.clear();
     biggestFirstColumn = 0;
-    lastColumns = new ArrayList<>();
+    lastColumns.clear();
     biggestLastColumn = 0;
   }
 
@@ -235,13 +235,13 @@ public class RecyclerViewGridSpacingDecoration extends RecyclerView.ItemDecorati
    * @param position the position from which the cache should be invalidated
    */
   public void invalidateCacheFromPosition(int position) {
-    firstColumns = Stream.of(firstColumns)
+    firstColumns.removeAll( Stream.of(firstColumns)
         .filter(item -> item <= position)
-        .toList();
+        .toList());
     biggestFirstColumn = firstColumns.get(firstColumns.size() - 1);
-    lastColumns = Stream.of(lastColumns)
+    lastColumns.removeAll(Stream.of(lastColumns)
         .filter(item -> item <= position)
-        .toList();
+        .toList());
     biggestLastColumn = lastColumns.get(lastColumns.size() -1);
   }
 }
