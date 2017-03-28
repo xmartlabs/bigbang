@@ -22,7 +22,7 @@ public class SessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
   @Inject
-  SharedPreferenceController sharedPreferencesController;
+  SharedPreferencesController sharedPreferencesController;
 
   /**
    * Retrieves the session information from the authResponse and stores it.

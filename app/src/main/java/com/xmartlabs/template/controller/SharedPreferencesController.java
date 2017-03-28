@@ -17,13 +17,13 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 /**
- * Manage the share preference storage of the application
+ * Manage the {@link SharedPreferences} storage of the application.
  *
  * The entities will be stored in the {@link SharedPreferences} as a String.
  * Thus, the entities objects are serialized using {@link Gson}.
  * The entities are retrieved once from disk and then kept in memory for faster access.
  */
-public class SharedPreferenceController extends Controller {
+public class SharedPreferencesController extends Controller {
   @Inject
   Gson gson;
   @Inject
