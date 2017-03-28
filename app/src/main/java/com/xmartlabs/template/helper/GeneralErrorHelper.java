@@ -11,12 +11,15 @@ import com.xmartlabs.template.BuildConfig;
 import com.xmartlabs.template.common.exeption.EntityNotFoundException;
 import com.xmartlabs.template.common.exeption.ServiceExceptionWithMessage;
 import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.template.log.LoggerTree;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.CancellationException;
 
 import javax.inject.Inject;
@@ -47,9 +50,11 @@ public final class GeneralErrorHelper {
   @Inject
   Context applicationContext;
   @Inject
-  SharedPreferences sharedPreferences;
+  LoggerTree loggerTree;
   @Inject
   SessionController sessionController;
+  @Inject
+  SharedPreferences sharedPreferences;
 
   @Getter
   final Consumer<? super Throwable> generalErrorAction = t -> {
@@ -68,18 +73,13 @@ public final class GeneralErrorHelper {
   }
 
   private void logError(ServiceExceptionWithMessage exceptionWithMessage) {
-    String url = ServiceHelper.getUrl(exceptionWithMessage.getResponse().raw());
-    int resultCode = exceptionWithMessage.getCode();
-    String headers = exceptionWithMessage.getResponse().headers().toString();
-    String body = exceptionWithMessage.getErrorBody();
+    Map<String, String> information = new HashMap<>();
+    information.put(CRASHLYTICS_KEY_URL, ServiceHelper.getUrl(exceptionWithMessage.getResponse().raw()));
+    information.put(CRASHLYTICS_KEY_STATUS_CODE, String.valueOf(exceptionWithMessage.getCode()));
+    information.put(CRASHLYTICS_KEY_RESPONSE_HEADERS, exceptionWithMessage.getResponse().headers().toString());
+    information.put(CRASHLYTICS_KEY_RESPONSE_BODY, exceptionWithMessage.getErrorBody());
 
-    String message = String.format(Locale.US, "result code = %d, headers = %s, url = %s, body = %s",
-        resultCode,
-        headers,
-        url,
-        body
-    );
-    Timber.e(message);
+    loggerTree.log(information);
   }
 
   private void handleException(Throwable throwable) {

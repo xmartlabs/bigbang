@@ -34,6 +34,8 @@ public class BaseProjectApplication extends Application {
 
   @Inject
   GeneralErrorHelper generalErrorHelper;
+  @Inject
+  LoggerTree loggerTree;
 
   public BaseProjectApplication() {
     instance = this;
@@ -84,11 +86,7 @@ public class BaseProjectApplication extends Application {
     Crashlytics crashlytics = new Crashlytics.Builder().core(crashlyticsCore).build();
     Fabric.with(this, crashlytics);
 
-    LoggerTree logger = LoggerTree.builder()
-        .excludedPriorities(Arrays.asList(Log.VERBOSE, Log.DEBUG, Log.INFO))
-        .logger(new CrashlyticsLogger())
-        .build();
-    Timber.plant(logger);
+    Timber.plant(loggerTree);
   }
 
   public <T> T inject(final T t) {

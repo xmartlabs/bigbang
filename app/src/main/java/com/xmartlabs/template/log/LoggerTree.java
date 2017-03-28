@@ -7,6 +7,7 @@ import com.annimon.stream.Stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import lombok.Builder;
 import lombok.Singular;
@@ -39,5 +40,15 @@ public class LoggerTree extends Timber.DebugTree {
         .build();
     Stream.ofNullable(loggers)
         .forEach(logger -> logger.log(logInfo, t));
+  }
+
+  /**
+   * Logs a set of information related to an event that deviates from the normal course of events.
+   *
+   * @param logInformation the information to be logged
+   */
+  public void log(Map<String, String> logInformation) {
+    Stream.ofNullable(loggers)
+        .forEach(logger -> logger.log(logInformation));
   }
 }
