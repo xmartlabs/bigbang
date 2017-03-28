@@ -12,7 +12,7 @@ import java.util.Locale;
 
 import timber.log.Timber;
 
-/** {@link JsonDeserializer} that checks that all {@link GsonRequired} fields have a value */
+/** {@link JsonDeserializer} that checks that all {@link GsonRequired} fields have a value. */
 public class RequiredFieldDeserializer implements JsonDeserializer<Object> {
   private Gson gson = new Gson();
 

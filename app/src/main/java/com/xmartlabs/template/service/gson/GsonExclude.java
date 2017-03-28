@@ -7,7 +7,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Annotation to exclude a field from being serialized.
+ * Indicates that a field should not be serialized/deserialized.
  *
  * Provides a configuration to choose whether to exclude the field of being serialized on:
  * <ul>

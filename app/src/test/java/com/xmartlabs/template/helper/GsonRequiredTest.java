@@ -4,6 +4,7 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.xmartlabs.template.service.adapter.MillisecondsLocalDateAdapter;
 import com.xmartlabs.template.service.gson.GsonExclude;
 import com.xmartlabs.template.service.gson.GsonRequired;
 import com.xmartlabs.template.service.gson.JsonRequiredFieldException;
@@ -13,6 +14,7 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.threeten.bp.LocalDate;
 
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class GsonRequiredTest {
   public void setUp() {
     gson = new GsonBuilder()
         .registerTypeHierarchyAdapter(Object.class, new RequiredFieldDeserializer())
+        .registerTypeAdapter(LocalDate.class, new MillisecondsLocalDateAdapter())
         .setExclusionStrategies(new ExclusionStrategy() {
           @Override
           public boolean shouldSkipField(FieldAttributes fieldAttributes) {
@@ -95,6 +98,26 @@ public class GsonRequiredTest {
     Assert.assertNull(value.getExcluded());
   }
 
+  @Test
+  public void testOtherTypeAdaptersAreStillWorking() {
+    TestInnerClass innerClass = TestInnerClass.builder()
+        .requiredObject("obj")
+        .build();
+    TestClass testClass = TestClass.builder()
+        .innerRequiredObject(innerClass)
+        .requiredField("obj")
+        .excluded("Something")
+        .date(LocalDate.now())
+        .build();
+
+    String value = gson.toJson(testClass);
+
+    MillisecondsLocalDateAdapter adapter = new MillisecondsLocalDateAdapter();
+    String serializedDate  = adapter.serialize(testClass.date, LocalDate.class, null).getAsString();
+
+    Assert.assertTrue(value.contains(serializedDate));
+  }
+
   @Builder
   @Data
   private static final class TestClass {
@@ -106,6 +129,7 @@ public class GsonRequiredTest {
     TestInnerClass innerRequiredObject;
     @GsonExclude
     String excluded;
+    LocalDate date;
   }
 
   @Builder
