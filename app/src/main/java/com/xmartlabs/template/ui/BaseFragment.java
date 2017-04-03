@@ -37,7 +37,7 @@ public abstract class BaseFragment extends RxFragment {
   private Optional<BaseProgressDialog> progressDialog = Optional.empty();
 
   /**
-   * Used to inflate the view layout/elements.
+   * Inflates the view layout/elements.
    * @return the layout resource from which to inflate the view
    */
   @LayoutRes

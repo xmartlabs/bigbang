@@ -41,7 +41,7 @@ public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentAc
   }
 
   /**
-   * Used to instruct the {@link Toolbar} to show/hide the navigation icon.
+   * Instructs the {@link Toolbar} to show/hide the navigation icon.
    * @return whether or not to show the navigation icon
    */
   protected boolean showNavigationIcon() {

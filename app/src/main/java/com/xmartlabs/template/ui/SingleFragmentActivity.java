@@ -17,14 +17,14 @@ import com.xmartlabs.template.R;
  */
 public abstract class SingleFragmentActivity extends BaseAppCompatActivity {
   /**
-   * Used to create the {@link Fragment} held and shown by this Activity.
+   * Creates the {@link Fragment} held and shown by this Activity.
    * @return the Fragment instance to be shown
    */
   @NonNull
   protected abstract BaseFragment createFragment();
 
   /**
-   * Used to specify the layout of the Activity.
+   * Specifies the layout of the Activity.
    * When overriding this method, be sure to include a container view in the layout with the id {@code fragment_container},
    * otherwise the Activity won't be able to add the Fragment in a proper way.
    * @return the layout resource id of the Activity

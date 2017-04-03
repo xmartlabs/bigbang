@@ -32,7 +32,7 @@ public abstract class OnDemandRecyclerViewScrollListener implements NestedScroll
   }
 
   /**
-   * Used to reset to the initial nested scroll view values
+   * Resets to the initial nested scroll view values
    */
   public void resetStatus() {
     enabled = true;
