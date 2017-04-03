@@ -37,11 +37,5 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:label="@string/welcome"
-            android:name=".ui.WelcomeActivity"
-            android:screenOrientation="portrait"
-            />
-
     </application>
 </manifest>
