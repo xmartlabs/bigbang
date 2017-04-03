@@ -21,5 +21,5 @@ public interface Logger {
    *
    * @param logInformation the information to be logged
    */
-  void log(@NonNull Map<String, String> logInformation);
+  void log(@NonNull Map<String, String> logInformation, @Nullable Throwable t);
 }

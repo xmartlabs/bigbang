@@ -3,6 +3,7 @@ package com.xmartlabs.template.log.logger;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 import com.crashlytics.android.Crashlytics;
 import com.xmartlabs.template.log.LogInfo;
@@ -23,7 +24,7 @@ public class CrashlyticsLogger implements Logger {
   }
 
   @Override
-  public void log(@NonNull Map<String, String> logInformation) {
+  public void log(@NonNull Map<String, String> logInformation, @Nullable Throwable t) {
     if (logInformation.isEmpty()) {
       return;
     }
@@ -33,6 +34,8 @@ public class CrashlyticsLogger implements Logger {
           Crashlytics.setString(entry.getKey(), entry.getValue());
           return accumulator + entry.getKey() + " = " + entry.getValue() + "\n";
         });
-    Crashlytics.logException(new Exception(exceptionMessage));
+    Optional.ofNullable(t)
+        .executeIfAbsent(() -> Crashlytics.logException(new Exception(exceptionMessage)))
+        .ifPresent(throwable -> Crashlytics.logException(t));
   }
 }

@@ -79,7 +79,7 @@ public final class GeneralErrorHelper {
     information.put(CRASHLYTICS_KEY_RESPONSE_HEADERS, exceptionWithMessage.getResponse().headers().toString());
     information.put(CRASHLYTICS_KEY_RESPONSE_BODY, exceptionWithMessage.getErrorBody());
 
-    loggerTree.log(information);
+    loggerTree.log(information, exceptionWithMessage);
   }
 
   private void handleException(Throwable throwable) {

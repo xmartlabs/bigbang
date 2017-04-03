@@ -1,5 +1,6 @@
 package com.xmartlabs.template.log;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -47,8 +48,8 @@ public class LoggerTree extends Timber.DebugTree {
    *
    * @param logInformation the information to be logged
    */
-  public void log(Map<String, String> logInformation) {
+  public void log(@NonNull Map<String, String> logInformation, @Nullable Throwable t) {
     Stream.ofNullable(loggers)
-        .forEach(logger -> logger.log(logInformation));
+        .forEach(logger -> logger.log(logInformation, t));
   }
 }
