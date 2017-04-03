@@ -3,7 +3,7 @@ package com.xmartlabs.template;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.module.DatabaseModule;
-import com.xmartlabs.template.module.GeneralErrorHelperModule;
+import com.xmartlabs.template.module.LoggerModule;
 import com.xmartlabs.template.module.GsonModule;
 import com.xmartlabs.template.module.MockRestServiceModule;
 import com.xmartlabs.template.module.OkHttpModule;
@@ -18,7 +18,7 @@ import dagger.Component;
     AndroidModule.class,
     ControllerModule.class,
     DatabaseModule.class,
-    GeneralErrorHelperModule.class,
+    LoggerModule.class,
     GsonModule.class,
     MockRestServiceModule.class,
     OkHttpModule.class,
