@@ -1,6 +1,7 @@
 package com.xmartlabs.template;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
@@ -13,7 +14,11 @@ import com.xmartlabs.template.common.rx.MaybeObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.ObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.SingleObserverWithErrorHandling;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
+import com.xmartlabs.template.log.LoggerTree;
+import com.xmartlabs.template.log.logger.CrashlyticsLogger;
 import com.xmartlabs.template.module.AndroidModule;
+
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -29,6 +34,8 @@ public class BaseProjectApplication extends Application {
 
   @Inject
   GeneralErrorHelper generalErrorHelper;
+  @Inject
+  LoggerTree loggerTree;
 
   public BaseProjectApplication() {
     instance = this;
@@ -79,10 +86,7 @@ public class BaseProjectApplication extends Application {
     Crashlytics crashlytics = new Crashlytics.Builder().core(crashlyticsCore).build();
     Fabric.with(this, crashlytics);
 
-    if (BuildConfig.DEBUG) {
-      Timber.plant(new Timber.DebugTree());
-    }
-    Timber.plant(new CrashlyticsTree());
+    Timber.plant(loggerTree);
   }
 
   public <T> T inject(final T t) {
