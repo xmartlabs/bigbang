@@ -10,7 +10,7 @@ import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.module.DatabaseModule;
-import com.xmartlabs.template.module.GeneralErrorHelperModule;
+import com.xmartlabs.template.module.LoggerModule;
 import com.xmartlabs.template.module.GsonModule;
 import com.xmartlabs.template.module.OkHttpModule;
 import com.xmartlabs.template.module.PicassoModule;
@@ -32,7 +32,7 @@ import dagger.Component;
     AndroidModule.class,
     ControllerModule.class,
     DatabaseModule.class,
-    GeneralErrorHelperModule.class,
+    LoggerModule.class,
     GsonModule.class,
     OkHttpModule.class,
     PicassoModule.class,
