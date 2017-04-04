@@ -9,7 +9,7 @@ import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.module.DatabaseModule;
-import com.xmartlabs.template.module.GeneralErrorHelperModule;
+import com.xmartlabs.template.module.LoggerModule;
 import com.xmartlabs.template.module.GsonModule;
 import com.xmartlabs.template.module.OkHttpModule;
 import com.xmartlabs.template.module.PicassoModule;
@@ -18,6 +18,7 @@ import com.xmartlabs.template.module.RestServiceModule;
 import com.xmartlabs.template.module.SessionInterceptor;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
+import com.xmartlabs.template.ui.BaseFragment;
 import com.xmartlabs.template.ui.MainActivity;
 import com.xmartlabs.template.ui.SingleFragmentActivity;
 import com.xmartlabs.template.ui.StartActivity;
@@ -31,7 +32,7 @@ import dagger.Component;
     AndroidModule.class,
     ControllerModule.class,
     DatabaseModule.class,
-    GeneralErrorHelperModule.class,
+    LoggerModule.class,
     GsonModule.class,
     OkHttpModule.class,
     PicassoModule.class,
@@ -47,6 +48,8 @@ public interface ApplicationComponent {
 
   void inject(MainActivity mainActivity);
   void inject(StartActivity startActivity);
+
+  void inject(BaseFragment baseFragment);
 
   void inject(Controller controller);
   void inject(ServiceController serviceController);
