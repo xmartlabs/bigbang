@@ -1,4 +1,4 @@
-package com.xmartlabs.template.common;
+package com.xmartlabs.template.service.gson;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -7,7 +7,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Annotation to exclude a field from being serialized.
+ * Indicates that a field should not be serialized/deserialized.
  *
  * Provides a configuration to choose whether to exclude the field of being serialized on:
  * <ul>
