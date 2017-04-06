@@ -13,6 +13,7 @@ import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
+import com.xmartlabs.template.ui.BaseFragment;
 import com.xmartlabs.template.ui.MainActivity;
 import com.xmartlabs.template.ui.SingleFragmentActivity;
 import com.xmartlabs.template.ui.StartActivity;
@@ -40,6 +41,8 @@ public interface ApplicationComponent extends CoreComponent {
 
   void inject(MainActivity mainActivity);
   void inject(StartActivity startActivity);
+
+  void inject(BaseFragment baseFragment);
 
   void inject(Controller controller);
   void inject(ServiceController serviceController);
