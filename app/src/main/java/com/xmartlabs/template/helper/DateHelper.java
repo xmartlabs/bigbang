@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
 
-import com.annimon.stream.Collectors;
 import com.annimon.stream.Exceptional;
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
