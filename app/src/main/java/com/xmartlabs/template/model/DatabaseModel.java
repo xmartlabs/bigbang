@@ -5,12 +5,15 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.experimental.Accessors;
 
+/**
+ * Created by mirland on 27/03/17.
+ */
+@Accessors(chain = true)
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ToString(callSuper = false)
-public abstract class DataBaseModel extends BaseModel {
+public class DatabaseModel<T> extends BaseModel implements EntityWithId<T> {
   @PrimaryKey(autoincrement = true)
-  String id;
+  T id;
 }

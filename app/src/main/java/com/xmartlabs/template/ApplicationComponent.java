@@ -2,7 +2,6 @@ package com.xmartlabs.template;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.Controller;
-import com.xmartlabs.template.controller.ServiceController;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.controller.SharedPreferencesController;
 import com.xmartlabs.template.helper.DatabaseHelper;
@@ -10,8 +9,8 @@ import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.module.DatabaseModule;
-import com.xmartlabs.template.module.LoggerModule;
 import com.xmartlabs.template.module.GsonModule;
+import com.xmartlabs.template.module.LoggerModule;
 import com.xmartlabs.template.module.OkHttpModule;
 import com.xmartlabs.template.module.PicassoModule;
 import com.xmartlabs.template.module.ReceiverModule;
@@ -53,7 +52,6 @@ public interface ApplicationComponent {
   void inject(BaseFragment baseFragment);
 
   void inject(Controller controller);
-  void inject(ServiceController serviceController);
 
   void inject(AuthController authController);
   void inject(SessionController sessionController);
