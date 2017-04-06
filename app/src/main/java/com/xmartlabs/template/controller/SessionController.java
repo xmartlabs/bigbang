@@ -4,16 +4,12 @@ import android.content.SharedPreferences;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
-import com.annimon.stream.Exceptional;
 import com.annimon.stream.Optional;
 import com.google.gson.Gson;
 import com.xmartlabs.template.model.AuthResponse;
 import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
-
-import io.reactivex.Single;
-import timber.log.Timber;
 
 /**
  * Controller that manages the Session of the Application.
@@ -26,23 +22,18 @@ public class SessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
   @Inject
-  Gson gson;
-  @Inject
-  SharedPreferences sharedPreferences;
-
-  private Optional<Session> session = Optional.empty();
+  SharedPreferencesController sharedPreferencesController;
 
   /**
    * Retrieves the session information from the authResponse and stores it.
    *
    * @param authResponse the Authentication response from the service from which the session information can be obtained
-   * @return {@code Single<Session>} instance, which will can only fail on saving the information to the {@link SharedPreferences}
+   * @return {@code Session} instance
    */
-  @CheckResult
-  @NonNull
-  public Single<Session> setSession(@NonNull AuthResponse authResponse) {
-    final Session session = getSessionFromAuthInformation(authResponse);
-    return setSession(session);
+  public Session setSession(@NonNull AuthResponse authResponse) {
+    Session session = getSessionFromAuthInformation(authResponse);
+    setSession(session);
+    return session;
   }
 
   /**
@@ -72,49 +63,21 @@ public class SessionController extends Controller {
   @CheckResult
   @NonNull
   public Optional<Session> getSession() {
-    return Optional.of(session).orElseGet(() -> {
-      String sessionJsonString = sharedPreferences.getString(PREFERENCES_KEY_SESSION, null);
-
-      return Exceptional.of(() -> gson.fromJson(sessionJsonString, Session.class))
-          .ifException(e -> {
-            Timber.w(e, "Error while deserializing the stored session");
-            deleteSession();
-          })
-          .getOptional();
-    });
+    return sharedPreferencesController.getEntity(PREFERENCES_KEY_SESSION, Session.class);
   }
 
   /**
    * Stores the {@code session} into the {@link SharedPreferences}.
    *
    * @param session the {@link Session} object to be stored
-   * @return {@code Single<Session>} object. Upon subscription, it will only fail if the session could not be stored
    */
-  @CheckResult
-  @NonNull
-  public Single<Session> setSession(@NonNull Session session) {
-    return Single.fromCallable(() -> {
-      String sessionJsonString = gson.toJson(session);
-      boolean committed = sharedPreferences
-          .edit()
-          .putString(PREFERENCES_KEY_SESSION, sessionJsonString)
-          .commit();
-
-      if (committed) {
-        this.session = Optional.of(session);
-        return session;
-      }
-      throw new RuntimeException("The session change could not be committed");
-    });
+  public void setSession(@NonNull Session session) {
+    sharedPreferencesController.saveEntity(PREFERENCES_KEY_SESSION, session);
   }
 
   /** Deletes the session information */
   public void deleteSession() {
-    session = Optional.empty();
-    sharedPreferences
-        .edit()
-        .remove(PREFERENCES_KEY_SESSION)
-        .apply();
+    sharedPreferencesController.deleteEntity(PREFERENCES_KEY_SESSION);
   }
 
   /**
@@ -124,7 +87,6 @@ public class SessionController extends Controller {
   @CheckResult
   @SuppressWarnings("unused")
   public boolean isSessionAlive() {
-    return sharedPreferences
-        .contains(PREFERENCES_KEY_SESSION);
+    return sharedPreferencesController.hasEntity(PREFERENCES_KEY_SESSION);
   }
 }
