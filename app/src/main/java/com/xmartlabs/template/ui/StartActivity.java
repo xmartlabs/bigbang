@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 

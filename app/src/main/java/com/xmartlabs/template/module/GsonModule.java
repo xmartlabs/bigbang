@@ -10,9 +10,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.xmartlabs.template.BuildConfig;
-import com.xmartlabs.template.common.GsonExclude;
 import com.xmartlabs.template.service.adapter.MillisecondsLocalDateAdapter;
 import com.xmartlabs.template.service.adapter.MillisecondsLocalDateTimeAdapter;
+import com.xmartlabs.template.service.gson.GsonExclude;
+import com.xmartlabs.template.service.gson.RequiredFieldDeserializer;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
@@ -72,6 +73,7 @@ public class GsonModule {
     if (BuildConfig.DEBUG) {
       gsonBuilder.setPrettyPrinting();
     }
+    gsonBuilder.registerTypeHierarchyAdapter(Object.class, new RequiredFieldDeserializer());
     return gsonBuilder;
   }
 }
