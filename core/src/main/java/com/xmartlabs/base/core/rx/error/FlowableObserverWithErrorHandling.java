@@ -1,4 +1,4 @@
-package com.xmartlabs.template.common.rx;
+package com.xmartlabs.base.core.rx.error;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

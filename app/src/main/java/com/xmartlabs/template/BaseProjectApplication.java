@@ -10,11 +10,11 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.base.core.Injector;
 import com.xmartlabs.base.core.helper.GeneralErrorHelper;
 import com.xmartlabs.base.core.log.LoggerTree;
-import com.xmartlabs.template.common.rx.CompletableObserverWithErrorHandling;
-import com.xmartlabs.template.common.rx.FlowableObserverWithErrorHandling;
-import com.xmartlabs.template.common.rx.MaybeObserverWithErrorHandling;
-import com.xmartlabs.template.common.rx.ObserverWithErrorHandling;
-import com.xmartlabs.template.common.rx.SingleObserverWithErrorHandling;
+import com.xmartlabs.base.core.rx.error.CompletableObserverWithErrorHandling;
+import com.xmartlabs.base.core.rx.error.FlowableObserverWithErrorHandling;
+import com.xmartlabs.base.core.rx.error.MaybeObserverWithErrorHandling;
+import com.xmartlabs.base.core.rx.error.ObserverWithErrorHandling;
+import com.xmartlabs.base.core.rx.error.SingleObserverWithErrorHandling;
 import com.xmartlabs.template.module.AndroidModule;
 
 import javax.inject.Inject;

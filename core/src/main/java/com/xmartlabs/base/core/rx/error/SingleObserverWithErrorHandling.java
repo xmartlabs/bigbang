@@ -1,4 +1,4 @@
-package com.xmartlabs.template.common.rx;
+package com.xmartlabs.base.core.rx.error;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
