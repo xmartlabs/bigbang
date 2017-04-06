@@ -13,8 +13,7 @@ import lombok.ToString;
 @Parcel
 @ToString(callSuper = true)
 public class Session extends AuthResponse {
-  public static final int CURRENT_DATABASE_VERSION = 1;
-
+  String accessToken;
   Integer databaseVersion;
 
   public void updateSession(@NonNull AuthResponse authResponse) {
