@@ -1,24 +1,21 @@
 package com.xmartlabs.template;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.xmartlabs.base.core.Injector;
+import com.xmartlabs.base.core.helper.GeneralErrorHelper;
+import com.xmartlabs.base.core.log.LoggerTree;
 import com.xmartlabs.template.common.rx.CompletableObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.FlowableObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.MaybeObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.ObserverWithErrorHandling;
 import com.xmartlabs.template.common.rx.SingleObserverWithErrorHandling;
-import com.xmartlabs.template.helper.GeneralErrorHelper;
-import com.xmartlabs.template.log.LoggerTree;
-import com.xmartlabs.template.log.logger.CrashlyticsLogger;
 import com.xmartlabs.template.module.AndroidModule;
-
-import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -58,7 +55,8 @@ public class BaseProjectApplication extends Application {
   private void initializeInjections() {
     ApplicationComponent component = createComponent();
     bullet = createBullet(component);
-    inject(this);
+    Injector.getComponent().setObjectGraph(bullet);
+    Injector.inject(this);
   }
 
   protected ApplicationComponent createComponent() {

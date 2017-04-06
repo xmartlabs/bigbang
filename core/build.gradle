@@ -1,0 +1,97 @@
+apply from: '../versions.gradle'
+apply plugin: 'com.android.library'
+
+ext {
+    PUBLISH_GROUP_ID = 'com.xmartlabs'
+    PUBLISH_ARTIFACT_ID = 'base'
+    PUBLISH_VERSION = '0.1'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+    }
+}
+
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url "https://jitpack.io" }
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
+    apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${project.ext.dbFlowVersion}"
+    apt "com.github.tbroyer.bullet:bullet-compiler:${project.ext.bulletVersion}"
+    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile "com.android.support:design:${project.ext.androidSupportVersion}"
+    compile "com.annimon:stream:${project.ext.streamVersion}"
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+        transitive = true
+    }
+    compile "com.f2prateek.dart:dart:${project.ext.dartVersion}"
+    compile "com.f2prateek.dart:henson:${project.ext.dartVersion}"
+    compile 'com.github.mrmike:Ok2Curl:0.2.5'
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${project.ext.dbFlowVersion}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${project.ext.dbFlowVersion}"
+    compile 'com.github.square.picasso:picasso:8c16e8564e'
+    compile "com.github.tbroyer.bullet:bullet:${project.ext.bulletVersion}"
+    compile "com.google.android.gms:play-services-basement:${project.ext.playServicesVersion}"
+    compile "com.google.android.gms:play-services-base:${project.ext.playServicesVersion}"
+    compile "com.google.dagger:dagger:${project.ext.daggerVersion}"
+    compile "com.jakewharton.threetenabp:threetenabp:${project.ext.localDateBackportVersion}"
+    compile "com.jakewharton.timber:timber:${project.ext.timberVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${project.ext.retrofitVersion}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${project.ext.retrofitVersion}"
+    compile "com.squareup.retrofit2:retrofit:${project.ext.retrofitVersion}"
+    compile "com.squareup.okhttp3:okhttp:${project.ext.okHttpVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${project.ext.okHttpVersion}"
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
+    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    testCompile 'junit:junit:4.12'
+}
+
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'

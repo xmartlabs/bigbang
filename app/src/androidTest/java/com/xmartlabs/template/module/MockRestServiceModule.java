@@ -2,13 +2,14 @@ package com.xmartlabs.template.module;
 
 import android.content.Context;
 
-import dagger.Module;
-import io.appflate.restmock.RESTMockServer;
+import com.xmartlabs.base.core.module.RestServiceModule;
 
-@Module
+import io.appflate.restmock.RESTMockServer;
+import okhttp3.HttpUrl;
+
 public class MockRestServiceModule extends RestServiceModule {
   @Override
-  protected String getBaseUrl(Context context) {
-    return RESTMockServer.getUrl();
+  protected HttpUrl provideBaseUrl(Context context) {
+    return HttpUrl.parse(RESTMockServer.getUrl());
   }
 }

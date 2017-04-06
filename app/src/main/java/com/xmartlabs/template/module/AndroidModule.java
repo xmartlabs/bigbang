@@ -1,33 +1,16 @@
 package com.xmartlabs.template.module;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.app.Application;
 
-import com.xmartlabs.template.BaseProjectApplication;
+import com.xmartlabs.template.BuildInformation;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
-
-@Module
-public class AndroidModule {
-  private final BaseProjectApplication application;
-
-  public AndroidModule(BaseProjectApplication application) {
-    this.application = application;
+public class AndroidModule extends com.xmartlabs.base.core.module.AndroidModule {
+  public AndroidModule(Application application) {
+    super(application);
   }
 
-  @Provides
-  @Singleton
-  Context provideApplicationContext() {
-    return application;
-  }
-
-  @Provides
-  @Singleton
-  SharedPreferences provideSharedPreferences() {
-    return PreferenceManager.getDefaultSharedPreferences(application);
+  @Override
+  public com.xmartlabs.base.core.model.BuildInformation provideBuildInformation() {
+    return new BuildInformation();
   }
 }
