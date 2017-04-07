@@ -1,6 +1,7 @@
 package com.xmartlabs.template.providers;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.annimon.stream.Optional;
 import com.xmartlabs.template.common.EntityProvider;
@@ -44,7 +45,7 @@ public class AccessTokenProvider implements EntityProvider<String> {
   }
 
   @Override
-  public void updateEntity(String accessToken) {
+  public void updateEntity(@Nullable String accessToken) {
     sessionController.getSession()
         .executeIfPresent(session -> session.setAccessToken(accessToken))
         .ifPresent(sessionController::setSession);

@@ -21,8 +21,9 @@ public class SessionInterceptor implements Interceptor {
     this.accessTokenProvider = accessTokenProvider;
   }
 
+  @NonNull
   @Override
-  public Response intercept(Chain chain) throws IOException {
+  public Response intercept(@NonNull Chain chain) throws IOException {
     Request request = accessTokenProvider.provideEntity()
         .map(accessToken -> chain.request()
             .newBuilder()

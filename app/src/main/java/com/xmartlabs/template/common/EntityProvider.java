@@ -1,5 +1,7 @@
 package com.xmartlabs.template.common;
 
+import android.support.annotation.Nullable;
+
 import com.annimon.stream.Optional;
 
 /** Used to provide an entity. */
@@ -16,7 +18,7 @@ public interface EntityProvider<T> {
    *
    * @param entity Entity to be saved
    */
-  void updateEntity(T entity);
+  void updateEntity(@Nullable T entity);
 
   /** Deletes the entity in the database. */
   void deleteEntity();
