@@ -9,10 +9,10 @@ import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 
-/**
- * Provides the access token in order to be added in the service requests
- */
+/** Provides the access token in order to be added in the service requests */
 public class AccessTokenProvider implements EntityProvider<String> {
+  private static final String SESSION_HEADER = "session";
+
   @NonNull
   private final SessionController sessionController;
 
@@ -26,6 +26,11 @@ public class AccessTokenProvider implements EntityProvider<String> {
     return sessionController.getSession()
         .map(Session::getAccessToken)
         .flatMap(Optional::ofNullable);
+  }
+
+  @NonNull
+  public String provideAccessTokenHeaderKey() {
+    return SESSION_HEADER;
   }
 
   @Override

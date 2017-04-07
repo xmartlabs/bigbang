@@ -26,7 +26,7 @@ public class SessionInterceptor implements Interceptor {
     Request request = accessTokenProvider.provideEntity()
         .map(accessToken -> chain.request()
             .newBuilder()
-            .addHeader("session", accessToken)
+            .addHeader(accessTokenProvider.provideAccessTokenHeaderKey(), accessToken)
             .build()
         ).orElse(chain.request());
     return chain.proceed(request);

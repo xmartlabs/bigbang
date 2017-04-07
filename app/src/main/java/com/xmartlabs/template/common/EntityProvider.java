@@ -2,11 +2,8 @@ package com.xmartlabs.template.common;
 
 import com.annimon.stream.Optional;
 
-/**
- * Used to provide an entity
- */
+/** Used to provide an entity */
 public interface EntityProvider<T> {
-
   /**
    * Provides the entity
    *
