@@ -1,7 +1,8 @@
-package com.xmartlabs.base.core.helper;
+package com.xmartlabs.base.core;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.IntStream;
+import com.xmartlabs.base.core.helper.DateHelper;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,9 +13,6 @@ import org.threeten.bp.Month;
 import java.util.List;
 import java.util.TimeZone;
 
-/**
- * Created by medina on 19/09/2016.
- */
 public class DateHelperTest {
   private static final String DEFAULT_TIME_ZONE_STRING = "GMT-03:00";
   public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getTimeZone(DEFAULT_TIME_ZONE_STRING);

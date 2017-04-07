@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestServiceModule {
   @Provides
   @Singleton
-  Retrofit provideRetrofit(Context context, @Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
+  Retrofit provideRetrofit(@Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
                            RxJava2CallAdapterFactory rxJavaCallAdapterFactory,
                            GsonConverterFactory gsonConverterFactory,
                            HttpUrl baseUrl,

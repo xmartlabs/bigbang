@@ -142,7 +142,7 @@ dependencies {
     androidTestCompile("com.android.support.test:runner:${project.ext.androidSupportTestVersion}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${project.ext.expressoVersion}") {
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${project.ext.espressoVersion}") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'design'
@@ -150,10 +150,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
-    androidTestCompile("com.android.support.test.espresso:espresso-core:${project.ext.expressoVersion}") {
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${project.ext.espressoVersion}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:${project.ext.expressoVersion}"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:${project.ext.espressoVersion}"
     androidTestCompile "com.github.andrzejchm.RESTMock:android:${project.ext.restMockVersion}"
     androidTestCompile("com.github.andrzejchm.RESTMock:core:${project.ext.restMockVersion}") {
         exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
@@ -175,7 +175,6 @@ dependencies {
     provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
     apt "com.hannesdorfmann.fragmentargs:processor:${project.ext.fragmentArgsVersion}"
     apt "com.jakewharton:butterknife-compiler:${project.ext.butterKnifeVersion}"
-    //apt 'net.ltgt.dagger:bullet-compiler:1.0-SNAPSHOT' // Loaded from JitPack
     apt "org.parceler:parceler:${project.ext.parcelerVersion}"
     apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
     compile "com.android.support:appcompat-v7:${project.ext.androidSupportVersion}"
@@ -203,7 +202,6 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:${project.ext.okHttpVersion}"
     compile "com.squareup.okhttp3:logging-interceptor:${project.ext.okHttpVersion}"
     compile "com.squareup.okio:okio:${project.ext.okioVersion}"
-    //compile 'com.squareup.picasso:picasso:2.5.2' // Loaded from JitPack in order to use OkHttp3
     compile "com.squareup.retrofit2:converter-gson:${project.ext.retrofitVersion}"
     compile "com.squareup.retrofit2:adapter-rxjava2:${project.ext.retrofitVersion}"
     compile "com.squareup.retrofit2:retrofit:${project.ext.retrofitVersion}"
@@ -213,7 +211,6 @@ dependencies {
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
     compile "io.reactivex.rxjava2:rxandroid:${project.ext.rxAndroidVersion}"
     compile "io.reactivex.rxjava2:rxjava:${project.ext.rxJavaVersion}"
-    //compile 'net.ltgt.dagger:bullet:1.0-SNAPSHOT' // Loaded from JitPack
     compile "org.parceler:parceler-api:${project.ext.parcelerVersion}"
     compile fileTree(include: ['*.jar'], dir: 'libs')
     provided "org.projectlombok:lombok:${project.ext.lombokVersion}"

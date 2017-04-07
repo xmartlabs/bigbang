@@ -1,4 +1,6 @@
-package com.xmartlabs.base.core.helper;
+package com.xmartlabs.base.core;
+
+import com.xmartlabs.base.core.helper.ServiceHelper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +12,6 @@ import okhttp3.Response;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by medina on 19/09/2016.
- */
 public class ServiceHelperTest {
   private static final String REQUEST_URL = "https://github.com/xmartlabs/Android-Base-Project";
 

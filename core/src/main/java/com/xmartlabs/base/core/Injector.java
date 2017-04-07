@@ -2,13 +2,6 @@ package com.xmartlabs.base.core;
 
 import android.support.annotation.NonNull;
 
-import com.annimon.stream.Stream;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import bullet.ObjectGraph;
 
 public class Injector {

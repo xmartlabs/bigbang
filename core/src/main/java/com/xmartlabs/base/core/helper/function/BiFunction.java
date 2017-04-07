@@ -16,7 +16,6 @@ public interface BiFunction<T1, T2, R> {
    * @param t1 the first value
    * @param t2 the second value
    * @return the result value
-   * @throws Exception on error
    */
   @NonNull
   R apply(@NonNull T1 t1, @NonNull T2 t2);

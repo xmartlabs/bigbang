@@ -1,4 +1,6 @@
-package com.xmartlabs.base.core.helper;
+package com.xmartlabs.base.core;
+
+import com.xmartlabs.base.core.helper.StringUtils;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,9 +8,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by santiago on 02/02/16.
- */
 public class StringUtilsTest {
   @Test
   public void nullString() {

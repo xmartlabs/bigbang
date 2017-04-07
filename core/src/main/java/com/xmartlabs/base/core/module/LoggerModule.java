@@ -2,7 +2,6 @@ package com.xmartlabs.base.core.module;
 
 import android.util.Log;
 
-import com.xmartlabs.base.core.helper.GeneralErrorHelper;
 import com.xmartlabs.base.core.log.LoggerTree;
 import com.xmartlabs.base.core.log.logger.CrashlyticsLogger;
 

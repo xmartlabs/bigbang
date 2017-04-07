@@ -39,9 +39,8 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled = true
     }
     buildTypes {
         release {
@@ -60,6 +59,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile "com.crittercism.dexmaker:dexmaker:${project.ext.dexmakerVersion}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${project.ext.dexmakerVersion}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${project.ext.dexmakerVersion}"
+    androidTestCompile "org.mockito:mockito-core:${project.ext.mockitoVersion}"
     apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
     apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${project.ext.dbFlowVersion}"
@@ -67,6 +70,7 @@ dependencies {
     apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile "com.android.support:design:${project.ext.androidSupportVersion}"
+    compile 'com.android.support:multidex:1.0.1'
     compile "com.annimon:stream:${project.ext.streamVersion}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
