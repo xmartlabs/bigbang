@@ -17,8 +17,6 @@ import org.junit.runner.RunWith;
 import java.util.Collection;
 import java.util.Locale;
 
-import javax.inject.Inject;
-
 import io.appflate.restmock.RESTMockServer;
 import lombok.Getter;
 

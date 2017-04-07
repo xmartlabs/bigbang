@@ -12,6 +12,7 @@ import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.xmartlabs.base.core.service.adapter.MillisecondsLocalDateAdapter;
 import com.xmartlabs.base.core.service.adapter.MillisecondsLocalDateTimeAdapter;
 import com.xmartlabs.base.core.service.common.GsonExclude;
+import com.xmartlabs.base.core.service.deserializer.RequiredFieldDeserializer;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
@@ -67,7 +68,9 @@ public class GsonModule {
   @NonNull
   @Provides
   public GsonBuilder provideCommonGsonBuilder() {
-    return modifyGsonBuilder(new GsonBuilder());
+    GsonBuilder gsonBuilder = modifyGsonBuilder(new GsonBuilder());
+    gsonBuilder.registerTypeHierarchyAdapter(Object.class, new RequiredFieldDeserializer());
+    return gsonBuilder;
   }
 
   protected GsonBuilder modifyGsonBuilder(GsonBuilder builder) {

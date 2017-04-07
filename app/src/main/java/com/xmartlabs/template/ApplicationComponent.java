@@ -10,6 +10,7 @@ import com.xmartlabs.base.core.module.RestServiceModule;
 import com.xmartlabs.template.controller.Controller;
 import com.xmartlabs.template.controller.ServiceController;
 import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.template.controller.SharedPreferencesController;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
@@ -47,4 +48,6 @@ public interface ApplicationComponent extends CoreComponent {
   void inject(Controller controller);
   void inject(ServiceController serviceController);
   void inject(SessionController sessionController);
+
+  void inject(SharedPreferencesController sharedPreferencesController);
 }
