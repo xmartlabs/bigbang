@@ -19,14 +19,14 @@ import io.reactivex.schedulers.Schedulers;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extends Controller {
-  private final EntityDao<Id, D, C> entityDao;
-  private final EntityServiceProvider<Id, D> entityServiceProvider;
+public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition> extends Controller {
+  private final EntityDao<Id, E, Condition> entityDao;
+  private final EntityServiceProvider<Id, E> entityServiceProvider;
 
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess", "unchecked"})
-  protected Flowable<List<D>> getEntities(@NonNull Single<List<D>> serviceCall, @NonNull C... conditions) {
+  protected Flowable<List<E>> getEntities(@NonNull Single<List<E>> serviceCall, @NonNull Condition... conditions) {
     return Flowable
         .concatArrayDelayError(
             entityDao.getEntities(conditions).toFlowable(),
@@ -45,7 +45,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Observable<D> getEntity(@NonNull Function<Id, Single<D>> serviceCall, @NonNull Id id) {
+  protected Observable<E> getEntity(@NonNull Function<Id, Single<E>> serviceCall, @NonNull Id id) {
     return Observable.mergeDelayError(
         entityDao.getEntity(id).toObservable(),
         getServiceEntity(serviceCall, id).toObservable()
@@ -55,7 +55,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Single<D> getEntityFromDbIfPresentOrGetFromService(@NonNull Function<Id, Single<D>> serviceCall,
+  protected Single<E> getEntityFromDbIfPresentOrGetFromService(@NonNull Function<Id, Single<E>> serviceCall,
                                                                @NonNull Id id) {
     return entityDao.getEntity(id)
         .switchIfEmpty(getServiceEntity(serviceCall, id).toMaybe())
@@ -65,7 +65,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Single<D> getServiceEntity(@NonNull Function<Id, Single<D>> serviceCall, Id id) {
+  protected Single<E> getServiceEntity(@NonNull Function<Id, Single<E>> serviceCall, Id id) {
     return serviceCall.apply(id)
         .compose(entityServiceProvider.applySingleServiceTransformation())
         .doOnSuccess(entityDao::updateEntity);
@@ -74,7 +74,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Single<D> createEntityAndGetValue(@NonNull Single<D> serviceCall) {
+  protected Single<E> createEntityAndGetValue(@NonNull Single<E> serviceCall) {
     return serviceCall
         .compose(entityServiceProvider.applySingleServiceTransformation())
         .flatMap(entityDao::createEntity);
@@ -83,7 +83,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Completable createEntity(@NonNull Single<D> serviceCall) {
+  protected Completable createEntity(@NonNull Single<E> serviceCall) {
     return createEntityAndGetValue(serviceCall)
         .toCompletable();
   }
@@ -91,7 +91,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Single<D> updateEntityAndGetValue(@NonNull D entity, @NonNull BiFunction<Id, D, Completable> serviceCall) {
+  protected Single<E> updateEntityAndGetValue(@NonNull E entity, @NonNull BiFunction<Id, E, Completable> serviceCall) {
     return Optional.ofNullable(entity.getId())
         .map(id -> updateEntityAndGetValue(entity, serviceCall.apply(entity.getId(), entity)))
         .orElse(Single.error(new IllegalStateException("EntityId id cannot be null")));
@@ -100,7 +100,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Single<D> updateEntityAndGetValue(D entity, Completable completable) {
+  protected Single<E> updateEntityAndGetValue(E entity, Completable completable) {
     return completable
         .compose(entityServiceProvider.applyCompletableServiceTransformation())
         .toSingleDefault(entity)
@@ -110,7 +110,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Completable updateEntity(D entity, @NonNull BiFunction<Id, D, Completable> serviceCall) {
+  protected Completable updateEntity(E entity, @NonNull BiFunction<Id, E, Completable> serviceCall) {
     return updateEntityAndGetValue(entity, serviceCall)
         .toCompletable();
   }
@@ -127,7 +127,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
   @CheckResult
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected Completable deleteEntity(@NonNull Function<Id, Completable> serviceCall, @NonNull D entity) {
+  protected Completable deleteEntity(@NonNull Function<Id, Completable> serviceCall, @NonNull E entity) {
     return Optional.of(entity.getId())
         .map(id -> serviceCall.apply(id)
             .compose(entityServiceProvider.applyCompletableServiceTransformation())
@@ -137,7 +137,7 @@ public abstract class EntityController<Id, D extends EntityWithId<Id>, C> extend
 
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})
-  protected abstract Class<D> getModelClass();
+  protected abstract Class<E> getModelClass();
 
   @NonNull
   @SuppressWarnings({"unused", "WeakerAccess"})

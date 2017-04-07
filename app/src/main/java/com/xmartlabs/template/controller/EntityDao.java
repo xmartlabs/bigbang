@@ -10,28 +10,28 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
-public interface EntityDao<Id, D, Condition> {
+public interface EntityDao<Id, E, Condition> {
   @CheckResult
   @NonNull
   @SuppressWarnings("unchecked")
-  Single<List<D>> getEntities(@NonNull Condition... conditions);
+  Single<List<E>> getEntities(@NonNull Condition... conditions);
 
   @CheckResult
   @NonNull
   @SuppressWarnings("unchecked")
-  Single<List<D>> deleteAndInsertEntities(@Nullable List<D> newEntities, @NonNull Condition... conditions);
+  Single<List<E>> deleteAndInsertEntities(@Nullable List<E> newEntities, @NonNull Condition... conditions);
 
   @CheckResult
   @NonNull
-  Maybe<D> getEntity(@NonNull Id id);
+  Maybe<E> getEntity(@NonNull Id id);
 
   @CheckResult
   @NonNull
-  Single<D> createEntity(@NonNull D entity);
+  Single<E> createEntity(@NonNull E entity);
 
   @CheckResult
   @NonNull
-  Single<D> updateEntity(@NonNull D entity);
+  Single<E> updateEntity(@NonNull E entity);
 
   @CheckResult
   @NonNull
@@ -39,5 +39,5 @@ public interface EntityDao<Id, D, Condition> {
 
   @CheckResult
   @NonNull
-  Completable deleteEntity(@NonNull D entity);
+  Completable deleteEntity(@NonNull E entity);
 }

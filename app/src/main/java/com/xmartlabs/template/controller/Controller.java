@@ -5,14 +5,23 @@ import android.support.annotation.NonNull;
 
 import com.xmartlabs.template.BaseProjectApplication;
 
+import io.reactivex.Completable;
 import io.reactivex.CompletableTransformer;
+import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
+import io.reactivex.Maybe;
 import io.reactivex.MaybeTransformer;
+import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Contains general controller methods.
+ * It automatically injects inherited classes.
+ */
 public abstract class Controller {
   @NonNull
   private final CompletableTransformer completableIoTransformer = upstream -> upstream
@@ -39,20 +48,24 @@ public abstract class Controller {
     BaseProjectApplication.getContext().inject(this);
   }
 
+  /**
+   * Provides the Io schedule {@link Completable} transformation.
+   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   *
+   * @return The stream with the schedule transformation
+   */
   @CheckResult
   @NonNull
-  protected <T> ObservableTransformer<T, T> applyObservableIoSchedulers() {
-    //noinspection unchecked
-    return (ObservableTransformer<T, T>) observableIoTransformer;
+  protected CompletableTransformer applyCompletableIoSchedulers() {
+    return completableIoTransformer;
   }
 
-  @CheckResult
-  @NonNull
-  protected <T> SingleTransformer<T, T> applySingleIoSchedulers() {
-    //noinspection unchecked
-    return (SingleTransformer<T, T>) singleIoTransformer;
-  }
-
+  /**
+   * Provides the Io schedule {@link Observable} transformation.
+   * Subscribes the stream to Io bound {@link Flowable} and observes it in the {Android main thread.
+   *
+   * @return The stream with the schedule transformation
+   */
   @CheckResult
   @NonNull
   protected <T> FlowableTransformer<T, T> applyFlowableIoSchedulers() {
@@ -60,6 +73,12 @@ public abstract class Controller {
     return (FlowableTransformer<T, T>) flowableIoTransformer;
   }
 
+  /**
+   * Provides the Io schedule {@link Maybe} transformation.
+   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   *
+   * @return The stream with the schedule transformation
+   */
   @CheckResult
   @NonNull
   protected <T> MaybeTransformer<T, T> applyMaybeIoSchedulers() {
@@ -67,9 +86,29 @@ public abstract class Controller {
     return (MaybeTransformer<T, T>) maybeIoTransformer;
   }
 
+  /**
+   * Provides the Io schedule {@link Observable} transformation.
+   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   *
+   * @return The stream with the schedule transformation
+   */
   @CheckResult
   @NonNull
-  protected CompletableTransformer applyCompletableIoSchedulers() {
-    return completableIoTransformer;
+  protected <T> ObservableTransformer<T, T> applyObservableIoSchedulers() {
+    //noinspection unchecked
+    return (ObservableTransformer<T, T>) observableIoTransformer;
+  }
+
+  /**
+   * Provides the Io schedule {@link Single} transformation.
+   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   *
+   * @return The stream with the schedule transformation
+   */
+  @CheckResult
+  @NonNull
+  protected <T> SingleTransformer<T, T> applySingleIoSchedulers() {
+    //noinspection unchecked
+    return (SingleTransformer<T, T>) singleIoTransformer;
   }
 }
