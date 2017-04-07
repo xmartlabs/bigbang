@@ -25,11 +25,10 @@ public class CollectionHelperTest {
   public void testIsNullOrEmptyFalse() {
     ArrayList<Object> list = new ArrayList<>();
     list.add(new Object());
-    //noinspection UnnecessaryLocalVariable
-    Collection<Object> collection = list;
 
     Assert.assertFalse(CollectionHelper.isNullOrEmpty(list));
-    Assert.assertFalse(CollectionHelper.isNullOrEmpty(collection));
+    //noinspection RedundantCast
+    Assert.assertFalse(CollectionHelper.isNullOrEmpty((Collection<Object>) list));
   }
 
   @Test

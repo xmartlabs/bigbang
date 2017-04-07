@@ -6,7 +6,7 @@ import android.os.StatFs;
 import android.support.annotation.NonNull;
 
 import com.moczul.ok2curl.CurlInterceptor;
-import com.xmartlabs.base.core.model.BuildInformation;
+import com.xmartlabs.base.core.model.BuildInfo;
 
 import java.io.File;
 
@@ -30,8 +30,8 @@ public class OkHttpModule {
   @Named(CLIENT_SERVICE)
   @Provides
   @Singleton
-  OkHttpClient provideServiceOkHttpClient(OkHttpClient.Builder clientBuilder, BuildInformation buildInformation) {
-    addLoggingInterceptor(clientBuilder, buildInformation);
+  OkHttpClient provideServiceOkHttpClient(OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
+    addLoggingInterceptor(clientBuilder, buildInfo);
 
     return clientBuilder.build();
   }
@@ -40,10 +40,10 @@ public class OkHttpModule {
   @Provides
   @Singleton
   OkHttpClient providePicassoOkHttpClient(OkHttpClient.Builder clientBuilder, Cache cache,
-                                          BuildInformation buildInformation) {
+                                          BuildInfo buildInfo) {
     clientBuilder.cache(cache);
 
-    addLoggingInterceptor(clientBuilder, buildInformation);
+    addLoggingInterceptor(clientBuilder, buildInfo);
 
     return clientBuilder.build();
   }
@@ -65,8 +65,8 @@ public class OkHttpModule {
     return new Cache(httpCacheDir, httpCacheSize);
   }
 
-  private void addLoggingInterceptor(@NonNull OkHttpClient.Builder clientBuilder, BuildInformation buildInformation) {
-    if (buildInformation.isDebug() && !buildInformation.isProduction()) {
+  private void addLoggingInterceptor(@NonNull OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
+    if (buildInfo.isDebug() && !buildInfo.isProduction()) {
       HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Timber.tag("OkHttp").d(message));
       loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
       clientBuilder.addInterceptor(loggingInterceptor);

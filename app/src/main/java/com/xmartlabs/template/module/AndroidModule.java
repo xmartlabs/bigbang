@@ -2,15 +2,16 @@ package com.xmartlabs.template.module;
 
 import android.app.Application;
 
-import com.xmartlabs.template.BuildInformation;
+import com.xmartlabs.base.core.module.CoreAndroidModule;
+import com.xmartlabs.template.BuildInfo;
 
-public class AndroidModule extends com.xmartlabs.base.core.module.AndroidModule {
+public class AndroidModule extends CoreAndroidModule {
   public AndroidModule(Application application) {
     super(application);
   }
 
   @Override
-  public com.xmartlabs.base.core.model.BuildInformation provideBuildInformation() {
-    return new BuildInformation();
+  public com.xmartlabs.base.core.model.BuildInfo provideBuildInformation() {
+    return new BuildInfo();
   }
 }

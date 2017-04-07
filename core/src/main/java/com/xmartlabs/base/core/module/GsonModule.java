@@ -4,13 +4,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.annimon.stream.Objects;
-import com.annimon.stream.Optional;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.raizlabs.android.dbflow.structure.ModelAdapter;
-import com.xmartlabs.base.core.helper.function.Function;
 import com.xmartlabs.base.core.service.adapter.MillisecondsLocalDateAdapter;
 import com.xmartlabs.base.core.service.adapter.MillisecondsLocalDateTimeAdapter;
 import com.xmartlabs.base.core.service.common.GsonExclude;
@@ -23,15 +21,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import lombok.Setter;
 
 @Module
 public class GsonModule {
   static final String SERVICE_GSON_NAME = "ServiceGson";
-
-  @Setter
-  @Nullable
-  private Function<GsonBuilder, GsonBuilder> modifyGsonBuilder;
 
   @Provides
   @Singleton
@@ -74,9 +67,10 @@ public class GsonModule {
   @NonNull
   @Provides
   public GsonBuilder provideCommonGsonBuilder() {
-    GsonBuilder gsonBuilder = new GsonBuilder();
-    return Optional.ofNullable(modifyGsonBuilder)
-        .map(modifier -> modifier.apply(gsonBuilder))
-        .orElse(gsonBuilder);
+    return modifyGsonBuilder(new GsonBuilder());
+  }
+
+  protected GsonBuilder modifyGsonBuilder(GsonBuilder builder) {
+    return builder;
   }
 }

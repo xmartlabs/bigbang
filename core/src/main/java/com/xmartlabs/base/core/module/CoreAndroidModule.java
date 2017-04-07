@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.xmartlabs.base.core.model.BuildInformation;
+import com.xmartlabs.base.core.model.BuildInfo;
 
 import javax.inject.Singleton;
 
@@ -13,10 +13,10 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AndroidModule {
+public class CoreAndroidModule {
   private final Application application;
 
-  public AndroidModule(Application application) {
+  public CoreAndroidModule(Application application) {
     this.application = application;
   }
 
@@ -28,7 +28,7 @@ public class AndroidModule {
 
   @Provides
   @Singleton
-  public BuildInformation provideBuildInformation() {
+  public BuildInfo provideBuildInformation() {
     return null;
   }
 

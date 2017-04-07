@@ -61,7 +61,7 @@ public class BaseProjectApplication extends Application {
 
   protected ApplicationComponent createComponent() {
     return DaggerApplicationComponent.builder()
-        .androidModule(new AndroidModule(this))
+        .coreAndroidModule(new AndroidModule(this))
         .build();
   }
 

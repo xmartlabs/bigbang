@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xmartlabs.template">
 
     <permission
@@ -14,6 +16,7 @@
     <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
 
     <application
+        tools:node="replace"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:name=".BaseProjectApplication"

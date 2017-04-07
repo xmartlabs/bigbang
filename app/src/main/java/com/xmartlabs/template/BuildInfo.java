@@ -2,7 +2,7 @@ package com.xmartlabs.template;
 
 import com.annimon.stream.Objects;
 
-public class BuildInformation implements com.xmartlabs.base.core.model.BuildInformation {
+public class BuildInfo implements com.xmartlabs.base.core.model.BuildInfo {
   @Override
   public boolean isDebug() {
     return BuildConfig.DEBUG;

@@ -1,7 +1,7 @@
 package com.xmartlabs.template;
 
 import com.xmartlabs.base.core.CoreComponent;
-import com.xmartlabs.base.core.module.AndroidModule;
+import com.xmartlabs.base.core.module.CoreAndroidModule;
 import com.xmartlabs.base.core.module.GsonModule;
 import com.xmartlabs.base.core.module.LoggerModule;
 import com.xmartlabs.base.core.module.OkHttpModule;
@@ -24,7 +24,7 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {
-    AndroidModule.class,
+    CoreAndroidModule.class,
     ControllerModule.class,
     LoggerModule.class,
     GsonModule.class,
