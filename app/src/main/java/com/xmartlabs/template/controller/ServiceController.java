@@ -16,8 +16,14 @@ import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 import retrofit2.Response;
 
-public class ServiceController<T, D extends EntityWithId<T>> extends Controller
-    implements EntityServiceProvider<T, D> {
+/**
+ * Controller used to make the service calls related to the entity {@link E}.
+ *
+ * @param <Id> Type of the entity id
+ * @param <E> Entity of the controller
+ */
+public class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
+    implements EntityServiceProvider<Id, E> {
   @CheckResult
   @NonNull
   @Override
@@ -50,7 +56,7 @@ public class ServiceController<T, D extends EntityWithId<T>> extends Controller
   @CheckResult
   @NonNull
   @Override
-  public Maybe<D> getEntityFromList(@NonNull Single<List<D>> serviceCall, @NonNull T id) {
+  public Maybe<E> getEntityFromList(@NonNull Single<List<E>> serviceCall, @NonNull Id id) {
     return serviceCall
         .compose(applySingleServiceTransformation())
         .toObservable()
