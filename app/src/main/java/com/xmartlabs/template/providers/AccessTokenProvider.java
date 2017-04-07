@@ -11,8 +11,8 @@ import com.xmartlabs.template.module.SessionInterceptor;
 import javax.inject.Inject;
 
 /**
- * Provides the access token in order to be added in the service requests
- * It's used by the {@link SessionInterceptor}
+ * Provides the access token in order to be added in the service requests.
+ * It's used by the {@link SessionInterceptor}.
  */
 public class AccessTokenProvider implements EntityProvider<String> {
   private static final String AUTH_TOKEN_HEADER_KEY = "session";
