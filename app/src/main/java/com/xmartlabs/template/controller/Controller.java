@@ -19,20 +19,19 @@ public abstract class Controller {
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
   @NonNull
-  private final ObservableTransformer observableIoTransformer =
-      observable -> observable
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread());
-  @NonNull
-  private final SingleTransformer singleIoTransformer = upstream -> upstream
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread());
-  @NonNull
   private final FlowableTransformer flowableIoTransformer = upstream -> upstream
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
   @NonNull
   private final MaybeTransformer maybeIoTransformer = upstream -> upstream
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread());
+  @NonNull
+  private final ObservableTransformer observableIoTransformer = observable -> observable
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread());
+  @NonNull
+  private final SingleTransformer singleIoTransformer = upstream -> upstream
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
 
