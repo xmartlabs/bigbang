@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 /** Provides the access token in order to be added in the service requests */
 public class AccessTokenProvider implements EntityProvider<String> {
-  private static final String SESSION_HEADER = "session";
+  private static final String AUTH_TOKEN_HEADER_KEY = "session"; // TODO 07/04/17: Add auth token header
 
   @NonNull
   private final SessionController sessionController;
@@ -30,7 +30,7 @@ public class AccessTokenProvider implements EntityProvider<String> {
 
   @NonNull
   public String provideAccessTokenHeaderKey() {
-    return SESSION_HEADER;
+    return AUTH_TOKEN_HEADER_KEY;
   }
 
   @Override
