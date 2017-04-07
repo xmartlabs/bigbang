@@ -129,6 +129,7 @@ public class GsonRequiredTest {
     TestInnerClass innerObject;
     @GsonRequired
     TestInnerClass innerRequiredObject;
+    @GsonExclude
     String excluded;
     LocalDate date;
   }
