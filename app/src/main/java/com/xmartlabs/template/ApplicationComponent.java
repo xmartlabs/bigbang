@@ -4,6 +4,7 @@ import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.Controller;
 import com.xmartlabs.template.controller.ServiceController;
 import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.template.controller.SharedPreferencesController;
 import com.xmartlabs.template.helper.DatabaseHelper;
 import com.xmartlabs.template.helper.GeneralErrorHelper;
 import com.xmartlabs.template.module.AndroidModule;
@@ -56,6 +57,7 @@ public interface ApplicationComponent {
 
   void inject(AuthController authController);
   void inject(SessionController sessionController);
+  void inject(SharedPreferencesController sharedPreferencesController);
 
   void inject(SessionInterceptor sessionInterceptor);
 
