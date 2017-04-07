@@ -33,7 +33,9 @@ repositories {
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
-
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 25

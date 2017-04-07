@@ -1,10 +1,9 @@
 package com.xmartlabs.base.core;
 
 import android.content.res.Resources;
-import android.content.res.Resources.Theme;
-import android.content.res.TypedArray;
 import android.support.annotation.DimenRes;
 import android.support.annotation.Dimension;
+import android.support.test.runner.AndroidJUnit4;
 import android.util.DisplayMetrics;
 
 import com.xmartlabs.base.core.helper.ui.MetricsHelper;
@@ -14,11 +13,13 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+@RunWith(AndroidJUnit4.class)
 public class MetricsHelperTest {
   private static final float DENSITY = 2.5f;
 

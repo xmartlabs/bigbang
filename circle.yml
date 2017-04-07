@@ -1,3 +1,7 @@
+machine:
+  environment:
+    QEMU_AUDIO_DRV: none
+
 dependencies:
   pre:
     - echo y | android update sdk --no-ui -a --filter tools
@@ -8,6 +12,18 @@ dependencies:
     - echo y | android update sdk --no-ui -a --filter extra-android-m2repository
 
 test:
+  pre:
+    - emulator -avd circleci-android24 -no-window:
+        background: true
+        parallel: true
+  override:
+    - circle-android wait-for-boot
+    - ./gradlew clean
+    - ./gradlew assembleDebug
+    - ./gradlew core:connectedCheck -PpreDexEnable=false -Pcom.android.build.threadPoolSize=1 -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xms512m -Xmx512m" -Dorg.gradle.daemon=false
+    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+    - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+    - ./gradlew test
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
