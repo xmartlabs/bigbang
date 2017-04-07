@@ -7,31 +7,24 @@ import com.xmartlabs.template.model.EntityWithId;
 
 import java.util.List;
 
-import io.reactivex.Completable;
+import io.reactivex.CompletableTransformer;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.SingleTransformer;
 import retrofit2.Response;
 
-public interface ServiceProvider<T, D extends EntityWithId<T>> {
+public interface EntityServiceProvider<T, D extends EntityWithId<T>> {
   @CheckResult
   @NonNull
-  <S> Single<S> makeServiceCall(Single<S> serviceCall);
+  <S> SingleTransformer<S, S> applySingleServiceTransformation();
 
   @CheckResult
   @NonNull
-  Completable makeServiceCall(Completable serviceCall);
+  CompletableTransformer applyCompletableServiceTransformation();
 
   @CheckResult
   @NonNull
-  <S> Single<S> makeServiceCallAndGetResponse(Single<Response<S>> serviceCall);
-
-  @CheckResult
-  @NonNull
-  Single<List<D>> getEntities(@NonNull Single<List<D>> serviceCall);
-
-  @CheckResult
-  @NonNull
-  Single<D> getEntity(@NonNull Single<D> serviceCall);
+  <S> SingleTransformer<Response<S>, S> applySingleServiceTransformationAndGetResponse();
 
   @CheckResult
   @NonNull

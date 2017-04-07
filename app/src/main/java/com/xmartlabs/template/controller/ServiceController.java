@@ -9,33 +9,35 @@ import com.xmartlabs.template.model.EntityWithId;
 
 import java.util.List;
 
-import io.reactivex.Completable;
+import io.reactivex.CompletableTransformer;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.SingleTransformer;
 import retrofit2.Response;
 
 public class ServiceController<T, D extends EntityWithId<T>> extends Controller
-    implements ServiceProvider<T, D> {
+    implements EntityServiceProvider<T, D> {
   @CheckResult
   @NonNull
   @Override
-  public <S> Single<S> makeServiceCall(Single<S> serviceCall) {
-    return makeIoCall(serviceCall);
+  public <S> SingleTransformer<S, S> applySingleServiceTransformation() {
+    return applySingleIoSchedulers();
   }
 
   @CheckResult
   @NonNull
   @Override
-  public Completable makeServiceCall(Completable serviceCall) {
-    return makeIoCall(serviceCall);
+  public CompletableTransformer applyCompletableServiceTransformation() {
+    return applyCompletableIoSchedulers();
   }
 
   @CheckResult
   @NonNull
   @Override
-  public <S> Single<S> makeServiceCallAndGetResponse(Single<Response<S>> serviceCall) {
-    return makeIoCall(serviceCall)
+  public <S> SingleTransformer<Response<S>, S> applySingleServiceTransformationAndGetResponse() {
+    return upstream -> upstream
+        .compose(applySingleServiceTransformation())
         .map(response -> {
           if (response.isSuccessful()) {
             return response.body();
@@ -48,22 +50,9 @@ public class ServiceController<T, D extends EntityWithId<T>> extends Controller
   @CheckResult
   @NonNull
   @Override
-  public Single<List<D>> getEntities(@NonNull Single<List<D>> serviceCall) {
-    return makeIoCall(serviceCall);
-  }
-
-  @CheckResult
-  @NonNull
-  @Override
-  public Single<D> getEntity(@NonNull Single<D> serviceCall) {
-    return makeServiceCall(serviceCall);
-  }
-
-  @CheckResult
-  @NonNull
-  @Override
   public Maybe<D> getEntityFromList(@NonNull Single<List<D>> serviceCall, T id) {
-    return getEntities(serviceCall)
+    return serviceCall
+        .compose(applySingleServiceTransformation())
         .toObservable()
         .flatMap(Observable::fromIterable)
         .filter(entity -> Objects.equals(entity, id))

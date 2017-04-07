@@ -51,9 +51,8 @@ public interface ApplicationComponent {
 
   void inject(BaseFragment baseFragment);
 
-  void inject(Controller controller);
-
   void inject(AuthController authController);
+  void inject(Controller controller);
   void inject(SessionController sessionController);
   void inject(SharedPreferencesController sharedPreferencesController);
 

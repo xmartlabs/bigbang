@@ -2,6 +2,7 @@ package com.xmartlabs.template.controller;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
-public interface DatabaseProvider<Id, D, Condition> {
+public interface EntityDao<Id, D, Condition> {
   @CheckResult
   @NonNull
   @SuppressWarnings("unchecked")
@@ -18,11 +19,11 @@ public interface DatabaseProvider<Id, D, Condition> {
   @CheckResult
   @NonNull
   @SuppressWarnings("unchecked")
-  Single<List<D>> updateEntities(List<D> newEntities, @NonNull Condition... conditions);
+  Single<List<D>> deleteAndInsertEntities(@Nullable List<D> newEntities, @NonNull Condition... conditions);
 
   @CheckResult
   @NonNull
-  Maybe<D> getEntity(Id id);
+  Maybe<D> getEntity(@NonNull Id id);
 
   @CheckResult
   @NonNull
@@ -34,9 +35,9 @@ public interface DatabaseProvider<Id, D, Condition> {
 
   @CheckResult
   @NonNull
-  Completable deleteEntityFromId(Id entityId);
+  Completable deleteEntityWithId(@NonNull Id entityId);
 
   @CheckResult
   @NonNull
-  Completable deleteEntityFromEntity(D entity);
+  Completable deleteEntity(@NonNull D entity);
 }

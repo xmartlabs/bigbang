@@ -2,6 +2,7 @@ package com.xmartlabs.template.controller;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.annimon.stream.Stream;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -26,11 +27,11 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class DbFlowController<Id, D extends DatabaseModel<Id>> extends Controller
-    implements DatabaseProvider<Id, D, SQLCondition> {
+    implements EntityDao<Id, D, SQLCondition> {
   @Getter(AccessLevel.PRIVATE)
-  final Class<D> modelClass;
+  private final Class<D> modelClass;
   @Getter(AccessLevel.PRIVATE)
-  final Property<Id> idProperty;
+  private final Property<Id> propertyId;
 
   @CheckResult
   @NonNull
@@ -49,18 +50,19 @@ public class DbFlowController<Id, D extends DatabaseModel<Id>> extends Controlle
   @CheckResult
   @NonNull
   @Override
-  public Single<List<D>> updateEntities(List<D> newEntities, @NonNull SQLCondition... conditions) {
+  public Single<List<D>> deleteAndInsertEntities(@Nullable List<D> entitiesToInsert,
+                                                 @NonNull SQLCondition... conditionsToDelete) {
     return Single
         .fromCallable(() -> {
           FlowManager.getDatabase(AppDataBase.class)
               .executeTransaction(databaseWrapper -> {
                 SQLite.delete(getModelClass())
-                    .where(conditions)
+                    .where(conditionsToDelete)
                     .execute();
-                Stream.of(newEntities)
+                Stream.ofNullable(entitiesToInsert)
                     .forEach(BaseModel::save);
               });
-          return newEntities;
+          return entitiesToInsert;
         })
         .subscribeOn(Schedulers.io());
   }
@@ -68,11 +70,11 @@ public class DbFlowController<Id, D extends DatabaseModel<Id>> extends Controlle
   @CheckResult
   @NonNull
   @Override
-  public Maybe<D> getEntity(Id id) {
+  public Maybe<D> getEntity(@NonNull Id id) {
     return Maybe
         .fromCallable(() -> new Select()
             .from(getModelClass())
-            .where(getIdProperty().eq(id))
+            .where(getPropertyId().eq(id))
             .querySingle())
         .subscribeOn(Schedulers.io());
   }
@@ -98,20 +100,20 @@ public class DbFlowController<Id, D extends DatabaseModel<Id>> extends Controlle
   @CheckResult
   @NonNull
   @Override
-  public Completable deleteEntityFromId(Id entityId) {
+  public Completable deleteEntityWithId(@NonNull Id entityId) {
     return Completable
         .fromAction(() ->
-        new Delete()
-            .from(getModelClass())
-            .where(getIdProperty().eq(entityId))
-            .execute())
+            new Delete()
+                .from(getModelClass())
+                .where(getPropertyId().eq(entityId))
+                .execute())
         .subscribeOn(Schedulers.io());
   }
 
   @CheckResult
   @NonNull
   @Override
-  public Completable deleteEntityFromEntity(D entity) {
+  public Completable deleteEntity(@NonNull D entity) {
     return Completable.fromAction(entity::delete)
         .subscribeOn(Schedulers.io());
   }
