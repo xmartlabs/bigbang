@@ -28,5 +28,5 @@ public interface EntityServiceProvider<T, D extends EntityWithId<T>> {
 
   @CheckResult
   @NonNull
-  Maybe<D> getEntityFromList(@NonNull Single<List<D>> serviceCall, T id);
+  Maybe<D> getEntityFromList(@NonNull Single<List<D>> serviceCall, @NonNull T id);
 }

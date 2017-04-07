@@ -50,7 +50,7 @@ public class ServiceController<T, D extends EntityWithId<T>> extends Controller
   @CheckResult
   @NonNull
   @Override
-  public Maybe<D> getEntityFromList(@NonNull Single<List<D>> serviceCall, T id) {
+  public Maybe<D> getEntityFromList(@NonNull Single<List<D>> serviceCall, @NonNull T id) {
     return serviceCall
         .compose(applySingleServiceTransformation())
         .toObservable()
