@@ -1,11 +1,10 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.base.ui;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import com.f2prateek.dart.Dart;
 import com.trello.rxlifecycle2.components.RxActivity;
-import com.xmartlabs.template.BaseProjectApplication;
 
 import bullet.ObjectGraph;
 
@@ -22,6 +21,6 @@ public abstract class BaseActivity extends RxActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Dart.inject(this);
-    BaseProjectApplication.getContext().inject(this);
+    UIInjector.inject(this);
   }
 }

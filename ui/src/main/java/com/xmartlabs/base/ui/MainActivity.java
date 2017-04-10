@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.base.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,10 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.f2prateek.dart.HensonNavigable;
-import com.xmartlabs.template.R;
-import com.xmartlabs.template.ui.mvp.BaseMvpAppCompatActivity;
-import com.xmartlabs.template.ui.mvp.BaseMvpPresenter;
-import com.xmartlabs.template.ui.mvp.MvpView;
+import com.xmartlabs.base.ui.mvp.BaseMvpAppCompatActivity;
+import com.xmartlabs.base.ui.mvp.BaseMvpPresenter;
+import com.xmartlabs.base.ui.mvp.MvpView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +18,7 @@ import butterknife.Unbinder;
 public class MainActivity extends BaseMvpAppCompatActivity<MvpView, BaseMvpPresenter<MvpView>> {
   private Unbinder unbinder;
 
-  @BindView(R.id.toolbar)
+  @BindView(R2.id.toolbar)
   Toolbar toolbar;
 
   @Override

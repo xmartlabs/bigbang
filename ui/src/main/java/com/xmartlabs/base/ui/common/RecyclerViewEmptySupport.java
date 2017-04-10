@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.common;
+package com.xmartlabs.base.ui.common;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.annimon.stream.Optional;
-import com.xmartlabs.base.core.helper.function.Function;
-import com.xmartlabs.template.R;
+import com.annimon.stream.function.Function;
+import com.xmartlabs.base.ui.R;
 
 /**
  * {@link RecyclerView} subclass that automatically handles empty state.

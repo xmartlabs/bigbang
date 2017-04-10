@@ -1,10 +1,10 @@
-package com.xmartlabs.template.ui.mvp;
+package com.xmartlabs.base.ui.mvp;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.xmartlabs.template.ui.BaseAppCompatActivity;
+import com.xmartlabs.base.ui.BaseAppCompatActivity;
 
 import lombok.AccessLevel;
 import lombok.Getter;

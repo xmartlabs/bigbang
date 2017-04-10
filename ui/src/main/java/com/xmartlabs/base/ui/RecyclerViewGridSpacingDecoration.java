@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.base.ui;
 
 import android.graphics.Rect;
 import android.support.annotation.Dimension;

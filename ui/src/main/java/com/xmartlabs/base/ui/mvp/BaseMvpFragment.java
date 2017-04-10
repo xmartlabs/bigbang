@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.mvp;
+package com.xmartlabs.base.ui.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
-import com.xmartlabs.template.ui.BaseFragment;
+import com.xmartlabs.base.ui.BaseFragment;
 
 import lombok.AccessLevel;
 import lombok.Setter;

@@ -1,18 +1,16 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.base.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
-import com.xmartlabs.template.R;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /** {@link SingleFragmentActivity} with {@link Toolbar} support. */
 public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentActivity {
-  @BindView(R.id.toolbar)
+  @BindView(R2.id.toolbar)
   Toolbar toolbar;
 
   protected int getLayoutResId() {
@@ -33,6 +31,7 @@ public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentAc
 
   /**
    * Retrieves the {@link Toolbar}.
+   *
    * @return the {@link Toolbar}
    */
   @NonNull
@@ -41,7 +40,8 @@ public abstract class SingleFragmentWithToolbarActivity extends SingleFragmentAc
   }
 
   /**
-   * Instructs the {@link Toolbar} to show/hide the navigation icon.
+   * Used to instruct the {@link Toolbar} to show/hide the navigation icon.
+   *
    * @return whether or not to show the navigation icon
    */
   protected boolean showNavigationIcon() {

@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.mvp;
+package com.xmartlabs.base.ui.mvp;
 
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;

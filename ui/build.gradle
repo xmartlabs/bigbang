@@ -1,0 +1,100 @@
+apply from: '../versions.gradle'
+apply plugin: 'com.android.library'
+
+ext {
+    PUBLISH_GROUP_ID = 'com.xmartlabs'
+    PUBLISH_ARTIFACT_ID = 'ui'
+    PUBLISH_VERSION = '0.1'
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath "com.jakewharton:butterknife-gradle-plugin:8.2.1"
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+    }
+}
+
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url "https://jitpack.io" }
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
+    apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
+    apt "com.github.tbroyer.bullet:bullet-compiler:${project.ext.bulletVersion}"
+    apt "com.hannesdorfmann.fragmentargs:processor:${project.ext.fragmentArgsVersion}"
+    apt "com.jakewharton:butterknife-compiler:${project.ext.butterKnifeVersion}"
+    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
+
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile "com.android.support:recyclerview-v7:${project.ext.androidSupportVersion}"
+    compile "com.android.support:design:${project.ext.androidSupportVersion}"
+    compile "com.android.support:recyclerview-v7:${project.ext.androidSupportVersion}"
+    compile "com.android.support:support-v13:${project.ext.androidSupportVersion}"
+    compile "com.annimon:stream:${project.ext.streamVersion}"
+    compile("com.crashlytics.sdk.android:crashlytics:${project.ext.crashlyticsVersion}") {
+        transitive = true
+    }
+    compile "com.f2prateek.dart:dart:${project.ext.dartVersion}"
+    compile "com.f2prateek.dart:henson:${project.ext.dartVersion}"
+    compile "com.github.tbroyer.bullet:bullet:${project.ext.bulletVersion}"
+    compile "com.google.dagger:dagger:${project.ext.daggerVersion}"
+    compile "com.hannesdorfmann.fragmentargs:annotation:${project.ext.fragmentArgsVersion}"
+    compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${project.ext.fragmentArgsVersion}"
+    compile "com.jakewharton:butterknife:${project.ext.butterKnifeVersion}"
+    compile "com.trello.rxlifecycle2:rxlifecycle:${project.ext.rxLifecycleVersion}"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:${project.ext.rxLifecycleVersion}"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
+    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
+
+    testCompile 'junit:junit:4.12'
+}
+
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'

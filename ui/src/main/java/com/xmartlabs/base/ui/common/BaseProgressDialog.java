@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.common;
+package com.xmartlabs.base.ui.common;
 
 /**
  * Describes a progress dialog.

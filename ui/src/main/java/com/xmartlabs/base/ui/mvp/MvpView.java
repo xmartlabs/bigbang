@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.mvp;
+package com.xmartlabs.base.ui.mvp;
 
 /**
  * The root view interface for any view in the MVP pattern. Each view (i.e. Activity, Fragment) should implement this
