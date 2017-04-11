@@ -1,4 +1,4 @@
-package com.xmartlabs.base.core;
+package com.xmartlabs.template;
 
 import android.content.res.Resources;
 import android.support.annotation.DimenRes;
