@@ -1,5 +1,7 @@
 package com.xmartlabs.base.core.adapter;
 
+import android.support.annotation.Nullable;
+
 import com.annimon.stream.Exceptional;
 import com.annimon.stream.Optional;
 import com.google.gson.Gson;
@@ -21,22 +23,34 @@ import timber.log.Timber;
 
 /** {@link Gson} type adapter that serializes {@link LocalDateTime} objects to a millisecond format */
 public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+  @Nullable
   @Override
-  public synchronized JsonElement serialize(LocalDateTime dateTime, Type type,
-                                            JsonSerializationContext jsonSerializationContext) {
+  public synchronized JsonElement serialize(@Nullable LocalDateTime dateTime, @Nullable Type type,
+                                            @Nullable JsonSerializationContext jsonSerializationContext) {
     return Optional.ofNullable(dateTime)
         .map(date -> new JsonPrimitive(date.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()))
         .orElse(null);
   }
 
+  public synchronized JsonElement serialize(@Nullable LocalDateTime dateTime) {
+    return serialize(dateTime, null, null);
+  }
+
+  @Nullable
   @Override
-  public synchronized LocalDateTime deserialize(JsonElement jsonElement, Type type,
-                                                JsonDeserializationContext jsonDeserializationContext) {
-    return Optional.ofNullable(jsonElement.getAsString())
+  public synchronized LocalDateTime deserialize(@Nullable JsonElement jsonElement, @Nullable Type type,
+                                                @Nullable JsonDeserializationContext jsonDeserializationContext) {
+    return Optional.ofNullable(jsonElement)
+        .map(JsonElement::getAsString)
         .filter(str -> !StringUtils.isNullOrEmpty(str))
         .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDateTime())
             .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
             .getOptional())
         .orElse(null);
+  }
+
+  @Nullable
+  public synchronized LocalDateTime deserialize(@Nullable JsonElement jsonElement) {
+    return deserialize(jsonElement, null, null);
   }
 }
