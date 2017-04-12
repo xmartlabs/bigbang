@@ -4,10 +4,13 @@ import android.support.annotation.NonNull;
 
 import bullet.ObjectGraph;
 
-public class Injector {
+public final class Injector {
   private static Injector instance = new Injector();
 
   private ObjectGraph bullet;
+
+  private Injector() {
+  }
 
   public static <T> void inject(@NonNull T t) {
     if (instance.bullet == null) {
