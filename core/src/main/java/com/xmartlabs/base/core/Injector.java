@@ -19,7 +19,7 @@ public final class Injector {
     instance.bullet.inject(t);
   }
 
-  public static Injector getComponent() {
+  public static Injector getInstance() {
     return instance;
   }
 

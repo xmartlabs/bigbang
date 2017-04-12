@@ -55,7 +55,7 @@ public class BaseProjectApplication extends Application {
   private void initializeInjections() {
     ApplicationComponent component = createComponent();
     bullet = createBullet(component);
-    Injector.getComponent().setObjectGraph(bullet);
+    Injector.getInstance().setObjectGraph(bullet);
     Injector.inject(this);
   }
 
