@@ -8,15 +8,18 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.util.Pair;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.xmartlabs.base.core.helper.function.Function;
 
 import java.util.List;
 import java.util.Locale;
@@ -130,40 +133,36 @@ public class UiHelper {
   /**
    * Validates that the given {@code fields} and put the appropriate error messages if needed.
    *
-   * The method {@link #validateField(EditText, boolean, int, int)} is applied to each of the {@code fields}.
+   * The method {@link #validateField(EditText, Function)} is applied to each of the {@code fields}.
    *
    * @param fields the fields to validate
-   * @param hideErrorLayout whether or not to enable the error on the fields
+   * @param isValid function that validates the field and returns a {@code Pair<Boolean, String>} indicating whether or
+   *                not the field is valid and, if not, the error to be shown (if any).
+   *                If the returned message is {@code null}, then the message will be hidden.
    */
-  public static void validateFieldsAndPutErrorMessages(List<EditText> fields, boolean hideErrorLayout,
-                                                       @StringRes int emailNotValid, @StringRes int fieldRequired) {
+  public static void validateFieldsAndPutErrorMessages(List<EditText> fields,
+                                                       @NonNull Function<String, Pair<Boolean, String>> isValid) {
     Stream.of(fields)
-        .forEach(field -> UiHelper.validateField(field, hideErrorLayout, emailNotValid, fieldRequired));
+        .forEach(field -> UiHelper.validateField(field, isValid));
   }
 
   /**
    * Validates that {@code editText} is valid and sets the error in the {@link TextInputLayout}, if any.
    *
    * @param editText the {@link EditText} to validate
-   * @param hideErrorLayout whether or not to enable the error on the given {@link EditText}
-   * @return true if {@code editText} is valid using {@link #isValidField(EditText)}
+   * @param isValid function that validates the field and returns a {@code Pair<Boolean, String>} indicating whether or
+   *                not the field is valid and, if not, the error to be shown (if any).
+   *                If the returned message is {@code null}, then the message will be hidden.
+   * @return true if {@code editText} is valid using the {@code isValid} function
    */
-  public static boolean validateField(@NonNull EditText editText, boolean hideErrorLayout,
-                                      @StringRes int emailNotValid, @StringRes int fieldRequired) {
-    boolean isValid = UiHelper.isValidField(editText);
-    TextInputLayout textInputLayout = UiHelper.getTextInputLayout(editText);
-    if (textInputLayout != null) {
-      if (isValid) {
-        textInputLayout.setError(null);
-        textInputLayout.setErrorEnabled(!hideErrorLayout);
-      } else {
-        textInputLayout.setErrorEnabled(true);
-        textInputLayout.setError(UiHelper.isEmailField(editText)
-            ? editText.getResources().getString(emailNotValid)
-            : editText.getResources().getString(fieldRequired)
-        );
-      }
-    }
-    return isValid;
+  public static boolean validateField(@NonNull EditText editText,
+                                      @NonNull Function<String, Pair<Boolean, String>> isValid) {
+    Pair<Boolean, String> validation = isValid.apply(editText.getText().toString());
+    Optional.ofNullable(UiHelper.getTextInputLayout(editText))
+        .ifPresent(inputLayout -> {
+          inputLayout.setError(validation.first ? null : validation.second);
+          inputLayout.setErrorEnabled(validation.second == null);
+        });
+    return validation.first;
   }
 }

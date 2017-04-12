@@ -1,17 +1,20 @@
 package com.xmartlabs.base.core.helper.ui;
 
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.Dimension;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 
 @SuppressWarnings("unused")
 public class MetricsHelper {
   /**
    * Converts the {@code dp} value to pixels dimension.
    *
+   * @param resources to obtain the density value
    * @param dp the value in dp dimension
    * @return the converted {@code dp} value to pixels
    */
@@ -23,6 +26,7 @@ public class MetricsHelper {
   /**
    * Converts the {@code sp} value to pixels dimension.
    *
+   * @param resources to obtain the density value
    * @param sp the value in sp dimension
    * @return the converted {@code sp} value to pixels
    */
@@ -34,6 +38,7 @@ public class MetricsHelper {
   /**
    * Converts the {@code dp} value to pixels dimension.
    *
+   * @param resources to obtain the density value
    * @param dp the value in dp dimension
    * @return the converted {@code dp} value to integer pixels
    */
@@ -45,10 +50,11 @@ public class MetricsHelper {
   /**
    * Converts the given {@code dimenId} resource to pixels.
    *
+   * @param resources to obtain the density value
    * @param dimenId the resource to convert
    * @return the converted {@code dimenId} resource value to integer pixels
    */
-  @Dimension(unit = Dimension.DP)
+  @Dimension(unit = Dimension.PX)
   public static int dimResToPxInt(@NonNull Resources resources, @DimenRes int dimenId) {
     return (int) resources.getDimension(dimenId);
   }
@@ -56,10 +62,11 @@ public class MetricsHelper {
   /**
    * Converts the {@code px} value to dp.
    *
+   * @param resources to obtain the density value
    * @param px the value in pixels to convert to dp
    * @return the converted {@code px} value to dp
    */
-  @Dimension(unit = Dimension.PX)
+  @Dimension(unit = Dimension.DP)
   public static float pxToDp(@NonNull Resources resources, @Dimension(unit = Dimension.PX) float px) {
     return px / resources.getDisplayMetrics().density;
   }
@@ -67,9 +74,12 @@ public class MetricsHelper {
   /**
    * Retrieves the toolbar height of the current app theme.
    *
+   * @param theme the device {@link Theme}
+   * @param actionBarSize the current {@link ActionBar} size
    * @return the toolbar height of the current app theme
    */
-  public static int getToolbarHeight(@NonNull Resources.Theme theme, @AttrRes int actionBarSize) {
+  @Dimension(unit = Dimension.DP)
+  public static int getToolbarHeight(@NonNull Theme theme, @AttrRes int actionBarSize) {
     final TypedArray styledAttributes = theme.obtainStyledAttributes(new int[] {actionBarSize});
     int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
     styledAttributes.recycle();
