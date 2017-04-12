@@ -2,12 +2,14 @@ package com.xmartlabs.base.core.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
 import com.xmartlabs.base.core.exception.EntityNotFoundException;
 import com.xmartlabs.base.core.exception.ServiceExceptionWithMessage;
 import com.xmartlabs.base.core.log.LoggerTree;
+import com.xmartlabs.base.core.model.BuildInfo;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
@@ -45,12 +47,15 @@ public final class GeneralErrorHelper {
   private final Context applicationContext;
   private final LoggerTree loggerTree;
   private final SharedPreferences sharedPreferences;
+  private final BuildInfo buildInfo;
 
   @Inject
-  public GeneralErrorHelper(Context applicationContext, LoggerTree loggerTree, SharedPreferences sharedPreferences) {
+  public GeneralErrorHelper(@NonNull Context applicationContext, @NonNull LoggerTree loggerTree,
+                            @NonNull SharedPreferences sharedPreferences, @NonNull BuildInfo buildInfo) {
     this.applicationContext = applicationContext;
     this.loggerTree = loggerTree;
     this.sharedPreferences = sharedPreferences;
+    this.buildInfo = buildInfo;
   }
 
   @Getter
@@ -77,7 +82,11 @@ public final class GeneralErrorHelper {
 
   private void handleException(Throwable throwable) {
     if (!shouldHandleThrowable(throwable)) {
-      Timber.e(throwable, "Untracked exception");
+      if (buildInfo.isDebug()) {
+        Timber.e(throwable, "Untracked exception");
+      } else {
+        Timber.d(throwable, "Untracked exception");
+      }
       return;
     }
 
