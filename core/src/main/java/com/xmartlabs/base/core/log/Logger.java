@@ -20,6 +20,7 @@ public interface Logger {
    * Logs a set of information related to an event that deviates from the normal course of events.
    *
    * @param logInformation the information to be logged
+   * @param t The captured exception, if present
    */
   void log(@NonNull Map<String, String> logInformation, @Nullable Throwable t);
 }

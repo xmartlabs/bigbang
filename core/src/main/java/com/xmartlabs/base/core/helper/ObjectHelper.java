@@ -47,7 +47,7 @@ public class ObjectHelper {
    * <ul>
    *   <li>-1 if {@code x} &lt; {@code y}</li>
    *   <li>0 if {@code x} == {@code y}</li>
-   *   <li>1 if {@code x} > {@code y}</li>
+   *   <li>1 if {@code x} &gt; {@code y}</li>
    * </ul>
    *
    * @param x the first int to compare.

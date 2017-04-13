@@ -32,7 +32,7 @@ import java.util.TimeZone;
 /**
  * A helper class to conveniently parse date information.
  *
- * Based on the version of Ralf Gehrer <ralf@ecotastic.de>.
+ * Based on the version of Ralf Gehrer.
  * This class contains date parsing for human and machine readable dates.
  */
 @SuppressWarnings("unused")
