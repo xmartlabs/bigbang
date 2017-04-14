@@ -44,7 +44,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
 
   @Test
   public void callsFlowableOnNextCorrectAmountOfTimes() {
-    Flowable.range(0,5)
+    Flowable.range(0, 5)
         .doOnNext(objects -> Timber.tag(OBSERVABLE_ON_NEXT).i(OBSERVABLE_ON_NEXT))
         .subscribe(o -> {
         });
@@ -54,9 +54,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
 
   @Test
   public void callsFlowableOnError() {
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {
         });
@@ -66,9 +67,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
 
   @Test
   public void doesNotCallOnCompleteWhenError() {
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnComplete(() -> Timber.e(OBSERVABLE_SUCCESS))
         .subscribe(o -> {
         });
@@ -82,9 +84,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
     RxJavaPlugins.setOnFlowableSubscribe((observable, observer) ->
         new FlowableObserverWithErrorHandling<>(observer, getErrorHandlingActionWithErrorInside()));
 
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {
         });
@@ -94,9 +97,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .subscribe(o -> {
         });
 
@@ -109,9 +113,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
     RxJavaPlugins.setOnFlowableSubscribe((observable, observer) ->
         new FlowableObserverWithErrorHandling<>(observer, getErrorHandlingActionWithErrorInside()));
 
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .subscribe(o -> {
         });
 
@@ -121,9 +126,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
 
   @Test
   public void callsHookOnErrorAndFlowableOnError() {
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {
@@ -139,9 +145,10 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
     RxJavaPlugins.setOnFlowableSubscribe((observable, observer) ->
         new FlowableObserverWithErrorHandling<>(observer, getErrorHandlingActionWithErrorInside()));
 
-    Flowable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Flowable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {

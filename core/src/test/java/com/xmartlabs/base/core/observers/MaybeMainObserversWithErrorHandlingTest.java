@@ -71,9 +71,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsMaybeOnError() {
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {
         });
@@ -83,9 +84,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void doesNotCallOnSuccessWhenError() {
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnSuccess(o -> Timber.e(OBSERVABLE_SUCCESS))
         .subscribe(o -> {
         });
@@ -99,9 +101,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
     RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
         new MaybeObserverWithErrorHandling(MaybeObserver, getErrorHandlingActionWithErrorInside()));
 
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {
         });
@@ -111,9 +114,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .subscribe(o -> {
         });
 
@@ -126,9 +130,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
     RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
         new MaybeObserverWithErrorHandling(MaybeObserver, getErrorHandlingActionWithErrorInside()));
 
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .subscribe(o -> {
         });
 
@@ -138,9 +143,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsHookOnErrorAndMaybeOnError() {
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
         .subscribe(o -> {
@@ -156,9 +162,10 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
     RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
         new MaybeObserverWithErrorHandling(MaybeObserver, getErrorHandlingActionWithErrorInside()));
 
-    Maybe.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Maybe
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
         .subscribe(o -> {

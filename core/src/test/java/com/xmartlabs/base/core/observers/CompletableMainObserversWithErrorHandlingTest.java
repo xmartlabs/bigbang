@@ -40,9 +40,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
 
   @Test
   public void callsCompletableOnError() {
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(() -> {
         });
@@ -52,9 +53,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
 
   @Test
   public void doesNotCallOnCompleteWhenError() {
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnComplete(() -> Timber.e(OBSERVABLE_ON_COMPLETE))
         .subscribe(() -> {
         });
@@ -67,9 +69,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
     RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
         new CompletableObserverWithErrorHandling(completableObserver, getErrorHandlingActionWithErrorInside()));
 
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(() -> {
         });
@@ -79,9 +82,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .subscribe(() -> {
         });
 
@@ -93,9 +97,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
     RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
         new CompletableObserverWithErrorHandling(completableObserver, getErrorHandlingActionWithErrorInside()));
 
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .subscribe(() -> {
         });
 
@@ -105,9 +110,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
 
   @Test
   public void callsHookOnErrorAndCompletableOnError() {
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(() -> {
@@ -122,9 +128,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
     RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
         new CompletableObserverWithErrorHandling(completableObserver, getErrorHandlingActionWithErrorInside()));
 
-    Completable.fromCallable(() -> {
-      throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-    })
+    Completable
+        .fromCallable(() -> {
+          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
+        })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(() -> {
