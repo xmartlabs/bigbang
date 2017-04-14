@@ -216,3 +216,5 @@ bintray {
     }
     configurations = ['archives']
 }
+
+apply from: '../circleci.gradle'

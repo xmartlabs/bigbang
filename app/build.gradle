@@ -222,5 +222,3 @@ dependencies {
 }
 
 //apply plugin: 'com.google.gms.google-services' // TODO: enable when adding google-services.json
-
-apply from: 'circleci.gradle'
