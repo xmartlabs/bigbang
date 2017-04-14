@@ -12,8 +12,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class MillisecondsLocalDateAdapterTest {
-  private static final long DEFAULT_DATE_LONG = 1491782400000L;
   private static final LocalDate DEFAULT_DATE = LocalDate.of(2017, Month.APRIL, 10);
+  private static final long DEFAULT_DATE_LONG = 1491782400000L;
 
   @Test
   public void correctSerialization() {
