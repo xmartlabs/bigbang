@@ -1,6 +1,7 @@
 package com.xmartlabs.template;
 
 import com.xmartlabs.template.module.AndroidModule;
+import com.xmartlabs.template.module.MockRestServiceModule;
 
 import bullet.ObjectGraph;
 
@@ -8,7 +9,8 @@ public class TestApplication extends BaseProjectApplication {
   @Override
   protected ApplicationComponent createComponent() {
     return DaggerTestComponent.builder()
-        .androidModule(new AndroidModule(this))
+        .coreAndroidModule(new AndroidModule(this))
+        .restServiceModule(new MockRestServiceModule())
         .build();
   }
 

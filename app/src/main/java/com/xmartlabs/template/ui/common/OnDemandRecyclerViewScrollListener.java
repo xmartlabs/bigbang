@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 
-import com.xmartlabs.template.helper.ui.MetricsHelper;
+import com.xmartlabs.base.core.helper.ui.MetricsHelper;
 
 import lombok.Setter;
 
@@ -24,10 +24,11 @@ public abstract class OnDemandRecyclerViewScrollListener implements NestedScroll
   private boolean enabled = true;
   @Setter
   @Dimension(unit = Dimension.PX)
-  private int visibleThreshold = MetricsHelper.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP);
+  private int visibleThreshold;
 
   public OnDemandRecyclerViewScrollListener(@NonNull RecyclerView recyclerView) {
     this.recyclerView = recyclerView;
+    visibleThreshold = MetricsHelper.dpToPxInt(recyclerView.getResources(), DEFAULT_VISIBLE_THRESHOLD_DP);
     loadNextPage(page);
   }
 
@@ -36,7 +37,7 @@ public abstract class OnDemandRecyclerViewScrollListener implements NestedScroll
    */
   public void resetStatus() {
     enabled = true;
-    visibleThreshold = MetricsHelper.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP);
+    visibleThreshold = MetricsHelper.dpToPxInt(recyclerView.getResources(), DEFAULT_VISIBLE_THRESHOLD_DP);
     loading = false;
     previousRecyclerViewHeight = recyclerView.getMeasuredHeight();
     page = 1;
