@@ -7,8 +7,12 @@ ext {
     PUBLISH_VERSION = '0.1'
 }
 
+apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
 
 buildscript {
     repositories {
@@ -21,9 +25,6 @@ buildscript {
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
 }
-
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
 
 repositories {
     flatDir {
@@ -71,7 +72,7 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:${project.ext.butterKnifeVersion}"
     apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
 
-    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile "com.android.support:appcompat-v7:${project.ext.androidSupportVersion}"
     compile "com.android.support:recyclerview-v7:${project.ext.androidSupportVersion}"
     compile "com.android.support:design:${project.ext.androidSupportVersion}"
     compile "com.android.support:recyclerview-v7:${project.ext.androidSupportVersion}"
@@ -96,5 +97,3 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
 }
-
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
