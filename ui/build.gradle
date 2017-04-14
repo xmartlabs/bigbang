@@ -95,5 +95,5 @@ dependencies {
     provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
     provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
 
-    testCompile 'junit:junit:4.12'
+    testCompile "junit:junit:${project.ext.junitVersion}"
 }
