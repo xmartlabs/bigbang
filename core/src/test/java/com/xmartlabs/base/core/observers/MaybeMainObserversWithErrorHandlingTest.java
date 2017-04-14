@@ -132,7 +132,8 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
         .subscribe(o -> {
         });
 
-    assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK), equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
+    assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
+        equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
   }
 
   @Test
@@ -164,6 +165,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
         });
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
-    assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK), equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
+    assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
+        equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
   }
 }
