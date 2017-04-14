@@ -183,8 +183,8 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:${project.ext.okHttpVersion}"
     compile "com.squareup.okhttp3:logging-interceptor:${project.ext.okHttpVersion}"
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-    provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
     compile "io.reactivex.rxjava2:rxandroid:${project.ext.rxAndroidVersion}"
+    provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
     provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
     testCompile 'junit:junit:4.12'
     testCompile ('org.threeten:threetenbp:1.3.2') {
