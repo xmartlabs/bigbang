@@ -44,7 +44,8 @@ public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, 
     return Optional.ofNullable(jsonElement)
         .map(JsonElement::getAsString)
         .filter(str -> !StringUtils.isNullOrEmpty(str))
-        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDate())
+        .flatMap(str ->
+            Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDate())
             .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
             .getOptional())
         .orElse(null);
