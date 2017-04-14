@@ -1,9 +1,11 @@
 apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
-group = "com.xmartlabs.base"
 def artifact = "core"
-version = "0.1.0"
+def versionCodeId = "0.1.2"
+
+group = "com.xmartlabs.base"
+version = versionCodeId
 
 ext {
     PUBLISH_GROUP_ID = group
@@ -86,7 +88,7 @@ android {
         versionCode 1
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled = true
+        multiDexEnabled true
     }
     signingConfigs {
         //noinspection GroovyMissingReturnStatement
@@ -144,12 +146,14 @@ artifacts {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile 'com.android.support:multidex:1.0.1'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestCompile "com.crittercism.dexmaker:dexmaker:${project.ext.dexmakerVersion}"
     androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${project.ext.dexmakerVersion}"
     androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${project.ext.dexmakerVersion}"
+    androidTestCompile "junit:junit:4.12"
     androidTestCompile "org.mockito:mockito-core:${project.ext.mockitoVersion}"
     apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
     apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
@@ -158,7 +162,6 @@ dependencies {
     apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
     compile "com.android.support:appcompat-v7:${project.ext.androidSupportVersion}"
     compile "com.android.support:design:${project.ext.androidSupportVersion}"
-    compile 'com.android.support:multidex:1.0.1'
     compile "com.annimon:stream:${project.ext.streamVersion}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
@@ -170,7 +173,6 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow:${project.ext.dbFlowVersion}"
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile "com.github.tbroyer.bullet:bullet:${project.ext.bulletVersion}"
-    compile "com.google.android.gms:play-services-basement:${project.ext.playServicesVersion}"
     compile "com.google.android.gms:play-services-base:${project.ext.playServicesVersion}"
     compile "com.google.dagger:dagger:${project.ext.daggerVersion}"
     compile "com.jakewharton.threetenabp:threetenabp:${project.ext.localDateBackportVersion}"
@@ -203,9 +205,9 @@ bintray {
         userOrg = 'xmartlabs'
 
         version {
-            name = version
+            name = versionCodeId
             released = new Date()
-            vcsTag = version
+            vcsTag = "${versionCodeId}"
         }
 
         licenses = ['Apache-2.0']
