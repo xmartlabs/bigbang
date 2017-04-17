@@ -8,10 +8,8 @@ import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.xmartlabs.base.core.service.adapter.MillisecondsLocalDateAdapter;
 import com.xmartlabs.base.core.service.common.GsonExclude;
 import com.xmartlabs.base.core.service.common.GsonRequired;
-import com.xmartlabs.base.core.service.exception.JsonRequiredFieldException;
 import com.xmartlabs.base.core.service.deserializer.RequiredFieldDeserializer;
-
-import junit.framework.Assert;
+import com.xmartlabs.base.core.service.exception.JsonRequiredFieldException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +17,10 @@ import org.threeten.bp.LocalDate;
 
 import lombok.Builder;
 import lombok.Data;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.nullValue;
 
 public class GsonRequiredTest {
   private Gson gson;
@@ -82,7 +84,7 @@ public class GsonRequiredTest {
       exception = e;
     }
 
-    Assert.assertNull(exception);
+    assertThat(exception, nullValue());
   }
 
   @Test
@@ -97,7 +99,7 @@ public class GsonRequiredTest {
         .build();
 
     TestClass value = gson.fromJson(gson.toJson(testClass), TestClass.class);
-    Assert.assertNull(value.getExcluded());
+    assertThat(value.getExcluded(), nullValue());
   }
 
   @Test
@@ -117,7 +119,7 @@ public class GsonRequiredTest {
     MillisecondsLocalDateAdapter adapter = new MillisecondsLocalDateAdapter();
     String serializedDate  = adapter.serialize(testClass.date, LocalDate.class, null).getAsString();
 
-    Assert.assertTrue(value.contains(serializedDate));
+    assertThat(value.contains(serializedDate), is(true));
   }
 
   @Builder
