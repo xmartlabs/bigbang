@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.annimon.stream.Optional;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
-import com.xmartlabs.template.helper.function.BiFunction;
-import com.xmartlabs.template.helper.function.Function;
+import com.xmartlabs.base.core.helper.function.BiFunction;
+import com.xmartlabs.base.core.helper.function.Function;
 import com.xmartlabs.template.model.EntityWithId;
 
 import java.util.List;

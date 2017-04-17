@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.annimon.stream.Optional;
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.helper.function.Function;
+import com.xmartlabs.base.core.helper.function.Function;
 
 /**
  * {@link RecyclerView} subclass that automatically handles empty state.

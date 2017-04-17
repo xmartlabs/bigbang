@@ -4,7 +4,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Objects;
-import com.xmartlabs.template.common.exeption.ServiceExceptionWithMessage;
+import com.xmartlabs.base.core.exception.ServiceExceptionWithMessage;
 import com.xmartlabs.template.model.EntityWithId;
 
 import java.util.List;
