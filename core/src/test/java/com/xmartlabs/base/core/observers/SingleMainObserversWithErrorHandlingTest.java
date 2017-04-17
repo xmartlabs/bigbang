@@ -23,8 +23,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
   public void callsSingleSubscribe() {
     Single.just(new Object())
         .doOnSubscribe(disposable -> Timber.tag(OBSERVABLE_SUBSCRIBE).i(OBSERVABLE_SUBSCRIBE))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUBSCRIBE).getTag(), equalTo(OBSERVABLE_SUBSCRIBE));
   }
@@ -33,8 +32,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
   public void callsSingleOnSuccess() {
     Single.just(new Object())
         .doOnSuccess(o -> Timber.tag(OBSERVABLE_SUCCESS).i(OBSERVABLE_SUCCESS))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUCCESS).getTag(), equalTo(OBSERVABLE_SUCCESS));
   }
@@ -46,8 +44,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
   }
@@ -59,8 +56,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
         .doOnSuccess(o -> Timber.e(OBSERVABLE_SUCCESS))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUCCESS).getTag(), equalTo(DEFAULT_NOT_FOUND_TREE_NODE));
   }
@@ -76,8 +72,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
   }
@@ -88,8 +83,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
         .fromCallable(() -> {
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
   }
@@ -104,8 +98,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
         .fromCallable(() -> {
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
         equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
@@ -119,8 +112,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
@@ -138,8 +130,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),

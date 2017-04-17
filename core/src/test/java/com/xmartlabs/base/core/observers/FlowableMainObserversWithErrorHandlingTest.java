@@ -11,9 +11,6 @@ import timber.log.Timber;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
-/**
- * Created by mike on 14/04/2017.
- */
 public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWithErrorHandlingTest {
   @Override
   @SuppressWarnings("unchecked")
@@ -26,8 +23,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
   public void callsFlowableSubscribe() {
     Flowable.fromCallable(Object::new)
         .doOnSubscribe(disposable -> Timber.tag(OBSERVABLE_SUBSCRIBE).i(OBSERVABLE_SUBSCRIBE))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUBSCRIBE).getTag(), equalTo(OBSERVABLE_SUBSCRIBE));
   }
@@ -36,8 +32,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
   public void callsFlowableOnComplete() {
     Flowable.fromCallable(Object::new)
         .doOnComplete(() -> Timber.tag(OBSERVABLE_SUCCESS).i(OBSERVABLE_SUCCESS))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUCCESS).getTag(), equalTo(OBSERVABLE_SUCCESS));
   }
@@ -46,8 +41,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
   public void callsFlowableOnNextCorrectAmountOfTimes() {
     Flowable.range(0, 5)
         .doOnNext(objects -> Timber.tag(OBSERVABLE_ON_NEXT).i(OBSERVABLE_ON_NEXT))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodesCountWithTag(OBSERVABLE_ON_NEXT), equalTo(5L));
   }
@@ -59,8 +53,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
   }
@@ -72,8 +65,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
         .doOnComplete(() -> Timber.e(OBSERVABLE_SUCCESS))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUCCESS).getTag(), equalTo(DEFAULT_NOT_FOUND_TREE_NODE));
   }
@@ -89,8 +81,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
   }
@@ -101,8 +92,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
         .fromCallable(() -> {
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
   }
@@ -117,8 +107,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
         .fromCallable(() -> {
           throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
         })
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
         equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
@@ -132,8 +121,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
@@ -151,8 +139,7 @@ public class FlowableMainObserversWithErrorHandlingTest extends MainObserversWit
         })
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
-        .subscribe(o -> {
-        });
+        .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
