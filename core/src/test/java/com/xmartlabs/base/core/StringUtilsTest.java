@@ -2,26 +2,26 @@ package com.xmartlabs.base.core;
 
 import com.xmartlabs.base.core.helper.StringUtils;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StringUtilsTest {
   @Test
   public void nullString() {
-    Assert.assertTrue(StringUtils.isNullOrEmpty(null));
+    assertThat(StringUtils.isNullOrEmpty(null), is(true));
   }
 
   @Test
   public void emptyString() {
-    Assert.assertTrue(StringUtils.isNullOrEmpty(""));
+    assertThat(StringUtils.isNullOrEmpty(""), is(true));
   }
 
   @Test
   public void length3String() {
-    Assert.assertFalse(StringUtils.isNullOrEmpty("abc"));
+    assertThat(StringUtils.isNullOrEmpty("abc"), is(false));
   }
 
   @Test
