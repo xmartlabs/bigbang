@@ -3,6 +3,8 @@ package com.xmartlabs.base.core.helper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.Locale;
+
 @SuppressWarnings("unused")
 public class StringUtils {
 
@@ -36,8 +38,7 @@ public class StringUtils {
   public static String capitalizeWord(@NonNull String word) {
     if (word.isEmpty()) {
       return "";
-    } else {
-      return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
     }
+    return word.substring(0, 1).toUpperCase(Locale.getDefault()) + word.substring(1).toLowerCase(Locale.getDefault());
   }
 }
