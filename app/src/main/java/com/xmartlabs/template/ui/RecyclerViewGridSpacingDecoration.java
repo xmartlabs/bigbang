@@ -10,10 +10,10 @@ import android.view.View;
 
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
+import com.xmartlabs.base.core.helper.function.BiConsumer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 import lombok.Builder;
 
