@@ -4,8 +4,10 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Objects;
+import com.xmartlabs.base.core.controller.Controller;
+import com.xmartlabs.base.core.controller.EntityServiceProvider;
 import com.xmartlabs.base.core.exception.ServiceExceptionWithMessage;
-import com.xmartlabs.template.model.EntityWithId;
+import com.xmartlabs.base.core.model.EntityWithId;
 
 import java.util.List;
 

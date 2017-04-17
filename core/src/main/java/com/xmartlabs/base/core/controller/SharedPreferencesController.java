@@ -1,4 +1,4 @@
-package com.xmartlabs.template.controller;
+package com.xmartlabs.base.core.controller;
 
 import android.content.SharedPreferences;
 import android.support.annotation.CheckResult;
@@ -24,10 +24,14 @@ import timber.log.Timber;
  * The entities are retrieved once from disk and then kept in memory for faster access.
  */
 public class SharedPreferencesController extends Controller {
+  private final Gson gson;
+  private final SharedPreferences sharedPreferences;
+
   @Inject
-  Gson gson;
-  @Inject
-  SharedPreferences sharedPreferences;
+  public SharedPreferencesController(@NonNull Gson gson, @NonNull SharedPreferences sharedPreferences) {
+    this.gson = gson;
+    this.sharedPreferences = sharedPreferences;
+  }
 
   private final Map<String, Object> cachedEntities = new HashMap<>();
 

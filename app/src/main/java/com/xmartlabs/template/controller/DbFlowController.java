@@ -12,6 +12,8 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.xmartlabs.base.core.controller.EntityDao;
+import com.xmartlabs.base.core.controller.Controller;
 import com.xmartlabs.template.database.AppDataBase;
 import com.xmartlabs.template.model.DatabaseModel;
 

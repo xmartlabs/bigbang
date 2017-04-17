@@ -1,9 +1,9 @@
-package com.xmartlabs.template.controller;
+package com.xmartlabs.base.core.controller;
 
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
-import com.xmartlabs.template.model.EntityWithId;
+import com.xmartlabs.base.core.model.EntityWithId;
 
 import java.util.List;
 

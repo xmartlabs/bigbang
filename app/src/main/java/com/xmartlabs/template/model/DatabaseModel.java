@@ -2,6 +2,7 @@ package com.xmartlabs.template.model;
 
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.xmartlabs.base.core.model.EntityWithId;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
