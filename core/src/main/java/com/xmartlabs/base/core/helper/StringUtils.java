@@ -36,9 +36,8 @@ public class StringUtils {
    */
   @NonNull
   public static String capitalizeWord(@NonNull String word) {
-    if (word.isEmpty()) {
-      return "";
-    }
-    return word.substring(0, 1).toUpperCase(Locale.getDefault()) + word.substring(1).toLowerCase(Locale.getDefault());
+    return word.isEmpty()
+        ? ""
+        : word.substring(0, 1).toUpperCase(Locale.getDefault()) + word.substring(1).toLowerCase(Locale.getDefault());
   }
 }
