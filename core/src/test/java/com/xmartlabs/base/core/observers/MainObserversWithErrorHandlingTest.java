@@ -17,7 +17,6 @@ import lombok.experimental.Accessors;
 import timber.log.Timber;
 
 abstract class MainObserversWithErrorHandlingTest {
-  static final String OBSERVABLE_ACTION_EXCEPTION = "Observable Action Exception";
   static final String OBSERVABLE_SUCCESS = "Entered success from Observable";
   static final String OBSERVABLE_ON_COMPLETE = "Entered onComplete from Observable";
   static final String OBSERVABLE_DO_ON_ERROR = "Entered do on error from Observable";

@@ -39,7 +39,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void doesNotCallMaybeOnSuccessWhenNoObjectIsEmmited() {
-    Maybe.fromCallable(() -> null)
+    Maybe.empty()
         .doOnSuccess(o -> Timber.tag(OBSERVABLE_SUCCESS).i(OBSERVABLE_SUCCESS))
         .subscribe(o -> {});
 
@@ -57,7 +57,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsMaybeOnCompleteWhenNoObjectOmited() {
-    Maybe.fromCallable(() -> null)
+    Maybe.empty()
         .doOnComplete(() -> Timber.tag(OBSERVABLE_ON_COMPLETE).i(OBSERVABLE_ON_COMPLETE))
         .subscribe(o -> {});
 
@@ -66,10 +66,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsMaybeOnError() {
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {});
 
@@ -78,10 +75,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void doesNotCallOnSuccessWhenError() {
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .doOnSuccess(o -> Timber.e(OBSERVABLE_SUCCESS))
         .subscribe(o -> {});
 
@@ -94,10 +88,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
     RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
         new MaybeObserverWithErrorHandling(MaybeObserver, getErrorHandlingActionWithErrorInside()));
 
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {});
 
@@ -106,10 +97,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
@@ -121,10 +109,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
     RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
         new MaybeObserverWithErrorHandling(MaybeObserver, getErrorHandlingActionWithErrorInside()));
 
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .subscribe(o -> {});
 
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
@@ -133,10 +118,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
 
   @Test
   public void callsHookOnErrorAndMaybeOnError() {
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
         .subscribe(o -> {});
@@ -151,10 +133,7 @@ public class MaybeMainObserversWithErrorHandlingTest extends MainObserversWithEr
     RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
         new MaybeObserverWithErrorHandling(MaybeObserver, getErrorHandlingActionWithErrorInside()));
 
-    Maybe
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Maybe.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
         .subscribe(o -> {});

@@ -48,10 +48,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
 
   @Test
   public void callsObservableOnError() {
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {});
 
@@ -60,10 +57,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
 
   @Test
   public void doesNotCallOnCompleteWhenError() {
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .doOnComplete(() -> Timber.e(OBSERVABLE_SUCCESS))
         .subscribe(o -> {});
 
@@ -76,10 +70,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
     RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
         new ObserverWithErrorHandling<>(observer, getErrorHandlingActionWithErrorInside()));
 
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {});
 
@@ -88,10 +79,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
@@ -103,10 +91,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
     RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
         new ObserverWithErrorHandling<>(observer, getErrorHandlingActionWithErrorInside()));
 
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .subscribe(o -> {});
 
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK), equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
@@ -114,10 +99,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
 
   @Test
   public void callsHookOnErrorAndObservableOnError() {
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {});
@@ -132,10 +114,7 @@ public class ObserversWithErrorHandlingTest extends MainObserversWithErrorHandli
     RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
         new ObserverWithErrorHandling<>(observer, getErrorHandlingActionWithErrorInside()));
 
-    Observable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Observable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {});

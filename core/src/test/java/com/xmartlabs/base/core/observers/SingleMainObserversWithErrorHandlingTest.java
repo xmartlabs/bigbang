@@ -39,10 +39,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
 
   @Test
   public void callsSingleOnError() {
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {});
 
@@ -51,10 +48,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
 
   @Test
   public void doesNotCallOnSuccessWhenError() {
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .doOnSuccess(o -> Timber.e(OBSERVABLE_SUCCESS))
         .subscribe(o -> {});
 
@@ -67,10 +61,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
     RxJavaPlugins.setOnSingleSubscribe((Single, SingleObserver) ->
         new SingleObserverWithErrorHandling(SingleObserver, getErrorHandlingActionWithErrorInside()));
 
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .subscribe(o -> {});
 
@@ -79,10 +70,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .subscribe(o -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
@@ -94,10 +82,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
     RxJavaPlugins.setOnSingleSubscribe((Single, SingleObserver) ->
         new SingleObserverWithErrorHandling(SingleObserver, getErrorHandlingActionWithErrorInside()));
 
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .subscribe(o -> {});
 
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
@@ -106,10 +91,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
 
   @Test
   public void callsHookOnErrorAndSingleOnError() {
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
         .subscribe(o -> {});
@@ -124,10 +106,7 @@ public class SingleMainObserversWithErrorHandlingTest extends MainObserversWithE
     RxJavaPlugins.setOnSingleSubscribe((Single, SingleObserver) ->
         new SingleObserverWithErrorHandling(SingleObserver, getErrorHandlingActionWithErrorInside()));
 
-    Single
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Single.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnSuccess(o -> assertThat("Executed OnSuccess", equalTo("Didn't execute OnSuccess")))
         .subscribe(o -> {});

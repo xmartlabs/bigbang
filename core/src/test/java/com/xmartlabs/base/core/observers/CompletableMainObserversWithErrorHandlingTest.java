@@ -22,8 +22,7 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
   public void callsCompletableSubscribe() {
     Completable.fromCallable(() -> null)
         .doOnSubscribe(disposable -> Timber.tag(OBSERVABLE_SUBSCRIBE).i(OBSERVABLE_SUBSCRIBE))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_SUBSCRIBE).getTag(), equalTo(OBSERVABLE_SUBSCRIBE));
   }
@@ -32,34 +31,25 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
   public void callsCompletableOnComplete() {
     Completable.fromCallable(() -> null)
         .doOnComplete(() -> Timber.tag(OBSERVABLE_ON_COMPLETE).i(OBSERVABLE_ON_COMPLETE))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_ON_COMPLETE).getTag(), equalTo(OBSERVABLE_ON_COMPLETE));
   }
 
   @Test
   public void callsCompletableOnError() {
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Completable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
   }
 
   @Test
   public void doesNotCallOnCompleteWhenError() {
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Completable.error(Throwable::new)
         .doOnComplete(() -> Timber.e(OBSERVABLE_ON_COMPLETE))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_ON_COMPLETE).getTag(), equalTo(DEFAULT_NOT_FOUND_TREE_NODE));
   }
@@ -69,25 +59,17 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
     RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
         new CompletableObserverWithErrorHandling(completableObserver, getErrorHandlingActionWithErrorInside()));
 
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Completable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
   }
 
   @Test
   public void callsHookErrorHandleWhenNoDoOnError() {
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
-        .subscribe(() -> {
-        });
+    Completable.error(Throwable::new)
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
   }
@@ -97,12 +79,8 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
     RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
         new CompletableObserverWithErrorHandling(completableObserver, getErrorHandlingActionWithErrorInside()));
 
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
-        .subscribe(() -> {
-        });
+    Completable.error(Throwable::new)
+        .subscribe(() -> {});
 
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
         equalTo(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK));
@@ -110,14 +88,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
 
   @Test
   public void callsHookOnErrorAndCompletableOnError() {
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Completable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(ENTERED_HOOK_ERROR_HANDLE).getTag(), equalTo(ENTERED_HOOK_ERROR_HANDLE));
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
@@ -128,14 +102,10 @@ public class CompletableMainObserversWithErrorHandlingTest extends MainObservers
     RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
         new CompletableObserverWithErrorHandling(completableObserver, getErrorHandlingActionWithErrorInside()));
 
-    Completable
-        .fromCallable(() -> {
-          throw new Exception(OBSERVABLE_ACTION_EXCEPTION);
-        })
+    Completable.error(Throwable::new)
         .doOnError(throwable -> Timber.tag(OBSERVABLE_DO_ON_ERROR).i(OBSERVABLE_DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
-        .subscribe(() -> {
-        });
+        .subscribe(() -> {});
 
     assertThat(getLogTreeNodeWithTag(OBSERVABLE_DO_ON_ERROR).getTag(), equalTo(OBSERVABLE_DO_ON_ERROR));
     assertThat(getLogTreeExceptionDetailMessage(EXCEPTION_WHILE_HANDLING_ERROR_WITH_HOOK),
