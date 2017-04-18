@@ -1,7 +1,5 @@
 package com.xmartlabs.base.core.helper;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Objects;
@@ -44,17 +42,12 @@ public final class GeneralErrorHelper {
   private final StackTraceElement[] DUMMY_STACK_TRACE_ELEMENT_ARRAY =
       new StackTraceElement[] {DUMMY_STACK_TRACE_ELEMENT};
 
-  private final Context applicationContext;
   private final LoggerTree loggerTree;
-  private final SharedPreferences sharedPreferences;
   private final BuildInfo buildInfo;
 
   @Inject
-  public GeneralErrorHelper(@NonNull Context applicationContext, @NonNull LoggerTree loggerTree,
-                            @NonNull SharedPreferences sharedPreferences, @NonNull BuildInfo buildInfo) {
-    this.applicationContext = applicationContext;
+  public GeneralErrorHelper(@NonNull LoggerTree loggerTree, @NonNull BuildInfo buildInfo) {
     this.loggerTree = loggerTree;
-    this.sharedPreferences = sharedPreferences;
     this.buildInfo = buildInfo;
   }
 
