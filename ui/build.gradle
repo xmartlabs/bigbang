@@ -1,14 +1,22 @@
 apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
+def artifact = "ui"
+def versionCodeId = "0.1.0"
+def versionCodeNumber = 1
+
+group = "com.xmartlabs.base"
+version = versionCodeId
+
 ext {
-    PUBLISH_GROUP_ID = 'com.xmartlabs'
-    PUBLISH_ARTIFACT_ID = 'ui'
-    PUBLISH_VERSION = '0.1'
+    PUBLISH_GROUP_ID = group
+    PUBLISH_ARTIFACT_ID = artifact
+    PUBLISH_VERSION = version
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
@@ -21,6 +29,7 @@ buildscript {
     }
     dependencies {
         classpath "com.jakewharton:butterknife-gradle-plugin:8.2.1"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
     }
@@ -35,29 +44,112 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
+def getSignInformation = { keystorePath, keystorePropertyPath ->
+    def keyStore = file(keystorePath)
+    if (!keyStore.exists()) {
+        logger.error("Keystore file not found, path=${keyStore.absolutePath}")
+        return
+    }
+    def propertiesFile = file(keystorePropertyPath)
+    if (!propertiesFile.exists()) {
+        logger.error("Keystore properties file not found, path=${propertiesFile.absolutePath}")
+        return
+    }
+    def Properties properties = new Properties()
+    properties.load(new FileInputStream(propertiesFile))
+    return [
+            storeFile    : keyStore,
+            storePassword: properties["store_password"],
+            keyAlias     : properties["key_alias"],
+            keyPassword  : properties["key_password"]
+    ]
+}
+
+def getBintrayInformation = { propertyFilePath ->
+    def propertiesFile = file(propertyFilePath)
+    if (!propertiesFile.exists()) {
+        logger.error("Bintray properties file not found, path=${propertiesFile.absolutePath}")
+        return
+    }
+    def Properties properties = new Properties()
+    properties.load(new FileInputStream(propertiesFile))
+    return [
+            user  : properties["bintray_user"],
+            apiKey: properties["bintray_api_key"],
+    ]
+}
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
-
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-
+        group group
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeNumber
+        versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        //noinspection GroovyMissingReturnStatement
+        release {
+            def signInformation = getSignInformation("release.keystore", "keystore.properties")
+            if (signInformation != null) {
+                storeFile signInformation.storeFile
+                storePassword signInformation.storePassword
+                keyAlias signInformation.keyAlias
+                keyPassword signInformation.keyPassword
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    options.linkSource true
+    classpath = configurations.compile
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+    failOnError false
+}
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
 }
 
 dependencies {
@@ -97,3 +189,31 @@ dependencies {
 
     testCompile "junit:junit:${project.ext.junitVersion}"
 }
+
+bintray {
+    def bintrayInfo = getBintrayInformation("../bintray.properties")
+    if (bintrayInfo == null) {
+        return
+    }
+
+    user = bintrayInfo.user
+    key = bintrayInfo.apiKey
+    pkg {
+        repo = 'Android-Base-Project'
+        name = 'Ui'
+        userOrg = 'xmartlabs'
+
+        version {
+            name = versionCodeId
+            released = new Date()
+            vcsTag = "${versionCodeId}"
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/xmartlabs/Android-Base-Project.git'
+        websiteUrl = 'https://github.com/xmartlabs/Android-Base-Project'
+    }
+    configurations = ['archives']
+}
+
+apply from: '../circleci.gradle'

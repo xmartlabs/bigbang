@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
-import com.xmartlabs.base.core.helper.function.BiConsumer;
+import com.annimon.stream.function.BiConsumer;
 
 import java.util.ArrayList;
 import java.util.List;
