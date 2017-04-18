@@ -20,7 +20,7 @@ public class TestingTree extends Timber.Tree {
   private static final String INCORRECT_EXCEPTION_THROWN = "Incorrect exception thrown";
 
   @Getter
-  private List<TestingTreeNode> loggingTree = new ArrayList<>();
+  private final List<TestingTreeNode> loggingTree = new ArrayList<>();
 
   @Override
   protected void log(int priority, @Nullable String tag, @Nullable String message, @Nullable Throwable t) {
