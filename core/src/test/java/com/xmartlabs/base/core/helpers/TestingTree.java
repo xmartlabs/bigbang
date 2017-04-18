@@ -56,5 +56,3 @@ public class TestingTree extends Timber.Tree {
         .orElse(INCORRECT_EXCEPTION_THROWN);
   }
 }
-
-
