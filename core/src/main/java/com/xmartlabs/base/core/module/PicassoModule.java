@@ -17,9 +17,11 @@ import timber.log.Timber;
 
 @Module
 public class PicassoModule {
+  private static final String CRASHLYTICS_KEY_URL = "url";
+
   private static final Picasso.Listener LISTENER = (picasso, uri, exception) -> {
     if (uri != null) {
-      Crashlytics.setString(GeneralErrorHelper.CRASHLYTICS_KEY_URL, uri.toString());
+      Crashlytics.setString(CRASHLYTICS_KEY_URL, uri.toString());
     }
     Timber.w(exception, "Picasso image load failed");
   };

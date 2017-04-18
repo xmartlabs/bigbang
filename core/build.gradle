@@ -2,10 +2,13 @@ apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
 def artifact = "core"
-def versionCodeId = "0.1.2"
+def versionCodeId = 1
+
+project.ext.projectName = "Core"
+project.ext.versionCodeNumber = "0.1.4"
 
 group = "com.xmartlabs.base"
-version = versionCodeId
+version = versionCodeNumber
 
 ext {
     PUBLISH_GROUP_ID = group
@@ -40,108 +43,31 @@ repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
-def getSignInformation = { keystorePath, keystorePropertyPath ->
-    def keyStore = file(keystorePath)
-    if (!keyStore.exists()) {
-        logger.error("Keystore file not found, path=${keyStore.absolutePath}")
-        return
-    }
-    def propertiesFile = file(keystorePropertyPath)
-    if (!propertiesFile.exists()) {
-        logger.error("Keystore properties file not found, path=${propertiesFile.absolutePath}")
-        return
-    }
-    def Properties properties = new Properties()
-    properties.load(new FileInputStream(propertiesFile))
-    return [
-            storeFile    : keyStore,
-            storePassword: properties["store_password"],
-            keyAlias     : properties["key_alias"],
-            keyPassword  : properties["key_password"]
-    ]
-}
-
-def getBintrayInformation = { propertyFilePath ->
-    def propertiesFile = file(propertyFilePath)
-    if (!propertiesFile.exists()) {
-        logger.error("Bintray properties file not found, path=${propertiesFile.absolutePath}")
-        return
-    }
-    def Properties properties = new Properties()
-    properties.load(new FileInputStream(propertiesFile))
-    return [
-            user  : properties["bintray_user"],
-            apiKey: properties["bintray_api_key"],
-    ]
-}
-
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
     dexOptions {
         javaMaxHeapSize '4g'
     }
     defaultConfig {
         group group
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 1
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-    }
-    signingConfigs {
-        //noinspection GroovyMissingReturnStatement
-        release {
-            def signInformation = getSignInformation("release.keystore", "keystore.properties")
-            if (signInformation != null) {
-                storeFile signInformation.storeFile
-                storePassword signInformation.storePassword
-                keyAlias signInformation.keyAlias
-                keyPassword signInformation.keyPassword
-            }
-        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
-        abortOnError false
-    }
-}
-
-task generateJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    options.linkSource true
-    classpath = configurations.compile
-    classpath += project.files(android.getBootClasspath()
-            .join(File.pathSeparator))
-    failOnError false
-}
-
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-task generateJavadocsJar(type: Jar) {
-    from generateJavadocs.destinationDir
-    classifier 'javadoc'
-}
-
-generateJavadocsJar.dependsOn generateJavadocs
-
-artifacts {
-    archives generateJavadocsJar
-    archives generateSourcesJar
 }
 
 dependencies {
@@ -153,11 +79,10 @@ dependencies {
     androidTestCompile "com.crittercism.dexmaker:dexmaker:${project.ext.dexmakerVersion}"
     androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${project.ext.dexmakerVersion}"
     androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${project.ext.dexmakerVersion}"
-    androidTestCompile "junit:junit:4.12"
+    androidTestCompile "junit:junit:${project.ext.junitVersion}"
     androidTestCompile "org.mockito:mockito-core:${project.ext.mockitoVersion}"
     apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
     apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${project.ext.dbFlowVersion}"
     apt "com.github.tbroyer.bullet:bullet-compiler:${project.ext.bulletVersion}"
     apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
     compile "com.android.support:appcompat-v7:${project.ext.androidSupportVersion}"
@@ -169,17 +94,13 @@ dependencies {
     compile "com.f2prateek.dart:dart:${project.ext.dartVersion}"
     compile "com.f2prateek.dart:henson:${project.ext.dartVersion}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${project.ext.dbFlowVersion}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${project.ext.dbFlowVersion}"
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile "com.github.tbroyer.bullet:bullet:${project.ext.bulletVersion}"
     compile "com.google.android.gms:play-services-base:${project.ext.playServicesVersion}"
     compile "com.google.dagger:dagger:${project.ext.daggerVersion}"
+    compile "com.google.code.gson:gson:${project.ext.gsonVersion}"
     compile "com.jakewharton.threetenabp:threetenabp:${project.ext.localDateBackportVersion}"
     compile "com.jakewharton.timber:timber:${project.ext.timberVersion}"
-    compile "com.squareup.retrofit2:converter-gson:${project.ext.retrofitVersion}"
-    compile "com.squareup.retrofit2:adapter-rxjava2:${project.ext.retrofitVersion}"
-    compile "com.squareup.retrofit2:retrofit:${project.ext.retrofitVersion}"
     compile "com.squareup.okhttp3:okhttp:${project.ext.okHttpVersion}"
     compile "com.squareup.okhttp3:logging-interceptor:${project.ext.okHttpVersion}"
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
@@ -193,30 +114,5 @@ dependencies {
     }
 }
 
-bintray {
-    def bintrayInfo = getBintrayInformation("../bintray.properties")
-    if (bintrayInfo == null) {
-        return
-    }
-
-    user = bintrayInfo.user
-    key = bintrayInfo.apiKey
-    pkg {
-        repo = 'Android-Base-Project'
-        name = 'Core'
-        userOrg = 'xmartlabs'
-
-        version {
-            name = versionCodeId
-            released = new Date()
-            vcsTag = "${versionCodeId}"
-        }
-
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/xmartlabs/Android-Base-Project.git'
-        websiteUrl = 'https://github.com/xmartlabs/Android-Base-Project'
-    }
-    configurations = ['archives']
-}
-
+apply from: '../bintray.gradle'
 apply from: '../circleci.gradle'

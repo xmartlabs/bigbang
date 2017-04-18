@@ -15,6 +15,8 @@ import com.xmartlabs.base.core.rx.error.FlowableObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.MaybeObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.ObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.SingleObserverWithErrorHandling;
+import com.xmartlabs.base.retrofit.helper.ServiceErrorHandler;
+import com.xmartlabs.base.retrofit.module.GsonModule;
 import com.xmartlabs.template.module.AndroidModule;
 
 import javax.inject.Inject;
@@ -33,6 +35,8 @@ public class BaseProjectApplication extends Application {
   GeneralErrorHelper generalErrorHelper;
   @Inject
   LoggerTree loggerTree;
+  @Inject
+  ServiceErrorHandler serviceErrorHandler;
 
   public BaseProjectApplication() {
     instance = this;
@@ -62,6 +66,7 @@ public class BaseProjectApplication extends Application {
   protected ApplicationComponent createComponent() {
     return DaggerApplicationComponent.builder()
         .coreAndroidModule(new AndroidModule(this))
+        .gsonModule(new GsonModule())
         .build();
   }
 
@@ -93,6 +98,8 @@ public class BaseProjectApplication extends Application {
 
   @SuppressWarnings("unchecked")
   private void initializeRxErrorHandler() {
+    serviceErrorHandler.handleServiceErrors();
+
     RxJavaPlugins.setOnSingleSubscribe((single, singleObserver) ->
         new SingleObserverWithErrorHandling<>(singleObserver, generalErrorHelper.getGeneralErrorAction()));
     RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->

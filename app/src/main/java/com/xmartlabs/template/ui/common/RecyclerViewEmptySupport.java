@@ -9,8 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.annimon.stream.Optional;
-import com.xmartlabs.template.R;
 import com.xmartlabs.base.core.helper.function.Function;
+import com.xmartlabs.template.R;
 
 /**
  * {@link RecyclerView} subclass that automatically handles empty state.

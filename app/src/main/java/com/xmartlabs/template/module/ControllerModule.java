@@ -1,7 +1,6 @@
 package com.xmartlabs.template.module;
 
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.base.core.controller.SharedPreferencesController;
 
 import javax.inject.Singleton;
 

@@ -1,0 +1,84 @@
+apply from: '../versions.gradle'
+apply plugin: 'com.android.library'
+
+def artifact = "dbflow"
+def versionCodeId = 1
+
+project.ext.projectName = "DbFlow"
+project.ext.versionCodeNumber = "0.1.0"
+
+group = "com.xmartlabs.base"
+version = versionCodeNumber
+
+ext {
+    PUBLISH_GROUP_ID = group
+    PUBLISH_ARTIFACT_ID = artifact
+    PUBLISH_VERSION = version
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+    }
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url "https://jitpack.io" }
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':core')
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${project.ext.dbFlowVersion}"
+    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${project.ext.dbFlowVersion}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${project.ext.dbFlowVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${project.ext.rxAndroidVersion}"
+    compile "io.reactivex.rxjava2:rxjava:${project.ext.rxJavaVersion}"
+    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
+}
+
+apply from: '../bintray.gradle'
+apply from: '../circleci.gradle'

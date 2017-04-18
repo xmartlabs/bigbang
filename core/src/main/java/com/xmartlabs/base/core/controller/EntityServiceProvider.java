@@ -12,7 +12,6 @@ import io.reactivex.CompletableTransformer;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
-import retrofit2.Response;
 
 /**
  * Provider used to make the service calls related to the entity {@link E}.
@@ -41,17 +40,6 @@ public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
   @CheckResult
   @NonNull
   CompletableTransformer applyCompletableServiceTransformation();
-
-  /**
-   * Provides the service {@link Single} transformation and gets the {@link S} value from the response.
-   * It could be used to sign out the user when getting a service error for example.
-   *
-   * @param <S> Type of the item emitted by the {@link Single}
-   * @return The {@link Single} transformation
-   */
-  @CheckResult
-  @NonNull
-  <S> SingleTransformer<Response<S>, S> applySingleServiceTransformationAndGetResponse();
 
   /**
    * Provides an entity {@link E} from a service which gives a list of {@link E}.

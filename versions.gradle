@@ -1,3 +1,8 @@
+project.ext.compileSdkVersion = 25
+project.ext.minSdkVersion = 17
+project.ext.targetSdkVersion = 25
+project.ext.buildToolsVersion = '25.0.2'
+
 project.ext.androidSupportVersion = '25.3.1'
 project.ext.androidSupportTestVersion = '0.5'
 project.ext.bulletVersion = 'e5044b53df'
@@ -9,6 +14,7 @@ project.ext.dbFlowVersion = '3.1.1'
 project.ext.espressoVersion = '2.2.2'
 project.ext.firebaseVersion = '9.2.1'
 project.ext.fragmentArgsVersion = '3.0.2'
+project.ext.gsonVersion = '1.7.2'
 project.ext.jsr305Version = '3.0.1'
 project.ext.junitVersion = '4.12'
 project.ext.localDateBackportVersion = '1.0.4'
