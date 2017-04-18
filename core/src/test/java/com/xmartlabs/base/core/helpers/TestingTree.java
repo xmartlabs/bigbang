@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
+import com.xmartlabs.base.core.observers.ObservableResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,25 +35,43 @@ public class TestingTree extends Timber.Tree {
   }
 
   @NonNull
-  public TestingTreeNode getLogTreeNodeWithTag(@Nullable String tag) {
+  private TestingTreeNode getLogTreeNodeWithTag(@NonNull String tag) {
     return Stream.ofNullable(loggingTree)
         .filter(node -> Objects.equals(node.getTag(), tag))
         .findFirst()
         .orElse(NODE_NOT_FOUND);
   }
 
-  public long getLogTreeNodesCountWithTag(@Nullable String tag) {
+  @NonNull
+  public TestingTreeNode getLogTreeNodeWithTag(@NonNull ObservableResult observableResult) {
+    return getLogTreeNodeWithTag(observableResult.toString());
+  }
+
+  private long getLogTreeNodesCountWithTag(@NonNull String tag) {
     return Stream.ofNullable(loggingTree)
         .filter(node -> Objects.equals(node.getTag(), tag))
         .count();
   }
 
+  public long getLogTreeNodesCountWithTag(@NonNull ObservableResult observableResultTag) {
+    return getLogTreeNodesCountWithTag(observableResultTag.toString());
+  }
+
   @NonNull
-  public String getLogTreeExceptionDetailMessage(@Nullable final String detailMessage) {
+  private String getLogTreeExceptionDetailMessage(@NonNull final String detailMessage) {
     return Stream.ofNullable(loggingTree)
         .map(node -> node.getThrowable().getMessage())
         .filter(message -> Objects.equals(message, detailMessage))
         .findFirst()
         .orElse(INCORRECT_EXCEPTION_THROWN);
+  }
+
+  @NonNull
+  public String getLogTreeExceptionDetailMessage(@NonNull final ObservableResult detailMessage) {
+    return getLogTreeExceptionDetailMessage(detailMessage.toString());
+  }
+
+  public static void log(ObservableResult observableResult) {
+    Timber.tag(observableResult.toString()).i(observableResult.toString());
   }
 }

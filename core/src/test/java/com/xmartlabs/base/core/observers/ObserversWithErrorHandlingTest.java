@@ -31,7 +31,7 @@ public class ObserversWithErrorHandlingTest {
             Timber.tag(ObservableResult.SUBSCRIBE.toString()).i(ObservableResult.SUBSCRIBE.toString()))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUBSCRIBE.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUBSCRIBE).getTag(),
         equalTo(ObservableResult.SUBSCRIBE.toString()));
   }
 
@@ -41,7 +41,7 @@ public class ObserversWithErrorHandlingTest {
         .doOnComplete(() -> Timber.tag(ObservableResult.SUCCESS.toString()).i(ObservableResult.SUCCESS.toString()))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS).getTag(),
         equalTo(ObservableResult.SUCCESS.toString()));
   }
 
@@ -51,17 +51,17 @@ public class ObserversWithErrorHandlingTest {
         .doOnNext(objects -> Timber.tag(ObservableResult.ON_NEXT.toString()).i(ObservableResult.ON_NEXT.toString()))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodesCountWithTag(ObservableResult.ON_NEXT.toString()), equalTo(5L));
+    assertThat(testingTree.getLogTreeNodesCountWithTag(ObservableResult.ON_NEXT), equalTo(5L));
   }
 
   @Test
   public void callsObservableOnError() {
     Observable.error(Throwable::new)
         .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+            TestingTree.log(ObservableResult.DO_ON_ERROR))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
   }
 
@@ -71,7 +71,7 @@ public class ObserversWithErrorHandlingTest {
         .doOnComplete(() -> Timber.e(ObservableResult.SUCCESS.toString()))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS).getTag(),
         equalTo(TestingTree.DEFAULT_NOT_FOUND_TREE_NODE));
   }
 
@@ -83,10 +83,10 @@ public class ObserversWithErrorHandlingTest {
 
     Observable.error(Throwable::new)
         .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+            TestingTree.log(ObservableResult.DO_ON_ERROR))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
   }
 
@@ -95,7 +95,7 @@ public class ObserversWithErrorHandlingTest {
     Observable.error(Throwable::new)
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE).getTag(),
         equalTo(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()));
   }
 
@@ -108,22 +108,21 @@ public class ObserversWithErrorHandlingTest {
     Observable.error(Throwable::new)
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeExceptionDetailMessage(
-        ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString()),
+    assertThat(testingTree.getLogTreeExceptionDetailMessage(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE),
         equalTo(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString()));
   }
 
   @Test
   public void callsHookOnErrorAndObservableOnError() {
     Observable.error(Throwable::new)
-        .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+        .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE).getTag(),
         equalTo(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()));
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
   }
 
@@ -134,15 +133,14 @@ public class ObserversWithErrorHandlingTest {
         new ObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
 
     Observable.error(Throwable::new)
-        .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+        .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
-    assertThat(testingTree.getLogTreeExceptionDetailMessage(
-        ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString()),
+
+    assertThat(testingTree.getLogTreeExceptionDetailMessage(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE),
         equalTo(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString())
     );
   }

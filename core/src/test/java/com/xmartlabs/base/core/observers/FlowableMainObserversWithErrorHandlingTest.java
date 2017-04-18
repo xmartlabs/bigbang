@@ -27,41 +27,39 @@ public class FlowableMainObserversWithErrorHandlingTest {
   @Test
   public void callsFlowableSubscribe() {
     Flowable.just(new Object())
-        .doOnSubscribe(disposable ->
-            Timber.tag(ObservableResult.SUBSCRIBE.toString()).i(ObservableResult.SUBSCRIBE.toString()))
+        .doOnSubscribe(disposable -> TestingTree.log(ObservableResult.SUBSCRIBE))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUBSCRIBE.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUBSCRIBE).getTag(),
         equalTo(ObservableResult.SUBSCRIBE.toString()));
   }
 
   @Test
   public void callsFlowableOnComplete() {
     Flowable.just(new Object())
-        .doOnComplete(() -> Timber.tag(ObservableResult.SUCCESS.toString()).i(ObservableResult.SUCCESS.toString()))
+        .doOnComplete(() -> TestingTree.log(ObservableResult.SUCCESS))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS).getTag(),
         equalTo(ObservableResult.SUCCESS.toString()));
   }
 
   @Test
   public void callsFlowableOnNextCorrectAmountOfTimes() {
     Flowable.range(0, 5)
-        .doOnNext(objects -> Timber.tag(ObservableResult.ON_NEXT.toString()).i(ObservableResult.ON_NEXT.toString()))
+        .doOnNext(objects -> TestingTree.log(ObservableResult.ON_NEXT))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodesCountWithTag(ObservableResult.ON_NEXT.toString()), equalTo(5L));
+    assertThat(testingTree.getLogTreeNodesCountWithTag(ObservableResult.ON_NEXT), equalTo(5L));
   }
 
   @Test
   public void callsFlowableOnError() {
     Flowable.error(Throwable::new)
-        .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+        .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
   }
 
@@ -71,7 +69,7 @@ public class FlowableMainObserversWithErrorHandlingTest {
         .doOnComplete(() -> Timber.e(ObservableResult.SUCCESS.toString()))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.SUCCESS).getTag(),
         equalTo(TestingTree.DEFAULT_NOT_FOUND_TREE_NODE));
   }
 
@@ -82,11 +80,10 @@ public class FlowableMainObserversWithErrorHandlingTest {
         new FlowableObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
 
     Flowable.error(Throwable::new)
-        .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+        .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
   }
 
@@ -95,7 +92,7 @@ public class FlowableMainObserversWithErrorHandlingTest {
     Flowable.error(Throwable::new)
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE).getTag(),
         equalTo(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()));
   }
 
@@ -109,7 +106,7 @@ public class FlowableMainObserversWithErrorHandlingTest {
         .subscribe(o -> {});
 
     assertThat(
-        testingTree.getLogTreeExceptionDetailMessage(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString()),
+        testingTree.getLogTreeExceptionDetailMessage(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE),
         equalTo(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString())
     );
   }
@@ -117,14 +114,13 @@ public class FlowableMainObserversWithErrorHandlingTest {
   @Test
   public void callsHookOnErrorAndFlowableOnError() {
     Flowable.error(Throwable::new)
-        .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+        .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.ENTERED_HOOK_ERROR_HANDLE).getTag(),
         equalTo(ObservableResult.ENTERED_HOOK_ERROR_HANDLE.toString()));
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
   }
 
@@ -135,15 +131,14 @@ public class FlowableMainObserversWithErrorHandlingTest {
         new FlowableObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
 
     Flowable.error(Throwable::new)
-        .doOnError(throwable ->
-            Timber.tag(ObservableResult.DO_ON_ERROR.toString()).i(ObservableResult.DO_ON_ERROR.toString()))
+        .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .doOnComplete(() -> assertThat("Executed OnComplete", equalTo("Didn't execute onComplete")))
         .subscribe(o -> {});
 
-    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR.toString()).getTag(),
+    assertThat(testingTree.getLogTreeNodeWithTag(ObservableResult.DO_ON_ERROR).getTag(),
         equalTo(ObservableResult.DO_ON_ERROR.toString()));
     assertThat(
-        testingTree.getLogTreeExceptionDetailMessage(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString()),
+        testingTree.getLogTreeExceptionDetailMessage(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE),
         equalTo(ObservableResult.EXCEPTION_WHILE_ON_ERROR_HOOK_HANDLE.toString())
     );
   }
