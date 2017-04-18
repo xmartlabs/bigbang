@@ -14,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class CompletableMainObserversWithErrorHandlingTest {
-  private TestingTree testingTree = new TestingTree();
+  private final TestingTree testingTree = new TestingTree();
 
   @Before
   public void setUp() {
