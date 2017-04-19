@@ -18,6 +18,8 @@ import com.xmartlabs.base.retrofit.deserialized.RequiredFieldDeserializer;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 
+import java.util.ArrayList;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -25,7 +27,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class ServiceGsonModule extends GsonExclusionStrategy {
+public class ServiceGsonModule {
   public static final String SERVICE_GSON_NAME = "ServiceGson";
 
   @Named(SERVICE_GSON_NAME)
@@ -44,5 +46,11 @@ public class ServiceGsonModule extends GsonExclusionStrategy {
     }
     builder.registerTypeHierarchyAdapter(Object.class, new RequiredFieldDeserializer());
     return builder;
+  }
+
+  @NonNull
+  protected ExclusionStrategy getExclusionStrategy(@Nullable GsonExclude.Strategy strategy) {
+    return new GsonExclusionStrategy(new ArrayList<>())
+        .getExclusionStrategy(strategy);
   }
 }
