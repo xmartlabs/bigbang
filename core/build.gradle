@@ -2,11 +2,10 @@ apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
 ext {
-    artifact = "core"
     projectName = "Core"
-    versionCodeNumber = "0.1.5"
+    versionCodeNumber = "0.1.6"
     PUBLISH_GROUP_ID = applicationId
-    PUBLISH_ARTIFACT_ID = artifact
+    PUBLISH_ARTIFACT_ID = "core"
     PUBLISH_VERSION = versionCodeNumber
 }
 
