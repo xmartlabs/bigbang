@@ -1,27 +1,40 @@
-project.ext.androidSupportVersion = '25.3.1'
-project.ext.androidSupportTestVersion = '0.5'
-project.ext.bulletVersion = 'e5044b53df'
-project.ext.butterKnifeVersion = '8.2.1'
-project.ext.daggerVersion = '2.6'
-project.ext.dartVersion = '2.0.0'
-project.ext.dexmakerVersion = '1.4'
-project.ext.dbFlowVersion = '3.1.1'
-project.ext.espressoVersion = '2.2.2'
-project.ext.firebaseVersion = '9.2.1'
-project.ext.fragmentArgsVersion = '3.0.2'
-project.ext.jsr305Version = '3.0.1'
-project.ext.junitVersion = '4.12'
-project.ext.localDateBackportVersion = '1.0.4'
-project.ext.lombokVersion = '1.16.10'
-project.ext.mockitoVersion = '1.10.19'
-project.ext.okHttpVersion = '3.6.0'
-project.ext.okioVersion = '1.11.0'
-project.ext.playServicesVersion = '10.2.1'
-project.ext.parcelerVersion = '1.1.5'
-project.ext.restMockVersion = '0.1.3'
-project.ext.retrofitVersion = '2.2.0'
-project.ext.rxAndroidVersion = '2.0.1'
-project.ext.rxJavaVersion = '2.0.7'
-project.ext.rxLifecycleVersion = '2.0.1'
-project.ext.streamVersion = '1.1.6'
-project.ext.timberVersion = '4.3.0'
+ext {
+    applicationId = "com.xmartlabs.base"
+
+    compileSdkVersion = 25
+    minSdkVersion = 17
+    targetSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+    javaVersion8 = JavaVersion.VERSION_1_8
+
+    libraryVersion = [
+        androidSupport: '25.3.1',
+        androidSupportTest: '0.5',
+        bullet: 'e5044b53df',
+        butterKnife: '8.2.1',
+        dagger: '2.6',
+        dart: '2.0.0',
+        dexmaker: '1.4',
+        dbFlow: '3.1.1',
+        espresso: '2.2.2',
+        firebase: '9.2.1',
+        fragmentArgs: '3.0.2',
+        gson: '1.7.2',
+        jsr305: '3.0.1',
+        junit: '4.12',
+        localDateBackport: '1.0.4',
+        lombok: '1.16.10',
+        mockito: '1.10.19',
+        okHttp: '3.6.0',
+        okio: '1.11.0',
+        playServices: '10.2.1',
+        parceler: '1.1.5',
+        restMock: '0.1.3',
+        retrofit: '2.2.0',
+        rxAndroid: '2.0.1',
+        rxJava: '2.0.7',
+        rxLifecycle: '2.0.1',
+        stream: '1.1.6',
+        timber: '4.3.0',
+    ]
+}

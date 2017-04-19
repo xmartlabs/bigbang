@@ -5,8 +5,7 @@ import android.support.annotation.NonNull;
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
 import com.xmartlabs.base.core.exception.EntityNotFoundException;
-import com.xmartlabs.base.core.exception.ServiceExceptionWithMessage;
-import com.xmartlabs.base.core.log.LoggerTree;
+import com.xmartlabs.base.core.helper.function.Consumer;
 import com.xmartlabs.base.core.model.BuildInfo;
 
 import java.net.ConnectException;
@@ -20,18 +19,12 @@ import java.util.concurrent.CancellationException;
 import javax.inject.Inject;
 
 import io.reactivex.exceptions.CompositeException;
-import io.reactivex.functions.Consumer;
 import lombok.Getter;
-import retrofit2.HttpException;
 import timber.log.Timber;
 
+/** Handles any {@link Throwable} thrown. */
 @SuppressWarnings("unused")
 public final class GeneralErrorHelper {
-  private static final String CRASHLYTICS_KEY_RESPONSE_BODY = "response_body";
-  private static final String CRASHLYTICS_KEY_RESPONSE_HEADERS = "response_headers";
-  private static final String CRASHLYTICS_KEY_STATUS_CODE = "status_code";
-  public static final String CRASHLYTICS_KEY_URL = "url";
-
   private final List<Class<?>> UNTRACKED_CLASSES = Arrays.asList(
       CancellationException.class,
       ConnectException.class,
@@ -42,17 +35,17 @@ public final class GeneralErrorHelper {
   private final StackTraceElement[] DUMMY_STACK_TRACE_ELEMENT_ARRAY =
       new StackTraceElement[] {DUMMY_STACK_TRACE_ELEMENT};
 
-  private final LoggerTree loggerTree;
+  private final Map<Class<? extends Throwable>, Consumer<? super Throwable>> throwableHandlers = new HashMap<>();
+
   private final BuildInfo buildInfo;
 
   @Inject
-  public GeneralErrorHelper(@NonNull LoggerTree loggerTree, @NonNull BuildInfo buildInfo) {
-    this.loggerTree = loggerTree;
+  public GeneralErrorHelper(@NonNull BuildInfo buildInfo) {
     this.buildInfo = buildInfo;
   }
 
   @Getter
-  final Consumer<? super Throwable> generalErrorAction = t -> {
+  private final io.reactivex.functions.Consumer<? super Throwable> generalErrorAction = t -> {
     if (t instanceof CompositeException) {
       CompositeException compositeException = (CompositeException) t;
       Stream.of(compositeException.getExceptions())
@@ -62,16 +55,6 @@ public final class GeneralErrorHelper {
     }
     markExceptionAsHandled(t);
   };
-
-  private void logError(ServiceExceptionWithMessage exceptionWithMessage) {
-    Map<String, String> information = new HashMap<>();
-    information.put(CRASHLYTICS_KEY_URL, ServiceHelper.getUrl(exceptionWithMessage.getResponse().raw()));
-    information.put(CRASHLYTICS_KEY_STATUS_CODE, String.valueOf(exceptionWithMessage.getCode()));
-    information.put(CRASHLYTICS_KEY_RESPONSE_HEADERS, exceptionWithMessage.getResponse().headers().toString());
-    information.put(CRASHLYTICS_KEY_RESPONSE_BODY, exceptionWithMessage.getErrorBody());
-
-    loggerTree.log(information, exceptionWithMessage);
-  }
 
   private void handleException(Throwable throwable) {
     if (!shouldHandleThrowable(throwable)) {
@@ -83,28 +66,20 @@ public final class GeneralErrorHelper {
       return;
     }
 
-    if (throwable instanceof HttpException || throwable instanceof ServiceExceptionWithMessage) {
+    if (throwableHandlers.containsKey(throwable.getClass())) {
       if (exceptionIsAlreadyBeingHandled(throwable)) {
         return;
       }
-      ServiceExceptionWithMessage exceptionWithMessage = throwable instanceof ServiceExceptionWithMessage
-          ? (ServiceExceptionWithMessage) throwable
-          : new ServiceExceptionWithMessage((HttpException) throwable);
-      logError(exceptionWithMessage);
+      throwableHandlers.get(throwable.getClass()).accept(throwable);
     } else {
       Timber.e(throwable);
     }
   }
 
   private boolean shouldHandleThrowable(Throwable throwable) {
-    return !(exceptionIsAlreadyBeingHandled(throwable)
-        || UNTRACKED_CLASSES.contains(throwable.getClass())
-        || (throwable instanceof ServiceExceptionWithMessage
-        && !shouldHandleServiceExceptionWithMessage((ServiceExceptionWithMessage) throwable)));
-  }
-
-  private boolean shouldHandleServiceExceptionWithMessage(ServiceExceptionWithMessage exception) {
-    return exception.getErrorListSize() <= 0;
+    return !exceptionIsAlreadyBeingHandled(throwable)
+        || !UNTRACKED_CLASSES.contains(throwable.getClass())
+        || throwableHandlers.containsKey(throwable.getClass());
   }
 
   private boolean exceptionIsAlreadyBeingHandled(Throwable t) {
@@ -113,5 +88,15 @@ public final class GeneralErrorHelper {
 
   private void markExceptionAsHandled(Throwable t) {
     t.setStackTrace(DUMMY_STACK_TRACE_ELEMENT_ARRAY);
+  }
+
+  /**
+   * Add a new handler for a specific {@link Throwable} class.
+   *
+   * @param clazz the {@link Throwable} class to be handled
+   * @param handler the handler for the specified {@link Throwable}
+   */
+  public void setErrorHandlerForThrowable(Class<? extends Throwable> clazz, Consumer<? super Throwable> handler) {
+    throwableHandlers.put(clazz, handler);
   }
 }

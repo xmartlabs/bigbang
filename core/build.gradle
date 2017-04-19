@@ -1,147 +1,51 @@
 apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
-def artifact = "core"
-def versionCodeId = "0.1.2"
-
-group = "com.xmartlabs.base"
-version = versionCodeId
-
 ext {
-    PUBLISH_GROUP_ID = group
-    PUBLISH_ARTIFACT_ID = artifact
-    PUBLISH_VERSION = version
+    projectName = "Core"
+    versionCodeId = 1
+    versionCodeNumber = "0.1.6"
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "core"
+    PUBLISH_VERSION = versionCodeNumber
 }
 
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
-    }
-}
+group = applicationId
+version = versionCodeNumber
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-    maven { url "https://jitpack.io" }
-    maven { url 'https://maven.fabric.io/public' }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
-def getSignInformation = { keystorePath, keystorePropertyPath ->
-    def keyStore = file(keystorePath)
-    if (!keyStore.exists()) {
-        logger.error("Keystore file not found, path=${keyStore.absolutePath}")
-        return
-    }
-    def propertiesFile = file(keystorePropertyPath)
-    if (!propertiesFile.exists()) {
-        logger.error("Keystore properties file not found, path=${propertiesFile.absolutePath}")
-        return
-    }
-    def Properties properties = new Properties()
-    properties.load(new FileInputStream(propertiesFile))
-    return [
-            storeFile    : keyStore,
-            storePassword: properties["store_password"],
-            keyAlias     : properties["key_alias"],
-            keyPassword  : properties["key_password"]
-    ]
-}
-
-def getBintrayInformation = { propertyFilePath ->
-    def propertiesFile = file(propertyFilePath)
-    if (!propertiesFile.exists()) {
-        logger.error("Bintray properties file not found, path=${propertiesFile.absolutePath}")
-        return
-    }
-    def Properties properties = new Properties()
-    properties.load(new FileInputStream(propertiesFile))
-    return [
-            user  : properties["bintray_user"],
-            apiKey: properties["bintray_api_key"],
-    ]
-}
-
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
     dexOptions {
         javaMaxHeapSize '4g'
     }
     defaultConfig {
         group group
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 1
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-    }
-    signingConfigs {
-        //noinspection GroovyMissingReturnStatement
-        release {
-            def signInformation = getSignInformation("release.keystore", "keystore.properties")
-            if (signInformation != null) {
-                storeFile signInformation.storeFile
-                storePassword signInformation.storePassword
-                keyAlias signInformation.keyAlias
-                keyPassword signInformation.keyPassword
-            }
-        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
     }
     lintOptions {
-        abortOnError false
+        warning 'InvalidPackage'
     }
-}
-
-task generateJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    options.linkSource true
-    classpath = configurations.compile
-    classpath += project.files(android.getBootClasspath()
-            .join(File.pathSeparator))
-    failOnError false
-}
-
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-task generateJavadocsJar(type: Jar) {
-    from generateJavadocs.destinationDir
-    classifier 'javadoc'
-}
-
-generateJavadocsJar.dependsOn generateJavadocs
-
-artifacts {
-    archives generateJavadocsJar
-    archives generateSourcesJar
 }
 
 dependencies {
@@ -150,72 +54,43 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile "com.crittercism.dexmaker:dexmaker:${project.ext.dexmakerVersion}"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${project.ext.dexmakerVersion}"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${project.ext.dexmakerVersion}"
-    androidTestCompile "junit:junit:4.12"
-    androidTestCompile "org.mockito:mockito-core:${project.ext.mockitoVersion}"
-    apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
-    apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${project.ext.dbFlowVersion}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${project.ext.bulletVersion}"
-    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
-    compile "com.android.support:appcompat-v7:${project.ext.androidSupportVersion}"
-    compile "com.android.support:design:${project.ext.androidSupportVersion}"
-    compile "com.annimon:stream:${project.ext.streamVersion}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker:${libraryVersion.dexmaker}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${libraryVersion.dexmaker}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
+    androidTestCompile "junit:junit:${libraryVersion.junit}"
+    androidTestCompile "org.mockito:mockito-core:${libraryVersion.mockito}"
+    apt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
+    apt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
+    apt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:design:${libraryVersion.androidSupport}"
+    compile "com.annimon:stream:${libraryVersion.stream}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
     }
-    compile "com.f2prateek.dart:dart:${project.ext.dartVersion}"
-    compile "com.f2prateek.dart:henson:${project.ext.dartVersion}"
+    compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${project.ext.dbFlowVersion}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${project.ext.dbFlowVersion}"
     compile 'com.github.square.picasso:picasso:8c16e8564e'
-    compile "com.github.tbroyer.bullet:bullet:${project.ext.bulletVersion}"
-    compile "com.google.android.gms:play-services-base:${project.ext.playServicesVersion}"
-    compile "com.google.dagger:dagger:${project.ext.daggerVersion}"
-    compile "com.jakewharton.threetenabp:threetenabp:${project.ext.localDateBackportVersion}"
-    compile "com.jakewharton.timber:timber:${project.ext.timberVersion}"
-    compile "com.squareup.retrofit2:converter-gson:${project.ext.retrofitVersion}"
-    compile "com.squareup.retrofit2:adapter-rxjava2:${project.ext.retrofitVersion}"
-    compile "com.squareup.retrofit2:retrofit:${project.ext.retrofitVersion}"
-    compile "com.squareup.okhttp3:okhttp:${project.ext.okHttpVersion}"
-    compile "com.squareup.okhttp3:logging-interceptor:${project.ext.okHttpVersion}"
+    compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    compile "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
+    compile "com.google.dagger:dagger:${libraryVersion.dagger}"
+    compile "com.google.code.gson:gson:${libraryVersion.gson}"
+    compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
+    compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
+    compile "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-    compile "io.reactivex.rxjava2:rxandroid:${project.ext.rxAndroidVersion}"
-    provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
-    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
-    testCompile "junit:junit:${project.ext.junitVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
+    testCompile "junit:junit:${libraryVersion.junit}"
     testCompile ('org.threeten:threetenbp:1.3.2') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }
 
-bintray {
-    def bintrayInfo = getBintrayInformation("../bintray.properties")
-    if (bintrayInfo == null) {
-        return
-    }
-
-    user = bintrayInfo.user
-    key = bintrayInfo.apiKey
-    pkg {
-        repo = 'Android-Base-Project'
-        name = 'Core'
-        userOrg = 'xmartlabs'
-
-        version {
-            name = versionCodeId
-            released = new Date()
-            vcsTag = "${versionCodeId}"
-        }
-
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/xmartlabs/Android-Base-Project.git'
-        websiteUrl = 'https://github.com/xmartlabs/Android-Base-Project'
-    }
-    configurations = ['archives']
-}
-
+apply from: '../bintray.gradle'
 apply from: '../circleci.gradle'

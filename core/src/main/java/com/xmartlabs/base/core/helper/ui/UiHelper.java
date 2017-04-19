@@ -6,7 +6,6 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.util.Pair;
 import android.text.InputType;
