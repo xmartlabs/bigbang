@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 
 ext {
     projectName = "DbFlow"
+    versionCodeId = 1
     versionCodeNumber = "0.1.0"
     PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = "dbflow"
@@ -47,14 +48,13 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbFlowVersion}"
-    apt "org.projectlombok:lombok:${lombokVersion}"
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbFlowVersion}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${dbFlowVersion}"
-    compile "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
-    compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    provided "org.projectlombok:lombok:${lombokVersion}"
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${libraryVersion.dbFlow}"
+    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${libraryVersion.dbFlow}"
+    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
 }
 
 apply from: '../bintray.gradle'

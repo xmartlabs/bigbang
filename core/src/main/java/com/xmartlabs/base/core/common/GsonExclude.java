@@ -1,4 +1,4 @@
-package com.xmartlabs.base.retrofit.common;
+package com.xmartlabs.base.core.common;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

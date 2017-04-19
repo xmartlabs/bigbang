@@ -3,6 +3,7 @@ apply plugin: 'com.android.library'
 
 ext {
     projectName = "Core"
+    versionCodeId = 1
     versionCodeNumber = "0.1.6"
     PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = "core"
@@ -53,39 +54,39 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}"
-    androidTestCompile "junit:junit:${junitVersion}"
-    androidTestCompile "org.mockito:mockito-core:${mockitoVersion}"
-    apt "com.f2prateek.dart:dart-processor:${dartVersion}"
-    apt "com.f2prateek.dart:henson-processor:${dartVersion}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${bulletVersion}"
-    apt "org.projectlombok:lombok:${lombokVersion}"
-    compile "com.android.support:appcompat-v7:${androidSupportVersion}"
-    compile "com.android.support:design:${androidSupportVersion}"
-    compile "com.annimon:stream:${streamVersion}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker:${libraryVersion.dexmaker}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${libraryVersion.dexmaker}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
+    androidTestCompile "junit:junit:${libraryVersion.junit}"
+    androidTestCompile "org.mockito:mockito-core:${libraryVersion.mockito}"
+    apt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
+    apt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
+    apt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:design:${libraryVersion.androidSupport}"
+    compile "com.annimon:stream:${libraryVersion.stream}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
     }
-    compile "com.f2prateek.dart:dart:${dartVersion}"
-    compile "com.f2prateek.dart:henson:${dartVersion}"
+    compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
     compile 'com.github.square.picasso:picasso:8c16e8564e'
-    compile "com.github.tbroyer.bullet:bullet:${bulletVersion}"
-    compile "com.google.android.gms:play-services-base:${playServicesVersion}"
-    compile "com.google.dagger:dagger:${daggerVersion}"
-    compile "com.google.code.gson:gson:${gsonVersion}"
-    compile "com.jakewharton.threetenabp:threetenabp:${localDateBackportVersion}"
-    compile "com.jakewharton.timber:timber:${timberVersion}"
-    compile "com.squareup.okhttp3:okhttp:${okHttpVersion}"
-    compile "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
+    compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    compile "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
+    compile "com.google.dagger:dagger:${libraryVersion.dagger}"
+    compile "com.google.code.gson:gson:${libraryVersion.gson}"
+    compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
+    compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
+    compile "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
-    compile "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
-    compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
-    provided "com.google.dagger:dagger-compiler:${daggerVersion}"
-    provided "org.projectlombok:lombok:${lombokVersion}"
-    testCompile "junit:junit:${junitVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
+    testCompile "junit:junit:${libraryVersion.junit}"
     testCompile ('org.threeten:threetenbp:1.3.2') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }

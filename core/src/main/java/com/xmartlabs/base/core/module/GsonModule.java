@@ -12,11 +12,13 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class GsonModule {
+public class GsonModule extends GsonExclusionStrategy {
   @Provides
   @Singleton
   public Gson provideGson(GsonBuilder gsonBuilder) {
-    return gsonBuilder.create();
+    return gsonBuilder
+        .setExclusionStrategies(getExclusionStrategy(null))
+        .create();
   }
 
   @NonNull

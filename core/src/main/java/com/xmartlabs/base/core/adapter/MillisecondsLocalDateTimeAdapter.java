@@ -1,4 +1,4 @@
-package com.xmartlabs.base.retrofit.adapter;
+package com.xmartlabs.base.core.adapter;
 
 import com.annimon.stream.Exceptional;
 import com.annimon.stream.Optional;
@@ -12,29 +12,29 @@ import com.google.gson.JsonSerializer;
 import com.xmartlabs.base.core.helper.StringUtils;
 
 import org.threeten.bp.Instant;
-import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneOffset;
 
 import java.lang.reflect.Type;
 
 import timber.log.Timber;
 
-/** {@link Gson} type adapter that serializes {@link LocalDate} objects to a millisecond format. */
-public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
+/** {@link Gson} type adapter that serializes {@link LocalDateTime} objects to a millisecond format */
+public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
   @Override
-  public synchronized JsonElement serialize(LocalDate date, Type type,
+  public synchronized JsonElement serialize(LocalDateTime dateTime, Type type,
                                             JsonSerializationContext jsonSerializationContext) {
-    return Optional.ofNullable(date)
-        .map(theDate -> new JsonPrimitive(theDate.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()))
+    return Optional.ofNullable(dateTime)
+        .map(date -> new JsonPrimitive(date.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()))
         .orElse(null);
   }
 
   @Override
-  public synchronized LocalDate deserialize(JsonElement jsonElement, Type type,
-                                            JsonDeserializationContext jsonDeserializationContext) {
+  public synchronized LocalDateTime deserialize(JsonElement jsonElement, Type type,
+                                                JsonDeserializationContext jsonDeserializationContext) {
     return Optional.ofNullable(jsonElement.getAsString())
         .filter(str -> !StringUtils.isNullOrEmpty(str))
-        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDate())
+        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDateTime())
             .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
             .getOptional())
         .orElse(null);

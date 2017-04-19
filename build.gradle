@@ -13,14 +13,13 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "http://dl.bintray.com/populov/maven"; }
-        maven { url 'https://maven.fabric.io/public' }
-        jcenter()
         flatDir {
             dirs 'libs'
         }
-        maven { url "https://jitpack.io" }
         maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://jitpack.io" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "http://dl.bintray.com/populov/maven"; }
+        jcenter()
     }
 }

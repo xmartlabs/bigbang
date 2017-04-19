@@ -5,7 +5,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.xmartlabs.base.retrofit.common.GsonRequired;
+import com.xmartlabs.base.core.common.GsonRequired;
 import com.xmartlabs.base.retrofit.exception.JsonRequiredFieldException;
 
 import java.lang.reflect.Field;
