@@ -1,20 +1,17 @@
 apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
-def artifact = "retrofit"
-def versionCodeId = 1
-
-project.ext.projectName = "Retrofit"
-project.ext.versionCodeNumber = "0.1.0"
-
-group = "com.xmartlabs.base"
-version = versionCodeNumber
-
 ext {
-    PUBLISH_GROUP_ID = group
+    artifact = "retrofit"
+    projectName = "Retrofit"
+    versionCodeNumber = "0.1.0"
+    PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = artifact
-    PUBLISH_VERSION = version
+    PUBLISH_VERSION = versionCodeNumber
 }
+
+group = applicationId
+version = versionCodeNumber
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
@@ -40,23 +37,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
+    }
+    lintOptions {
+        warning 'InvalidPackage'
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
-    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
-    compile "com.jakewharton.threetenabp:threetenabp:${project.ext.localDateBackportVersion}"
-    compile "com.squareup.retrofit2:converter-gson:${project.ext.retrofitVersion}"
-    compile "com.squareup.retrofit2:adapter-rxjava2:${project.ext.retrofitVersion}"
-    compile "com.squareup.retrofit2:retrofit:${project.ext.retrofitVersion}"
-    compile "io.reactivex.rxjava2:rxandroid:${project.ext.rxAndroidVersion}"
-    compile "io.reactivex.rxjava2:rxjava:${project.ext.rxJavaVersion}"
-    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
-    testCompile "junit:junit:${project.ext.junitVersion}"
+    apt "org.projectlombok:lombok:${lombokVersion}"
+    compile "com.jakewharton.threetenabp:threetenabp:${localDateBackportVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    provided "org.projectlombok:lombok:${lombokVersion}"
+    testCompile "junit:junit:${junitVersion}"
     testCompile ('org.threeten:threetenbp:1.3.2') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }

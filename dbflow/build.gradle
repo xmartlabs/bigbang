@@ -1,20 +1,17 @@
 apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
-def artifact = "dbflow"
-def versionCodeId = 1
-
-project.ext.projectName = "DbFlow"
-project.ext.versionCodeNumber = "0.1.0"
-
-group = "com.xmartlabs.base"
-version = versionCodeNumber
-
 ext {
-    PUBLISH_GROUP_ID = group
+    artifact = "dbflow"
+    projectName = "DbFlow"
+    versionCodeNumber = "0.1.0"
+    PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = artifact
-    PUBLISH_VERSION = version
+    PUBLISH_VERSION = versionCodeNumber
 }
+
+group = applicationId
+version = versionCodeNumber
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
@@ -40,22 +37,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
+    }
+    lintOptions {
+        warning 'InvalidPackage'
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${project.ext.dbFlowVersion}"
-    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbFlowVersion}"
+    apt "org.projectlombok:lombok:${lombokVersion}"
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${project.ext.dbFlowVersion}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${project.ext.dbFlowVersion}"
-    compile "io.reactivex.rxjava2:rxandroid:${project.ext.rxAndroidVersion}"
-    compile "io.reactivex.rxjava2:rxjava:${project.ext.rxJavaVersion}"
-    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbFlowVersion}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbFlowVersion}"
+    compile "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    compile "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    provided "org.projectlombok:lombok:${lombokVersion}"
 }
 
 apply from: '../bintray.gradle'
