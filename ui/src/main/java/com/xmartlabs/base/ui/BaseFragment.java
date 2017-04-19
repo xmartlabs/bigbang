@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui;
+package com.xmartlabs.base.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import com.annimon.stream.Optional;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.trello.rxlifecycle2.components.support.RxFragment;
-import com.xmartlabs.template.BaseProjectApplication;
-import com.xmartlabs.template.ui.common.BaseProgressDialog;
 
 import javax.inject.Inject;
+import com.xmartlabs.base.core.Injector;
+import com.xmartlabs.base.ui.common.BaseProgressDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -53,6 +53,7 @@ public abstract class BaseFragment extends RxFragment {
     super.onCreate(savedInstanceState);
     FragmentArgs.inject(this);
     BaseProjectApplication.getContext().inject(this);
+    Injector.inject(this);
   }
 
   @NonNull

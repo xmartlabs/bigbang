@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.f2prateek.dart.Dart;
 import com.trello.rxlifecycle2.components.RxActivity;
+import com.xmartlabs.base.core.Injector;
 
 import bullet.ObjectGraph;
 
@@ -21,6 +22,6 @@ public abstract class BaseActivity extends RxActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Dart.inject(this);
-    UIInjector.inject(this);
+    Injector.inject(this);
   }
 }

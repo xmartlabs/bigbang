@@ -183,6 +183,7 @@ dependencies {
     compile "com.trello.rxlifecycle2:rxlifecycle:${project.ext.rxLifecycleVersion}"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${project.ext.rxLifecycleVersion}"
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(path: ':core')
 
     provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
     provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
