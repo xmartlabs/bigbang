@@ -1,0 +1,65 @@
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    options.linkSource true
+    classpath = configurations.compile
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+    failOnError false
+}
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+
+def getBintrayInformation = { propertyFilePath ->
+    def propertiesFile = file(propertyFilePath)
+    if (!propertiesFile.exists()) {
+        logger.error("Bintray properties file not found, path=${propertiesFile.absolutePath}")
+        return
+    }
+    def Properties properties = new Properties()
+    properties.load(new FileInputStream(propertiesFile))
+    return [
+            user  : properties["bintray_user"],
+            apiKey: properties["bintray_api_key"],
+    ]
+}
+
+bintray {
+    def bintrayInfo = getBintrayInformation("../bintray.properties")
+    if (bintrayInfo == null) {
+        return
+    }
+
+    user = bintrayInfo.user
+    key = bintrayInfo.apiKey
+    pkg {
+        repo = 'Android-Base-Project'
+        name = "${project.ext.projectName}"
+        userOrg = 'xmartlabs'
+
+        version {
+            name = project.ext.versionCodeNumber
+            released = new Date()
+            vcsTag = "${project.ext.versionCodeNumber}"
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/xmartlabs/Android-Base-Project.git'
+        websiteUrl = 'https://github.com/xmartlabs/Android-Base-Project'
+    }
+    configurations = ['archives']
+}

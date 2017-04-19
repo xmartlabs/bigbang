@@ -1,21 +1,15 @@
 package com.xmartlabs.template.model;
 
-import android.support.annotation.NonNull;
+import com.xmartlabs.base.core.model.SessionType;
 
 import org.parceler.Parcel;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Parcel
 @ToString(callSuper = true)
-public class Session extends AuthResponse {
+public class Session implements SessionType {
   String accessToken;
-  Integer databaseVersion;
-
-  public void updateSession(@NonNull AuthResponse authResponse) {
-  }
 }

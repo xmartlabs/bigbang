@@ -1,0 +1,66 @@
+apply from: '../versions.gradle'
+apply plugin: 'com.android.library'
+
+ext {
+    projectName = "Retrofit"
+    versionCodeId = 1
+    versionCodeNumber = "0.1.0"
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "retrofit"
+    PUBLISH_VERSION = versionCodeNumber
+}
+
+group = applicationId
+version = versionCodeNumber
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
+    }
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':core')
+    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    compile "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${libraryVersion.retrofit}"
+    compile "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
+    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
+    testCompile "junit:junit:${libraryVersion.junit}"
+    testCompile ('org.threeten:threetenbp:1.3.2') {
+        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
+    }
+}
+
+apply from: '../bintray.gradle'
+apply from: '../circleci.gradle'

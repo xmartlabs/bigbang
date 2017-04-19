@@ -1,20 +1,16 @@
 package com.xmartlabs.template;
 
-import com.xmartlabs.template.controller.AuthController;
-import com.xmartlabs.template.controller.Controller;
-import com.xmartlabs.template.controller.ServiceController;
+import com.xmartlabs.base.core.controller.Controller;
+import com.xmartlabs.base.core.controller.SharedPreferencesController;
+import com.xmartlabs.base.core.module.CoreAndroidModule;
+import com.xmartlabs.base.core.module.GsonModule;
+import com.xmartlabs.base.core.module.LoggerModule;
+import com.xmartlabs.base.core.module.OkHttpModule;
+import com.xmartlabs.base.core.module.PicassoModule;
+import com.xmartlabs.base.retrofit.module.RestServiceModule;
+import com.xmartlabs.base.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.controller.SharedPreferencesController;
-import com.xmartlabs.template.helper.GeneralErrorHelper;
-import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.ControllerModule;
-import com.xmartlabs.template.module.GsonModule;
-import com.xmartlabs.template.module.LoggerModule;
-import com.xmartlabs.template.module.OkHttpModule;
-import com.xmartlabs.template.module.PicassoModule;
-import com.xmartlabs.template.module.ReceiverModule;
-import com.xmartlabs.template.module.RestServiceModule;
-import com.xmartlabs.template.module.SessionInterceptor;
 import com.xmartlabs.template.ui.BaseActivity;
 import com.xmartlabs.template.ui.BaseAppCompatActivity;
 import com.xmartlabs.template.ui.BaseFragment;
@@ -28,13 +24,14 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {
-    AndroidModule.class,
+    CoreAndroidModule.class,
     ControllerModule.class,
     LoggerModule.class,
     GsonModule.class,
+    ServiceGsonModule.class,
+    LoggerModule.class,
     OkHttpModule.class,
     PicassoModule.class,
-    ReceiverModule.class,
     RestServiceModule.class,
 })
 public interface ApplicationComponent {
@@ -50,13 +47,7 @@ public interface ApplicationComponent {
   void inject(BaseFragment baseFragment);
 
   void inject(Controller controller);
-  void inject(ServiceController serviceController);
-
-  void inject(AuthController authController);
   void inject(SessionController sessionController);
+
   void inject(SharedPreferencesController sharedPreferencesController);
-
-  void inject(SessionInterceptor sessionInterceptor);
-
-  void inject(GeneralErrorHelper generalErrorHelper);
 }
