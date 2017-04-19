@@ -16,32 +16,10 @@ ext {
     PUBLISH_VERSION = version
 }
 
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
-    }
-}
-
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-    maven { url "https://jitpack.io" }
-    maven { url 'https://maven.fabric.io/public' }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -109,6 +87,9 @@ dependencies {
     provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
     provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
     testCompile "junit:junit:${project.ext.junitVersion}"
+    testCompile ('org.threeten:threetenbp:1.3.2') {
+        exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
+    }
 }
 
 apply from: '../bintray.gradle'

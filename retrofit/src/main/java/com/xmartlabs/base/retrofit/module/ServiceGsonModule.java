@@ -17,17 +17,22 @@ import com.xmartlabs.base.retrofit.deserialized.RequiredFieldDeserializer;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 
-public class GsonModule extends com.xmartlabs.base.core.module.GsonModule {
-  @Override
-  public Gson provideGson(GsonBuilder gsonBuilder) {
-    return gsonBuilder
-        .setExclusionStrategies(getExclusionStrategy(null))
-        .create();
-  }
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-  @Override
-  public Gson provideServiceGson(GsonBuilder gsonBuilder) {
-    gsonBuilder
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+public class ServiceGsonModule {
+  public static final String SERVICE_GSON_NAME = "ServiceGson";
+
+  @Named(SERVICE_GSON_NAME)
+  @Provides
+  @Singleton
+  @SuppressWarnings("unused")
+  public Gson provideServiceGson(@NonNull GsonBuilder gsonBuilder, @NonNull BuildInfo buildInfo) {
+    modifyGsonBuilder(gsonBuilder, buildInfo)
         .setExclusionStrategies(getExclusionStrategy(GsonExclude.Strategy.SERVICE))
         .registerTypeAdapter(LocalDateTime.class, new MillisecondsLocalDateTimeAdapter())
         .registerTypeAdapter(LocalDate.class, new MillisecondsLocalDateAdapter());

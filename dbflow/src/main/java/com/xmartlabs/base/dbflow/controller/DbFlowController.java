@@ -121,9 +121,9 @@ public abstract class DbFlowController<Id, D extends DatabaseModel<Id>> extends 
   }
 
   /**
-   * Retrieves the type of the AppDataBase class
-   * @param <T> the type of the AppDataBase class
-   * @return the type of the AppDataBase class
+   * Retrieves the type of the AppDataBase model class
+   * @param <T> the type of the AppDataBase model class
+   * @return the type of the AppDataBase model class
    */
   protected abstract <T> Class<T> getAppDataBaseClass();
 }

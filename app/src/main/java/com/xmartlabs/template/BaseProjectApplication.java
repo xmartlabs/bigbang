@@ -16,7 +16,7 @@ import com.xmartlabs.base.core.rx.error.MaybeObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.ObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.SingleObserverWithErrorHandling;
 import com.xmartlabs.base.retrofit.helper.ServiceErrorHandler;
-import com.xmartlabs.base.retrofit.module.GsonModule;
+import com.xmartlabs.base.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.module.AndroidModule;
 
 import javax.inject.Inject;
@@ -66,7 +66,6 @@ public class BaseProjectApplication extends Application {
   protected ApplicationComponent createComponent() {
     return DaggerApplicationComponent.builder()
         .coreAndroidModule(new AndroidModule(this))
-        .gsonModule(new GsonModule())
         .build();
   }
 

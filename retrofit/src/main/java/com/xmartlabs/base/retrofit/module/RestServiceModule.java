@@ -44,7 +44,7 @@ public class RestServiceModule {
 
   @Provides
   @Singleton
-  GsonConverterFactory provideGsonConverterFactory(@Named(GsonModule.SERVICE_GSON_NAME) Gson gson) {
+  GsonConverterFactory provideGsonConverterFactory(@Named(ServiceGsonModule.SERVICE_GSON_NAME) Gson gson) {
     return GsonConverterFactory.create(gson);
   }
 

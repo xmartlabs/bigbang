@@ -8,6 +8,7 @@ import com.xmartlabs.base.core.module.LoggerModule;
 import com.xmartlabs.base.core.module.OkHttpModule;
 import com.xmartlabs.base.core.module.PicassoModule;
 import com.xmartlabs.base.retrofit.module.RestServiceModule;
+import com.xmartlabs.base.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.ui.BaseActivity;
@@ -26,6 +27,7 @@ import dagger.Component;
     CoreAndroidModule.class,
     ControllerModule.class,
     GsonModule.class,
+    ServiceGsonModule.class,
     LoggerModule.class,
     OkHttpModule.class,
     PicassoModule.class,
