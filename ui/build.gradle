@@ -1,18 +1,17 @@
 apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
-def artifact = "ui"
-def versionCodeId = "0.1.0"
-def versionCodeNumber = 1
-
-group = "com.xmartlabs.base"
-version = versionCodeId
-
 ext {
-    PUBLISH_GROUP_ID = group
-    PUBLISH_ARTIFACT_ID = artifact
-    PUBLISH_VERSION = version
+    projectName = "Ui"
+    versionCodeId = 1
+    versionCodeNumber = "0.1.0"
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "ui"
+    PUBLISH_VERSION = versionCodeNumber
 }
+
+group = applicationId
+version = versionCodeNumber
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 apply plugin: 'com.android.library'
@@ -20,64 +19,6 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-
-
-buildscript {
-    repositories {
-        jcenter()
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath "com.jakewharton:butterknife-gradle-plugin:8.2.1"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
-    }
-}
-
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
-    maven { url "https://jitpack.io" }
-    maven { url 'https://maven.fabric.io/public' }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
-def getSignInformation = { keystorePath, keystorePropertyPath ->
-    def keyStore = file(keystorePath)
-    if (!keyStore.exists()) {
-        logger.error("Keystore file not found, path=${keyStore.absolutePath}")
-        return
-    }
-    def propertiesFile = file(keystorePropertyPath)
-    if (!propertiesFile.exists()) {
-        logger.error("Keystore properties file not found, path=${propertiesFile.absolutePath}")
-        return
-    }
-    def Properties properties = new Properties()
-    properties.load(new FileInputStream(propertiesFile))
-    return [
-            storeFile    : keyStore,
-            storePassword: properties["store_password"],
-            keyAlias     : properties["key_alias"],
-            keyPassword  : properties["key_password"]
-    ]
-}
-
-def getBintrayInformation = { propertyFilePath ->
-    def propertiesFile = file(propertyFilePath)
-    if (!propertiesFile.exists()) {
-        logger.error("Bintray properties file not found, path=${propertiesFile.absolutePath}")
-        return
-    }
-    def Properties properties = new Properties()
-    properties.load(new FileInputStream(propertiesFile))
-    return [
-            user  : properties["bintray_user"],
-            apiKey: properties["bintray_api_key"],
-    ]
-}
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -89,30 +30,16 @@ android {
         group group
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
-        versionCode versionCodeNumber
+        versionCode versionCodeId
         versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-    }
-
-    signingConfigs {
-        //noinspection GroovyMissingReturnStatement
-        release {
-            def signInformation = getSignInformation("release.keystore", "keystore.properties")
-            if (signInformation != null) {
-                storeFile signInformation.storeFile
-                storePassword signInformation.storePassword
-                keyAlias signInformation.keyAlias
-                keyPassword signInformation.keyPassword
-            }
-        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
     }
 
@@ -122,34 +49,8 @@ android {
     }
 
     lintOptions {
-        abortOnError false
+        warning 'InvalidPackage'
     }
-}
-
-task generateJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    options.linkSource true
-    classpath = configurations.compile
-    classpath += project.files(android.getBootClasspath()
-            .join(File.pathSeparator))
-    failOnError false
-}
-
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-task generateJavadocsJar(type: Jar) {
-    from generateJavadocs.destinationDir
-    classifier 'javadoc'
-}
-
-generateJavadocsJar.dependsOn generateJavadocs
-
-artifacts {
-    archives generateJavadocsJar
-    archives generateSourcesJar
 }
 
 dependencies {
@@ -157,64 +58,39 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    apt "com.f2prateek.dart:dart-processor:${project.ext.dartVersion}"
-    apt "com.f2prateek.dart:henson-processor:${project.ext.dartVersion}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${project.ext.bulletVersion}"
-    apt "com.hannesdorfmann.fragmentargs:processor:${project.ext.fragmentArgsVersion}"
-    apt "com.jakewharton:butterknife-compiler:${project.ext.butterKnifeVersion}"
-    apt "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    apt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
+    apt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
+    apt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    apt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
+    apt "com.jakewharton:butterknife-compiler:${libraryVersion.butterKnife}"
+    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
 
-    compile "com.android.support:appcompat-v7:${project.ext.androidSupportVersion}"
-    compile "com.android.support:recyclerview-v7:${project.ext.androidSupportVersion}"
-    compile "com.android.support:design:${project.ext.androidSupportVersion}"
-    compile "com.android.support:recyclerview-v7:${project.ext.androidSupportVersion}"
-    compile "com.android.support:support-v13:${project.ext.androidSupportVersion}"
-    compile "com.annimon:stream:${project.ext.streamVersion}"
-    compile("com.crashlytics.sdk.android:crashlytics:${project.ext.crashlyticsVersion}") {
+    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:design:${libraryVersion.androidSupport}"
+    compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    compile "com.annimon:stream:${libraryVersion.stream}"
+    compile("com.crashlytics.sdk.android:crashlytics:${libraryVersion.crashlytics}") {
         transitive = true
     }
-    compile "com.f2prateek.dart:dart:${project.ext.dartVersion}"
-    compile "com.f2prateek.dart:henson:${project.ext.dartVersion}"
-    compile "com.github.tbroyer.bullet:bullet:${project.ext.bulletVersion}"
-    compile "com.google.dagger:dagger:${project.ext.daggerVersion}"
-    compile "com.hannesdorfmann.fragmentargs:annotation:${project.ext.fragmentArgsVersion}"
-    compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${project.ext.fragmentArgsVersion}"
-    compile "com.jakewharton:butterknife:${project.ext.butterKnifeVersion}"
-    compile "com.trello.rxlifecycle2:rxlifecycle:${project.ext.rxLifecycleVersion}"
-    compile "com.trello.rxlifecycle2:rxlifecycle-components:${project.ext.rxLifecycleVersion}"
+    compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
+    compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    compile "com.google.dagger:dagger:${libraryVersion.daggerVersion}"
+    compile "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
+    compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
+    compile "com.jakewharton:butterknife:${libraryVersion.butterKnife}"
+    compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':core')
 
-    provided "com.google.dagger:dagger-compiler:${project.ext.daggerVersion}"
-    provided "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
 
-    testCompile "junit:junit:${project.ext.junitVersion}"
+    testCompile "junit:junit:${libraryVersion.junit}"
 }
 
-bintray {
-    def bintrayInfo = getBintrayInformation("../bintray.properties")
-    if (bintrayInfo == null) {
-        return
-    }
-
-    user = bintrayInfo.user
-    key = bintrayInfo.apiKey
-    pkg {
-        repo = 'Android-Base-Project'
-        name = 'Ui'
-        userOrg = 'xmartlabs'
-
-        version {
-            name = versionCodeId
-            released = new Date()
-            vcsTag = "${versionCodeId}"
-        }
-
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/xmartlabs/Android-Base-Project.git'
-        websiteUrl = 'https://github.com/xmartlabs/Android-Base-Project'
-    }
-    configurations = ['archives']
-}
-
+apply from: '../bintray.gradle'
 apply from: '../circleci.gradle'

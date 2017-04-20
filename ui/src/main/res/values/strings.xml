@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">ui</string>
     <string name="welcome">Welcome</string>
     <string name="log_in">Log in</string>
 </resources>
