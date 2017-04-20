@@ -71,13 +71,18 @@ public abstract class BaseFragment extends RxFragment {
     progressDialog = Optional.ofNullable(createProgressDialog());
   }
 
+  /**
+   * If there is any analytic tracker configured and the trackable analytic
+   * created, it will track that this screen was displayed
+   */
   protected void trackViewIfNeeded() {
-    Optional.ofNullable(getScreenAnalyticsEvent())
+    Optional.ofNullable(getScreenTrackableAnalytic())
         .ifPresent(analyticsManager::track);
   }
 
+  /** Create the trackable analytic to be tracked */
   @Nullable
-  protected TrackableAnalytic getScreenAnalyticsEvent(){
+  protected TrackableAnalytic getScreenTrackableAnalytic(){
     return null;
   }
 
