@@ -11,5 +11,5 @@ import lombok.ToString;
 @Parcel
 @ToString(callSuper = true)
 public class Session implements SessionType {
-
+  String accessToken;
 }

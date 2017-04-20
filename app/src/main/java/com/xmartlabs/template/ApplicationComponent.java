@@ -26,6 +26,7 @@ import dagger.Component;
 @Component(modules = {
     CoreAndroidModule.class,
     ControllerModule.class,
+    LoggerModule.class,
     GsonModule.class,
     ServiceGsonModule.class,
     LoggerModule.class,
