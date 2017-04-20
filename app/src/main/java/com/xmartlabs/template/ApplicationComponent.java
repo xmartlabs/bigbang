@@ -8,14 +8,12 @@ import com.xmartlabs.base.core.module.OkHttpModule;
 import com.xmartlabs.base.core.module.PicassoModule;
 import com.xmartlabs.base.retrofit.module.RestServiceModule;
 import com.xmartlabs.base.retrofit.module.ServiceGsonModule;
-import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.base.ui.BaseActivity;
 import com.xmartlabs.base.ui.BaseAppCompatActivity;
 import com.xmartlabs.base.ui.BaseFragment;
-import com.xmartlabs.template.MainActivity;
 import com.xmartlabs.base.ui.SingleFragmentActivity;
-import com.xmartlabs.template.StartActivity;
+import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.template.module.ControllerModule;
 
 import javax.inject.Singleton;
 
