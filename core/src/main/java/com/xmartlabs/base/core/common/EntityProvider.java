@@ -1,4 +1,4 @@
-package com.xmartlabs.template.common;
+package com.xmartlabs.base.core.common;
 
 import android.support.annotation.Nullable;
 

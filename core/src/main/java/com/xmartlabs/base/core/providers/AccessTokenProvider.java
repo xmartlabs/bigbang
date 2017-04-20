@@ -1,13 +1,13 @@
-package com.xmartlabs.template.providers;
+package com.xmartlabs.base.core.providers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.annimon.stream.Optional;
-import com.xmartlabs.template.common.EntityProvider;
-import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.model.Session;
-import com.xmartlabs.template.module.SessionInterceptor;
+import com.xmartlabs.base.core.common.EntityProvider;
+import com.xmartlabs.base.core.controller.SessionController;
+import com.xmartlabs.base.core.model.SessionType;
+import com.xmartlabs.base.core.module.SessionInterceptor;
 
 import javax.inject.Inject;
 
@@ -19,17 +19,18 @@ public class AccessTokenProvider implements EntityProvider<String> {
   private static final String AUTH_TOKEN_HEADER_KEY = "session";
 
   @NonNull
-  private final SessionController sessionController;
+  private final SessionController<SessionType> sessionController;
 
   @Inject
   public AccessTokenProvider(@NonNull SessionController sessionController) {
+    //noinspection unchecked
     this.sessionController = sessionController;
   }
 
   @Override
   public Optional<String> provideEntity() {
     return sessionController.getSession()
-        .map(Session::getAccessToken)
+        .map(SessionType::getAccessToken)
         .flatMap(Optional::ofNullable);
   }
 

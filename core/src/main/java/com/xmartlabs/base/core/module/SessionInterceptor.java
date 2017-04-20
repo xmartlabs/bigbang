@@ -1,8 +1,8 @@
-package com.xmartlabs.template.module;
+package com.xmartlabs.base.core.module;
 
 import android.support.annotation.NonNull;
 
-import com.xmartlabs.template.providers.AccessTokenProvider;
+import com.xmartlabs.base.core.providers.AccessTokenProvider;
 
 import java.io.IOException;
 
