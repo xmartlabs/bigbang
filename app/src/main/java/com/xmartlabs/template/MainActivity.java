@@ -25,7 +25,7 @@ public class MainActivity extends BaseMvpAppCompatActivity<MvpView, BaseMvpPrese
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(com.xmartlabs.base.ui.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
