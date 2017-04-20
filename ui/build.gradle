@@ -4,7 +4,7 @@ apply plugin: 'com.android.library'
 ext {
     projectName = "Ui"
     versionCodeId = 1
-    versionCodeNumber = "0.1.0"
+    versionCodeNumber = "0.1.1"
     PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = "ui"
     PUBLISH_VERSION = versionCodeNumber
@@ -13,8 +13,7 @@ ext {
 group = applicationId
 version = versionCodeNumber
 
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
-apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'com.neenbedankt.android-apt'
@@ -44,8 +43,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
     }
 
     lintOptions {
@@ -83,6 +82,7 @@ dependencies {
     compile "com.jakewharton:butterknife:${libraryVersion.butterKnife}"
     compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':core')
 
