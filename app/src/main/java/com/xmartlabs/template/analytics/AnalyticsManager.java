@@ -3,7 +3,7 @@ package com.xmartlabs.template.analytics;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Stream;
-import com.xmartlabs.base.core.log.analytics.AnalyticTrackable;
+import com.xmartlabs.base.core.log.analytics.TrackableAnalytic;
 import com.xmartlabs.base.core.log.analytics.AnalyticTracker;
 
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ public final class AnalyticsManager {
   @Inject
   AnalyticsManager() {}
 
-  public void track(@NonNull AnalyticTrackable analyticTrackable) {
+  public void track(@NonNull TrackableAnalytic trackableAnalytic) {
     Stream.of(analyticTrackers)
-        .forEach(analyticTracker -> analyticTracker.track(analyticTrackable));
+        .forEach(analyticTracker -> analyticTracker.track(trackableAnalytic));
   }
 
   public void addTracker(AnalyticTracker analyticTracker) {
