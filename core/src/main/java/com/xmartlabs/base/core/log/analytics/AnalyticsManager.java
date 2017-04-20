@@ -1,10 +1,8 @@
-package com.xmartlabs.template.analytics;
+package com.xmartlabs.base.core.log.analytics;
 
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Stream;
-import com.xmartlabs.base.core.log.analytics.TrackableAnalytic;
-import com.xmartlabs.base.core.log.analytics.AnalyticTracker;
 
 import java.util.ArrayList;
 import java.util.List;
