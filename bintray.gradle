@@ -27,7 +27,7 @@ artifacts {
 def getBintrayInformation = { propertyFilePath ->
     def propertiesFile = file(propertyFilePath)
     if (!propertiesFile.exists()) {
-        logger.error("Bintray properties file not found, path=${propertiesFile.absolutePath}")
+        logger.warn("Bintray properties file not found, path=${propertiesFile.absolutePath}")
         return
     }
     def Properties properties = new Properties()
