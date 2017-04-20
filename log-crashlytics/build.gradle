@@ -1,0 +1,57 @@
+apply from: '../versions.gradle'
+apply plugin: 'com.android.library'
+
+ext {
+    projectName = "Crashlytics Logger"
+    versionCodeId = 1
+    versionCodeNumber = "0.1.0"
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "log-crashlytics"
+    PUBLISH_VERSION = versionCodeNumber
+}
+
+group = applicationId
+version = versionCodeNumber
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
+    }
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+        transitive = true
+    }
+    compile project(path: ':core')
+}
+
+apply from: '../bintray.gradle'
+apply from: '../circleci.gradle'

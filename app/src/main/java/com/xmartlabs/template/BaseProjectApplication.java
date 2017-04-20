@@ -15,6 +15,7 @@ import com.xmartlabs.base.core.rx.error.FlowableObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.MaybeObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.ObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.SingleObserverWithErrorHandling;
+import com.xmartlabs.base.log.crashlytics.CrashlyticsLogger;
 import com.xmartlabs.base.retrofit.helper.ServiceErrorHandler;
 import com.xmartlabs.base.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.module.AndroidModule;
@@ -88,6 +89,7 @@ public class BaseProjectApplication extends Application {
     Crashlytics crashlytics = new Crashlytics.Builder().core(crashlyticsCore).build();
     Fabric.with(this, crashlytics);
 
+    loggerTree.addLogger(new CrashlyticsLogger());
     Timber.plant(loggerTree);
   }
 

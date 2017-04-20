@@ -1,4 +1,4 @@
-package com.xmartlabs.base.core.log.logger;
+package com.xmartlabs.base.log.crashlytics;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

@@ -209,6 +209,7 @@ dependencies {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
     compile project(path: ':retrofit')
+    compile project(path: ':log-crashlytics')
 }
 
 //apply plugin: 'com.google.gms.google-services' // TODO: enable when adding google-services.json
