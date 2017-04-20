@@ -1,4 +1,4 @@
-package com.xmartlabs.template;
+package com.xmartlabs.template.model;
 
 public enum BuildType {
   STAGING,

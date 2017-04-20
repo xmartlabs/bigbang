@@ -2,14 +2,13 @@ package com.xmartlabs.template;
 
 import android.app.Application;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.xmartlabs.base.core.Injector;
 import com.xmartlabs.base.core.helper.GeneralErrorHelper;
 import com.xmartlabs.base.core.log.LoggerTree;
+import com.xmartlabs.base.core.model.BuildInfo;
 import com.xmartlabs.base.core.rx.error.CompletableObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.FlowableObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.MaybeObserverWithErrorHandling;
@@ -17,13 +16,11 @@ import com.xmartlabs.base.core.rx.error.ObserverWithErrorHandling;
 import com.xmartlabs.base.core.rx.error.SingleObserverWithErrorHandling;
 import com.xmartlabs.base.log.crashlytics.CrashlyticsLogger;
 import com.xmartlabs.base.retrofit.helper.ServiceErrorHandler;
-import com.xmartlabs.base.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.module.AndroidModule;
 
 import javax.inject.Inject;
 
 import bullet.ObjectGraph;
-import io.fabric.sdk.android.Fabric;
 import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
@@ -32,6 +29,8 @@ public class BaseProjectApplication extends Application {
 
   private ObjectGraph bullet;
 
+  @Inject
+  BuildInfo buildInfo;
   @Inject
   GeneralErrorHelper generalErrorHelper;
   @Inject
@@ -83,13 +82,7 @@ public class BaseProjectApplication extends Application {
   }
 
   private void initializeLogging() {
-    CrashlyticsCore crashlyticsCore = new CrashlyticsCore.Builder()
-        .disabled(BuildConfig.DEBUG)
-        .build();
-    Crashlytics crashlytics = new Crashlytics.Builder().core(crashlyticsCore).build();
-    Fabric.with(this, crashlytics);
-
-    loggerTree.addLogger(new CrashlyticsLogger());
+    loggerTree.addLogger(new CrashlyticsLogger().initialize(buildInfo, this));
     Timber.plant(loggerTree);
   }
 
