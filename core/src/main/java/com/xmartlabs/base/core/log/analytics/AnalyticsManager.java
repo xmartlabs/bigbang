@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/** Manager of all the analytic trackers the app will use. */
 public final class AnalyticsManager {
   @NonNull
   private List<AnalyticTracker> analyticTrackers = new ArrayList<>();
@@ -16,6 +17,11 @@ public final class AnalyticsManager {
   @Inject
   AnalyticsManager() {}
 
+  /**
+   *  Tracks the analytic that wants to be tracked in all the trackers added to the analyticTrackers list.
+   *
+   * @param trackableAnalytic Any event, screen or whatever the app wants to track
+   */
   public void track(@NonNull TrackableAnalytic trackableAnalytic) {
     Stream.of(analyticTrackers)
         .forEach(analyticTracker -> analyticTracker.track(trackableAnalytic));

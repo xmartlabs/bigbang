@@ -82,7 +82,7 @@ public abstract class BaseFragment extends RxFragment {
 
   /** Create the trackable analytic to be tracked */
   @Nullable
-  protected TrackableAnalytic getScreenTrackableAnalytic(){
+  protected TrackableAnalytic getScreenTrackableAnalytic() {
     return null;
   }
 
