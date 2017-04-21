@@ -15,9 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 
-/**
- * Created by mike on 11/04/2017.
- */
 public class ObjectHelperTest {
   @Test
   public void deepCopy() {
