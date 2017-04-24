@@ -2,7 +2,6 @@ package com.xmartlabs.template;
 
 import com.xmartlabs.base.core.module.CoreAndroidModule;
 import com.xmartlabs.base.core.module.GsonModule;
-import com.xmartlabs.base.core.module.LoggerModule;
 import com.xmartlabs.base.core.module.OkHttpModule;
 import com.xmartlabs.base.core.module.PicassoModule;
 import com.xmartlabs.base.retrofit.module.RestServiceModule;
@@ -16,7 +15,6 @@ import dagger.Component;
 @Component(modules = {
     CoreAndroidModule.class,
     ControllerModule.class,
-    LoggerModule.class,
     GsonModule.class,
     RestServiceModule.class,
     OkHttpModule.class,

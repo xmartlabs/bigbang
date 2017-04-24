@@ -57,6 +57,6 @@ public class RestServiceModule {
   @Provides
   @Singleton
   protected HttpUrl provideBaseUrl(Context context) {
-    return HttpUrl.parse(context.getString(R.string.url_service));
+    throw new UnsupportedOperationException("This method should be overridden in the app module");
   }
 }
