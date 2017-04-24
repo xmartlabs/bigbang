@@ -7,7 +7,6 @@ import java.util.Locale;
 
 @SuppressWarnings("unused")
 public class StringUtils {
-
   /**
    * Checks whether the given string is null or empty.
    *
@@ -39,6 +38,5 @@ public class StringUtils {
     return text.isEmpty()
         ? ""
         : text.substring(0, 1).toUpperCase(Locale.getDefault()) + text.substring(1).toLowerCase(Locale.getDefault());
-    }
   }
 }
