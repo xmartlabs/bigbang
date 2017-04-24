@@ -3,20 +3,13 @@ package com.xmartlabs.base.retrofit.module;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.annimon.stream.Objects;
 import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.xmartlabs.base.core.model.BuildInfo;
-import com.xmartlabs.base.core.adapter.MillisecondsLocalDateAdapter;
-import com.xmartlabs.base.core.adapter.MillisecondsLocalDateTimeAdapter;
 import com.xmartlabs.base.core.common.GsonExclude;
+import com.xmartlabs.base.core.model.BuildInfo;
 import com.xmartlabs.base.core.module.GsonExclusionStrategy;
 import com.xmartlabs.base.retrofit.deserialized.RequiredFieldDeserializer;
-
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.LocalDateTime;
 
 import java.util.ArrayList;
 
