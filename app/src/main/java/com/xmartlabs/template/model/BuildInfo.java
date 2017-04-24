@@ -1,6 +1,7 @@
-package com.xmartlabs.template;
+package com.xmartlabs.template.model;
 
 import com.annimon.stream.Objects;
+import com.xmartlabs.template.BuildConfig;
 
 public class BuildInfo implements com.xmartlabs.base.core.model.BuildInfo {
   @Override

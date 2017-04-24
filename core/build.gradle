@@ -66,9 +66,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:design:${libraryVersion.androidSupport}"
     compile "com.annimon:stream:${libraryVersion.stream}"
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
-        transitive = true
-    }
     compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
     compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'

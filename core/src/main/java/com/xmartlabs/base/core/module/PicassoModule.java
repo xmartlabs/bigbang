@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Optional;
-import com.crashlytics.android.Crashlytics;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 import com.xmartlabs.base.core.log.LoggerTree;
@@ -18,7 +17,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
-import timber.log.Timber;
 
 @Module
 public class PicassoModule {
