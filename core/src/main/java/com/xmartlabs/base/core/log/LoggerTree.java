@@ -26,8 +26,7 @@ public class LoggerTree extends Timber.DebugTree {
   private final List<Integer> excludedPriorities = new ArrayList<>();
 
   @Inject
-  public LoggerTree() {
-  }
+  public LoggerTree() {}
 
   @Override
   protected void log(int priority, @Nullable String tag, @Nullable String message,
