@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class ServiceHelperTest {
-  private static final String REQUEST_URL = "https://github.com/xmartlabs/Android-Base-Project";
+  private static final String REQUEST_URL = "https://github.com/xmartlabs/bigbang";
 
   private Response response;
 

@@ -47,7 +47,7 @@ bintray {
     user = bintrayInfo.user
     key = bintrayInfo.apiKey
     pkg {
-        repo = 'Android-Base-Project'
+        repo = 'bigbang'
         name = "${project.ext.projectName}"
         userOrg = 'xmartlabs'
 
@@ -58,8 +58,8 @@ bintray {
         }
 
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/xmartlabs/Android-Base-Project.git'
-        websiteUrl = 'https://github.com/xmartlabs/Android-Base-Project'
+        vcsUrl = 'https://github.com/xmartlabs/bigbang.git'
+        websiteUrl = 'https://github.com/xmartlabs/bigbang'
     }
     configurations = ['archives']
 }
