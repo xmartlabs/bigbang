@@ -1,6 +1,6 @@
 package com.xmartlabs.template.model;
 
-import com.xmartlabs.base.core.model.SessionType;
+import com.xmartlabs.bigbang.core.model.SessionType;
 
 import org.parceler.Parcel;
 

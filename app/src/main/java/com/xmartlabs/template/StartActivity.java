@@ -3,7 +3,7 @@ package com.xmartlabs.template;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.xmartlabs.base.ui.BaseActivity;
+import com.xmartlabs.bigbang.ui.BaseActivity;
 
 public class StartActivity extends BaseActivity {
     @Override

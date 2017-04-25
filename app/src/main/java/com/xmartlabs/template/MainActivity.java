@@ -6,9 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.f2prateek.dart.HensonNavigable;
-import com.xmartlabs.base.ui.mvp.BaseMvpAppCompatActivity;
-import com.xmartlabs.base.ui.mvp.BaseMvpPresenter;
-import com.xmartlabs.base.ui.mvp.MvpView;
+import com.xmartlabs.bigbang.ui.mvp.BaseMvpAppCompatActivity;
+import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter;
+import com.xmartlabs.bigbang.ui.mvp.MvpView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
