@@ -25,7 +25,6 @@ public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, 
   @Override
   public synchronized JsonElement serialize(@Nullable LocalDate date, @Nullable Type type,
                                             @Nullable JsonSerializationContext jsonSerializationContext) {
-
     return Optional.ofNullable(date)
         .flatMap(theDate ->
             Exceptional.of(() -> new JsonPrimitive(theDate.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()))
@@ -44,7 +43,6 @@ public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, 
   @Override
   public synchronized LocalDate deserialize(@Nullable JsonElement jsonElement, @Nullable Type type,
                                             @Nullable JsonDeserializationContext jsonDeserializationContext) {
-
       return Optional.ofNullable(jsonElement)
           .map(JsonElement::toString)
           .filter(str -> !StringUtils.isNullOrEmpty(str))
