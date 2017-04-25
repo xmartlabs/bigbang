@@ -189,7 +189,7 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHol
   protected boolean isADividerPosition(int position) {
     return (hasStartDivider() && position % 2 == 0)
         || (hasDividers() && position % 2 == 1)
-        || (hasEndDivider() && position == getItemCount());
+        || (hasEndDivider() && position == getItemCount() - 1);
   }
 
   /** @return if recycler view has dividers */

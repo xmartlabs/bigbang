@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Toolbar" parent="Widget.AppCompat.Toolbar" />
+
+    <style name="Toolbar.Transparent" parent="Toolbar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:theme">@style/Toolbar.Transparent.Theme</item>
+        <item name="popupTheme">@style/Toolbar.Transparent.Theme</item>
+    </style>
+
+    <style name="Toolbar.Transparent.Theme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+    
+</resources>

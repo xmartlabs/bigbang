@@ -12,6 +12,7 @@ ext {
         androidSupportTest: '0.5',
         bullet: 'e5044b53df',
         butterKnife: '8.2.1',
+        crashlytics: '2.6.7@aar',
         dagger: '2.6',
         dart: '2.0.0',
         dexmaker: '1.4',
