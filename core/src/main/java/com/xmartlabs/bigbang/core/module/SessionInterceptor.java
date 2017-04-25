@@ -2,6 +2,7 @@ package com.xmartlabs.bigbang.core.module;
 
 import android.support.annotation.NonNull;
 
+import com.xmartlabs.bigbang.core.Injector;
 import com.xmartlabs.bigbang.core.providers.AccessTokenProvider;
 
 import java.io.IOException;
@@ -13,12 +14,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class SessionInterceptor implements Interceptor {
-  @NonNull
-  private final AccessTokenProvider accessTokenProvider;
-
   @Inject
-  public SessionInterceptor(@NonNull AccessTokenProvider accessTokenProvider) {
-    this.accessTokenProvider = accessTokenProvider;
+  AccessTokenProvider accessTokenProvider;
+
+  public SessionInterceptor() {
+    Injector.inject(this);
   }
 
   @NonNull
