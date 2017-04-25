@@ -35,11 +35,6 @@ public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, 
   }
 
   @Nullable
-  public synchronized JsonElement serialize(@Nullable LocalDate date) {
-    return serialize(date, null, null);
-  }
-
-  @Nullable
   @Override
   public synchronized LocalDate deserialize(@Nullable JsonElement jsonElement, @Nullable Type type,
                                             @Nullable JsonDeserializationContext jsonDeserializationContext) {
@@ -50,10 +45,5 @@ public class MillisecondsLocalDateAdapter implements JsonSerializer<LocalDate>, 
               .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
               .getOptional())
           .orElse(null);
-  }
-
-  @Nullable
-  public synchronized LocalDate deserialize(@Nullable JsonElement jsonElement) {
-    return deserialize(jsonElement, null, null);
   }
 }
