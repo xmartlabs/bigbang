@@ -27,7 +27,7 @@ import timber.log.Timber;
 /** {@link Gson} type adapter that serializes {@link LocalDate} objects to any specified format. */
 @RequiredArgsConstructor
 public class LocalDateTimeCustomFormatterAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
-  final DateTimeFormatter dateFormat;
+  private final DateTimeFormatter dateFormat;
 
   @Nullable
   @Override
