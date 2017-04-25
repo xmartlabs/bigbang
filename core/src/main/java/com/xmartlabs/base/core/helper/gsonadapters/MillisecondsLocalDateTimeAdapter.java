@@ -24,18 +24,6 @@ import timber.log.Timber;
 @RequiredArgsConstructor
 public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDateTime>,
     JsonDeserializer<LocalDateTime> {
-//  @Override
-//  public synchronized LocalDateTime deserialize(JsonElement jsonElement, Type type,
-//                                                JsonDeserializationContext jsonDeserializationContext) {
-//    return Optional.ofNullable(jsonElement.getAsString())
-//        .filter(str -> !StringUtils.isNullOrEmpty(str))
-//        .flatMap(str -> Exceptional.of(() -> Instant.ofEpochMilli(Long.valueOf(str)).atZone(ZoneOffset.UTC).toLocalDateTime())
-//            .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
-//            .getOptional())
-//        .orElse(null);
-//  }
-
-
   @Nullable
   @Override
   public synchronized JsonElement serialize(@Nullable LocalDateTime dateTime, @Nullable Type type,
@@ -46,11 +34,6 @@ public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDat
             .ifException(e -> Timber.e(e, "Date cannot be serialized, date='%s'", date.toString()))
                 .getOptional())
         .orElse(null);
-  }
-
-  @Nullable
-  public synchronized JsonElement serialize(@Nullable LocalDateTime dateTime) {
-    return serialize(dateTime, null, null);
   }
 
   @Nullable
@@ -65,10 +48,5 @@ public class MillisecondsLocalDateTimeAdapter implements JsonSerializer<LocalDat
             .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
             .getOptional())
         .orElse(null);
-  }
-
-  @Nullable
-  public synchronized LocalDateTime deserialize(@Nullable JsonElement jsonElement) {
-    return deserialize(jsonElement, null, null);
   }
 }
