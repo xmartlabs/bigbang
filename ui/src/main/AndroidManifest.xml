@@ -1,0 +1,11 @@
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xmartlabs.base.ui"
+    >
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        />
+
+</manifest>

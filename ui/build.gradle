@@ -1,0 +1,96 @@
+apply from: '../versions.gradle'
+apply plugin: 'com.android.library'
+
+ext {
+    projectName = "Ui"
+    versionCodeId = 1
+    versionCodeNumber = "0.1.1"
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "ui"
+    PUBLISH_VERSION = versionCodeNumber
+}
+
+group = applicationId
+version = versionCodeNumber
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
+    defaultConfig {
+        group group
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
+        versionName version
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility javaVersion8
+        targetCompatibility javaVersion8
+    }
+
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}
+
+dependencies {
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    apt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
+    apt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
+    apt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    apt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
+    apt "com.jakewharton:butterknife-compiler:${libraryVersion.butterKnife}"
+    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+
+    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:design:${libraryVersion.androidSupport}"
+    compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    compile "com.annimon:stream:${libraryVersion.stream}"
+    compile("com.crashlytics.sdk.android:crashlytics:${libraryVersion.crashlytics}") {
+        transitive = true
+    }
+    compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
+    compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    compile "com.google.dagger:dagger:${libraryVersion.daggerVersion}"
+    compile "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
+    compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
+    compile "com.jakewharton:butterknife:${libraryVersion.butterKnife}"
+    compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(path: ':core')
+
+    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
+
+    testCompile "junit:junit:${libraryVersion.junit}"
+}
+
+apply from: '../bintray.gradle'
+apply from: '../circleci.gradle'
