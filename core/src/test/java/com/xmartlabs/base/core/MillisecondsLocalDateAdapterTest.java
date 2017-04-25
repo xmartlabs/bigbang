@@ -24,26 +24,10 @@ public class MillisecondsLocalDateAdapterTest {
   }
 
   @Test
-  public void correctSerializationWithNoTypeOrSerializationContext() {
-    MillisecondsLocalDateAdapter adapter = new MillisecondsLocalDateAdapter();
-    JsonElement jsonElementExpected = new JsonPrimitive(DEFAULT_DATE_LONG);
-
-    assertThat(adapter.serialize(DEFAULT_DATE), equalTo(jsonElementExpected));
-  }
-
-  @Test
   public void correctDeserialization() {
     JsonElement actualJsonElement = new JsonPrimitive(DEFAULT_DATE_LONG);
     MillisecondsLocalDateAdapter adapter = new MillisecondsLocalDateAdapter();
 
     assertThat(adapter.deserialize(actualJsonElement, JsonElement.class, null), equalTo(DEFAULT_DATE));
-  }
-
-  @Test
-  public void correctDeserializationWithNoTypeOrSerializationContext() {
-    JsonElement actualJsonElement = new JsonPrimitive(DEFAULT_DATE_LONG);
-    MillisecondsLocalDateAdapter adapter = new MillisecondsLocalDateAdapter();
-
-    assertThat(adapter.deserialize(actualJsonElement), equalTo(DEFAULT_DATE));
   }
 }

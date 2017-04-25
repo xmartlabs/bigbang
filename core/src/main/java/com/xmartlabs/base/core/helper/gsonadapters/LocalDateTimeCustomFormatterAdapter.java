@@ -26,7 +26,7 @@ import timber.log.Timber;
 
 /** {@link Gson} type adapter that serializes {@link LocalDate} objects to any specified format. */
 @RequiredArgsConstructor
-public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+public class LocalDateTimeCustomFormatterAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
   final DateTimeFormatter dateFormat;
 
   @Nullable
@@ -42,11 +42,6 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
   }
 
   @Nullable
-  public synchronized JsonElement serialize(@Nullable LocalDateTime dateTime) {
-    return serialize(dateTime, null, null);
-  }
-
-  @Nullable
   @Override
   public synchronized LocalDateTime deserialize(@Nullable JsonElement jsonElement, @Nullable Type type,
                                                 @Nullable JsonDeserializationContext jsonDeserializationContext) {
@@ -58,10 +53,5 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
                 .ifException(e -> Timber.e(e, "Date cannot be parsed, date='%s'", str))
                 .getOptional())
         .orElse(null);
-  }
-
-  @Nullable
-  public synchronized LocalDateTime deserialize(@Nullable JsonElement jsonElement) {
-    return deserialize(jsonElement, null, null);
   }
 }
