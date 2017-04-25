@@ -18,9 +18,11 @@ import static org.hamcrest.core.IsNull.notNullValue;
 public class ObjectHelperTest {
   @Test
   public void deepCopy() {
-    Object object = new Object();
+    DummyObject object = createDummyObject();
     ObjectHelper objectHelper = new ObjectHelper(new Gson());
-    assertThat(object == objectHelper.deepCopy(object, Object.class), is(false));
+
+    DummyObject deepCopy = objectHelper.deepCopy(object, DummyObject.class);
+    assertThat(object == deepCopy, is(false));
   }
 
   @Test
