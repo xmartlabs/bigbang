@@ -1,11 +1,11 @@
 # BigBang
 
-[![CircleCI](https://circleci.com/gh/xmartlabs/Android-Base-Project.svg?style=svg)](https://circleci.com/gh/xmartlabs/Android-Base-Project)
+[![CircleCI](https://circleci.com/gh/xmartlabs/bigbang.svg?style=svg)](https://circleci.com/gh/xmartlabs/Android-Base-Project)
 [![codebeat badge](https://codebeat.co/badges/af8770f0-d2bf-47d1-a504-6dee56b99312)](https://codebeat.co/projects/github-com-xmartlabs-android-base-project-master)
-[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Core/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Core/_latestVersion)
-[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/DbFlow/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/DbFlow/_latestVersion)
-[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Retrofit/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Retrofit/_latestVersion)
-[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Ui/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Ui/_latestVersion)
+[![Core](https://api.bintray.com/packages/xmartlabs/bigbang/Core/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Core/_latestVersion)
+[![DbFlow](https://api.bintray.com/packages/xmartlabs/bigbang/DbFlow/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/DbFlow/_latestVersion)
+[![Retrofit](https://api.bintray.com/packages/xmartlabs/bigbang/Retrofit/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Retrofit/_latestVersion)
+[![Ui](https://api.bintray.com/packages/xmartlabs/bigbang/Ui/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Ui/_latestVersion)
 
 
 This is [XMARTLABS](https://xmartlabs.com) Android base project. Architecturally composed of a set of libraries for building modern and scalable applications from the ground up.
