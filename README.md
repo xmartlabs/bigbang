@@ -15,18 +15,17 @@ Our architecture divides the typical layers of an Android application into simpl
 * UI
 * Services
 * Database
-* Crashlytics
 
 In order to keep modules independent, we decoupled the behavior required for each layer into a single module, where everything comes together smoothly, which we call `core`. This not only allows you to choose which modules to use, but also gives you independence from any service or database oriented libraries we use.
 
-Learn more about the project on the [Wiki](https://github.com/xmartlabs/Android-Base-Project/wiki) or by reading the Javadocs.
+Learn more about the project on the [BigBang Wiki](https://github.com/xmartlabs/bigbang/wiki) or by reading the Javadocs.
 
 ## Getting started
 
 The first step is to include the Core library into your project as a Gradle compile dependency:
 
 ```groovy
-compile 'com.xmartlabs.base:core:0.1.10'
+compile 'com.xmartlabs.bigbang:core:0.1.10'
 ```
 
 Then, add jCenter to the buildscript repositories:
@@ -54,9 +53,9 @@ repositories {
 
 Then, include any of the following compile dependencies to add an specific module to your app:
 ```groovy
-compile 'com.xmartlabs.base:dbflow:0.1.4'
-compile 'com.xmartlabs.base:retrofit:0.1.2'
-compile 'com.xmartlabs.base:ui:0.1.1'
+compile 'com.xmartlabs.bigbang:dbflow:0.1.4'
+compile 'com.xmartlabs.bigbang:retrofit:0.1.2'
+compile 'com.xmartlabs.bigbang:ui:0.1.1'
 ```
 
 The dbflow module is `database` related, while the `retrofit` module is service related.
@@ -89,7 +88,7 @@ We strictly follow [our style guide](https://github.com/xmartlabs/Android-Style-
 When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible. Please also make sure your code compiles and try to cover your code with tests.
 <br><b>We welcome contributors!</b>
 
-For bugs, issues, feature requests, questions and discussions please use the [Github Issues](https://github.com/xmartlabs/Android-Base-Project/issues).
+For bugs, issues, feature requests, questions and discussions please use the [Github Issues](https://github.com/xmartlabs/bigbang/issues).
 
 ## Authors
 
