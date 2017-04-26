@@ -2,7 +2,7 @@ package com.xmartlabs.template.module;
 
 import android.app.Application;
 
-import com.xmartlabs.base.core.module.CoreAndroidModule;
+import com.xmartlabs.bigbang.core.module.CoreAndroidModule;
 import com.xmartlabs.template.model.BuildInfo;
 
 public class AndroidModule extends CoreAndroidModule {
@@ -11,7 +11,7 @@ public class AndroidModule extends CoreAndroidModule {
   }
 
   @Override
-  public com.xmartlabs.base.core.model.BuildInfo provideBuildInformation() {
+  public com.xmartlabs.bigbang.core.model.BuildInfo provideBuildInformation() {
     return new BuildInfo();
   }
 }

@@ -1,10 +1,10 @@
 package com.xmartlabs.template;
 
-import com.xmartlabs.base.core.module.CoreAndroidModule;
-import com.xmartlabs.base.core.module.GsonModule;
-import com.xmartlabs.base.core.module.OkHttpModule;
-import com.xmartlabs.base.core.module.PicassoModule;
-import com.xmartlabs.base.retrofit.module.RestServiceModule;
+import com.xmartlabs.bigbang.core.module.CoreAndroidModule;
+import com.xmartlabs.bigbang.core.module.GsonModule;
+import com.xmartlabs.bigbang.core.module.OkHttpModule;
+import com.xmartlabs.bigbang.core.module.PicassoModule;
+import com.xmartlabs.bigbang.retrofit.module.RestServiceModule;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.ui.common.BaseInstrumentationTest;
 

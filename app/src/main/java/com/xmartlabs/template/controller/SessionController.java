@@ -7,7 +7,7 @@ import com.xmartlabs.template.model.Session;
 
 import javax.inject.Inject;
 
-public class SessionController extends com.xmartlabs.base.core.controller.SessionController<Session> {
+public class SessionController extends com.xmartlabs.bigbang.core.controller.SessionController<Session> {
   @Inject
   Gson gson;
 

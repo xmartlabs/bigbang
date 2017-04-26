@@ -8,7 +8,7 @@ import android.support.test.espresso.IdlingResource;
 import android.support.test.runner.AndroidJUnitRunner;
 
 import com.jakewharton.espresso.OkHttp3IdlingResource;
-import com.xmartlabs.base.core.module.OkHttpModule;
+import com.xmartlabs.bigbang.core.module.OkHttpModule;
 import com.xmartlabs.template.common.ImmediateNewThreadScheduler;
 import com.xmartlabs.template.module.MockClockModule;
 
