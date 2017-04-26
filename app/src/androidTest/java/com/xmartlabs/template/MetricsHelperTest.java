@@ -6,7 +6,7 @@ import android.support.annotation.Dimension;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.DisplayMetrics;
 
-import com.xmartlabs.base.core.helper.ui.MetricsHelper;
+import com.xmartlabs.bigbang.core.helper.ui.MetricsHelper;
 
 import junit.framework.Assert;
 

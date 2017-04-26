@@ -1,5 +1,5 @@
 ext {
-    applicationId = "com.xmartlabs.base"
+    applicationId = "com.xmartlabs.bigbang"
 
     compileSdkVersion = 25
     minSdkVersion = 17
