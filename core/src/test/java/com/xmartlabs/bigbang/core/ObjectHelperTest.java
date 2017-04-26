@@ -4,7 +4,7 @@ import android.support.v4.util.Pair;
 
 import com.annimon.stream.Objects;
 import com.google.gson.Gson;
-import com.xmartlabs.base.core.helper.ObjectHelper;
+import com.xmartlabs.bigbang.core.helper.ObjectHelper;
 
 import org.junit.Test;
 
