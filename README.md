@@ -1,170 +1,108 @@
-# Android Base Project
+# BigBang
 
-This is the Xmartlabs' Android base project. Remember to follow [the style guide]
-(https://github.com/xmartlabs/Android-Style-Guide) when working on projects, and also when contributing here.
-An example usage of this project lays in [the demo branch]
-(https://github.com/xmartlabs/bigbang/tree/demo).
+[![CircleCI](https://circleci.com/gh/xmartlabs/Android-Base-Project.svg?style=svg)](https://circleci.com/gh/xmartlabs/Android-Base-Project)
+[![codebeat badge](https://codebeat.co/badges/af8770f0-d2bf-47d1-a504-6dee56b99312)](https://codebeat.co/projects/github-com-xmartlabs-android-base-project-master)
+[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Core/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Core/_latestVersion)
+[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/DbFlow/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/DbFlow/_latestVersion)
+[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Retrofit/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Retrofit/_latestVersion)
+[![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Ui/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Ui/_latestVersion)
 
-## Assets
 
-The configuration assets are in a [Google Drive folder](PUT LINK).
-To access them, ask via email.
+This is [Xmartlabs](https://xmartlabs.com) Android base project. Architecturally composed of a set of libraries for building modern and scalable applications from the ground up.
+<br>The BigBang of our Android projects.
 
-The easiest way to copy them in the repo folder, is by downloading the GDrive folder and running the
-following:
+Our architecture divides the typical layers of an Android application into simple coherent modules, which are completely independent from one another:
+* UI
+* Services
+* Database
+* Crashlytics
 
-```bash
-./copy-assets.sh path-of-assets-folder
+In order to keep modules independent, we decoupled the behavior required for each layer in another module, which we call `core`. This not only allows you to choose which modules to use, but also gives you independence from any service or database oriented libraries we use.
+
+Learn more about the project on the [Wiki](https://github.com/xmartlabs/Android-Base-Project/wiki) or by reading the Javadocs.
+
+## Getting started
+
+The first step is to include the Core library into your project as a Gradle compile dependency:
+
+```groovy
+compile 'com.xmartlabs.base:core:0.1.10'
 ```
 
-If you want to do it manually, or understand the process in order to add keys, see the following
-subsections.
+Then, add jCenter to the buildscript repositories:
 
-### Key stores
-
-`debug.keystore` and `release.keystore` files need to be present in the `app` folder. Also the file
-`app/keystore.properties` is needed with the following inside (replace where needed):
-
-```data
-store_password=STORE_PASSWORD
-key_alias=KEY_ALIAS
-key_password=KEY_PASSWORD
+```groovy
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
 ```
 
-If you need to create them, run the following in the `app` folder:
+Also, you'll need to add the following repositories:
 
-```bash
-keytool -genkey -v -keystore debug.keystore -alias KEY_ALIAS -keyalg RSA -keysize 2048 -validity 10000
-keytool -genkey -v -keystore release.keystore -alias KEY_ALIAS -keyalg RSA -keysize 2048 -validity 10000
+```groovy
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url "https://jitpack.io" }
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
 ```
 
-### Generic keys file
-
-For the following services, add the files `app/src/production/res/values/keys.xml` and
-`app/src/staging/res/values/keys.xml` (for each environment) with this empty content:
-
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<resources>
-    <string name="SOME_SERVICE" translatable="false">SOME_SERVICE_TOKEN</string>
-</resources>
+Then, include any of the following compile dependencies to add an specific module to your app:
+```groovy
+compile 'com.xmartlabs.base:dbflow:0.1.4'
+compile 'com.xmartlabs.base:retrofit:0.1.2'
+compile 'com.xmartlabs.base:ui:0.1.1'
 ```
 
-### Fabric
+The dbflow module is `database` related, while the `retrofit` module is service related.
 
-In order to use Fabric, create a file `app/fabric.properties` with the content (replace with the
-right values):
+## Architecture
 
-```data
-apiSecret=YOUR_BUILD_SECRET
-apiKey=YOUR_API_KEY
-```
+![Architecture](architecture.png)
 
-### GCM
+There are four main components. The `core` component exposes the 
+interfaces needed to implement a certain type of service, like database or network related.
+Thus, the `core` component should always be included in any project that makes use of this
+architecture.
 
-Place the staging and production `google-services.json` files in `app/src/staging` and
-`app/src/production` respectively. These are created using [a Google app]
-(https://developers.google.com/mobile/add?platform=android&cntapi=gcm).
+A component should encapsulate and provide a single functionality. If the component belongs to a certain category of services (like networking or database), then the functionality
+should be specified and described in the core component.
 
-## Genymotion
+## Project template
 
-We recommend using [Genymotion](https://www.genymotion.com) emulator.
+In order to start using the modules, you'll need to set up a few things, which are well
+explained in their respective Wiki. Therefore, to start a new project, we provide a
+template, which consists of the minimal setup required to get you going.
+You will find that in the `template` module.
 
-## Useful plugins
+## Style guide
 
-The plugins for Android Studio that we consider useful are:
+We strictly follow [our style guide](https://github.com/xmartlabs/Android-Style-Guide), which extends from the [Google Java Style Guide](http://google.github.io/styleguide/javaguide.html) but with some modifications. Please remember to follow it when contributing to this project.
 
-<dl>
-    <dt>.gitignore</dt>
-    <dd>For highlighting .gitignore files and finding unused paths in it.</dd>
-    
-    <dt>Android ButterKnife Zelezny</dt>
-    <dd>For automatically binding views with ButterKnife.</dd>
-    
-    <dt>Android Material Design Icon Generator</dt>
-    <dd>Used to add common icons to the projects. Icons come from the <a href="https://design.google.com/icons/">
-    Material Icons</a>.</dd>
+## Bugs and Feedback
 
-    <dt>BashSupport</dt>
-    <dd>For code highlighting in bash script files.</dd>
+When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible. Please also make sure your code compiles and try to cover your code with tests.
+<br><b>We welcome contributors!</b>
 
-    <dt>Fabric for Android Studio</dt>
-    <dd>Mainly for Crashlytics Beta releases (AFAIK it's the only way to do this). Also for viewing
-    crashes and other Fabric stuff.</dd>
+For bugs, issues, feature requests, questions and discussions please use the [Github Issues](https://github.com/xmartlabs/Android-Base-Project/issues).
 
-    <dt>Genymotion</dt>
-    <dd>For quick access to Genymotion's emulators.</dd>
+## Authors
 
-    <dt>Lombok Plugin</dt>
-    <dd>In order to avoid receiving "Cannot resolve symbol/method" errors when using Lombok.</dd>
+* [Santiago Castro](https://github.com/bryant1410)
+* [Miguel Revetria](https://github.com/m-revetria)
+* [Matías Irland](https://github.com/matir91)
+* [Michael Ellis](https://github.com/michaelEllisUy)
+* [Diego Medina](https://github.com/diegomedina248)
+* [Santiago Casas](https://github.com/chacaa)
 
-    <dt>Markdown</dt>
-    <dd>Markdown language support.</dd>
-</dl>
+## Change Log
 
-## Design tips
+This can be found in the [CHANGELOG.md](CHANGELOG.md) file.
 
-You can find common color material combinations in [MaterialUp](https://www.materialpalette.com/), which is based on
-[Google 500 colors](https://www.google.com/design/spec/style/color.html). Also, [Color Hunt]
-(http://colorhunt.co/) can be used for general color combination inspiration.
 
-## Warning `libpng warning: iCCP: Not recognizing known sRGB profile that has been edited` when building an APK
 
-This happens when unrecognised and unnecessary metadata is present in PNG files. To remove it (you
-need `exiftool`):
-
-```bash
-find . -path '*src/main/res/*' -name '*.png' -exec exiftool -overwrite_original -all= {} \;
-```
-
-[Source](http://stackoverflow.com/a/29162323/1165181)
-
-## Location problems in Genymotion
-
-A Genymotion emulator (with Google Play Services installed) will have more problems with Location
-than a mobile. Getting the last known location shouldn't throw null if location is enabled. See
-[the different answers and comments here](http://stackoverflow.com/questions/16830047/locationclient-getlastlocation-return-null)
-for more info.
-
-## Check for outdated libraries
-
-Run the following:
-
-```bash
-./gradlew dependencyUpdates
-```
-
-## cURL
-
-[Ok2Curl](https://github.com/mrmike/Ok2Curl) is added so all network activity logs a curl command to be reproduced
-easily if desired.
-
-## Use Google Play Services in Genymotion
-
-[Follow this StackOverflow answer](http://stackoverflow.com/a/20013322/1165181).
-
-## Asset Studio
-
-[Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/index.html) should be used when trying to
-generate icons for different screen densities.
-
-## 10 non-intuitive and helpful keymaps
-
-These are not common keymaps in other IDEs and programs, and they are helpful too.
-
-| Description                            | Mac                         | Non-Mac                    |
-| -------------------------------------- | --------------------------- | -------------------------- |
-| Cut or copy current line               | `⌘ X` / `⌘ V`               | `Ctrl + X/C`               |
-| Extract variable, field or method      | `⌘ ⌥ V` / `⌘ ⌥ F` / `⌘ ⌥ M` | `Ctrl + Shift + V/F/M`     |
-| File structure popup                   | `⌘ F12`                     | `Ctrl + F12`               |
-| Generate code                          | `⌘ N`                       | `Alt + Insert`             |
-| Go to declaration                      | `⌘ Click`, `⌘ B`            | `Ctrl + Click`, `Ctrl + B` |
-| Go to previous or next method          | `^ ↑` / `^ ↓`               | `Alt + Up/Down`            |
-| Move line up or down                   | `⌘ ⇧ ↑` / `⌘ ⇧ ↓`           | `Ctrl + Shift + Up/Down`   |
-| Rename                                 | `⇧ F6`                      | `Shift + F6`               |
-| Search everywhere                      | `Double ⇧`                  | `Double Shift`             |
-| Show intention actions and quick-fixes | `⌥ ⏎`                       | `Alt + Enter`              |
-
-Take into account that some may conflict with OS ones. For more, check out the [IntelliJ IDEA Default Keymap]
-(https://resources.jetbrains.com/assets/products/intellij-idea/IntelliJIDEA_ReferenceCard.pdf) or the [IntelliJ IDEA Mac
-OS X Default Keymap](https://resources.jetbrains.com/assets/products/intellij-idea/IntelliJIDEA_ReferenceCard_mac.pdf).
