@@ -17,7 +17,7 @@ Our architecture divides the typical layers of an Android application into simpl
 * Database
 * Crashlytics
 
-In order to keep modules independent, we decoupled the behavior required for each layer in another module, which we call `core`. This not only allows you to choose which modules to use, but also gives you independence from any service or database oriented libraries we use.
+In order to keep modules independent, we decoupled the behavior required for each layer into a single module, where everything comes together smoothly, which we call `core`. This not only allows you to choose which modules to use, but also gives you independence from any service or database oriented libraries we use.
 
 Learn more about the project on the [Wiki](https://github.com/xmartlabs/Android-Base-Project/wiki) or by reading the Javadocs.
 
