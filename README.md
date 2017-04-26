@@ -8,7 +8,7 @@
 [![Download](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Ui/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Ui/_latestVersion)
 
 
-This is [Xmartlabs](https://xmartlabs.com) Android base project. Architecturally composed of a set of libraries for building modern and scalable applications from the ground up.
+This is [XMARTLABS](https://xmartlabs.com) Android base project. Architecturally composed of a set of libraries for building modern and scalable applications from the ground up.
 <br>The BigBang of our Android projects.
 
 Our architecture divides the typical layers of an Android application into simple coherent modules, which are completely independent from one another:
