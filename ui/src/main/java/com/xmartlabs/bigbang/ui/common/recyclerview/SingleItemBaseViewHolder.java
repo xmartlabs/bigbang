@@ -11,13 +11,13 @@ import com.xmartlabs.bigbang.core.helper.function.Consumer;
 public class SingleItemBaseViewHolder<T> extends BaseViewHolder implements BindingItemViewHolder<T> {
   Optional<Consumer<T>> onClickListener;
 
+  public SingleItemBaseViewHolder(@NonNull View view) {
+    this(view, null);
+  }
+
   public SingleItemBaseViewHolder(@NonNull View view, @Nullable Consumer<T> onClickListenerConsumer) {
     super(view);
     this.onClickListener = Optional.ofNullable(onClickListenerConsumer);
-  }
-
-  public SingleItemBaseViewHolder(@NonNull View view) {
-    this(view, null);
   }
 
   @CallSuper
