@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 
 import com.xmartlabs.bigbang.ui.test.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public abstract class ListActivity<T extends RecyclerView.Adapter> extends Activity {
+  @BindView(R.id.recycler_view)
   RecyclerView recyclerView;
 
   protected final T adapter = createAdapter();
@@ -16,11 +20,11 @@ public abstract class ListActivity<T extends RecyclerView.Adapter> extends Activ
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_with_list);
+    ButterKnife.bind(this);
     setupRecyclerViewAdapter();
   }
 
   private void setupRecyclerViewAdapter() {
-    recyclerView = (RecyclerView) findViewById(com.xmartlabs.bigbang.ui.test.R.id.recycler_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
   }

@@ -10,6 +10,8 @@ import com.xmartlabs.bigbang.ui.common.recyclerview.SingleItemBaseViewHolder;
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car;
 import com.xmartlabs.bigbang.ui.test.R;
 
+import butterknife.BindView;
+
 public class CarAdapter extends SingleItemBaseRecyclerViewAdapter<Car, CarAdapter.CarViewHolder> {
   @NonNull
   @Override
@@ -18,11 +20,11 @@ public class CarAdapter extends SingleItemBaseRecyclerViewAdapter<Car, CarAdapte
   }
 
   static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
-    private TextView title;
+    @BindView(android.R.id.title)
+    TextView title;
 
     public CarViewHolder(@NonNull View view) {
       super(view);
-      title = (TextView) view.findViewById(android.R.id.title);
     }
 
     @Override

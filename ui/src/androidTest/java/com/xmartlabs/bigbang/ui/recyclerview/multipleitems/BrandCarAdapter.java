@@ -16,6 +16,8 @@ import com.xmartlabs.bigbang.ui.test.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 public class BrandCarAdapter extends BaseRecyclerViewAdapter {
   private final SimpleItemRecycleItemType<Car, CarViewHolder> carItemType =
       new SimpleItemRecycleItemType<Car, CarViewHolder>() {
@@ -46,12 +48,12 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
     notifyDataSetChanged();
   }
 
-  private static final class BrandViewHolder extends SingleItemBaseViewHolder<Brand> {
-    private TextView title;
+  static final class BrandViewHolder extends SingleItemBaseViewHolder<Brand> {
+    @BindView(android.R.id.title)
+    TextView title;
 
     BrandViewHolder(@NonNull View view) {
       super(view);
-      title = (TextView) view.findViewById(android.R.id.title);
     }
 
     @Override
@@ -61,12 +63,12 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
     }
   }
 
-  private static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
-    private TextView title;
+  static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
+    @BindView(android.R.id.title)
+    TextView title;
 
     CarViewHolder(@NonNull View view) {
       super(view);
-      title = (TextView) view.findViewById(android.R.id.title);
     }
 
     @Override
