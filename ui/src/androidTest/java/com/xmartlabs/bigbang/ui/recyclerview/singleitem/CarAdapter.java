@@ -17,11 +17,6 @@ public class CarAdapter extends SingleItemBaseRecyclerViewAdapter<Car, CarAdapte
     return new CarViewHolder(inflateView(parent, R.layout.item_single));
   }
 
-  @Override
-  public void getOnBindViewHolder(@NonNull CarViewHolder viewHolder, @NonNull Car item, int position) {
-    viewHolder.bindItem(item);
-  }
-
   static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
     TextView title;
 

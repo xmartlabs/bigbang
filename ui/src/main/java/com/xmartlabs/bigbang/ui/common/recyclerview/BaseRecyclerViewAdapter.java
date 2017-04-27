@@ -164,13 +164,18 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
   @CallSuper
   @Override
-  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+  public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
     if (isADividerPosition(position)) {
-      onBindDividerViewHolder(holder, position);
+      onBindDividerViewHolder(viewHolder, position);
     } else {
       Element element = items.get(getRealItemPosition(position));
+      Object item = element.getItem();
       //noinspection unchecked
-      element.getType().getOnBindViewHolder(holder, element.getItem(), position);
+      element.getType().onBindViewHolder(viewHolder, item, position);
+      if (viewHolder instanceof BindingItemViewHolder) {
+        //noinspection unchecked
+        ((BindingItemViewHolder) viewHolder).bindItem(item);
+      }
     }
   }
 

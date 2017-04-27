@@ -49,4 +49,9 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   public boolean addItems(@Nullable List<? extends T> items) {
     return addItems(this, items);
   }
+
+  @Override
+  public void onBindViewHolder(@NonNull VH viewHolder, @NonNull T item, int position) {
+
+  }
 }

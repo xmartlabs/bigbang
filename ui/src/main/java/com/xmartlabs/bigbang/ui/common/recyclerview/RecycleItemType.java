@@ -7,5 +7,5 @@ import android.view.ViewGroup;
 public interface RecycleItemType<I, VH extends RecyclerView.ViewHolder> {
   @NonNull
   VH onCreateViewHolder(@NonNull ViewGroup parent);
-  void getOnBindViewHolder(@NonNull VH viewHolder, @NonNull I item, int position);
+  void onBindViewHolder(@NonNull VH viewHolder, @NonNull I item, int position);
 }
