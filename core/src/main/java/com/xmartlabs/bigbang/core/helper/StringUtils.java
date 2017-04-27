@@ -7,7 +7,6 @@ import java.util.Locale;
 
 @SuppressWarnings("unused")
 public class StringUtils {
-
   /**
    * Checks whether the given string is null or empty.
    *
@@ -29,15 +28,15 @@ public class StringUtils {
   }
 
   /**
-   * Changes the first letter of the given word to uppercase.
+   * Changes the first letter of the given sentence to uppercase.
    *
-   * @param word the word to capitalize
+   * @param text the text to capitalize the first character
    * @return a new {@code string} instance with the first letter in uppercase
    */
   @NonNull
-  public static String capitalizeWord(@NonNull String word) {
-    return word.isEmpty()
+  public static String capitalizeFirstChar(@NonNull String text) {
+    return text.isEmpty()
         ? ""
-        : word.substring(0, 1).toUpperCase(Locale.getDefault()) + word.substring(1).toLowerCase(Locale.getDefault());
+        : text.substring(0, 1).toUpperCase(Locale.getDefault()) + text.substring(1).toLowerCase(Locale.getDefault());
   }
 }
