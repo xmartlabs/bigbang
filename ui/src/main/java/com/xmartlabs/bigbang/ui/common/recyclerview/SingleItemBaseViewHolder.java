@@ -12,12 +12,12 @@ public class SingleItemBaseViewHolder<T> extends BaseViewHolder implements Bindi
   Optional<Consumer<T>> onClickListener;
 
   public SingleItemBaseViewHolder(@NonNull View view, @Nullable Consumer<T> onClickListenerConsumer) {
-    this(view);
+    super(view);
     this.onClickListener = Optional.ofNullable(onClickListenerConsumer);
   }
 
   public SingleItemBaseViewHolder(@NonNull View view) {
-    super(view);
+    this(view, null);
   }
 
   @CallSuper
