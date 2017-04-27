@@ -35,7 +35,8 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   @Getter(AccessLevel.PROTECTED)
   @NonNull
   private List<Element> items = new ArrayList<>();
-  private List<RecycleItemType> types = new ArrayList<>();
+  @NonNull
+  private final List<RecycleItemType> types = new ArrayList<>();
 
   @AllArgsConstructor
   @Data
@@ -45,8 +46,10 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     Object item;
   }
 
-  public RecyclerView.ViewHolder onCreateDividerViewHolder(@NonNull ViewGroup parent) {
-    return null;
+  @NonNull
+  @SuppressWarnings("WeakerAccess")
+  protected RecyclerView.ViewHolder onCreateDividerViewHolder(@NonNull ViewGroup parent) {
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
@@ -112,6 +115,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   }
 
   @MainThread
+  @SuppressWarnings("WeakerAccess")
   protected <T extends RecycleItemType> void setItems(@NonNull T type, @Nullable List<?> items) {
     addItems(type, items);
   }
@@ -135,6 +139,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    *
    * @return number of total items from the data
    */
+  @SuppressWarnings("WeakerAccess")
   protected int getItemCountWithoutDividers() {
     return items.size();
   }
@@ -152,7 +157,8 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   }
 
   /** Binds the divider with the view holder */
-  public void onBindDividerViewHolder(RecyclerView.ViewHolder holder, int position) {
+  @SuppressWarnings({"WeakerAccess", "UnusedParameters"})
+  protected void onBindDividerViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
   }
 
@@ -174,6 +180,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param position of all the items that compose the recycler view
    * @return item position within data items
    */
+  @SuppressWarnings("WeakerAccess")
   protected int getRealItemPosition(int position) {
     return hasDividers() ? position / 2 : position;
   }
@@ -195,6 +202,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param position of recycler view item
    * @return if the position in question is a divider
    */
+  @SuppressWarnings("WeakerAccess")
   protected boolean isADividerPosition(int position) {
     return (hasStartDivider() && position % 2 == 0)
         || (hasDividers() && position % 2 == 1)
@@ -202,16 +210,19 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   }
 
   /** @return if recycler view has dividers */
+  @SuppressWarnings("WeakerAccess")
   protected boolean hasDividers() {
     return false;
   }
 
   /** @return if the recycler view has an end divider */
+  @SuppressWarnings("WeakerAccess")
   protected boolean hasEndDivider() {
     return false;
   }
 
   /** @return if the recycler view has a top divider */
+  @SuppressWarnings("WeakerAccess")
   protected boolean hasStartDivider() {
     return false;
   }

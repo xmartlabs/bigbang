@@ -8,7 +8,7 @@ public class SingleItemBaseViewHolder<T> extends BaseViewHolder {
     super(view);
   }
 
-  public void bindItem(T item) {
+  public void bindItem(@NonNull T item) {
 
   }
 }

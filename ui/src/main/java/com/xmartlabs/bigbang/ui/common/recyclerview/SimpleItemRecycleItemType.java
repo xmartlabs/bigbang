@@ -1,11 +1,10 @@
 package com.xmartlabs.bigbang.ui.common.recyclerview;
 
-/**
- * Created by mirland on 20/04/2017.
- */
+import android.support.annotation.NonNull;
+
 public abstract class SimpleItemRecycleItemType<I, VH extends SingleItemBaseViewHolder<I>>
     implements RecycleItemType<I, VH> {
-  public void getOnBindViewHolder(VH viewHolder, I item, int position) {
+  public void getOnBindViewHolder(@NonNull VH viewHolder, @NonNull I item, int position) {
     viewHolder.bindItem(item);
   }
 }

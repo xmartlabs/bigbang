@@ -1,19 +1,21 @@
 package com.xmartlabs.bigbang.ui.recyclerview.singleitem;
 
+import android.support.annotation.NonNull;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
 
 import com.annimon.stream.Stream;
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car;
 import com.xmartlabs.bigbang.ui.recyclerview.common.RecyclerViewAssertions;
 import com.xmartlabs.bigbang.ui.test.R;
 
+import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -28,22 +30,28 @@ public class SimpleItemRecyclerViewTest {
 
   @Test
   public void tesSetItems() {
-    Car car1 = new Car("Corsa");
-    Car car2 = new Car("Gol");
-    Car car3 = new Car("Golf");
-    Car car4 = new Car("Saveiro");
-    Car car5 = new Car("Partner");
+    List<Car> cars = getCarList();
 
     SingleItemActivity activity = mActivityRule.getActivity();
-    List<Car> cars = Arrays.asList(car1, car2, car3, car4, car5);
     activity.runOnUiThread(() -> activity.setItems(cars));
-    ViewInteraction recyclerViewInteraction = onView(withId(R.id.recycler_view));
-    recyclerViewInteraction
-        .check(matches(RecyclerViewAssertions.countIs(5)));
+
+    checkRecyclerViewCondition(RecyclerViewAssertions.countIs(5));
     Stream.of(cars)
+        .map(Car::getModel)
         .indexed()
-        .forEach(carIntPair ->
-            recyclerViewInteraction.check(matches(
-                RecyclerViewAssertions.atPosition(carIntPair.getFirst(), withText(carIntPair.getSecond().getModel())))));
+        .forEach(carIntPair -> checkRecyclerViewCondition(
+            RecyclerViewAssertions.atPosition(carIntPair.getFirst(), withText(carIntPair.getSecond()))));
+  }
+
+  private void checkRecyclerViewCondition(Matcher<View> viewMatcher) {
+    ViewInteraction recyclerViewInteraction = onView(withId(R.id.recycler_view));
+    recyclerViewInteraction.check(matches(viewMatcher));
+  }
+
+  @NonNull
+  private List<Car> getCarList() {
+    return Stream.of("Corsa", "Gol", "Golf", "Saveiro", "Partner")
+        .map(Car::new)
+        .toList();
   }
 }

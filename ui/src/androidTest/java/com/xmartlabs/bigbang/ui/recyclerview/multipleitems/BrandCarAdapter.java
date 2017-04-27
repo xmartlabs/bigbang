@@ -21,7 +21,7 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
       new SimpleItemRecycleItemType<Car, CarViewHolder>() {
         @NonNull
         @Override
-        public CarViewHolder onCreateViewHolder(ViewGroup parent) {
+        public CarViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
           return new CarViewHolder(inflateView(parent, R.layout.item_single));
         }
       };
@@ -30,13 +30,13 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
       new SimpleItemRecycleItemType<Brand, BrandViewHolder>() {
         @NonNull
         @Override
-        public BrandViewHolder onCreateViewHolder(ViewGroup parent) {
+        public BrandViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
           return new BrandViewHolder(inflateView(parent, R.layout.item_single));
         }
       };
 
   @MainThread
-  public void setItems(List<Brand> brands) {
+  public void setItems(@NonNull List<Brand> brands) {
     Stream.of(brands)
         .forEach(brand -> {
           addItem(brandItemType, brand);
@@ -49,13 +49,13 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
   private static final class BrandViewHolder extends SingleItemBaseViewHolder<Brand> {
     TextView title;
 
-    public BrandViewHolder(@NonNull View view) {
+    BrandViewHolder(@NonNull View view) {
       super(view);
       title = (TextView) view.findViewById(android.R.id.title);
     }
 
     @Override
-    public void bindItem(Brand item) {
+    public void bindItem(@NonNull Brand item) {
       super.bindItem(item);
       title.setText(item.getName());
     }
@@ -64,13 +64,13 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
   private static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
     TextView title;
 
-    public CarViewHolder(@NonNull View view) {
+    CarViewHolder(@NonNull View view) {
       super(view);
       title = (TextView) view.findViewById(android.R.id.title);
     }
 
     @Override
-    public void bindItem(Car item) {
+    public void bindItem(@NonNull Car item) {
       super.bindItem(item);
       title.setText(item.getModel());
     }

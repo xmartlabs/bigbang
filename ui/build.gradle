@@ -85,7 +85,6 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':core')
-    androidTestCompile project(path: ':core')
 
     provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     provided "org.projectlombok:lombok:${libraryVersion.lombok}"

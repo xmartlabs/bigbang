@@ -1,5 +1,7 @@
 package com.xmartlabs.bigbang.ui.recyclerview.multipleitems;
 
+import android.support.annotation.NonNull;
+
 import com.xmartlabs.bigbang.ui.recyclerview.common.Brand;
 import com.xmartlabs.bigbang.ui.recyclerview.common.ListActivity;
 
@@ -11,7 +13,7 @@ public class MultipleItemActivity extends ListActivity<BrandCarAdapter> {
     return new BrandCarAdapter();
   }
 
-  public void setItems(List<Brand> brands) {
+  public void setItems(@NonNull List<Brand> brands) {
     adapter.setItems(brands);
   }
 }

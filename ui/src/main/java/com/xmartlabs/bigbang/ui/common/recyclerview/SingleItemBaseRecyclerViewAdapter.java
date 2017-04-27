@@ -21,6 +21,7 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
    * @param items the items that will be the data for the recycler view
    */
   @MainThread
+  @SuppressWarnings("unused")
   public void setItems(@Nullable List<? extends T> items) {
     setItems(this, items);
   }
@@ -31,6 +32,7 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
    * @param items array of items that will be the data for the recycler view
    */
   @MainThread
+  @SuppressWarnings("unused")
   public void setItems(@NonNull T[] items) {
     setItems(Arrays.asList(items));
   }
@@ -43,6 +45,7 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
    * @return if item was successfully added
    */
   @MainThread
+  @SuppressWarnings("unused")
   public boolean addItems(@Nullable List<? extends T> items) {
     return addItems(this, items);
   }
