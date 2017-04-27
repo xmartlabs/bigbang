@@ -2,10 +2,10 @@
 
 [![CircleCI](https://circleci.com/gh/xmartlabs/bigbang.svg?style=svg)](https://circleci.com/gh/xmartlabs/Android-Base-Project)
 [![codebeat badge](https://codebeat.co/badges/af8770f0-d2bf-47d1-a504-6dee56b99312)](https://codebeat.co/projects/github-com-xmartlabs-android-base-project-master)
-[![Core](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Core/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Core/_latestVersion)
-[![DbFlow](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/DbFlow/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/DbFlow/_latestVersion)
-[![Retrofit](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Retrofit/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Retrofit/_latestVersion)
-[![Ui](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Ui/images/download.svg)](https://bintray.com/xmartlabs/Android-Base-Project/Ui/_latestVersion)
+[Core](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Core/images/download.svg)
+[DbFlow](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/DbFlow/images/download.svg)
+[Retrofit](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Retrofit/images/download.svg)
+[Ui](https://api.bintray.com/packages/xmartlabs/Android-Base-Project/Ui/images/download.svg)
 
 
 This is [XMARTLABS](https://xmartlabs.com) Android base project. Architecturally composed of a set of libraries for building modern and scalable applications from the ground up.
@@ -25,7 +25,7 @@ Learn more about the project on the [BigBang Wiki](https://github.com/xmartlabs/
 The first step is to include the Core library into your project as a Gradle compile dependency:
 
 ```groovy
-compile 'com.xmartlabs.bigbang:core:0.1.10'
+compile 'com.xmartlabs.bigbang:core:0.1.11'
 ```
 
 Then, add jCenter to the buildscript repositories:
@@ -53,12 +53,12 @@ repositories {
 
 Then, include any of the following compile dependencies to add an specific module to your app:
 ```groovy
-compile 'com.xmartlabs.bigbang:dbflow:0.1.4'
-compile 'com.xmartlabs.bigbang:retrofit:0.1.2'
-compile 'com.xmartlabs.bigbang:ui:0.1.1'
+compile 'com.xmartlabs.bigbang:dbflow:0.1.11'
+compile 'com.xmartlabs.bigbang:retrofit:0.1.11'
+compile 'com.xmartlabs.bigbang:ui:0.1.11'
 ```
 
-The dbflow module is `database` related, while the `retrofit` module is service related.
+The `dbflow` module is database related, while the `retrofit` module is service related.
 
 ## Architecture
 
@@ -99,7 +99,7 @@ For bugs, issues, feature requests, questions and discussions please use the [Gi
 * [Diego Medina](https://github.com/diegomedina248)
 * [Santiago Casas](https://github.com/chacaa)
 
-## Change Log
+## Changelog
 
 This can be found in the [CHANGELOG.md](CHANGELOG.md) file.
 
