@@ -18,7 +18,7 @@ public class CarAdapter extends SingleItemBaseRecyclerViewAdapter<Car, CarAdapte
   }
 
   static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
-    TextView title;
+    private TextView title;
 
     public CarViewHolder(@NonNull View view) {
       super(view);

@@ -47,7 +47,7 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
   }
 
   private static final class BrandViewHolder extends SingleItemBaseViewHolder<Brand> {
-    TextView title;
+    private TextView title;
 
     BrandViewHolder(@NonNull View view) {
       super(view);
@@ -62,7 +62,7 @@ public class BrandCarAdapter extends BaseRecyclerViewAdapter {
   }
 
   private static final class CarViewHolder extends SingleItemBaseViewHolder<Car> {
-    TextView title;
+    private TextView title;
 
     CarViewHolder(@NonNull View view) {
       super(view);

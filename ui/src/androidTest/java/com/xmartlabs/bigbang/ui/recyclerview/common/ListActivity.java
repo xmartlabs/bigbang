@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.xmartlabs.bigbang.ui.test.R;
+
 public abstract class ListActivity<T extends RecyclerView.Adapter> extends Activity {
   RecyclerView recyclerView;
 
@@ -13,7 +15,7 @@ public abstract class ListActivity<T extends RecyclerView.Adapter> extends Activ
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(com.xmartlabs.bigbang.ui.test.R.layout.activity_with_list);
+    setContentView(R.layout.activity_with_list);
     setupRecyclerViewAdapter();
   }
 

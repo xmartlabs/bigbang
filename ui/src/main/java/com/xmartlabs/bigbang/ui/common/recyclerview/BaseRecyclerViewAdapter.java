@@ -187,7 +187,9 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    */
   @SuppressWarnings("WeakerAccess")
   protected int getRealItemPosition(int position) {
-    return hasDividers() ? position / 2 : position;
+    int startDivider = hasStartDivider() ? 1 : 0;
+    int middleDividers = hasDividers() ? position / 2 : position;
+    return startDivider + middleDividers;
   }
 
   /**

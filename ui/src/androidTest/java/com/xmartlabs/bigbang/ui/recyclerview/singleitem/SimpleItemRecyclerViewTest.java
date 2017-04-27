@@ -29,7 +29,7 @@ public class SimpleItemRecyclerViewTest {
   public ActivityTestRule<SingleItemActivity> mActivityRule = new ActivityTestRule<>(SingleItemActivity.class);
 
   @Test
-  public void tesSetItems() {
+  public void testSetItems() {
     List<Car> cars = getCarList();
 
     SingleItemActivity activity = mActivityRule.getActivity();
