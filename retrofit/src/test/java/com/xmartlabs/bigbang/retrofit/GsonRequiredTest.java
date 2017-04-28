@@ -4,9 +4,9 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.xmartlabs.bigbang.core.adapter.MillisecondsLocalDateAdapter;
 import com.xmartlabs.bigbang.core.common.GsonExclude;
 import com.xmartlabs.bigbang.core.common.GsonRequired;
+import com.xmartlabs.bigbang.core.helper.gsonadapters.MillisecondsLocalDateAdapter;
 import com.xmartlabs.bigbang.retrofit.deserialized.RequiredFieldDeserializer;
 import com.xmartlabs.bigbang.retrofit.exception.JsonRequiredFieldException;
 

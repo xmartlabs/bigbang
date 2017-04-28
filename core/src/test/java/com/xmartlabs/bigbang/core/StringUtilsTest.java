@@ -26,11 +26,11 @@ public class StringUtilsTest {
 
   @Test
   public void capitalizeEmptyString() {
-    assertThat(StringUtils.capitalizeWord(""), equalTo(""));
+    assertThat(StringUtils.capitalizeFirstChar(""), equalTo(""));
   }
 
   @Test
-  public void capitalizeWord() {
-    assertThat(StringUtils.capitalizeWord("word"), equalTo("Word"));
+  public void capitalizeFirstLetter() {
+    assertThat(StringUtils.capitalizeFirstChar("capitalize first letter"), equalTo("Capitalize first letter"));
   }
 }
