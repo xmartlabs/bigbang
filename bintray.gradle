@@ -1,3 +1,5 @@
+import java.sql.Array
+
 task generateJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     options.linkSource true
@@ -38,6 +40,32 @@ def getBintrayInformation = { propertyFilePath ->
     ]
 }
 
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging 'aar'
+            groupId project.ext.applicationId
+            artifactId project.ext.PUBLISH_ARTIFACT_ID
+            version project.ext.librariesVersion
+            name project.ext.PUBLISH_ARTIFACT_ID
+            url project.ext.websiteUrl
+            inceptionYear '2017'
+            licenses {
+                license { // HARDCODED
+                    name 'Apache-2.0'
+                    url 'https://github.com/xmartlabs/bigbang/blob/master/LICENSE'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection project.ext.vcsUrl
+                developerConnection project.ext.vcsUrl
+                url project.ext.websiteUrl
+            }
+        }
+    }
+}
+
 bintray {
     def bintrayInfo = getBintrayInformation("../bintray.properties")
     if (bintrayInfo == null) {
@@ -47,7 +75,7 @@ bintray {
     user = bintrayInfo.user
     key = bintrayInfo.apiKey
     pkg {
-        repo = 'bigbang'
+        repo = 'Android-Base-Project'
         name = "${project.ext.projectName}"
         userOrg = 'xmartlabs'
 
@@ -58,8 +86,34 @@ bintray {
         }
 
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/xmartlabs/bigbang.git'
-        websiteUrl = 'https://github.com/xmartlabs/bigbang'
+        vcsUrl = "${project.ext.vcsUrl}"
+        websiteUrl = "${project.ext.websiteUrl}"
     }
     configurations = ['archives']
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+    // options.encoding = 'UTF-8'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
 }

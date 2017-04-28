@@ -2,9 +2,9 @@ apply from: '../versions.gradle'
 apply plugin: 'com.android.library'
 
 ext {
-    projectName = "Crashlytics Logger"
-    versionCodeId = 1
-    versionCodeNumber = "0.1.0"
+    projectName = "CrashlyticsLogger"
+    versionCodeId = project.ext.librariesVersionCode
+    versionCodeNumber = project.ext.librariesVersion
     PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = "log-crashlytics"
     PUBLISH_VERSION = versionCodeNumber
