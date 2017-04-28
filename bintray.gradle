@@ -1,31 +1,3 @@
-import java.sql.Array
-
-task generateJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    options.linkSource true
-    classpath = configurations.compile
-    classpath += project.files(android.getBootClasspath()
-            .join(File.pathSeparator))
-    failOnError false
-}
-
-task generateSourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-task generateJavadocsJar(type: Jar) {
-    from generateJavadocs.destinationDir
-    classifier 'javadoc'
-}
-
-generateJavadocsJar.dependsOn generateJavadocs
-
-artifacts {
-    archives generateJavadocsJar
-    archives generateSourcesJar
-}
-
 def getBintrayInformation = { propertyFilePath ->
     def propertiesFile = file(propertyFilePath)
     if (!propertiesFile.exists()) {
@@ -99,14 +71,18 @@ task sourcesJar(type: Jar) {
 
 task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
+    options.linkSource true
+    classpath = configurations.compile
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    failOnError false
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
-    // options.encoding = 'UTF-8'
 }
+
+javadocJar.dependsOn javadoc
 
 artifacts {
     archives javadocJar

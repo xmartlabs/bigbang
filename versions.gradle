@@ -1,7 +1,7 @@
 ext {
     applicationId = "com.xmartlabs.bigbang"
-    librariesVersionCode = 28
-    librariesVersion = '0.1.28'
+    librariesVersionCode = 30
+    librariesVersion = '0.1.30'
     compileSdkVersion = 25
     minSdkVersion = 17
     targetSdkVersion = 25
