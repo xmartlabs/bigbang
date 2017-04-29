@@ -9,12 +9,14 @@ import com.xmartlabs.bigbang.ui.test.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lombok.Getter;
 
 public abstract class ListActivity<T extends RecyclerView.Adapter> extends Activity {
   @BindView(R.id.recycler_view)
   RecyclerView recyclerView;
 
-  protected final T adapter = createAdapter();
+  @Getter
+  private final T adapter = createAdapter();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

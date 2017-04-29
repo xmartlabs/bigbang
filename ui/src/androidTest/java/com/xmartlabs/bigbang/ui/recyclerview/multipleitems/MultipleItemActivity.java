@@ -14,6 +14,6 @@ public class MultipleItemActivity extends ListActivity<BrandCarAdapter> {
   }
 
   public void setItems(@NonNull List<Brand> brands) {
-    adapter.setItems(brands);
+    getAdapter().setItems(brands);
   }
 }

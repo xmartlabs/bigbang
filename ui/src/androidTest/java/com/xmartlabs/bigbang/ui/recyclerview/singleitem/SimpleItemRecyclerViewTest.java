@@ -13,7 +13,6 @@ import com.xmartlabs.bigbang.ui.test.R;
 
 import org.hamcrest.Matcher;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.List;
@@ -24,18 +23,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-public class SimpleItemRecyclerViewTest {
+public abstract class SimpleItemRecyclerViewTest {
   @Rule
   public ActivityTestRule<SingleItemActivity> mActivityRule = new ActivityTestRule<>(SingleItemActivity.class);
 
-  @Test
-  public void testSetItems() {
-    List<Car> cars = getCarList();
-
-    SingleItemActivity activity = mActivityRule.getActivity();
-    activity.runOnUiThread(() -> activity.setItems(cars));
-
-    checkRecyclerViewCondition(RecyclerViewAssertions.countIs(5));
+  void checkItems(@NonNull List<Car> cars) {
+    checkRecyclerViewCondition(RecyclerViewAssertions.countIs(cars.size()));
     Stream.of(cars)
         .map(Car::getModel)
         .indexed()
@@ -49,7 +42,7 @@ public class SimpleItemRecyclerViewTest {
   }
 
   @NonNull
-  private List<Car> getCarList() {
+  List<Car> getCarList() {
     return Stream.of("Corsa", "Gol", "Golf", "Saveiro", "Partner")
         .map(Car::new)
         .toList();
