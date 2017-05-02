@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHolder>
     extends BaseRecyclerViewAdapter implements RecycleItemType<T, VH> {
   /**
-   * Sets the items data for the recycler view and notifying any registered observers that the data set has
+   * Sets the items data for the recycler view and notifies any registered observers that the data set has
    * changed.
    *
    * @param items the items that will be the data for the recycler view

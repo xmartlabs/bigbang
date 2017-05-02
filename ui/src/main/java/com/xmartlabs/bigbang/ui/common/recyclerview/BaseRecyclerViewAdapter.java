@@ -98,9 +98,9 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param addTypeIfNeeded A boolean specifying if the item type has to be added to the type collection.
    *                        If this parameter is true, the type will be added only if it wasn't added yet.
    */
-  protected <T extends RecycleItemType> void addItemWithoutNotify(@NonNull T type, @NonNull Object item,
-                                                                  boolean addTypeIfNeeded) {
-    addItemWithoutNotify(items.size(), type, item, addTypeIfNeeded);
+  protected <T extends RecycleItemType> void addItemWithoutNotifying(@NonNull T type, @NonNull Object item,
+                                                                     boolean addTypeIfNeeded) {
+    addItemWithoutNotifying(items.size(), type, item, addTypeIfNeeded);
   }
 
   /**
@@ -113,12 +113,12 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param addTypeIfNeeded A boolean specifying if the item type has to be added to the type collection.
    *                        If this parameter is true, the type will be added only if it wasn't added yet.
    */
-  private <T extends RecycleItemType> void addItemWithoutNotify(int index, @NonNull T type, @Nullable Object item,
-                                                                boolean addTypeIfNeeded) {
+  private <T extends RecycleItemType> void addItemWithoutNotifying(int index, @NonNull T type, @Nullable Object item,
+                                                                   boolean addTypeIfNeeded) {
     Element element = new Element(type, item);
     items.add(index, element);
     if (addTypeIfNeeded) {
-      addTypeIfNeeded(type);
+      addItemTypeIfNeeded(type);
     }
   }
 
@@ -127,7 +127,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    *
    * @param type The type to be added.
    */
-  private <T extends RecycleItemType> void addTypeIfNeeded(@NonNull T type) {
+  private <T extends RecycleItemType> void addItemTypeIfNeeded(@NonNull T type) {
     if (!types.contains(type)) {
       types.add(type);
     }
@@ -141,7 +141,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    */
   @MainThread
   protected <T extends RecycleItemType> void addItem(@NonNull T type, @NonNull Object item) {
-    addItemWithoutNotify(type, item, true);
+    addItemWithoutNotifying(type, item, true);
     notifyItemInserted(items.size() - 1);
   }
 
@@ -162,8 +162,8 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     Stream.ofNullable(items)
         .indexed()
         .forEach(itemWithPosition ->
-            addItemWithoutNotify(index + itemWithPosition.getFirst(), type, itemWithPosition.getSecond(), false));
-    addTypeIfNeeded(type);
+            addItemWithoutNotifying(index + itemWithPosition.getFirst(), type, itemWithPosition.getSecond(), false));
+    addItemTypeIfNeeded(type);
     notifyItemRangeInserted(index, getItemCount() - lastItemCount);
     return true;
   }
@@ -182,8 +182,8 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     }
     int lastItemCount = getItemCount();
     Stream.ofNullable(items)
-        .forEach(item -> addItemWithoutNotify(type, item, false));
-    addTypeIfNeeded(type);
+        .forEach(item -> addItemWithoutNotifying(type, item, false));
+    addItemTypeIfNeeded(type);
     if (lastItemCount == 0) {
       notifyDataSetChanged();
     } else {
@@ -194,7 +194,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
   /**
    * Sets the items data for the recycler view and notifying any registered observers that the data set has
-   * changed. It uses a function that calculate the difference between the last items and the new items
+   * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
    * @param type                      Type of items.
@@ -214,44 +214,51 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
       updateElementsDisposable.dispose();
     }
     updateElementsDisposable = Single.fromCallable(() -> DiffUtil
-        .calculateDiff(new DiffUtil.Callback() {
-          @Override
-          public int getOldListSize() {
-            return items.size();
-          }
-
-          @Override
-          public int getNewListSize() {
-            return newItems.size();
-          }
-
-          @Override
-          public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            return areItemsTheSameFunction.apply(
-                items.get(oldItemPosition).getItem(),
-                newItems.get(newItemPosition));
-          }
-
-          @Override
-          public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            return areContentTheSameFunction.apply(
-                BaseRecyclerViewAdapter.this.items.get(oldItemPosition).getItem(),
-                newItems.get(newItemPosition));
-          }
-        }))
+        .calculateDiff(getUpdateDiffCallback(newItems, areItemsTheSameFunction, areContentTheSameFunction)))
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(diffResult -> {
           items.clear();
           Stream.of(newItems)
-              .forEach(item -> addItemWithoutNotify(type, item, false));
-          addTypeIfNeeded(type);
+              .forEach(item -> addItemWithoutNotifying(type, item, false));
+          addItemTypeIfNeeded(type);
           diffResult.dispatchUpdatesTo(this);
         });
   }
 
+  @NonNull
+  private DiffUtil.Callback getUpdateDiffCallback(@NonNull final List<?> newItems,
+                                                  @NonNull final BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
+                                                  @NonNull final BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+    return new DiffUtil.Callback() {
+      @Override
+      public int getOldListSize() {
+        return items.size();
+      }
+
+      @Override
+      public int getNewListSize() {
+        return newItems.size();
+      }
+
+      @Override
+      public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+        return areItemsTheSameFunction.apply(
+            items.get(oldItemPosition).getItem(),
+            newItems.get(newItemPosition));
+      }
+
+      @Override
+      public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+        return areContentTheSameFunction.apply(
+            BaseRecyclerViewAdapter.this.items.get(oldItemPosition).getItem(),
+            newItems.get(newItemPosition));
+      }
+    };
+  }
+
   /**
-   * Sets the items data for the recycler view and notifying any registered observers that the data set has
+   * Sets the items data for the recycler view and notifies any registered observers that the data set has
    * changed.
    *
    * @param type     Type of items.
