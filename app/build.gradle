@@ -49,8 +49,8 @@ android {
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
         testInstrumentationRunner "${applicationId}.TestRunner"
-        versionCode 1
-        versionName '0.1.0'
+        versionCode project.ext.librariesVersionCode
+        versionName project.ext.librariesVersion
     }
     signingConfigs {
         //noinspection GroovyMissingReturnStatement

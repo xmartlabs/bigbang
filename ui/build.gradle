@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 
 ext {
     projectName = "Ui"
-    versionCodeId = 1
-    versionCodeNumber = "0.1.1"
+    versionCodeId = project.ext.librariesVersionCode
+    versionCodeNumber = project.ext.librariesVersion
     PUBLISH_GROUP_ID = applicationId
     PUBLISH_ARTIFACT_ID = "ui"
     PUBLISH_VERSION = versionCodeNumber
