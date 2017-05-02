@@ -1,10 +1,15 @@
 ext {
     applicationId = "com.xmartlabs.bigbang"
-
+    librariesVersionCode = 30
+    librariesVersion = '0.1.30'
     compileSdkVersion = 25
     minSdkVersion = 17
     targetSdkVersion = 25
     buildToolsVersion = '25.0.2'
+
+    vcsUrl = 'https://github.com/xmartlabs/bigbang.git'
+    websiteUrl = 'https://github.com/xmartlabs/bigbang'
+
     javaVersion8 = JavaVersion.VERSION_1_8
 
     libraryVersion = [
