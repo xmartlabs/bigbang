@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-/**
- * Created by mirland on 28/04/17.
- */
 public class SimpleItemTestSetItems extends SimpleItemRecyclerViewTest {
   @Test
   public void testSetItems() {

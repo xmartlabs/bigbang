@@ -9,9 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by mirland on 28/04/17.
- */
 public class SimpleItemTestAddItems extends SimpleItemRecyclerViewTest {
   private void testAddItem(List<Car> initialItems, List<Car> itemsToAdd) {
     SingleItemActivity activity = mActivityRule.getActivity();
