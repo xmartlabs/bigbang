@@ -30,7 +30,7 @@ public class OkHttpModule {
   @Named(CLIENT_SERVICE)
   @Provides
   @Singleton
-  OkHttpClient provideServiceOkHttpClient(OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
+  public OkHttpClient provideServiceOkHttpClient(OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
     addLoggingInterceptor(clientBuilder, buildInfo);
 
     return clientBuilder.build();
@@ -39,7 +39,7 @@ public class OkHttpModule {
   @Named(CLIENT_PICASSO)
   @Provides
   @Singleton
-  OkHttpClient providePicassoOkHttpClient(OkHttpClient.Builder clientBuilder, Cache cache,
+  public OkHttpClient providePicassoOkHttpClient(OkHttpClient.Builder clientBuilder, Cache cache,
                                           BuildInfo buildInfo) {
     clientBuilder.cache(cache);
 
@@ -49,13 +49,13 @@ public class OkHttpModule {
   }
 
   @Provides
-  OkHttpClient.Builder provideOkHttpClientBuilder() {
+  public OkHttpClient.Builder provideOkHttpClientBuilder() {
     return new OkHttpClient.Builder();
   }
 
   @Provides
   @Singleton
-  Cache provideCache(Context context) {
+  public Cache provideCache(Context context) {
     File httpCacheDir = new File(context.getExternalCacheDir(), "cache");
     if (!httpCacheDir.exists()) {
       //noinspection ResultOfMethodCallIgnored
