@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * A Base RecyclerViewAdapter with already implemented functions such as
- * Setting, removing, adding items, getting its count among others.
+ * setting, removing, adding items, getting its count among others.
  */
 public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHolder>
     extends BaseRecyclerViewAdapter implements RecycleItemType<T, VH> {
