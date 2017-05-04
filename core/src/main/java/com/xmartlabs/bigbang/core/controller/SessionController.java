@@ -40,10 +40,12 @@ public abstract class SessionController extends Controller {
   @CheckResult
   @NonNull
   public Optional<SessionType> getAbstractSession() {
-    return Optional.of(session).orElseGet(() -> {
-      String sessionJsonString = sharedPreferences.getString(PREFERENCES_KEY_SESSION, null);
-      return deserializeSession(sessionJsonString);
-    });
+    return session
+        .map(Optional::of)
+        .orElseGet(() -> {
+          String sessionJsonString = sharedPreferences.getString(PREFERENCES_KEY_SESSION, null);
+          return deserializeSession(sessionJsonString);
+        });
   }
 
   protected abstract Optional<SessionType> deserializeSession(String json);
