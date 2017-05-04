@@ -9,7 +9,7 @@ import okhttp3.HttpUrl;
 
 public class MockRestServiceModule extends RestServiceModule {
   @Override
-  protected HttpUrl provideBaseUrl(Context context) {
+  public HttpUrl provideBaseUrl(Context context) {
     return HttpUrl.parse(RESTMockServer.getUrl());
   }
 }

@@ -49,12 +49,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
     apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "com.google.dagger:dagger:${libraryVersion.dagger}"
     compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
     compile "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
     compile "com.squareup.retrofit2:adapter-rxjava2:${libraryVersion.retrofit}"
     compile "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     provided "org.projectlombok:lombok:${libraryVersion.lombok}"
     testCompile "junit:junit:${libraryVersion.junit}"
     testCompile ('org.threeten:threetenbp:1.3.2') {
