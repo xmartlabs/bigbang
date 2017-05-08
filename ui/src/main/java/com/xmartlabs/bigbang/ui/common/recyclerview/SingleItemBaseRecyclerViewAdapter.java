@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 
+import com.xmartlabs.bigbang.core.helper.function.BiFunction;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,6 +50,41 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   @SuppressWarnings("unused")
   public boolean addItems(@Nullable List<? extends T> items) {
     return addItems(this, items);
+  }
+
+  /**
+   * Adds an item to the data for the recycler view and notifies any registered observers that an item has been added.
+   *
+   * @param item The item to be added.
+   */
+  public void addItem(@NonNull Object item) {
+    addItem(this, item);
+  }
+
+  /**
+   * Adds items to the data for the recycler view and notifies any registered observers that the items has been added.
+   *
+   * @param index The index at which the specified items are to be inserted.
+   * @param items The items that will be the data for the recycler view.
+   * @return if items was successfully added.
+   */
+  public boolean addItems(int index, @Nullable List<?> items) {
+    return addItems(index, this, items);
+  }
+
+  /**
+   * Sets the items data for the recycler view and notifying any registered observers that the data set has
+   * changed. It uses a function that calculates the difference between the old and the new items
+   * in order to improve the update process.
+   *
+   * @param newItems                  The items tobe added.
+   * @param areItemsTheSameFunction   A function which checks that two items are the same.
+   * @param areContentTheSameFunction A function which checks that the content of two items are the same.
+   */
+  protected void setItems(final @Nullable List<?> newItems,
+                          @NonNull BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
+                          @NonNull BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+    setItems(this, newItems, areItemsTheSameFunction, areContentTheSameFunction);
   }
 
   @Override

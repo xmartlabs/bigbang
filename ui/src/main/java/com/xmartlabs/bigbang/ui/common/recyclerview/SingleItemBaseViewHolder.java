@@ -8,8 +8,14 @@ import android.view.View;
 import com.annimon.stream.Optional;
 import com.xmartlabs.bigbang.core.helper.function.Consumer;
 
+/**
+ * View holder for a single item {@link T}.
+ *
+ * @param <T> The type of the single item.
+ */
 public class SingleItemBaseViewHolder<T> extends BaseViewHolder implements BindingItemViewHolder<T> {
-  Optional<Consumer<T>> onClickListener;
+  @NonNull
+  private Optional<Consumer<T>> onClickListener;
 
   public SingleItemBaseViewHolder(@NonNull View view) {
     this(view, null);
