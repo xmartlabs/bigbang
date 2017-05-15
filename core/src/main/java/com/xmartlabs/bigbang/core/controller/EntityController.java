@@ -15,6 +15,8 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -28,7 +30,9 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition> extends Controller {
+  @Getter(AccessLevel.PROTECTED)
   private final EntityDao<Id, E, Condition> entityDao;
+  @Getter(AccessLevel.PROTECTED)
   private final EntityServiceProvider<Id, E> entityServiceProvider;
 
   /**
@@ -52,7 +56,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
                 .toFlowable()
         )
         .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.io())
+        .observeOn(Schedulers.io(),true)
         .scan((databaseEntities, serviceEntities) ->
             entityDao.deleteAndInsertEntities(serviceEntities, conditions).blockingGet()
         )
