@@ -9,7 +9,7 @@
         />
 
     <solid
-        android:color="@color/dark_sky_blue"
+        android:color="@color/colorAccent"
         />
 
 </shape>

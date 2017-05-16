@@ -1,11 +1,7 @@
 package com.xmartlabs.template.ui.onboarding;
 
-import android.content.Intent;
-
 import com.annimon.stream.Optional;
 import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter;
-import com.xmartlabs.template.TemplateApplication;
-import com.xmartlabs.template.ui.Henson;
 
 import lombok.Builder;
 
@@ -25,7 +21,7 @@ public class OnboardingPresenter extends BaseMvpPresenter<OnboardingView> {
 
   void nextButtonPressed() {
     if (isLastPage()) {
-      goToLoginActivity();
+      skipButtonPressed();
     } else {
       currentPage++;
       Optional.ofNullable(getView())
@@ -51,15 +47,7 @@ public class OnboardingPresenter extends BaseMvpPresenter<OnboardingView> {
   }
 
   void skipButtonPressed() {
-    goToLoginActivity();
-  }
-
-  private void goToLoginActivity() {
-    Intent intent = Henson.with(TemplateApplication.getContext())
-        .gotoLoginActivity()
-        .build()
-        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     Optional.ofNullable(getView())
-        .ifPresent(view -> view.startActivity(intent));
+        .ifPresent(OnboardingView::goToLoginActivity);
   }
 }

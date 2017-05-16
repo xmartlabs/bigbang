@@ -1,5 +1,6 @@
 package com.xmartlabs.template.ui.onboarding;
 
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.xmartlabs.template.R;
+import com.xmartlabs.template.TemplateApplication;
+import com.xmartlabs.template.ui.Henson;
 import com.xmartlabs.template.ui.common.TemplateFragment;
 
 import butterknife.BindView;
@@ -108,5 +111,14 @@ public class OnboardingFragment extends TemplateFragment<OnboardingView, Onboard
   @OnClick(R.id.skip_button)
   void onSkipButtonClick() {
     presenter.skipButtonPressed();
+  }
+
+  @Override
+  public void goToLoginActivity() {
+    Intent intent = Henson.with(TemplateApplication.getContext())
+        .gotoLoginActivity()
+        .build()
+        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    startActivity(intent);
   }
 }

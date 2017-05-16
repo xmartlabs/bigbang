@@ -14,7 +14,6 @@ public interface TemplateView extends MvpView {
   void showError(@StringRes int message, @StringRes int title, @StringRes int buttonTitle);
   void showError(@NonNull Throwable error, @StringRes Integer message);
   String getString(@StringRes int stringRes);
-  void startActivity(Intent intent);
   boolean isViewAlive();
   Context getContext();
 }

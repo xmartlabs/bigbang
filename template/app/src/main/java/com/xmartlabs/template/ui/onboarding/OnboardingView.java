@@ -12,4 +12,5 @@ public interface OnboardingView extends TemplateView {
   void moveToPage(int page);
   void startActivity(Intent intent);
   void handleNextButtonVisibility();
+  void goToLoginActivity();
 }

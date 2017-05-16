@@ -23,7 +23,6 @@
         <item name="android:background">@drawable/primary_btn_background</item>
         <item name="android:gravity">center</item>
         <item name="android:lineSpacingExtra">2sp</item>
-        <item name="android:textColor">@color/white_82</item>
         <item name="android:textSize">17sp</item>
     </style>
 

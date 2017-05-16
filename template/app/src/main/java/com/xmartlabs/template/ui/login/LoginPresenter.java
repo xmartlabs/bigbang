@@ -1,6 +1,5 @@
 package com.xmartlabs.template.ui.login;
 
-import android.content.Intent;
 import android.support.annotation.StringRes;
 
 import com.annimon.stream.Optional;
@@ -8,9 +7,7 @@ import com.xmartlabs.bigbang.core.Injector;
 import com.xmartlabs.bigbang.core.controller.SharedPreferencesController;
 import com.xmartlabs.bigbang.core.helper.ObjectHelper;
 import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter;
-import com.xmartlabs.template.TemplateApplication;
 import com.xmartlabs.template.controller.AuthController;
-import com.xmartlabs.template.ui.Henson;
 
 import javax.inject.Inject;
 
@@ -33,12 +30,8 @@ public class LoginPresenter extends BaseMvpPresenter<LoginView> {
 
   public void loginButtonClicked() {
     //TODO: Do something on login button clicked
-    Intent intent = Henson.with(TemplateApplication.getContext())
-        .gotoRecyclerExampleActivity()
-        .build()
-        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     Optional.ofNullable(getView())
-        .ifPresent(view -> view.startActivity(intent));
+        .ifPresent(LoginView::gotoRecyclerExampleActivity);
   }
 
   private void showErrorIfPresent(@StringRes int stringRes) {

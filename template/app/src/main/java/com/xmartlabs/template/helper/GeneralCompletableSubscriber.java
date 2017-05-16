@@ -8,6 +8,8 @@ import android.support.annotation.StringRes;
 import com.xmartlabs.template.ui.common.TemplateView;
 
 import java.lang.ref.WeakReference;
+import java.util.Optional;
+import java.util.function.Function;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
@@ -34,13 +36,11 @@ public class GeneralCompletableSubscriber implements CompletableObserver {
   public void onError(@NonNull Throwable throwable) {
     TemplateView view = viewReference.get();
     if (alertOnError(throwable) && view != null && view.isViewAlive()) {
-      view.showError(throwable, getErrorMessage(throwable));
+      view.showError(throwable, getErrorMessage(throwable).orElse(0));
     }
   }
 
-  @Nullable
-  @StringRes
-  protected Integer getErrorMessage(Throwable throwable) {
+  protected Optional<Integer> getErrorMessage(Throwable throwable) {
     return null;
   }
 
