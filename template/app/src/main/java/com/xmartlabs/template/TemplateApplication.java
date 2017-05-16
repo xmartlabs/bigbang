@@ -61,7 +61,7 @@ public class TemplateApplication extends Application {
 
   @Override
   public void onCreate() {
-    super.onCreate()
+    super.onCreate();
     initializeThreeTenABP();
     initializeInjections();
     initializeDataBase();
