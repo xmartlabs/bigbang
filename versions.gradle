@@ -1,7 +1,7 @@
 ext {
     applicationId = "com.xmartlabs.bigbang"
-    librariesVersionCode = 41
-    librariesVersion = '0.1.41'
+    librariesVersionCode = 44
+    librariesVersion = '0.1.44'
     compileSdkVersion = 25
     minSdkVersion = 17
     targetSdkVersion = 25
@@ -21,7 +21,7 @@ ext {
         dagger: '2.6',
         dart: '2.0.0',
         dexmaker: '1.4',
-        dbFlow: '3.1.1',
+        dbFlow: '4.0.2',
         espresso: '2.2.2',
         firebase: '9.2.1',
         fragmentArgs: '3.0.2',
