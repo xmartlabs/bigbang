@@ -16,7 +16,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
   /** @return a Resources instance for the application's package */
   protected final Resources getResources() {
-    return getContext().getResources();
+    return getContext().getResources()
   }
 
   /**
