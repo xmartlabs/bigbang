@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name" translatable="false">Template</string>
+    <!--TODO: Replace base url with the correct url-->
+    <string name="base_url" translatable="false">https://xmartlabs.com/</string>
+
+    <string name="skip">Skip</string>
+    <string name="start">Start</string>
+    <string name="next">Next</string>
+    <string name="onboarding_title_1">Welcome to Template!</string>
+    <string name="onboarding_description_1">Onboarding description 1!</string>
+    <string name="onboarding_title_2">Onboarding Title 2!</string>
+    <string name="onboarding_description_2">Onboarding Description 2!</string>
+    <string name="onboarding_title_3">Onboarding Title 3!</string>
+    <string name="onboarding_description_3">Onboarding Description 3!</string>
+    <string name="login">Login</string>
+    <string name="onboarding">Onboarding</string>
+    <string name="recycler_fragment_example">Recycler fragment example</string>
+    <string name="error">Error</string>
+    <string name="check_your_internet_connection">Check your internet connection and try again</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="error_service_call_generic">Could not connect to the server. Please try again.</string>
+    <string name="android_mipmap_image">android_mipmap_image</string>
+    <string name="example_empty_view">Empty View Example</string>
+</resources>
