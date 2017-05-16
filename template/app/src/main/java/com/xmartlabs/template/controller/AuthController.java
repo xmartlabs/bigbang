@@ -33,8 +33,8 @@ public class AuthController extends Controller {
             sessionController.setSession(new Session())
                 .flatMap(session -> {
                   accessTokenProvider.updateEntity(authResponse.getAccessToken());
-                  return Single.just(authResponse);
+                  return Single.just(authResponse)
                 })
-        );
+        )
   }
 }
