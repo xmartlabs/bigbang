@@ -7,9 +7,9 @@ if [ ${TEMPLATE_BIG_BANG_VERSION} = ${BIG_BANG_VERSION} ]; then
     echo "BIGBANG_VERSION"
     echo ${TEMPLATE_BIG_BANG_VERSION}
 else
-    echo "BigBang version: "${BIG_BANG_VERSION}
+    echo "BigBang version: "${BIG_BANG_VERSION} 1>&2
     echo "Version used in template: "${TEMPLATE_BIG_BANG_VERSION} 1>&2
-    echo "Template's BigBang library version and BigBang librariesVersion should be exactly the same."
+    echo "Template's BigBang library version and BigBang librariesVersion should be exactly the same." 1>&2
     exit 1
 fi
 
