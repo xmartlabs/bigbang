@@ -17,8 +17,8 @@ import com.xmartlabs.bigbang.core.rx.error.FlowableObserverWithErrorHandling;
 import com.xmartlabs.bigbang.core.rx.error.MaybeObserverWithErrorHandling;
 import com.xmartlabs.bigbang.core.rx.error.ObserverWithErrorHandling;
 import com.xmartlabs.bigbang.core.rx.error.SingleObserverWithErrorHandling;
+import com.xmartlabs.bigbang.log.crashlytics.CrashlyticsLogger;
 import com.xmartlabs.bigbang.retrofit.helper.ServiceErrorHandler;
-import com.xmartlabs.template.logger.CrashlyticsLogger;
 import com.xmartlabs.template.module.AndroidModule;
 import com.xmartlabs.template.module.OkHttpModule;
 import com.xmartlabs.template.module.RestServiceModule;
@@ -61,7 +61,7 @@ public class TemplateApplication extends Application {
 
   @Override
   public void onCreate() {
-    super.onCreate();
+    super.onCreate()
     initializeThreeTenABP();
     initializeInjections();
     initializeDataBase();
@@ -99,8 +99,8 @@ public class TemplateApplication extends Application {
 
   private void initializeLogging() {
     //TODO: Configure Fabric and add Fabric apiSecret and apiKey properties file in the root folder
-//    loggerTree.addLogger(new CrashlyticsLogger().initialize(buildInfo, this));
-//    Timber.plant(loggerTree);
+    loggerTree.addLogger(new CrashlyticsLogger().initialize(buildInfo, this));
+    Timber.plant(loggerTree);
   }
 
   @SuppressWarnings("unchecked")

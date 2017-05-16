@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 TEMPLATE_BIG_BANG_VERSION=$(sed -n -e "s/\.*final BIGBANG_VERSION = '\s*\(.*\)[\"\']\s*/\1/p" template/app/build.gradle)
 BIG_BANG_VERSION=$(sed -n -e "s/\.*librariesVersion = '\s*\(.*\)[\"\']\s*/\1/p" versions.gradle)
 
@@ -11,3 +12,16 @@ else
     echo "Template's BigBang library version and BigBang librariesVersion should be exactly the same."
     exit 1
 fi
+
+cd template/;
+
+./gradlew clean;
+./gradlew generateAllVersionsStagingDebugSources;
+./gradlew generateAllVersionsStagingDebugAndroidTestSources;
+./gradlew mockableAndroidJar;
+./gradlew prepareAllVersionsStagingDebugUnitTestDependencies;
+./gradlew compileAllVersionsStagingDebugSources;
+./gradlew compileAllVersionsStagingDebugAndroidTestSources;
+./gradlew compileAllVersionsStagingDebugUnitTestSources;
+
+cd ..

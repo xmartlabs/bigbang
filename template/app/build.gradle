@@ -184,6 +184,7 @@ dependencies {
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${RXLIFECYCLE_VERSION}"
     compile "com.xmartlabs.bigbang:core:${BIGBANG_VERSION}"
     compile "com.xmartlabs.bigbang:dbflow:${BIGBANG_VERSION}"
+    compile "com.xmartlabs.bigbang:log-crashlytics:${BIGBANG_VERSION}"
     compile "com.xmartlabs.bigbang:retrofit:${BIGBANG_VERSION}"
     compile "com.xmartlabs.bigbang:ui:${BIGBANG_VERSION}"
     compile "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION}"

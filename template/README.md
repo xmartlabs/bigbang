@@ -1,6 +1,6 @@
-# ProjectHub Android
+# Android Template project
 
-This is Xmartlabs' Android ProjectHub project.
+This is [Xmartlabs](https://xmartlabs.com) Android Template project.
 Please read through this README before start working.
 
 ## Style guide
