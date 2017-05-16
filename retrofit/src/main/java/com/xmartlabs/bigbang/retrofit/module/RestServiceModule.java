@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestServiceModule {
   @Provides
   @Singleton
-  Retrofit provideRetrofit(@Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
+  public Retrofit provideRetrofit(@Named(OkHttpModule.CLIENT_SERVICE) OkHttpClient client,
                            RxJava2CallAdapterFactory rxJavaCallAdapterFactory,
                            GsonConverterFactory gsonConverterFactory,
                            HttpUrl baseUrl,
@@ -37,25 +37,25 @@ public class RestServiceModule {
 
   @Provides
   @Singleton
-  RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
+  public RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
     return RxJava2CallAdapterFactory.create();
   }
 
   @Provides
   @Singleton
-  GsonConverterFactory provideGsonConverterFactory(@Named(ServiceGsonModule.SERVICE_GSON_NAME) Gson gson) {
+  public GsonConverterFactory provideGsonConverterFactory(@Named(ServiceGsonModule.SERVICE_GSON_NAME) Gson gson) {
     return GsonConverterFactory.create(gson);
   }
 
   @Provides
   @Singleton
-  ServiceStringConverter provideStringConverter() {
+  public ServiceStringConverter provideStringConverter() {
     return new ServiceStringConverter();
   }
 
   @Provides
   @Singleton
-  protected HttpUrl provideBaseUrl(Context context) {
+  public HttpUrl provideBaseUrl(Context context) {
     throw new UnsupportedOperationException("This method should be overridden in the app module");
   }
 }
