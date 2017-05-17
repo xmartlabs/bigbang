@@ -41,11 +41,6 @@ public class LoginFragment extends TemplateFragment<LoginView, LoginPresenter> i
   }
 
   @Override
-  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-  }
-
-  @Override
   public void setIsLoading(boolean loading) {
     loginButton.setVisibility(loading ? View.GONE : View.VISIBLE);
     progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);

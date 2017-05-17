@@ -1,37 +1,41 @@
 package com.xmartlabs.template.ui.recyclerfragmentexample;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.annimon.stream.Optional;
 import com.xmartlabs.template.R;
-import com.xmartlabs.template.ui.common.BaseRecyclerViewAdapter;
-import com.xmartlabs.template.ui.common.BaseViewHolder;
 
 import java.util.List;
 
-public class RecyclerExampleAdapter
-    extends BaseRecyclerViewAdapter<String, RecyclerExampleAdapter.RecyclerExampleViewHolder> {
-  public RecyclerExampleAdapter(List<String> strings) {
-    setItems(strings);
+class RecyclerExampleAdapter extends RecyclerView.Adapter<RecyclerExampleAdapter.RecyclerExampleViewHolder> {
+  @NonNull
+  private List<String> items;
+
+  RecyclerExampleAdapter(@NonNull List<String> strings) {
+    items = strings;
   }
 
   @Override
   public RecyclerExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = inflateView(parent, R.layout.item_recycler_example);
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_example, parent, false);
     return new RecyclerExampleViewHolder(view);
   }
 
   @Override
-  protected void onBindItemViewHolder(@NonNull RecyclerExampleViewHolder holder, @Nullable String item) {
-    Optional.ofNullable(item)
-        .ifPresent(holder::bind);
+  public void onBindViewHolder(RecyclerExampleViewHolder holder, int position) {
+    holder.bind(items.get(position));
   }
 
-  static class RecyclerExampleViewHolder extends BaseViewHolder {
+  @Override
+  public int getItemCount() {
+    return items.size();
+  }
+
+  static class RecyclerExampleViewHolder extends RecyclerView.ViewHolder {
     RecyclerExampleViewHolder(@NonNull View view) {
       super(view);
     }

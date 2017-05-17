@@ -34,19 +34,8 @@ public class LoginPresenter extends BaseMvpPresenter<LoginView> {
         .ifPresent(LoginView::gotoRecyclerExampleActivity);
   }
 
-  private void showErrorIfPresent(@StringRes int stringRes) {
-    Optional.ofNullable(getView())
-        .ifPresent(view -> view.showError(stringRes));
-  }
-
   private void setIsLoading(boolean loading) {
     Optional.ofNullable(getView())
         .ifPresent(view -> view.setIsLoading(loading));
-  }
-
-  private String getString(@StringRes int stringRes) {
-    return Optional.ofNullable(getView())
-        .map(view -> view.getString(stringRes))
-        .orElse("");
   }
 }

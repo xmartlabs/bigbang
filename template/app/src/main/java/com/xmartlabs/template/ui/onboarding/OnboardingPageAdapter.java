@@ -12,10 +12,10 @@ import com.xmartlabs.template.ui.onboarding.page.OnboardingPageFragmentBuilder;
 
 import java.util.List;
 
-public class OnboardingPageAdapter extends FragmentStatePagerAdapter {
+class OnboardingPageAdapter extends FragmentStatePagerAdapter {
   private final List<OnboardingPageFragment> pages;
 
-  public OnboardingPageAdapter(@NonNull FragmentManager fragmentManager) {
+  OnboardingPageAdapter(@NonNull FragmentManager fragmentManager) {
     super(fragmentManager);
 
     pages = Stream.of(OnboardingPage.values())

@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.common;
+package com.xmartlabs.bigbang.ui;
 
 import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
@@ -29,8 +29,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public abstract class BaseRecyclerViewAdapter<T, VH extends RecyclerView.ViewHolder>
     extends RecyclerView.Adapter<VH> {
-  protected static final int ITEM_TYPE_DIVIDER = -1;
-  protected static final int ITEM_TYPE_ITEM = -2;
+  private static final int ITEM_TYPE_DIVIDER = -1;
+  private static final int ITEM_TYPE_ITEM = -2;
   @Getter(AccessLevel.PROTECTED)
   @NonNull
   private List<? extends T> items = new ArrayList<>();

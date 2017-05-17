@@ -40,8 +40,7 @@ public class OnboardingFragment extends TemplateFragment<OnboardingView, Onboard
   @NonNull
   @Override
   protected OnboardingPresenter createPresenter() {
-    presenter = OnboardingPresenter.builder()
-        .build();
+    presenter = OnboardingPresenter.builder().build();
     return presenter;
   }
 

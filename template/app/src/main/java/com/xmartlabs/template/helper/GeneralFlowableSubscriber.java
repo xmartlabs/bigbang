@@ -5,39 +5,42 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
-import com.annimon.stream.Optional;
 import com.xmartlabs.template.ui.common.TemplateView;
+
+import org.reactivestreams.Subscription;
 
 import java.lang.ref.WeakReference;
 
-import io.reactivex.CompletableObserver;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.FlowableSubscriber;
 
-public class GeneralCompletableSubscriber implements CompletableObserver {
+public class GeneralFlowableSubscriber<T> implements FlowableSubscriber<T> {
   @NonNull
   private WeakReference<TemplateView> viewReference;
 
-  public GeneralCompletableSubscriber() {
+  public GeneralFlowableSubscriber() {
     this(null);
   }
 
-  public GeneralCompletableSubscriber(@Nullable TemplateView templateView) {
+  public GeneralFlowableSubscriber(@Nullable TemplateView templateView) {
     viewReference = new WeakReference<>(templateView);
   }
 
   @Override
-  public void onSubscribe(@NonNull Disposable disposable) {}
+  public void onSubscribe(@NonNull Subscription subscription) {}
 
   @Override
-  public void onComplete() {}
+  public void onNext(T t) {}
 
   @Override
-  public void onError(@NonNull Throwable throwable) {
+  public void onError(Throwable throwable) {
     TemplateView view = viewReference.get();
     if (alertOnError(throwable) && view != null && view.isViewAlive()) {
       view.showError(throwable, getErrorMessage(throwable));
     }
   }
+
+  @Override
+  public void onComplete() {}
 
   @Nullable
   @StringRes
