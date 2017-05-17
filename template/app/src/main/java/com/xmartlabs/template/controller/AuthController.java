@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import com.xmartlabs.bigbang.core.controller.Controller;
 import com.xmartlabs.bigbang.core.providers.AccessTokenProvider;
-import com.xmartlabs.template.model.AuthResponse;
 import com.xmartlabs.template.model.Session;
 import com.xmartlabs.template.service.AuthService;
 
@@ -24,17 +23,12 @@ public class AuthController extends Controller {
   //TODO: Change signature and method to match authService request to fetch the Access Token
   @CheckResult
   @NonNull
-  public Single<AuthResponse> getAccessToken() {
+  public Single<Session> getAccessToken() {
     return authService.getAccessToken()
         .compose(applySingleIoSchedulers())
         .filter(authResponse -> authResponse.getAccessToken() != null)
         .toSingle()
-        .flatMap(authResponse ->
-            sessionController.setSession(new Session())
-                .flatMap(session -> {
-                  accessTokenProvider.updateEntity(authResponse.getAccessToken());
-                  return Single.just(authResponse);
-                })
-        );
+        .flatMap(authResponse -> sessionController.setSession(new Session())
+            .doOnSuccess(session -> accessTokenProvider.updateEntity(authResponse.getAccessToken())));
   }
 }
