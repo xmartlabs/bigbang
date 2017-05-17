@@ -19,7 +19,7 @@ import io.reactivex.Single;
  * Thus, the {@link SessionType} object is serialized using {@link Gson}.
  * The session is retrieved once from disk and then kept in memory for faster access.
  */
-public abstract class SessionController<S extends SessionType> extends Controller {
+public abstract class SessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
   @Inject
@@ -27,7 +27,7 @@ public abstract class SessionController<S extends SessionType> extends Controlle
   @Inject
   SharedPreferences sharedPreferences;
 
-  private Optional<S> session = Optional.empty();
+  private Optional<SessionType> session = Optional.empty();
 
   /**
    * Retrieves the current stored {@link SessionType}, if it exists.
@@ -39,14 +39,16 @@ public abstract class SessionController<S extends SessionType> extends Controlle
    */
   @CheckResult
   @NonNull
-  public Optional<S> getSession() {
-    return Optional.of(session).orElseGet(() -> {
-      String sessionJsonString = sharedPreferences.getString(PREFERENCES_KEY_SESSION, null);
-      return deserializeSession(sessionJsonString);
-    });
+  public Optional<SessionType> getAbstractSession() {
+    return session
+        .map(Optional::of)
+        .orElseGet(() -> {
+          String sessionJsonString = sharedPreferences.getString(PREFERENCES_KEY_SESSION, null);
+          return deserializeSession(sessionJsonString);
+        });
   }
 
-  protected abstract Optional<S> deserializeSession(String json);
+  protected abstract Optional<SessionType> deserializeSession(String json);
 
   /**
    * Stores the {@code session} into the {@link SharedPreferences}.
@@ -56,7 +58,7 @@ public abstract class SessionController<S extends SessionType> extends Controlle
    */
   @CheckResult
   @NonNull
-  public Single<S> setSession(@NonNull S session) {
+  public <S extends SessionType> Single<S> setSession(@NonNull S session) {
     return Single.fromCallable(() -> {
       String sessionJsonString = gson.toJson(session);
       boolean committed = sharedPreferences

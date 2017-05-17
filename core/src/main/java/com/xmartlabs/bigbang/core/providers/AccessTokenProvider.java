@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.annimon.stream.Optional;
+import com.xmartlabs.bigbang.core.Injector;
 import com.xmartlabs.bigbang.core.common.EntityProvider;
 import com.xmartlabs.bigbang.core.controller.SessionController;
 import com.xmartlabs.bigbang.core.model.SessionType;
@@ -18,18 +19,16 @@ import javax.inject.Inject;
 public class AccessTokenProvider implements EntityProvider<String> {
   private static final String AUTH_TOKEN_HEADER_KEY = "session";
 
-  @NonNull
-  private final SessionController<SessionType> sessionController;
-
   @Inject
-  public AccessTokenProvider(@NonNull SessionController sessionController) {
-    //noinspection unchecked
-    this.sessionController = sessionController;
+  SessionController sessionController;
+
+  public AccessTokenProvider() {
+    Injector.inject(this);
   }
 
   @Override
   public Optional<String> provideEntity() {
-    return sessionController.getSession()
+    return sessionController.getAbstractSession()
         .map(SessionType::getAccessToken)
         .flatMap(Optional::ofNullable);
   }
@@ -47,14 +46,14 @@ public class AccessTokenProvider implements EntityProvider<String> {
 
   @Override
   public void updateEntity(@Nullable String accessToken) {
-    sessionController.getSession()
+    sessionController.getAbstractSession()
         .executeIfPresent(session -> session.setAccessToken(accessToken))
         .ifPresent(sessionController::setSession);
   }
 
   @Override
   public void deleteEntity() {
-    sessionController.getSession()
+    sessionController.getAbstractSession()
         .executeIfPresent(session -> session.setAccessToken(null))
         .ifPresent(sessionController::setSession);
   }

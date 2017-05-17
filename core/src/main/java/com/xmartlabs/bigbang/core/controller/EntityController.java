@@ -56,7 +56,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
                 .toFlowable()
         )
         .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.io(),true)
+        .observeOn(Schedulers.io(), true)
         .scan((databaseEntities, serviceEntities) ->
             entityDao.deleteAndInsertEntities(serviceEntities, conditions).blockingGet()
         )
