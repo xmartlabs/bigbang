@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 @Data
 public class Brand {
-  String name;
-  List<Car> cars = new ArrayList<>();
+  private List<Car> cars = new ArrayList<>();
+  private String name;
 }

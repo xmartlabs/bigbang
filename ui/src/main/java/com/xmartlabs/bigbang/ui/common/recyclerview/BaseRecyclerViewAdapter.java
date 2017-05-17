@@ -54,7 +54,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   }
 
   @Override
-  public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public final RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     //noinspection unchecked
     return types.get(viewType).onCreateViewHolder(parent);
   }

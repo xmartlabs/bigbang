@@ -11,7 +11,7 @@ public class SimpleItemTestSetItems extends SimpleItemRecyclerViewTest {
   public void testSetItems() {
     List<Car> cars = getCarList();
 
-    SingleItemActivity activity = mActivityRule.getActivity();
+    SingleItemActivity activity = activityRule.getActivity();
     activity.runOnUiThread(() -> activity.getAdapter().setItems(cars));
 
     checkItems(cars);

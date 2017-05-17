@@ -25,7 +25,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public abstract class SimpleItemRecyclerViewTest {
   @Rule
-  public ActivityTestRule<SingleItemActivity> mActivityRule = new ActivityTestRule<>(SingleItemActivity.class);
+  public ActivityTestRule<SingleItemActivity> activityRule = new ActivityTestRule<>(SingleItemActivity.class);
 
   void checkItems(@NonNull List<Car> cars) {
     checkRecyclerViewCondition(RecyclerViewAssertions.countIs(cars.size()));

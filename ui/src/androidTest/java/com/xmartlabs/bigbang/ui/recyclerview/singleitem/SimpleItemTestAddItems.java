@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SimpleItemTestAddItems extends SimpleItemRecyclerViewTest {
   private void testAddItem(List<Car> initialItems, List<Car> itemsToAdd) {
-    SingleItemActivity activity = mActivityRule.getActivity();
+    SingleItemActivity activity = activityRule.getActivity();
     CarAdapter activityCarAdapter = activity.getAdapter();
     activity.runOnUiThread(() -> activityCarAdapter.setItems(initialItems));
 

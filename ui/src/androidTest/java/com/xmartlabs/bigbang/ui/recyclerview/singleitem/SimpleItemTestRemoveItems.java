@@ -13,12 +13,12 @@ public class SimpleItemTestRemoveItems extends SimpleItemRecyclerViewTest {
   public void testRemoveFirstItem() {
     List<Car> cars = getCarList();
 
-    SingleItemActivity activity = mActivityRule.getActivity();
+    SingleItemActivity activity = activityRule.getActivity();
     CarAdapter activityCarAdapter = activity.getAdapter();
     activity.runOnUiThread(() -> activityCarAdapter.setItems(cars));
 
     checkItems(cars);
-    Car first = cars.remove(1);
+    Car first = cars.remove(0);
     activity.runOnUiThread(() -> activityCarAdapter.removeItem(first));
     checkItems(cars);
   }
@@ -27,7 +27,7 @@ public class SimpleItemTestRemoveItems extends SimpleItemRecyclerViewTest {
   public void testRemoveMiddleItem() {
     List<Car> cars = getCarList();
 
-    SingleItemActivity activity = mActivityRule.getActivity();
+    SingleItemActivity activity = activityRule.getActivity();
     CarAdapter activityCarAdapter = activity.getAdapter();
     activity.runOnUiThread(() -> activityCarAdapter.setItems(cars));
 
@@ -41,7 +41,7 @@ public class SimpleItemTestRemoveItems extends SimpleItemRecyclerViewTest {
   public void testRemoveLastItem() {
     List<Car> cars = getCarList();
 
-    SingleItemActivity activity = mActivityRule.getActivity();
+    SingleItemActivity activity = activityRule.getActivity();
     CarAdapter activityCarAdapter = activity.getAdapter();
     activity.runOnUiThread(() -> activityCarAdapter.setItems(cars));
 
@@ -59,7 +59,7 @@ public class SimpleItemTestRemoveItems extends SimpleItemRecyclerViewTest {
     cars.add(2, carToRemove);
     cars.add(5, carToRemove);
 
-    SingleItemActivity activity = mActivityRule.getActivity();
+    SingleItemActivity activity = activityRule.getActivity();
     CarAdapter activityCarAdapter = activity.getAdapter();
     activity.runOnUiThread(() -> activityCarAdapter.setItems(cars));
     checkItems(cars);
