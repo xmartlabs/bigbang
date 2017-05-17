@@ -29,11 +29,12 @@ import lombok.RequiredArgsConstructor;
  * @param <Condition> to be able to filter the entities before returning them
  */
 @RequiredArgsConstructor
-public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition> extends Controller {
+public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition,
+    S extends EntityServiceProvider<Id, E>> extends Controller {
   @Getter(AccessLevel.PROTECTED)
   private final EntityDao<Id, E, Condition> entityDao;
   @Getter(AccessLevel.PROTECTED)
-  private final EntityServiceProvider<Id, E> entityServiceProvider;
+  private final S entityServiceProvider;
 
   /**
    * Retrieves the entities from the db that match the {@code conditions} and, when the service call returns,
