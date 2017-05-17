@@ -20,7 +20,7 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
    * Sets the items data for the recycler view and notifies any registered observers that the data set has
    * changed.
    *
-   * @param items the items that will be the data for the recycler view
+   * @param items the items that will be recycler view data.
    */
   @MainThread
   @SuppressWarnings("unused")
@@ -29,9 +29,9 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   }
 
   /**
-   * Sets the items data for the recycler view in form of an array and calls {@link #setItems(List)}
+   * Sets the items data for the recycler view in form of an array and calls {@link #setItems(List)}.
    *
-   * @param items array of items that will be the data for the recycler view
+   * @param items array of items that will be the data for the recycler view.
    */
   @MainThread
   @SuppressWarnings("unused")
@@ -40,10 +40,9 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   }
 
   /**
-   * Adds items to the data for the recycler view and notifies any registered observers that the data set has
-   * changed.
+   * Adds items to the recycler view.
    *
-   * @param items the items that will be the data for the recycler view
+   * @param items the items that will be the recycler view data.
    * @return if item was successfully added
    */
   @MainThread
@@ -53,7 +52,7 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   }
 
   /**
-   * Adds an item to the data for the recycler view and notifies any registered observers that an item has been added.
+   * Adds an item to the recycler's view data and notifies any registered observers that an item has been added.
    *
    * @param item The item to be added.
    */
@@ -62,7 +61,8 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   }
 
   /**
-   * Adds items to the data for the recycler view and notifies any registered observers that the items has been added.
+   * Adds a list of items to the recycler's view data and notifies any registered observers that the items has been
+   * added.
    *
    * @param index The index at which the specified items are to be inserted.
    * @param items The items that will be the data for the recycler view.
@@ -73,7 +73,7 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
   }
 
   /**
-   * Sets the items data for the recycler view and notifying any registered observers that the data set has
+   * Sets the items for the recycler view and notifying any registered observers that the data set has
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
