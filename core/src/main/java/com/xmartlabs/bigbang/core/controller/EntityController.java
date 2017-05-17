@@ -27,6 +27,7 @@ import lombok.RequiredArgsConstructor;
  * @param <Id> the type of the primary key
  * @param <E> the entity to be manipulated
  * @param <Condition> to be able to filter the entities before returning them
+ * @param <S> the {@link EntityServiceProvider} type
  */
 @RequiredArgsConstructor
 public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition,
