@@ -1,4 +1,4 @@
-package com.xmartlabs.bigbang.ui;
+package com.xmartlabs.bigbang.ui.common.recyclerview;
 
 import android.graphics.Rect;
 import android.support.annotation.Dimension;
