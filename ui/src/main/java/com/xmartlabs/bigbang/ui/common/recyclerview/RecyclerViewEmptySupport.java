@@ -1,4 +1,4 @@
-package com.xmartlabs.bigbang.ui.common;
+package com.xmartlabs.bigbang.ui.common.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

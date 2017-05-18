@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.common;
+package com.xmartlabs.bigbang.ui.common.recyclerview;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,6 +15,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
   }
 
   /** @return a Resources instance for the application's package */
+  @NonNull
+  @SuppressWarnings("unused")
   protected final Resources getResources() {
     return getContext().getResources();
   }
@@ -25,6 +27,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
    *
    * @return The view's Context.
    */
+  @NonNull
   protected final Context getContext() {
     return itemView.getContext();
   }
