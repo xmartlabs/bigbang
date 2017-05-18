@@ -1,0 +1,6 @@
+<resources>
+    <string translatable="false" name="app_name">Template STA</string>
+    <string translatable="false" name="client_id">75afec7488c28db45e36</string>
+    <string translatable="false" name="client_secret">9896924703bd9fe29581f197474c541b4d421a71</string>
+    <string translatable="false" name="url_prefix_redirect">staging.template.com</string>
+</resources>
