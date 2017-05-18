@@ -227,9 +227,10 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   }
 
   @NonNull
-  private DiffUtil.Callback getUpdateDiffCallback(@NonNull final List<?> newItems,
-                                                  @NonNull final BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
-                                                  @NonNull final BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+  private DiffUtil.Callback getUpdateDiffCallback(
+      @NonNull final List<?> newItems,
+      @NonNull final BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
+      @NonNull final BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
     return new DiffUtil.Callback() {
       @Override
       public int getOldListSize() {
