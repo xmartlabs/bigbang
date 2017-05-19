@@ -126,10 +126,10 @@ android {
 final ANDROID_SUPPORT_VERSION = '25.3.1'
 final BULLET_VERSION = 'e5044b53df'
 final BUTTERKNIFE_VERSION = '8.5.1'
-final BIGBANG_VERSION = '0.1.39'
+final BIGBANG_VERSION = '0.1.47'
 final DAGGER_VERSION = '2.10'
 final DART_VERSION = '2.0.2'
-final DBFLOW_VERSION = '3.1.1'
+final DBFLOW_VERSION = '4.0.2'
 final DRAG_LIST_VIEW_VERSION = 'b49f21d'
 final FRAGMENTARGS_VERSION = '3.0.2'
 final LOCALDATE_BACKPORT_VERSION = '1.0.5'
@@ -141,7 +141,7 @@ final RETROFIT_VERSION = '2.2.0'
 final RXANDROID_VERSION = '2.0.1'
 final RXJAVA_VERSION = '2.0.9'
 final RXLIFECYCLE_VERSION = '2.0.1'
-final STREAM_VERISION = '1.1.7'
+final STREAM_VERSION = '1.1.7'
 final TIMBER_VERSION = '4.5.1'
 
 dependencies {
@@ -162,7 +162,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:multidex:${MULTIDEX_VERSION}"
-    compile "com.annimon:stream:${STREAM_VERISION}"
+    compile "com.annimon:stream:${STREAM_VERSION}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true
     }

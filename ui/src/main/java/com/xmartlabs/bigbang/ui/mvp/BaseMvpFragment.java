@@ -9,6 +9,7 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.xmartlabs.bigbang.ui.BaseFragment;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -21,6 +22,7 @@ import lombok.Setter;
 @FragmentWithArgs
 public abstract class BaseMvpFragment<V extends MvpView, P extends MvpPresenter<V>> extends BaseFragment
     implements MvpView {
+  @Getter(AccessLevel.PROTECTED)
   @Setter(AccessLevel.PROTECTED)
   private P presenter;
 
