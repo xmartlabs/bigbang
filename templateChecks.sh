@@ -26,5 +26,12 @@ pushd template/
 ./gradlew compileAllVersionsStagingDebugAndroidTestSources
 ./gradlew compileAllVersionsStagingDebugUnitTestSources
 
-./gradlew test
-./gradlew lint
+./gradlew testAllVersionsProductionDebugUnitTest
+./gradlew testAllVersionsProductionReleaseUnitTest
+./gradlew testAllVersionsStagingDebugUnitTest
+./gradlew testAllVersionsStagingReleaseUnitTest
+
+./gradlew lintAllVersionsProductionRelease
+./gradlew lintAllVersionsProductionDebug
+./gradlew lintAllVersionsStagingDebug
+./gradlew lintAllVersionsStagingRelease

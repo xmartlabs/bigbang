@@ -10,8 +10,15 @@ dependencies:
 
 test:
   override:
-    - ./gradlew test
-    - ./gradlew lint
+    - ./gradlew testAllVersionsProductionDebugUnitTest
+    - ./gradlew testAllVersionsProductionReleaseUnitTest
+    - ./gradlew testAllVersionsStagingDebugUnitTest
+    - ./gradlew testAllVersionsStagingReleaseUnitTest
+
+    - ./gradlew lintAllVersionsProductionRelease
+    - ./gradlew lintAllVersionsProductionDebug
+    - ./gradlew lintAllVersionsStagingDebug
+    - ./gradlew lintAllVersionsStagingRelease
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
