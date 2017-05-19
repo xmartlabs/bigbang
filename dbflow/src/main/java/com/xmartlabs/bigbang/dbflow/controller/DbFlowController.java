@@ -7,14 +7,14 @@ import android.support.annotation.Nullable;
 import com.annimon.stream.Stream;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.SQLCondition;
+import com.raizlabs.android.dbflow.sql.language.SQLOperator;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.xmartlabs.bigbang.core.controller.Controller;
 import com.xmartlabs.bigbang.core.controller.EntityDao;
-import com.xmartlabs.bigbang.dbflow.model.DatabaseModel;
+import com.xmartlabs.bigbang.core.model.EntityWithId;
 
 import java.util.List;
 
@@ -28,8 +28,8 @@ import lombok.RequiredArgsConstructor;
 
 /** {@link EntityDao} implementation using DbFlow ORM */
 @RequiredArgsConstructor
-public abstract class DbFlowController<Id, D extends DatabaseModel<Id>> extends Controller
-    implements EntityDao<Id, D, SQLCondition> {
+public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id>> extends Controller
+    implements EntityDao<Id, D, SQLOperator> {
   @Getter(AccessLevel.PRIVATE)
   private final Class<D> modelClass;
   @Getter(AccessLevel.PRIVATE)
@@ -38,7 +38,7 @@ public abstract class DbFlowController<Id, D extends DatabaseModel<Id>> extends 
   @CheckResult
   @NonNull
   @Override
-  public Single<List<D>> getEntities(@NonNull SQLCondition... conditions) {
+  public Single<List<D>> getEntities(@NonNull SQLOperator... conditions) {
     return Single
         .fromCallable(() ->
             SQLite.select()
@@ -53,7 +53,7 @@ public abstract class DbFlowController<Id, D extends DatabaseModel<Id>> extends 
   @NonNull
   @Override
   public Single<List<D>> deleteAndInsertEntities(@Nullable List<D> entitiesToInsert,
-                                                 @NonNull SQLCondition... conditionsToDelete) {
+                                                 @NonNull SQLOperator... conditionsToDelete) {
     return Single
         .fromCallable(() -> {
           FlowManager.getDatabase(getAppDataBaseClass())
@@ -122,8 +122,7 @@ public abstract class DbFlowController<Id, D extends DatabaseModel<Id>> extends 
 
   /**
    * Retrieves the type of the AppDataBase model class
-   * @param <T> the type of the AppDataBase model class
    * @return the type of the AppDataBase model class
    */
-  protected abstract <T> Class<T> getAppDataBaseClass();
+  protected abstract Class<?> getAppDataBaseClass();
 }

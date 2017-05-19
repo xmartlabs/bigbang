@@ -3,13 +3,9 @@ package com.xmartlabs.template.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.annimon.stream.function.Consumer;
 import com.f2prateek.dart.HensonNavigable;
 import com.xmartlabs.bigbang.ui.BaseAppCompatActivity;
 import com.xmartlabs.template.controller.SessionController;
-import com.xmartlabs.template.model.Session;
-
-import java.util.Optional;
 
 import javax.inject.Inject;
 

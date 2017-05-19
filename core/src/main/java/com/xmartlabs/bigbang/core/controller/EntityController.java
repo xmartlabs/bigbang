@@ -15,6 +15,8 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -25,11 +27,15 @@ import lombok.RequiredArgsConstructor;
  * @param <Id> the type of the primary key
  * @param <E> the entity to be manipulated
  * @param <Condition> to be able to filter the entities before returning them
+ * @param <S> the {@link EntityServiceProvider} type
  */
 @RequiredArgsConstructor
-public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition> extends Controller {
+public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition,
+    S extends EntityServiceProvider<Id, E>> extends Controller {
+  @Getter(AccessLevel.PROTECTED)
   private final EntityDao<Id, E, Condition> entityDao;
-  private final EntityServiceProvider<Id, E> entityServiceProvider;
+  @Getter(AccessLevel.PROTECTED)
+  private final S entityServiceProvider;
 
   /**
    * Retrieves the entities from the db that match the {@code conditions} and, when the service call returns,
@@ -52,7 +58,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
                 .toFlowable()
         )
         .subscribeOn(Schedulers.io())
-        .observeOn(Schedulers.io())
+        .observeOn(Schedulers.io(), true)
         .scan((databaseEntities, serviceEntities) ->
             entityDao.deleteAndInsertEntities(serviceEntities, conditions).blockingGet()
         )
