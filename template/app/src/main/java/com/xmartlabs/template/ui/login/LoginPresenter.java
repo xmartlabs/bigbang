@@ -1,7 +1,5 @@
 package com.xmartlabs.template.ui.login;
 
-import android.support.annotation.StringRes;
-
 import com.annimon.stream.Optional;
 import com.xmartlabs.bigbang.core.Injector;
 import com.xmartlabs.bigbang.core.controller.SharedPreferencesController;
