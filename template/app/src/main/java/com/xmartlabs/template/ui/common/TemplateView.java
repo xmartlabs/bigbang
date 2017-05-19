@@ -1,7 +1,6 @@
 package com.xmartlabs.template.ui.common;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.StringRes;
 
 import com.xmartlabs.bigbang.ui.mvp.MvpView;
