@@ -10,6 +10,7 @@ public class OnboardingPresenter extends BaseMvpPresenter<OnboardingView> {
   private static final int FIRST_PAGE = 0;
 
   private OnboardingPageAdapter pageAdapter;
+  @Builder.Default
   private int currentPage = FIRST_PAGE;
 
   @Override

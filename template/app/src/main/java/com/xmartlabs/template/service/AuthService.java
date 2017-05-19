@@ -3,9 +3,7 @@ package com.xmartlabs.template.service;
 import com.xmartlabs.template.model.AuthResponse;
 
 import io.reactivex.Single;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface AuthService {
   //TODO: replace with url path to get access token
