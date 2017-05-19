@@ -13,6 +13,9 @@ import org.reactivestreams.Subscription;
 import java.lang.ref.WeakReference;
 
 public class GeneralObservableSubscriber<T> implements Subscriber<T> {
+  @NonNull
+  private WeakReference<TemplateView> viewReference;
+  
   public GeneralObservableSubscriber() {
     this(null);
   }
@@ -37,9 +40,6 @@ public class GeneralObservableSubscriber<T> implements Subscriber<T> {
 
   @Override
   public void onComplete() {}
-
-  @NonNull
-  private WeakReference<TemplateView> viewReference;
 
   @Nullable
   @StringRes
