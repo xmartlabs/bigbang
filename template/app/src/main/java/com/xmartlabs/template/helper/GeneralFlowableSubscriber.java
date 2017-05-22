@@ -26,7 +26,9 @@ public class GeneralFlowableSubscriber<T> implements FlowableSubscriber<T> {
   }
 
   @Override
-  public void onSubscribe(@NonNull Subscription subscription) {}
+  public void onSubscribe(@NonNull Subscription subscription) {
+    subscription.request(getMaxNumberOfElements());
+  }
 
   @Override
   public void onNext(T t) {}
@@ -51,5 +53,9 @@ public class GeneralFlowableSubscriber<T> implements FlowableSubscriber<T> {
   @CheckResult
   protected boolean alertOnError(Throwable throwable) {
     return true;
+  }
+
+  protected Long getMaxNumberOfElements() {
+    return Long.MAX_VALUE;
   }
 }
