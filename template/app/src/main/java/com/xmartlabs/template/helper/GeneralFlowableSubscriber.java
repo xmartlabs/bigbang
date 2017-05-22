@@ -55,7 +55,7 @@ public class GeneralFlowableSubscriber<T> implements FlowableSubscriber<T> {
     return true;
   }
 
-  protected Long getMaxNumberOfElements() {
+  protected long getMaxNumberOfElements() {
     return Long.MAX_VALUE;
   }
 }
