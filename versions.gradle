@@ -25,7 +25,7 @@ ext {
         espresso: '2.2.2',
         firebase: '9.2.1',
         fragmentArgs: '3.0.2',
-        gson: '1.7.2',
+        gson: '2.8.0',
         jsr305: '3.0.1',
         junit: '4.12',
         localDateBackport: '1.0.4',
