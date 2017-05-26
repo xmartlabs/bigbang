@@ -20,7 +20,6 @@ gen/
 
 # Local configuration file (sdk path, etc)
 release.keystore
-bintray.properties
 local.properties
 build.properties
 
