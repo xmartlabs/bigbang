@@ -22,7 +22,6 @@ public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
   private WeakReference<V> viewReference;
 
   public BaseMvpPresenter() {
-    super();
     Injector.inject(this);
   }
 
