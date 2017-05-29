@@ -53,10 +53,10 @@ repositories {
 
 Then, include any of the following compile dependencies to add an specific module to your app:
 ```groovy
-compile 'com.xmartlabs.bigbang:dbflow:0.1.30'
-compile 'com.xmartlabs.bigbang:log-crashlytics:0.1.30'
-compile 'com.xmartlabs.bigbang:retrofit:0.1.30'
-compile 'com.xmartlabs.bigbang:ui:0.1.30'
+compile 'com.xmartlabs.bigbang:dbflow:0.1.50'
+compile 'com.xmartlabs.bigbang:log-crashlytics:0.1.50'
+compile 'com.xmartlabs.bigbang:retrofit:0.1.50'
+compile 'com.xmartlabs.bigbang:ui:0.1.50'
 ```
 
 The `dbflow` module is database related, while the `retrofit` module is service related.
