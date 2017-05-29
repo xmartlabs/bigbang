@@ -25,7 +25,7 @@ Learn more about the project on the [BigBang Wiki](https://github.com/xmartlabs/
 The first step is to include the Core library into your project as a Gradle compile dependency:
 
 ```groovy
-compile 'com.xmartlabs.bigbang:core:0.1.30'
+compile 'com.xmartlabs.bigbang:core:0.1.50'
 ```
 
 Then, add jCenter to the buildscript repositories:
