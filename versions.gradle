@@ -30,7 +30,7 @@ ext {
         junit: '4.12',
         localDateBackport: '1.0.4',
         lombok: '1.16.10',
-        mockito: '1.10.19',
+        mockito: '2.8.9',
         okHttp: '3.6.0',
         okio: '1.11.0',
         playServices: '10.2.1',
