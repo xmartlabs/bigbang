@@ -68,7 +68,7 @@ dependencies {
     compile "com.annimon:stream:${libraryVersion.stream}"
     compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
     compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
-    compile 'com.github.mrmike:Ok2Curl:0.2.5'
+    compile 'com.github.mrmike:Ok2Curl:0.3.1'
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
     compile "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
