@@ -19,7 +19,7 @@ ext {
         butterKnife: '8.5.1',
         crashlytics: '2.6.7@aar',
         dagger: '2.6',
-        dart: '2.0.0',
+        dart: '2.0.2',
         dexmaker: '1.4',
         dbFlow: '4.0.2',
         espresso: '2.2.2',
