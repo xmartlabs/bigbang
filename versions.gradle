@@ -40,7 +40,7 @@ ext {
         rxAndroid: '2.0.1',
         rxJava: '2.0.7',
         rxLifecycle: '2.0.1',
-        stream: '1.1.6',
+        stream: '1.1.7',
         timber: '4.3.0',
     ]
 }
