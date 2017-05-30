@@ -13,7 +13,7 @@ ext {
     javaVersion8 = JavaVersion.VERSION_1_8
 
     libraryVersion = [
-        androidSupport: '25.3.1',
+        androidSupport: '26.0.0-alpha1',
         androidSupportTest: '0.5',
         bullet: 'e5044b53df',
         butterKnife: '8.5.1',
