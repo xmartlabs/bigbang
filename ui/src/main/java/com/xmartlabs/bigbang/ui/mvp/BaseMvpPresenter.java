@@ -21,12 +21,9 @@ import java.lang.ref.WeakReference;
 public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
   private WeakReference<V> viewReference;
 
-  public BaseMvpPresenter() {
-    Injector.inject(this);
-  }
-
   @Override
   public void attachView(V view) {
+    Injector.inject(this);
     viewReference = new WeakReference<>(view);
   }
 
