@@ -11,6 +11,7 @@ import com.xmartlabs.bigbang.core.model.SessionType;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Controller that manages the Session of the Application.
@@ -19,15 +20,14 @@ import io.reactivex.Single;
  * Thus, the {@link SessionType} object is serialized using {@link Gson}.
  * The session is retrieved once from disk and then kept in memory for faster access.
  */
-public abstract class SessionController extends Controller {
+@RequiredArgsConstructor
+public class CoreSessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
-  @Inject
-  Gson gson;
-  @Inject
-  SharedPreferences sharedPreferences;
+  private final Class<? extends SessionType> clazz;
 
-  private Optional<SessionType> session = Optional.empty();
+  @Inject
+  SharedPreferencesController sharedPreferencesController;
 
   /**
    * Retrieves the current stored {@link SessionType}, if it exists.
@@ -39,16 +39,10 @@ public abstract class SessionController extends Controller {
    */
   @CheckResult
   @NonNull
-  public Optional<SessionType> getAbstractSession() {
-    return session
-        .map(Optional::of)
-        .orElseGet(() -> {
-          String sessionJsonString = sharedPreferences.getString(PREFERENCES_KEY_SESSION, null);
-          return deserializeSession(sessionJsonString);
-        });
+  public Optional<? extends SessionType> getSession() {
+    return sharedPreferencesController
+        .getEntity(PREFERENCES_KEY_SESSION, clazz);
   }
-
-  protected abstract Optional<SessionType> deserializeSession(String json);
 
   /**
    * Stores the {@code session} into the {@link SharedPreferences}.
@@ -59,28 +53,12 @@ public abstract class SessionController extends Controller {
   @CheckResult
   @NonNull
   public <S extends SessionType> Single<S> setSession(@NonNull S session) {
-    return Single.fromCallable(() -> {
-      String sessionJsonString = gson.toJson(session);
-      boolean committed = sharedPreferences
-          .edit()
-          .putString(PREFERENCES_KEY_SESSION, sessionJsonString)
-          .commit();
-
-      if (committed) {
-        this.session = Optional.of(session);
-        return session;
-      }
-      throw new RuntimeException("The session change could not be committed");
-    });
+    return sharedPreferencesController.saveEntity(PREFERENCES_KEY_SESSION, session);
   }
 
   /** Deletes the session information */
   public void deleteSession() {
-    session = Optional.empty();
-    sharedPreferences
-        .edit()
-        .remove(PREFERENCES_KEY_SESSION)
-        .apply();
+    sharedPreferencesController.deleteEntity(PREFERENCES_KEY_SESSION);
   }
 
   /**
@@ -90,7 +68,6 @@ public abstract class SessionController extends Controller {
   @CheckResult
   @SuppressWarnings("unused")
   public boolean isSessionAlive() {
-    return sharedPreferences
-        .contains(PREFERENCES_KEY_SESSION);
+    return sharedPreferencesController.hasEntity(PREFERENCES_KEY_SESSION);
   }
 }
