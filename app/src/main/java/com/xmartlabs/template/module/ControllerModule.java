@@ -1,6 +1,7 @@
 package com.xmartlabs.template.module;
 
-import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.bigbang.core.controller.CoreSessionController;
+import com.xmartlabs.template.model.Session;
 
 import javax.inject.Singleton;
 
@@ -11,7 +12,7 @@ import dagger.Provides;
 public class ControllerModule {
   @Provides
   @Singleton
-  SessionController provideSessionController() {
-    return new SessionController();
+  CoreSessionController provideSessionController() {
+    return new CoreSessionController(Session.class);
   }
 }
