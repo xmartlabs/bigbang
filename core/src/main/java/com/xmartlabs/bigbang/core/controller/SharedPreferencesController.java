@@ -168,7 +168,7 @@ public class SharedPreferencesController extends Controller {
           .putString(key, serializedValue)
           .commit();
       return value;
-    }).subscribeOn(Schedulers.io());
+    }).compose(applySingleIoSchedulers());
   }
 
   /**
