@@ -21,10 +21,10 @@ import lombok.RequiredArgsConstructor;
 public class CoreSessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
-  private final Class<? extends SessionType> concreteSessionType;
-
   @Inject
   SharedPreferencesController sharedPreferencesController;
+
+  private final Class<? extends SessionType> concreteSessionType;
 
   /**
    * Retrieves the current stored {@link SessionType}, if it exists.
