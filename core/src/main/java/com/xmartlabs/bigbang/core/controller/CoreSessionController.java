@@ -5,7 +5,6 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Optional;
-import com.google.gson.Gson;
 import com.xmartlabs.bigbang.core.model.SessionType;
 
 import javax.inject.Inject;
@@ -16,15 +15,13 @@ import lombok.RequiredArgsConstructor;
 /**
  * Controller that manages the Session of the Application.
  *
- * The Session will be stored in the {@link SharedPreferences} as a String.
- * Thus, the {@link SessionType} object is serialized using {@link Gson}.
- * The session is retrieved once from disk and then kept in memory for faster access.
+ * The Session will be stored via the {@link SharedPreferencesController}.
  */
 @RequiredArgsConstructor
 public class CoreSessionController extends Controller {
   private static final String PREFERENCES_KEY_SESSION = "session";
 
-  private final Class<? extends SessionType> clazz;
+  private final Class<? extends SessionType> concreteSessionType;
 
   @Inject
   SharedPreferencesController sharedPreferencesController;
@@ -32,23 +29,22 @@ public class CoreSessionController extends Controller {
   /**
    * Retrieves the current stored {@link SessionType}, if it exists.
    *
-   * Only upon first request the {@link SessionType} object will be queried from {@link SharedPreferences}.
-   * Then, it will be stored in memory for faster access.
-   *
    * @return the current {@link SessionType}, or {@code null} if none exists
    */
   @CheckResult
   @NonNull
   public Optional<? extends SessionType> getSession() {
     return sharedPreferencesController
-        .getEntity(PREFERENCES_KEY_SESSION, clazz);
+        .getEntity(PREFERENCES_KEY_SESSION, concreteSessionType);
   }
 
   /**
    * Stores the {@code session} into the {@link SharedPreferences}.
    *
-   * @param session the {@link SessionType} object to be stored
-   * @return {@code Single<Session>} object. Upon subscription, it will only fail if the session could not be stored
+   * @param session the {@code S} object to be stored
+   * @param <S> the {@link SessionType} object to be stored
+   *
+   * @return {@code Single<S>} object. Upon subscription, it will only fail if the session could not be stored
    */
   @CheckResult
   @NonNull
@@ -63,6 +59,7 @@ public class CoreSessionController extends Controller {
 
   /**
    * Returns whether the {@link SessionType} information is present on the device.
+   *
    * @return whether or not the {@link SessionType} information exists
    */
   @CheckResult
