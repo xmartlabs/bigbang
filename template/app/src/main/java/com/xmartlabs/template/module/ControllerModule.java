@@ -1,7 +1,9 @@
 package com.xmartlabs.template.module;
 
+import com.xmartlabs.bigbang.core.controller.CoreSessionController;
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
+import com.xmartlabs.template.model.Session;
 
 import javax.inject.Singleton;
 
@@ -18,13 +20,13 @@ public class ControllerModule {
 
   @Provides
   @Singleton
-  com.xmartlabs.bigbang.core.controller.SessionController provideCoreSessionController(SessionController sessionController) {
+  CoreSessionController provideCoreSessionController(SessionController sessionController) {
     return sessionController;
   }
 
   @Provides
   @Singleton
   SessionController provideSessionController() {
-    return new SessionController();
+    return new SessionController(Session.class);
   }
 }
