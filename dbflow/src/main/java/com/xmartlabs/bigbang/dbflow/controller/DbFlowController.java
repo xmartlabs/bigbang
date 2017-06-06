@@ -56,7 +56,7 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
                                                  @NonNull SQLOperator... conditionsToDelete) {
     return Single
         .fromCallable(() -> {
-          FlowManager.getDatabase(getAppDataBaseClass())
+          FlowManager.getDatabase(modelClass)
               .executeTransaction(databaseWrapper -> {
                 SQLite.delete(getModelClass())
                     .where(conditionsToDelete)
@@ -66,7 +66,7 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
               });
           return entitiesToInsert;
         })
-        .subscribeOn(Schedulers.io());
+        .compose(applySingleIoSchedulers());
   }
 
   @CheckResult
@@ -78,7 +78,7 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
             .from(getModelClass())
             .where(getPropertyId().eq(id))
             .querySingle())
-        .subscribeOn(Schedulers.io());
+        .compose(applyMaybeIoSchedulers());
   }
 
   @CheckResult
@@ -87,7 +87,7 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
   public Single<D> createEntity(@NonNull D entity) {
     return Completable.fromAction(entity::insert)
         .toSingleDefault(entity)
-        .subscribeOn(Schedulers.io());
+        .compose(applySingleIoSchedulers());
   }
 
   @CheckResult
@@ -96,7 +96,7 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
   public Single<D> updateEntity(@NonNull D entity) {
     return Completable.fromAction(entity::update)
         .toSingleDefault(entity)
-        .subscribeOn(Schedulers.io());
+        .compose(applySingleIoSchedulers());
   }
 
   @CheckResult
@@ -109,7 +109,7 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
                 .from(getModelClass())
                 .where(getPropertyId().eq(entityId))
                 .execute())
-        .subscribeOn(Schedulers.io());
+        .compose(applyCompletableIoSchedulers());
   }
 
   @CheckResult
@@ -117,12 +117,6 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
   @Override
   public Completable deleteEntity(@NonNull D entity) {
     return Completable.fromAction(entity::delete)
-        .subscribeOn(Schedulers.io());
+        .compose(applyCompletableIoSchedulers());
   }
-
-  /**
-   * Retrieves the type of the AppDataBase model class
-   * @return the type of the AppDataBase model class
-   */
-  protected abstract Class<?> getAppDataBaseClass();
 }
