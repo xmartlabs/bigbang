@@ -18,7 +18,7 @@ ext {
         bullet: 'e5044b53df',
         butterKnife: '8.5.1',
         crashlytics: '2.6.7@aar',
-        dagger: '2.6',
+        dagger: '2.11',
         dart: '2.0.0',
         dexmaker: '1.4',
         dbFlow: '4.0.2',
