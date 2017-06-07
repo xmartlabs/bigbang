@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.1.52 *(2017-06-05)*
+----------------------------
+
+Updated Session management in SessionController
+Improved SharedPreferencesController to support caching with Gsons' TypeToken
+
 Version 0.1.51 *(2017-06-01)*
 ----------------------------
 
