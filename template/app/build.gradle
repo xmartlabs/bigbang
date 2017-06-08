@@ -163,7 +163,7 @@ dependencies {
     compile "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:multidex:${MULTIDEX_VERSION}"
     compile "com.annimon:stream:${STREAM_VERSION}"
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true
     }
     compile "com.f2prateek.dart:dart:${DART_VERSION}"
