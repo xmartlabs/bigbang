@@ -149,7 +149,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
+    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.2'
     apt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
     apt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
     apt "com.github.tbroyer.bullet:bullet-compiler:${BULLET_VERSION}"
