@@ -6,7 +6,6 @@ import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
 import com.xmartlabs.bigbang.core.exception.EntityNotFoundException;
 import com.xmartlabs.bigbang.core.helper.function.Consumer;
-import com.xmartlabs.bigbang.core.model.BuildInfo;
 
 import java.net.ConnectException;
 import java.net.UnknownHostException;
@@ -31,21 +30,15 @@ public final class GeneralErrorHelper {
       EntityNotFoundException.class,
       UnknownHostException.class
   );
-  private final StackTraceElement DUMMY_STACK_TRACE_ELEMENT = new StackTraceElement("", "", null, -1);
-  private final StackTraceElement[] DUMMY_STACK_TRACE_ELEMENT_ARRAY =
-      new StackTraceElement[] {DUMMY_STACK_TRACE_ELEMENT};
-
+  private final StackTraceElement DUMMY_STACK_TRACE_ELEMENT = new StackTraceElement("General error logger", "", null, -1);
   private final Map<Class<? extends Throwable>, Consumer<? super Throwable>> throwableHandlers = new HashMap<>();
 
-  private final BuildInfo buildInfo;
-
   @Inject
-  public GeneralErrorHelper(@NonNull BuildInfo buildInfo) {
-    this.buildInfo = buildInfo;
+  public GeneralErrorHelper() {
   }
 
   @Getter
-  private final io.reactivex.functions.Consumer<? super Throwable> generalErrorAction = t -> {
+  private final Consumer<? super Throwable> generalErrorAction = t -> {
     if (t instanceof CompositeException) {
       CompositeException compositeException = (CompositeException) t;
       Stream.of(compositeException.getExceptions())
@@ -53,47 +46,45 @@ public final class GeneralErrorHelper {
     } else {
       handleException(t);
     }
-    markExceptionAsHandled(t);
   };
 
-  private void handleException(Throwable throwable) {
-    if (!shouldHandleThrowable(throwable)) {
-      if (buildInfo.isDebug()) {
-        Timber.e(throwable, "Untracked exception");
-      } else {
-        Timber.d(throwable, "Untracked exception");
-      }
+  private void handleException(@NonNull Throwable throwable) {
+    if (!shouldHandleThrowable(throwable)
+        || (throwable.getCause() != null && !shouldHandleThrowable(throwable.getCause()))) {
       return;
     }
 
     if (throwableHandlers.containsKey(throwable.getClass())) {
-      if (exceptionIsAlreadyBeingHandled(throwable)) {
-        return;
-      }
       throwableHandlers.get(throwable.getClass()).accept(throwable);
     } else {
       Timber.e(throwable);
     }
+    markExceptionAsHandled(throwable);
   }
 
-  private boolean shouldHandleThrowable(Throwable throwable) {
+  private boolean shouldHandleThrowable(@NonNull Throwable throwable) {
     return !exceptionIsAlreadyBeingHandled(throwable)
-        || !UNTRACKED_CLASSES.contains(throwable.getClass())
-        || throwableHandlers.containsKey(throwable.getClass());
+        && !UNTRACKED_CLASSES.contains(throwable.getClass());
   }
 
-  private boolean exceptionIsAlreadyBeingHandled(Throwable t) {
-    return Objects.equals(t.getStackTrace(), DUMMY_STACK_TRACE_ELEMENT_ARRAY);
+  private boolean exceptionIsAlreadyBeingHandled(@NonNull Throwable throwable) {
+    return Stream.ofNullable(Arrays.asList(throwable.getStackTrace()))
+        .anyMatch(value -> Objects.equals(value, DUMMY_STACK_TRACE_ELEMENT));
   }
 
-  private void markExceptionAsHandled(Throwable t) {
-    t.setStackTrace(DUMMY_STACK_TRACE_ELEMENT_ARRAY);
+  private void markExceptionAsHandled(Throwable throwable) {
+    StackTraceElement[] stacktrace = Stream
+        .concat(
+            Stream.of(DUMMY_STACK_TRACE_ELEMENT),
+            Stream.of(throwable.getStackTrace()))
+        .toArray(StackTraceElement[]::new);
+    throwable.setStackTrace(stacktrace);
   }
 
   /**
    * Add a new handler for a specific {@link Throwable} class.
    *
-   * @param clazz the {@link Throwable} class to be handled
+   * @param clazz   the {@link Throwable} class to be handled
    * @param handler the handler for the specified {@link Throwable}
    */
   public void setErrorHandlerForThrowable(Class<? extends Throwable> clazz, Consumer<? super Throwable> handler) {

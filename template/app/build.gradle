@@ -143,6 +143,7 @@ final RXJAVA_VERSION = '2.0.9'
 final RXLIFECYCLE_VERSION = '2.0.1'
 final STREAM_VERSION = '1.1.7'
 final TIMBER_VERSION = '4.5.1'
+final TRACEUR_VERSION = '273cc7d582'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -171,6 +172,7 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow:${DBFLOW_VERSION}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${DBFLOW_VERSION}"
     compile "com.github.tbroyer.bullet:bullet:${BULLET_VERSION}"
+    compile "com.github.xmartlabs:Traceur:${TRACEUR_VERSION}"
     compile "com.github.xmartlabs:draglistview:${DRAG_LIST_VIEW_VERSION}"
     compile "com.google.dagger:dagger:${DAGGER_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:annotation:${FRAGMENTARGS_VERSION}"

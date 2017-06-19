@@ -1,6 +1,14 @@
 package com.xmartlabs.bigbang.core.helper;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import okio.Buffer;
+import okio.BufferedSource;
+import timber.log.Timber;
 
 @SuppressWarnings("unused")
 public class ServiceHelper {
@@ -43,5 +51,25 @@ public class ServiceHelper {
    */
   public static String addParameterNameToEndOfUrl(@NonNull String url, @NonNull String parameterId) {
     return url + "/{" + parameterId + "}";
+  }
+
+
+  /**
+   * Returns the string representation of the service response.
+   * The buffer is cloned in order to be able to be consumed again.
+   *
+   * @param response The service response
+   * @return the {@code String} representation of the service response
+   */
+  @Nullable
+  public static String cloneResponseAndGetAsString(BufferedSource response) {
+    try {
+      Buffer buffer = (Buffer) response;
+      response.request(Long.MAX_VALUE);
+      return buffer.clone().readString(Charset.forName("UTF-8"));
+    } catch (IOException e) {
+      Timber.w(e);
+    }
+    return null;
   }
 }
