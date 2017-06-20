@@ -86,6 +86,16 @@ public class DateHelper {
   }
 
   /**
+   * Gets the android device short date format.
+   *
+   * @return {@link DateTimeFormatter} formatted the right way.
+   */
+  public static DateTimeFormatter getDeviceShortDateFormat(Context context) {
+    SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getDateFormat(context);
+    return DateTimeFormatter.ofPattern(timeFormat.toPattern());
+  }
+
+  /**
    * Gets the android device long date format.
    *
    * @return {@link DateTimeFormatter} formatted the right way.
