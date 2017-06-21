@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.CancellationException;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.exceptions.CompositeException;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import timber.log.Timber;
 
 /** Handles any {@link Throwable} thrown. */
 @SuppressWarnings("unused")
+@Singleton
 public final class GeneralErrorHelper {
   private final List<Class<?>> UNTRACKED_CLASSES = Arrays.asList(
       CancellationException.class,

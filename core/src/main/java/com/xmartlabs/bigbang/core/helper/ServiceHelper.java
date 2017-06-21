@@ -62,7 +62,7 @@ public class ServiceHelper {
    * @return the {@code String} representation of the service response
    */
   @Nullable
-  public static String cloneResponseAndGetAsString(BufferedSource response) {
+  public static String cloneResponseAndGetAsString(@NonNull BufferedSource response) {
     try {
       Buffer buffer = (Buffer) response;
       response.request(Long.MAX_VALUE);
