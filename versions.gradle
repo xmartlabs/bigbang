@@ -42,6 +42,6 @@ ext {
         rxLifecycle: '2.0.1',
         stream: '1.1.6',
         timber: '4.3.0',
-        traceur: '273cc7d582',
+        traceur: '05c2c81241',
     ]
 }
