@@ -30,12 +30,12 @@ public final class GeneralErrorHelper {
       EntityNotFoundException.class,
       UnknownHostException.class
   );
-  private final StackTraceElement DUMMY_STACK_TRACE_ELEMENT = new StackTraceElement("General error logger", "", null, -1);
+  private final StackTraceElement DUMMY_STACK_TRACE_ELEMENT =
+      new StackTraceElement("General error logger", "", null, -1);
   private final Map<Class<? extends Throwable>, Consumer<? super Throwable>> throwableHandlers = new HashMap<>();
 
   @Inject
-  public GeneralErrorHelper() {
-  }
+  public GeneralErrorHelper() {}
 
   @Getter
   private final Consumer<? super Throwable> generalErrorAction = t -> {
