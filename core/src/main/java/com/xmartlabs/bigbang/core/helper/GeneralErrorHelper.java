@@ -51,6 +51,10 @@ public final class GeneralErrorHelper {
   private void handleException(@NonNull Throwable throwable) {
     if (!shouldHandleThrowable(throwable)
         || (throwable.getCause() != null && !shouldHandleThrowable(throwable.getCause()))) {
+      if (!exceptionIsAlreadyBeingHandled(throwable)) {
+        Timber.d(throwable, "Untracked exception");
+      }
+      markExceptionAsHandled(throwable);
       return;
     }
 
