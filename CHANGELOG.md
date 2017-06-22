@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-Version 0.1.53 *(2017-06-05)*
+Version 0.1.54 *(2017-06-05)*
 ----------------------------
 Adding short date format.
 Adding nullables when getting date formats, when context not used.
