@@ -80,7 +80,7 @@ public class DateHelper {
    *
    * @return {@link DateTimeFormatter} formatted the right way.
    */
-  public static DateTimeFormatter getDeviceMediumDateFormat(Context context) {
+  public static DateTimeFormatter getDeviceMediumDateFormat(@Nullable Context context) {
     SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getMediumDateFormat(context);
     return DateTimeFormatter.ofPattern(timeFormat.toPattern());
   }
@@ -90,7 +90,7 @@ public class DateHelper {
    *
    * @return {@link DateTimeFormatter} formatted the right way.
    */
-  public static DateTimeFormatter getDeviceShortDateFormat(Context context) {
+  public static DateTimeFormatter getDeviceShortDateFormat(@Nullable Context context) {
     SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getDateFormat(context);
     return DateTimeFormatter.ofPattern(timeFormat.toPattern());
   }
@@ -100,7 +100,7 @@ public class DateHelper {
    *
    * @return {@link DateTimeFormatter} formatted the right way.
    */
-  public static DateTimeFormatter getDeviceLongDateFormat(Context context) {
+  public static DateTimeFormatter getDeviceLongDateFormat(@Nullable Context context) {
     SimpleDateFormat timeFormat = (SimpleDateFormat) DateFormat.getLongDateFormat(context);
     return DateTimeFormatter.ofPattern(timeFormat.toPattern());
   }
