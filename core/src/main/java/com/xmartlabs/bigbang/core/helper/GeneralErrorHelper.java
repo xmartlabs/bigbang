@@ -2,7 +2,6 @@ package com.xmartlabs.bigbang.core.helper;
 
 import android.support.annotation.NonNull;
 
-import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
 import com.xmartlabs.bigbang.core.exception.EntityNotFoundException;
 import com.xmartlabs.bigbang.core.helper.function.Consumer;
@@ -75,7 +74,7 @@ public final class GeneralErrorHelper {
 
   private boolean exceptionIsAlreadyBeingHandled(@NonNull Throwable throwable) {
     return Stream.ofNullable(Arrays.asList(throwable.getStackTrace()))
-        .anyMatch(value -> Objects.equals(value, DUMMY_STACK_TRACE_ELEMENT));
+        .anyMatch(value -> value == DUMMY_STACK_TRACE_ELEMENT);
   }
 
   private void markExceptionAsHandled(Throwable throwable) {
