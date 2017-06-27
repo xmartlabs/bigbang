@@ -16,6 +16,7 @@ import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
+import org.threeten.bp.YearMonth;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -385,7 +386,7 @@ public class DateHelper {
    * @return the list between, but not including, {@code startDate} and {@code endDate}.
    */
   @NonNull
-  public static List<LocalDate> getListOfDaysBetweenTwoDates(LocalDate startDate, LocalDate endDate) {
+  public static List<LocalDate> getListOfDaysBetweenTwoDates(@NonNull LocalDate startDate, @NonNull LocalDate endDate) {
     LocalDate endLocalDate = endDate.plusDays(1);
     return Stream.iterate(startDate, day -> day.plusDays(1))
         .limit(startDate.until(endLocalDate, ChronoUnit.DAYS))
@@ -400,7 +401,7 @@ public class DateHelper {
    * @return the list between, but not including, {@code startDate} and {@code endDate}.
    */
   @NonNull
-  public static List<LocalDate> getListOfDaysBetweenTwoDates(Date startDate, Date endDate) {
+  public static List<LocalDate> getListOfDaysBetweenTwoDates(@NonNull Date startDate, @NonNull Date endDate) {
     return getListOfDaysBetweenTwoDates(dateToLocalDate(startDate), dateToLocalDate(endDate));
   }
 
@@ -409,10 +410,11 @@ public class DateHelper {
    *
    * @param firstLocalDate  a first local date to compare.
    * @param secondLocalDate a second local date to compare.
-   * @return true if both dates have the same month.
+   * @return true if both dates have the same month and year.
    */
-  public static boolean haveSameMonth(LocalDate firstLocalDate, LocalDate secondLocalDate) {
-    return firstLocalDate.getMonth().equals(secondLocalDate.getMonth());
+  public static boolean haveSameMonthAndYear(@NonNull LocalDate firstLocalDate, @NonNull LocalDate secondLocalDate) {
+    return firstLocalDate.getMonth().equals(secondLocalDate.getMonth())
+        && YearMonth.from(firstLocalDate).equals(YearMonth.from(secondLocalDate));
   }
 
   /**
@@ -420,9 +422,9 @@ public class DateHelper {
    *
    * @param firstLocalDateTime  a first local date to compare.
    * @param secondLocalDateTime a second local date to compare.
-   * @return true if both dates have the same month.
+   * @return true if both dates have the same month and year.
    */
-  public static boolean haveSameMonth(LocalDateTime firstLocalDateTime, LocalDateTime secondLocalDateTime) {
-    return haveSameMonth(firstLocalDateTime.toLocalDate(), secondLocalDateTime.toLocalDate());
+  public static boolean haveSameMonthAndYear(@NonNull LocalDateTime firstLocalDateTime, @NonNull LocalDateTime secondLocalDateTime) {
+    return haveSameMonthAndYear(firstLocalDateTime.toLocalDate(), secondLocalDateTime.toLocalDate());
   }
 }
