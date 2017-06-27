@@ -403,4 +403,26 @@ public class DateHelper {
   public static List<LocalDate> getListOfDaysBetweenTwoDates(Date startDate, Date endDate) {
     return getListOfDaysBetweenTwoDates(dateToLocalDate(startDate), dateToLocalDate(endDate));
   }
+
+  /**
+   * Checks whether the given {@code date} is today or not.
+   *
+   * @param firstLocalDate  a first local date to compare.
+   * @param secondLocalDate a second local date to compare.
+   * @return true if both dates have the same month.
+   */
+  public static boolean haveSameMonth(LocalDate firstLocalDate, LocalDate secondLocalDate) {
+    return firstLocalDate.getMonth().equals(secondLocalDate.getMonth());
+  }
+
+  /**
+   * Checks whether the given {@code date} is today or not.
+   *
+   * @param firstLocalDateTime  a first local date to compare.
+   * @param secondLocalDateTime a second local date to compare.
+   * @return true if both dates have the same month.
+   */
+  public static boolean haveSameMonth(LocalDateTime firstLocalDateTime, LocalDateTime secondLocalDateTime) {
+    return haveSameMonth(firstLocalDateTime.toLocalDate(), secondLocalDateTime.toLocalDate());
+  }
 }
