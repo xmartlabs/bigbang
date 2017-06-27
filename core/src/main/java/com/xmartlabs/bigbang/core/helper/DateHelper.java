@@ -16,6 +16,7 @@ import org.threeten.bp.DayOfWeek;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.LocalTime;
+import org.threeten.bp.Month;
 import org.threeten.bp.YearMonth;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
@@ -413,7 +414,7 @@ public class DateHelper {
    * @return true if both dates have the same month and year.
    */
   public static boolean haveSameMonthAndYear(@NonNull LocalDate firstLocalDate, @NonNull LocalDate secondLocalDate) {
-    return firstLocalDate.getMonth().equals(secondLocalDate.getMonth())
+    return Month.from(firstLocalDate).equals(Month.from(secondLocalDate))
         && YearMonth.from(firstLocalDate).equals(YearMonth.from(secondLocalDate));
   }
 
@@ -425,6 +426,6 @@ public class DateHelper {
    * @return true if both dates have the same month and year.
    */
   public static boolean haveSameMonthAndYear(@NonNull LocalDateTime firstLocalDateTime, @NonNull LocalDateTime secondLocalDateTime) {
-    return haveSameMonthAndYear(firstLocalDateTime.toLocalDate(), secondLocalDateTime.toLocalDate());
+    return haveSameMonthAndYear(LocalDate.from(firstLocalDateTime), LocalDate.from(secondLocalDateTime));
   }
 }
