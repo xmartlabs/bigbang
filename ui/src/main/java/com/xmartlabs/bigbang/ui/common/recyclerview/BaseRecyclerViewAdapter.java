@@ -317,4 +317,10 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   public int getItemViewType(int position) {
     return types.indexOf(items.get(position).getType());
   }
+
+  @MainThread
+  protected void clearAll() {
+    items.clear();
+    notifyDataSetChanged();
+  }
 }
