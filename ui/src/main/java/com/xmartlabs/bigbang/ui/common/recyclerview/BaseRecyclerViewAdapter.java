@@ -333,9 +333,11 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    */
   @MainThread
   public void clearItems(@NonNull RecycleItemType itemType) {
-    Stream.ofNullable(items)
+    final List<Object> itemsToRemove = Stream.ofNullable(items)
         .filter(value -> value.getType().equals(itemType))
-        .distinct()
-        .forEach(this::removeItem);
+        .map(Element::getItem)
+        .toList();
+
+    removeItems(itemsToRemove);
   }
 }
