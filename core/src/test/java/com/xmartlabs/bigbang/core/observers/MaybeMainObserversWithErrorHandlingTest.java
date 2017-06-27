@@ -1,13 +1,15 @@
 package com.xmartlabs.bigbang.core.observers;
 
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 import com.xmartlabs.bigbang.core.helpers.TestingTree;
-import com.xmartlabs.bigbang.core.rx.error.MaybeObserverWithErrorHandling;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.reactivex.Maybe;
-import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,8 +22,15 @@ public class MaybeMainObserversWithErrorHandlingTest {
   @SuppressWarnings("unchecked")
   public void setUp() {
     Timber.plant(testingTree);
-    RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
-        new MaybeObserverWithErrorHandling<>(MaybeObserver, ObservableResult.ERROR_HANDLING_ACTION));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION);
+  }
+
+  private void setUpLog(@NonNull Consumer<? super Throwable> action) {
+    TraceurConfig config = new TraceurConfig(
+        true,
+        Traceur.AssemblyLogLevel.NONE,
+        action::accept);
+    Traceur.enableLogging(config);
   }
 
   @Test
@@ -96,9 +105,7 @@ public class MaybeMainObserversWithErrorHandlingTest {
 
   @Test
   public void doesNotCallOnSuccessWhenErrorAndErrorInHookErrorHandle() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
-        new MaybeObserverWithErrorHandling(MaybeObserver, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Maybe.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
@@ -119,9 +126,7 @@ public class MaybeMainObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsIt() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
-        new MaybeObserverWithErrorHandling(MaybeObserver, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Maybe.error(Throwable::new)
         .subscribe(o -> {});
@@ -147,9 +152,7 @@ public class MaybeMainObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsItAndCallsMaybeOnError() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnMaybeSubscribe((Maybe, MaybeObserver) ->
-        new MaybeObserverWithErrorHandling(MaybeObserver, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Maybe.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
