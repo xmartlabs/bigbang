@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.annimon.stream.IntPair;
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 import com.xmartlabs.bigbang.core.helper.CollectionHelper;
 import com.xmartlabs.bigbang.core.helper.ObjectHelper;
 import com.xmartlabs.bigbang.core.helper.function.BiFunction;
@@ -318,9 +319,23 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     return types.indexOf(items.get(position).getType());
   }
 
+  /** Removes all items and notifies that the data has changed. */
   @MainThread
-  protected void clearAll() {
+  public void clearAll() {
     items.clear();
     notifyDataSetChanged();
+  }
+
+  /**
+   * Removes all items in the recyclerView of a specified type.
+   *
+   * @param itemType The specified type of items to be removed.
+   */
+  @MainThread
+  public void clearItems(@NonNull RecycleItemType itemType) {
+    Stream.ofNullable(items)
+        .filter(value -> value.getType().equals(itemType))
+        .distinct()
+        .forEach(this::removeItem);
   }
 }
