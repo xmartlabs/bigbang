@@ -4,8 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.xmartlabs.bigbang.core.Injector;
-
-import java.io.IOException;
+import com.xmartlabs.bigbang.core.helper.ServiceHelper;
 
 import javax.inject.Inject;
 
@@ -24,24 +23,19 @@ public final class ServiceExceptionWithMessage extends RuntimeException {
   @Inject
   Gson gson;
 
-  public ServiceExceptionWithMessage(Response<?> response) {
+  private ServiceExceptionWithMessage(Response<?> response) {
     super("HTTP " + response.code() + " " + response.message());
     //noinspection ThrowableResultOfMethodCallIgnored
     Injector.inject(this);
 
     code = response.code();
     message = response.message();
-    String errorBody = null;
-    try {
-      errorBody = response.errorBody().string();
-    } catch (IOException ignored) {
-    } finally {
-      this.errorBody = errorBody;
-    }
+    errorBody = ServiceHelper.cloneResponseAndGetAsString(response.errorBody().source());
     this.response = response;
   }
 
   public ServiceExceptionWithMessage(HttpException exception) {
     this(exception.response());
+    initCause(exception);
   }
 }
