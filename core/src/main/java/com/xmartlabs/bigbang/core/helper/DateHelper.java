@@ -409,23 +409,12 @@ public class DateHelper {
   /**
    * Checks whether the given {@code date} is today or not.
    *
-   * @param firstLocalDate  a first local date to compare.
-   * @param secondLocalDate a second local date to compare.
+   * @param firstTemporalAccessor  a first local date to compare.
+   * @param secondTemporalAccessor a second local date to compare.
    * @return true if both dates have the same month and year.
    */
-  public static boolean haveSameMonthAndYear(@NonNull LocalDate firstLocalDate, @NonNull LocalDate secondLocalDate) {
-    return Month.from(firstLocalDate).equals(Month.from(secondLocalDate))
-        && YearMonth.from(firstLocalDate).equals(YearMonth.from(secondLocalDate));
-  }
-
-  /**
-   * Checks whether the given {@code date} is today or not.
-   *
-   * @param firstLocalDateTime  a first local date to compare.
-   * @param secondLocalDateTime a second local date to compare.
-   * @return true if both dates have the same month and year.
-   */
-  public static boolean haveSameMonthAndYear(@NonNull LocalDateTime firstLocalDateTime, @NonNull LocalDateTime secondLocalDateTime) {
-    return haveSameMonthAndYear(LocalDate.from(firstLocalDateTime), LocalDate.from(secondLocalDateTime));
+  public static boolean haveSameMonthAndYear(@NonNull TemporalAccessor firstTemporalAccessor,
+                                             @NonNull TemporalAccessor secondTemporalAccessor) {
+    return YearMonth.from(firstTemporalAccessor).equals(YearMonth.from(secondTemporalAccessor));
   }
 }
