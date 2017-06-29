@@ -198,7 +198,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
     compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
-    compile 'com.viewpagerindicator:library:2.4.1@aar'
+    compile 'com.viewpagerindicator:library:2.4.1'
     compile 'com.wdullaer:materialdatetimepicker:2.5.0'
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
