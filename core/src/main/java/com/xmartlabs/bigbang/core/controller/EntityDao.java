@@ -49,7 +49,7 @@ public interface EntityDao<Id, E, Condition> {
    * If more than one entity satisfy the conditions, the first one will be returned
    *
    * @param conditions to find the entity
-   * @return
+   * @return the entity, if exists
    */
   @CheckResult
   @NonNull
