@@ -32,7 +32,7 @@ ext {
         localDateBackport: '1.0.5',
         lombok: '1.16.10',
         mockito: '1.10.19',
-        okHttp: '3.6.0',
+        okHttp: '3.8.0',
         okio: '1.11.0',
         parceler: '1.1.5',
         playServices: '10.2.1',
