@@ -33,8 +33,8 @@ class OnboardingPageFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
     titleView.setText(onboardingPage.title)
     descriptionView.setText(onboardingPage.description)
-    
-    //noinspection deprecation
+  
+    @Suppress("DEPRECATION")
     imageView.setImageDrawable(context.resources.getDrawable(onboardingPage.image))
   }
 }

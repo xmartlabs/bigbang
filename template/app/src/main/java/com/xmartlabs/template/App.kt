@@ -74,17 +74,11 @@ class App : Application() {
         .build()
   }
 
-  private fun createBullet(component: ApplicationComponent): ObjectGraph {
-    return BulletApplicationComponent(component)
-  }
+  private fun createBullet(component: ApplicationComponent) = BulletApplicationComponent(component)
   
-  private fun initializeDataBase() {
-    FlowManager.init(FlowConfig.Builder(this).build())
-  }
+  private fun initializeDataBase() = FlowManager.init(FlowConfig.Builder(this).build())
   
-  private fun initializeThreeTenABP() {
-    AndroidThreeTen.init(this)
-  }
+  private fun initializeThreeTenABP() = AndroidThreeTen.init(this)
   
   private fun initializeLogging() {
     //TODO: Configure Fabric and add Fabric apiSecret and apiKey properties file in the root folder

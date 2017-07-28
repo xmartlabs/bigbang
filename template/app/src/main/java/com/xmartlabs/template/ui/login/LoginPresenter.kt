@@ -13,7 +13,7 @@ import lombok.Builder
 
 class LoginPresenter @Inject constructor() : BaseMvpPresenter<LoginView>() {
   //TODO: Do something on login button clicked
-  fun loginButtonClicked() = view?.let(LoginView::gotoRecyclerExampleActivity)
+  fun loginButtonClicked() = view?.gotoRecyclerExampleActivity()
 
   private fun setIsLoading(loading: Boolean) = view?.setIsLoading(loading)
 }

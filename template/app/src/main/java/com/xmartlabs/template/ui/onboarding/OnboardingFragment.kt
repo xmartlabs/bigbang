@@ -45,7 +45,7 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
 
   override fun createPageAdapter() = OnboardingPageAdapter(childFragmentManager)
 
-  override fun setupView(pageAdapter: OnboardingPageAdapter) {
+  override fun setup(pageAdapter: OnboardingPageAdapter) {
     viewPager.adapter = pageAdapter
     listOf(startButton, nextButton).forEach { it.setOnClickListener { presenter.nextButtonPressed() } }
     skipButton.setOnClickListener { presenter.skipButtonPressed() }

@@ -6,7 +6,7 @@ import com.xmartlabs.template.ui.common.TemplateView
 
 interface OnboardingView : TemplateView {
   fun createPageAdapter(): OnboardingPageAdapter
-  fun setupView(pageAdapter: OnboardingPageAdapter)
+  fun setup(pageAdapter: OnboardingPageAdapter)
   fun setSkipButtonVisibility(visible: Boolean)
   fun moveToPage(page: Int)
   fun startActivity(intent: Intent)

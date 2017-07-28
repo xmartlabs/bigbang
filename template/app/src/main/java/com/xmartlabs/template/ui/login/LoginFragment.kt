@@ -31,6 +31,10 @@ class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
   @LayoutRes
   override fun getLayoutResId() = R.layout.fragment_login
   
+  override fun setup() {
+    loginButton.setOnClickListener { presenter.loginButtonClicked() }
+  }
+  
   override fun setIsLoading(loading: Boolean) {
     loginButton.visibility = if (loading) View.GONE else View.VISIBLE
     progressBar.visibility = if (loading) View.VISIBLE else View.GONE
@@ -42,10 +46,5 @@ class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
         .build()
         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
     startActivity(intent)
-  }
-  
-  @OnClick(R.id.log_in_button)
-  fun onLoginButtonClicked() {
-    presenter.loginButtonClicked()
   }
 }

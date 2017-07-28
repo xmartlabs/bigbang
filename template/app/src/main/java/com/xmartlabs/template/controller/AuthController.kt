@@ -24,11 +24,10 @@ class AuthController : Controller() {
   val accessToken: Single<Session>
     @CheckResult
     get() = authService.accessToken
-        .compose(applySingleIoSchedulers<AuthResponse>())
+        .compose(applySingleIoSchedulers())
         .filter { authResponse -> authResponse.accessToken != null }
         .toSingle()
-        .flatMap { authResponse ->
-          sessionController.setSession(Session())
+        .flatMap { authResponse -> sessionController.setSession(Session())
               .doOnSuccess { accessTokenProvider.updateEntity(authResponse.accessToken) }
         }
 }

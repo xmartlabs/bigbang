@@ -12,6 +12,7 @@ import java.lang.ref.WeakReference
 import io.reactivex.FlowableSubscriber
 
 open class GeneralFlowableSubscriber<T> constructor(templateView: TemplateView? = null) : FlowableSubscriber<T> {
+  protected val maxNumberOfElements = java.lang.Long.MAX_VALUE
   private val viewReference: WeakReference<TemplateView> = WeakReference<TemplateView>(templateView)
 
   override fun onSubscribe(subscription: Subscription) = subscription.request(maxNumberOfElements)
@@ -32,7 +33,4 @@ open class GeneralFlowableSubscriber<T> constructor(templateView: TemplateView? 
 
   @CheckResult
   open protected fun alertOnError(throwable: Throwable) = true
-
-  protected val maxNumberOfElements: Long
-    get() = java.lang.Long.MAX_VALUE
 }

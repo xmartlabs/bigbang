@@ -17,7 +17,7 @@ class OnboardingPresenter @Inject constructor(): BaseMvpPresenter<OnboardingView
   override fun attachView(view: OnboardingView) {
     super.attachView(view)
     pageAdapter = view.createPageAdapter()
-    view.setupView(pageAdapter)
+    view.setup(pageAdapter)
   }
 
   internal fun nextButtonPressed() {
