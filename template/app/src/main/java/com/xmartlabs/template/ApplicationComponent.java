@@ -19,9 +19,11 @@ import com.xmartlabs.template.ui.login.LoginFragment;
 import com.xmartlabs.template.ui.login.LoginPresenter;
 import com.xmartlabs.template.ui.onboarding.OnboardingActivity;
 import com.xmartlabs.template.ui.onboarding.OnboardingFragment;
+import com.xmartlabs.template.ui.onboarding.OnboardingPresenter;
 import com.xmartlabs.template.ui.onboarding.page.OnboardingPageFragment;
 import com.xmartlabs.template.ui.recyclerfragmentexample.RecyclerExampleActivity;
 import com.xmartlabs.template.ui.recyclerfragmentexample.RecyclerExampleFragment;
+import com.xmartlabs.template.ui.recyclerfragmentexample.RecyclerExamplePresenter;
 
 import javax.inject.Singleton;
 
@@ -39,7 +41,7 @@ import dagger.Component;
     RestServiceModuleAdditions.class,
 })
 public interface ApplicationComponent {
-  void inject(TemplateApplication templateApplication);
+  void inject(App app);
 
   void inject(LoginActivity loginActivity);
   void inject(OnboardingActivity onboardingActivity);
@@ -52,6 +54,8 @@ public interface ApplicationComponent {
   void inject(RecyclerExampleFragment recyclerExampleFragment);
 
   void inject(LoginPresenter loginPresenter);
+  void inject(OnboardingPresenter onboardingPresenter);
+  void inject(RecyclerExamplePresenter recyclerExamplePresenter);
 
   void inject(AuthController authController);
   void inject(SessionController sessionController);

@@ -8,15 +8,13 @@ buildscript {
         classpath 'com.google.gms:google-services:3.0.0'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'io.fabric.tools:gradle:1.22.1'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.1'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
 
 def getSignInformation = { keystorePath, keystorePropertyPath ->
     def keyStore = file(keystorePath)
@@ -105,8 +103,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
     //noinspection GroovyMissingReturnStatement
     lintOptions {
@@ -132,6 +130,7 @@ final DART_VERSION = '2.0.2'
 final DBFLOW_VERSION = '4.0.2'
 final DRAG_LIST_VIEW_VERSION = 'b49f21d'
 final FRAGMENTARGS_VERSION = '3.0.2'
+final KOTLIN_VERSION = '1.1.3-2'
 final LOCALDATE_BACKPORT_VERSION = '1.0.5'
 final LOMBOK_VERSION = '1.16.16'
 final MATERIAL_DIALOGS_VERSION = '0.9.4.4'
@@ -151,14 +150,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
-    apt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
-    apt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${BULLET_VERSION}"
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${DBFLOW_VERSION}"
-    apt "com.hannesdorfmann.fragmentargs:processor:${FRAGMENTARGS_VERSION}"
-    apt "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
-    apt "org.parceler:parceler:${PARCELER_VERSION}"
-    apt "org.projectlombok:lombok:${LOMBOK_VERSION}"
+    kapt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
+    kapt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
+    kapt "com.github.tbroyer.bullet:bullet-compiler:${BULLET_VERSION}"
+    kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${DBFLOW_VERSION}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    kapt "com.hannesdorfmann.fragmentargs:processor:${FRAGMENTARGS_VERSION}"
+    kapt "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
+    kapt "org.parceler:parceler:${PARCELER_VERSION}"
+    kapt "org.projectlombok:lombok:${LOMBOK_VERSION}"
     compile "com.afollestad.material-dialogs:core:${MATERIAL_DIALOGS_VERSION}"
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
@@ -191,8 +191,12 @@ dependencies {
     compile "com.xmartlabs.bigbang:ui:${BIGBANG_VERSION}"
     compile "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION}"
     compile "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${KOTLIN_VERSION}"
     compile "org.parceler:parceler:${PARCELER_VERSION}"
-    provided "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
     provided "org.projectlombok:lombok:${LOMBOK_VERSION}"
+    provided 'javax.annotation:jsr250-api:1.0'
     testCompile 'junit:junit:4.12'
+}
+repositories {
+    mavenCentral()
 }
