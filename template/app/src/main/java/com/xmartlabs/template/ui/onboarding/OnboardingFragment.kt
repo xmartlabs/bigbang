@@ -16,6 +16,7 @@ import butterknife.BindView
 import butterknife.OnClick
 import butterknife.OnPageChange
 import com.xmartlabs.template.ui.Henson
+import javax.inject.Inject
 
 @FragmentWithArgs
 class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>(), OnboardingView {
@@ -34,29 +35,24 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
   @BindView(R.id.next_button)
   internal lateinit var nextButton: TextView
 
-  private val presenter = OnboardingPresenter()
-
-  override fun createPresenter(): OnboardingPresenter {
-    return presenter
-  }
+  @Inject
+  internal lateinit var presenter: OnboardingPresenter
+  
+  override fun createPresenter() = presenter
 
   @LayoutRes
-  override fun getLayoutResId(): Int {
-    return R.layout.fragment_onboarding
-  }
+  override fun getLayoutResId() = R.layout.fragment_onboarding
 
-  override fun createPageAdapter(): OnboardingPageAdapter {
-    return OnboardingPageAdapter(childFragmentManager)
-  }
+  override fun createPageAdapter() = OnboardingPageAdapter(childFragmentManager)
 
   override fun setupView(pageAdapter: OnboardingPageAdapter) {
     viewPager.adapter = pageAdapter
+    listOf(startButton, nextButton).forEach { it.setOnClickListener { presenter.nextButtonPressed() } }
+    skipButton.setOnClickListener { presenter.skipButtonPressed() }
   }
 
   @OnPageChange(R.id.view_pager)
-  internal fun onPageChanged(position: Int) {
-    presenter.pageChanged(position)
-  }
+  internal fun onPageChanged(position: Int) = presenter.pageChanged(position)
 
   override fun setSkipButtonVisibility(visible: Boolean) {
     if (visible && skipButton.alpha == ALPHA_OPAQUE || !visible && skipButton.alpha == View.INVISIBLE.toFloat()) {
@@ -89,16 +85,6 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
         .alpha(ALPHA_OPAQUE)
         .setStartDelay(ALPHA_START_DELAY_MILLISECONDS)
         .start()
-  }
-
-  @OnClick(R.id.start_button, R.id.next_button)
-  internal fun onNextButtonClick() {
-    presenter.nextButtonPressed()
-  }
-
-  @OnClick(R.id.skip_button)
-  internal fun onSkipButtonClick() {
-    presenter.skipButtonPressed()
   }
 
   override fun goToLoginActivity() {

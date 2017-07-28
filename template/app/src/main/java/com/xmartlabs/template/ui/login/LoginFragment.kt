@@ -14,6 +14,7 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.xmartlabs.template.App
 import com.xmartlabs.template.ui.Henson
+import javax.inject.Inject
 
 @FragmentWithArgs
 class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
@@ -22,16 +23,13 @@ class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
   @BindView(R.id.progress_bar)
   internal lateinit var progressBar: ProgressBar
   
-  private val presenter = LoginPresenter()
+  @Inject
+  internal lateinit var presenter: LoginPresenter
   
-  override fun createPresenter(): LoginPresenter {
-    return presenter
-  }
+  override fun createPresenter() = presenter
   
   @LayoutRes
-  override fun getLayoutResId(): Int {
-    return R.layout.fragment_login
-  }
+  override fun getLayoutResId() = R.layout.fragment_login
   
   override fun setIsLoading(loading: Boolean) {
     loginButton.visibility = if (loading) View.GONE else View.VISIBLE
@@ -43,12 +41,11 @@ class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
         .gotoRecyclerExampleActivity()
         .build()
         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-    
-    startActivity(intent);
+    startActivity(intent)
   }
   
   @OnClick(R.id.log_in_button)
-  internal fun onLoginButtonClicked() {
+  fun onLoginButtonClicked() {
     presenter.loginButtonClicked()
   }
 }

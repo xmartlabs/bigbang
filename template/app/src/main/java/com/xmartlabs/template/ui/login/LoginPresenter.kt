@@ -11,28 +11,9 @@ import javax.inject.Inject
 
 import lombok.Builder
 
-@Builder
-class LoginPresenter : BaseMvpPresenter<LoginView>() {
-  @Inject
-  internal lateinit var authController: AuthController
-  @Inject
-  internal lateinit var objectHelper: ObjectHelper
-  @Inject
-  internal lateinit var sharedPreferencesController: SharedPreferencesController
+class LoginPresenter @Inject constructor() : BaseMvpPresenter<LoginView>() {
+  //TODO: Do something on login button clicked
+  fun loginButtonClicked() = view?.let(LoginView::gotoRecyclerExampleActivity)
 
-  override fun attachView(view: LoginView) {
-    super.attachView(view)
-    Injector.inject(this)
-  }
-
-  fun loginButtonClicked() {
-    //TODO: Do something on login button clicked
-    Optional.ofNullable<LoginView>(view)
-        .ifPresent { it.gotoRecyclerExampleActivity() }
-  }
-
-  private fun setIsLoading(loading: Boolean) {
-    Optional.ofNullable<LoginView>(view)
-        .ifPresent { view -> view.setIsLoading(loading) }
-  }
+  private fun setIsLoading(loading: Boolean) = view?.setIsLoading(loading)
 }

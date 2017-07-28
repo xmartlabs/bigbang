@@ -5,7 +5,7 @@ import com.xmartlabs.bigbang.core.model.SessionType
 import lombok.Data
 
 class Session: SessionType {
-  private var token: String? = null
+  var token: String? = null
   
   override fun setAccessToken(accessToken: String?) {
     token = accessToken

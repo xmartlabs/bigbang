@@ -1,8 +1,9 @@
 package com.xmartlabs.template.ui.onboarding
 
 import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter
+import javax.inject.Inject
 
-class OnboardingPresenter : BaseMvpPresenter<OnboardingView>() {
+class OnboardingPresenter @Inject constructor(): BaseMvpPresenter<OnboardingView>() {
   companion object {
     private val FIRST_PAGE = 0
   }
@@ -24,18 +25,18 @@ class OnboardingPresenter : BaseMvpPresenter<OnboardingView>() {
       skipButtonPressed()
     } else {
       currentPage++
-      view?.let { it.moveToPage(currentPage) }
+      view?.moveToPage(currentPage)
       handleSkipButtonVisibility()
     }
   }
 
-  private fun handleSkipButtonVisibility() = view?.let { it.setSkipButtonVisibility(!isLastPage) }
+  private fun handleSkipButtonVisibility() = view?.setSkipButtonVisibility(!isLastPage)
 
   internal fun pageChanged(newPage: Int) {
     currentPage = newPage
-    view?.let { it.handleNextButtonVisibility() }
+    view?.handleNextButtonVisibility()
     handleSkipButtonVisibility()
   }
 
-  internal fun skipButtonPressed() = view?.let { it.goToLoginActivity() }
+  internal fun skipButtonPressed() = view?.goToLoginActivity()
 }

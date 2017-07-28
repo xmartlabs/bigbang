@@ -11,11 +11,7 @@ import com.xmartlabs.template.ui.onboarding.page.OnboardingPageFragmentBuilder
 class OnboardingPageAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
   private val pages = OnboardingPage.values().map { OnboardingPageFragmentBuilder(it).build() }
 
-  override fun getItem(position: Int): Fragment {
-    return pages[position]
-  }
+  override fun getItem(position: Int): Fragment = pages[position]
 
-  override fun getCount(): Int {
-    return pages.size
-  }
+  override fun getCount() = pages.size
 }

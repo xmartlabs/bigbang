@@ -27,9 +27,7 @@ class OnboardingPageFragment : BaseFragment() {
   internal lateinit var onboardingPage: OnboardingPage
 
   @LayoutRes
-  override fun getLayoutResId(): Int {
-    return R.layout.fragment_onboarding_page
-  }
+  override fun getLayoutResId() = R.layout.fragment_onboarding_page
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

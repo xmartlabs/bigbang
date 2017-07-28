@@ -10,20 +10,20 @@ import com.xmartlabs.template.ui.common.TemplateFragment
 import java.util.Locale
 
 import butterknife.BindView
+import javax.inject.Inject
 
 @FragmentWithArgs
 class RecyclerExampleFragment : TemplateFragment<RecyclerExampleView, RecyclerExamplePresenter>(), RecyclerExampleView {
   @BindView(R.id.recyclerView)
   internal lateinit var recyclerView: RecyclerViewEmptySupport
-
-  override fun createPresenter(): RecyclerExamplePresenter {
-    return RecyclerExamplePresenter()
-  }
+  
+  @Inject
+  internal lateinit var presenter: RecyclerExamplePresenter
+  
+  override fun createPresenter() = presenter
 
   @LayoutRes
-  override fun getLayoutResId(): Int {
-    return R.layout.fragment_recycler_example
-  }
+  override fun getLayoutResId() = R.layout.fragment_recycler_example
 
   override fun setup() {
     val strings = listOf(1..39)
