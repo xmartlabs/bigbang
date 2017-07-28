@@ -9,6 +9,7 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.6.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.3-2'
     }
 }
 

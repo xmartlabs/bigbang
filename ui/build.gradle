@@ -1,5 +1,4 @@
 apply from: '../versions.gradle'
-apply plugin: 'com.android.library'
 
 ext {
     projectName = "Ui"
@@ -13,11 +12,13 @@ ext {
 group = applicationId
 version = versionCodeNumber
 
+apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jakewharton.butterknife'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -42,36 +43,27 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility javaVersion8
-        targetCompatibility javaVersion8
-    }
-
     lintOptions {
         warning 'InvalidPackage'
     }
 }
 
 dependencies {
-    androidTestApt "com.jakewharton:butterknife-compiler:${libraryVersion.butterKnife}"
-
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    apt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
-    apt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
-    apt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
-    apt "com.jakewharton:butterknife-compiler:${libraryVersion.butterKnife}"
-    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
+    kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
+    kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
+    kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+    kapt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
 
     compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:design:${libraryVersion.androidSupport}"
     compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    compile "com.annimon:stream:${libraryVersion.stream}"
     compile("com.crashlytics.sdk.android:crashlytics:${libraryVersion.crashlytics}") {
         transitive = true
     }
@@ -81,15 +73,12 @@ dependencies {
     compile "com.google.dagger:dagger:${libraryVersion.daggerVersion}"
     compile "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
     compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
-    compile "com.jakewharton:butterknife:${libraryVersion.butterKnife}"
     compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(path: ':core')
-
-    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
-    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
 
     testCompile "junit:junit:${libraryVersion.junit}"
 }
