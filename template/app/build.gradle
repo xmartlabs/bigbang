@@ -7,7 +7,7 @@ buildscript {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
-        classpath 'io.fabric.tools:gradle:1.22.1'
+        classpath 'io.fabric.tools:gradle:1.23.0'
         classpath 'me.tatarka:gradle-retrolambda:3.6.1'
     }
 }
@@ -126,23 +126,24 @@ android {
 final ANDROID_SUPPORT_VERSION = '25.3.1'
 final BULLET_VERSION = 'e5044b53df'
 final BUTTERKNIFE_VERSION = '8.5.1'
-final BIGBANG_VERSION = '0.1.52'
+final BIGBANG_VERSION = '0.1.54'
 final DAGGER_VERSION = '2.10'
 final DART_VERSION = '2.0.2'
-final DBFLOW_VERSION = '4.0.2'
+final DBFLOW_VERSION = '4.0.5'
 final DRAG_LIST_VIEW_VERSION = 'b49f21d'
 final FRAGMENTARGS_VERSION = '3.0.2'
 final LOCALDATE_BACKPORT_VERSION = '1.0.5'
-final LOMBOK_VERSION = '1.16.16'
+final LOMBOK_VERSION = '1.16.18'
 final MATERIAL_DIALOGS_VERSION = '0.9.4.4'
 final MULTIDEX_VERSION = '1.0.1'
-final PARCELER_VERSION = '1.1.6'
+final PARCELER_VERSION = '1.1.9'
 final RETROFIT_VERSION = '2.2.0'
 final RXANDROID_VERSION = '2.0.1'
-final RXJAVA_VERSION = '2.0.9'
-final RXLIFECYCLE_VERSION = '2.1.0'
-final STREAM_VERSION = '1.1.7'
+final RXJAVA_VERSION = '2.1.2'
+final RXLIFECYCLE_VERSION = '2.0.1'
+final STREAM_VERSION = '1.1.8'
 final TIMBER_VERSION = '4.5.1'
+final TRACEUR_VERSION = '273cc7d582'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -171,6 +172,7 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow:${DBFLOW_VERSION}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${DBFLOW_VERSION}"
     compile "com.github.tbroyer.bullet:bullet:${BULLET_VERSION}"
+    compile "com.github.xmartlabs:Traceur:${TRACEUR_VERSION}"
     compile "com.github.xmartlabs:draglistview:${DRAG_LIST_VIEW_VERSION}"
     compile "com.google.dagger:dagger:${DAGGER_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:annotation:${FRAGMENTARGS_VERSION}"
