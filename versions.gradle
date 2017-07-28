@@ -41,7 +41,7 @@ ext {
         rxJava: '2.0.7',
         rxLifecycle: '2.0.1',
         stream: '1.1.6',
-        timber: '4.3.0',
+        timber: '4.5.1',
         traceur: '05c2c81241',
     ]
 }
