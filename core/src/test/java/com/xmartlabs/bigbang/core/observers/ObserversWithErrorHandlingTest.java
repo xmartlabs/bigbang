@@ -1,13 +1,15 @@
 package com.xmartlabs.bigbang.core.observers;
 
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 import com.xmartlabs.bigbang.core.helpers.TestingTree;
-import com.xmartlabs.bigbang.core.rx.error.ObserverWithErrorHandling;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.reactivex.Observable;
-import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,8 +22,15 @@ public class ObserversWithErrorHandlingTest {
   @SuppressWarnings("unchecked")
   public void setUp() {
     Timber.plant(testingTree);
-    RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
-        new ObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION);
+  }
+
+  private void setUpLog(@NonNull Consumer<? super Throwable> action) {
+    TraceurConfig config = new TraceurConfig(
+        true,
+        Traceur.AssemblyLogLevel.NONE,
+        action::accept);
+    Traceur.enableLogging(config);
   }
 
   @Test
@@ -77,9 +86,7 @@ public class ObserversWithErrorHandlingTest {
 
   @Test
   public void doesNotCallOnCompleteWhenErrorAndErrorInHookErrorHandle() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
-        new ObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Observable.error(Throwable::new)
         .doOnError(throwable ->
@@ -101,9 +108,7 @@ public class ObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsIt() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
-        new ObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Observable.error(Throwable::new)
         .subscribe(o -> {});
@@ -128,9 +133,7 @@ public class ObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsItAndCallsObservableOnError() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
-        new ObserverWithErrorHandling<>(observer, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Observable.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))

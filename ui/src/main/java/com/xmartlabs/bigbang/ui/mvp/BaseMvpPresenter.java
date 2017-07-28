@@ -1,5 +1,6 @@
 package com.xmartlabs.bigbang.ui.mvp;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 
@@ -21,12 +22,9 @@ import java.lang.ref.WeakReference;
 public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
   private WeakReference<V> viewReference;
 
-  public BaseMvpPresenter() {
-    Injector.inject(this);
-  }
-
   @Override
-  public void attachView(V view) {
+  public void attachView(@NonNull V view) {
+    Injector.inject(this);
     viewReference = new WeakReference<>(view);
   }
 
