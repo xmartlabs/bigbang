@@ -2,12 +2,10 @@ package com.xmartlabs.template.module
 
 import com.xmartlabs.bigbang.core.providers.AccessTokenProvider
 import com.xmartlabs.template.service.AuthService
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 class RestServiceModuleAdditions {

@@ -6,16 +6,13 @@ import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-
-import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.xmartlabs.template.R
-import com.xmartlabs.template.App
-import com.xmartlabs.template.ui.common.TemplateFragment
-
 import butterknife.BindView
-import butterknife.OnClick
 import butterknife.OnPageChange
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
+import com.xmartlabs.template.App
+import com.xmartlabs.template.R
 import com.xmartlabs.template.ui.Henson
+import com.xmartlabs.template.ui.common.TemplateFragment
 import javax.inject.Inject
 
 @FragmentWithArgs

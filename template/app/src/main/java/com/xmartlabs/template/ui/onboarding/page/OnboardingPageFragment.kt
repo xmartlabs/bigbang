@@ -5,14 +5,11 @@ import android.support.annotation.LayoutRes
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-
+import butterknife.BindView
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.hannesdorfmann.fragmentargs.bundler.ParcelerArgsBundler
 import com.xmartlabs.bigbang.ui.BaseFragment
 import com.xmartlabs.template.R
-
-import butterknife.BindView
 
 @FragmentWithArgs
 class OnboardingPageFragment : BaseFragment() {

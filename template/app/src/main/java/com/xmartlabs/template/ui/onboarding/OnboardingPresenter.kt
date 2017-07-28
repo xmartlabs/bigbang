@@ -1,9 +1,9 @@
 package com.xmartlabs.template.ui.onboarding
 
-import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter
+import com.xmartlabs.template.ui.common.TemplatePresenter
 import javax.inject.Inject
 
-class OnboardingPresenter @Inject constructor(): BaseMvpPresenter<OnboardingView>() {
+class OnboardingPresenter @Inject constructor(): TemplatePresenter<OnboardingView>() {
   companion object {
     private val FIRST_PAGE = 0
   }

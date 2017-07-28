@@ -4,11 +4,9 @@ import com.xmartlabs.bigbang.core.controller.CoreSessionController
 import com.xmartlabs.template.controller.AuthController
 import com.xmartlabs.template.controller.SessionController
 import com.xmartlabs.template.model.Session
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class ControllerModule {

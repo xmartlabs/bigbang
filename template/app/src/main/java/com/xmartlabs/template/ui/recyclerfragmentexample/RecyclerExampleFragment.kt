@@ -2,14 +2,12 @@ package com.xmartlabs.template.ui.recyclerfragmentexample
 
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.LinearLayoutManager
-
+import butterknife.BindView
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.bigbang.ui.common.recyclerview.RecyclerViewEmptySupport
 import com.xmartlabs.template.R
 import com.xmartlabs.template.ui.common.TemplateFragment
-import java.util.Locale
-
-import butterknife.BindView
+import java.util.*
 import javax.inject.Inject
 
 @FragmentWithArgs

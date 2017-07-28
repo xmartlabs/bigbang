@@ -2,10 +2,7 @@ package com.xmartlabs.template.ui.onboarding.page
 
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
-
 import com.xmartlabs.template.R
-
-import org.parceler.Parcel
 
 enum class OnboardingPage(@StringRes val title: Int, @StringRes val description: Int, @DrawableRes val image: Int) {
   //TODO: Replace texts and images for your onboarding

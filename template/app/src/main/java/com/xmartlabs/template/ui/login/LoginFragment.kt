@@ -5,15 +5,12 @@ import android.support.annotation.LayoutRes
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
-
-import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.xmartlabs.template.R
-import com.xmartlabs.template.ui.common.TemplateFragment
-
 import butterknife.BindView
-import butterknife.OnClick
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.template.App
+import com.xmartlabs.template.R
 import com.xmartlabs.template.ui.Henson
+import com.xmartlabs.template.ui.common.TemplateFragment
 import javax.inject.Inject
 
 @FragmentWithArgs

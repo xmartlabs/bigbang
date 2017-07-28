@@ -1,17 +1,13 @@
 package com.xmartlabs.template.ui.common
 
 import android.support.annotation.StringRes
-
 import com.afollestad.materialdialogs.MaterialDialog
 import com.xmartlabs.bigbang.ui.mvp.BaseMvpFragment
 import com.xmartlabs.bigbang.ui.mvp.MvpPresenter
 import com.xmartlabs.template.R
-
+import io.reactivex.exceptions.CompositeException
 import java.io.IOException
 import java.util.concurrent.CancellationException
-
-import io.reactivex.annotations.NonNull
-import io.reactivex.exceptions.CompositeException
 
 abstract class TemplateFragment<V : TemplateView, P : MvpPresenter<V>> : BaseMvpFragment<V, P>(), TemplateView {
   override val isViewAlive: Boolean

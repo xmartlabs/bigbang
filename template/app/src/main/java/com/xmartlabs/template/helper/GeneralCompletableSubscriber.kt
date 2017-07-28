@@ -2,13 +2,10 @@ package com.xmartlabs.template.helper
 
 import android.support.annotation.CheckResult
 import android.support.annotation.StringRes
-
 import com.xmartlabs.template.ui.common.TemplateView
-
-import java.lang.ref.WeakReference
-
 import io.reactivex.CompletableObserver
 import io.reactivex.disposables.Disposable
+import java.lang.ref.WeakReference
 
 open class GeneralCompletableSubscriber constructor(templateView: TemplateView? = null) : CompletableObserver {
   private val viewReference = WeakReference<TemplateView>(templateView)

@@ -2,13 +2,10 @@ package com.xmartlabs.template.helper
 
 import android.support.annotation.CheckResult
 import android.support.annotation.StringRes
-
 import com.xmartlabs.template.ui.common.TemplateView
-
-import java.lang.ref.WeakReference
-
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import java.lang.ref.WeakReference
 
 open class GeneralSingleSubscriber<T> constructor(templateView: TemplateView? = null) : SingleObserver<T> {
   private val viewReference = WeakReference<TemplateView>(templateView)

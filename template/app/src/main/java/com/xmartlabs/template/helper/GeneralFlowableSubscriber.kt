@@ -2,14 +2,10 @@ package com.xmartlabs.template.helper
 
 import android.support.annotation.CheckResult
 import android.support.annotation.StringRes
-
 import com.xmartlabs.template.ui.common.TemplateView
-
-import org.reactivestreams.Subscription
-
-import java.lang.ref.WeakReference
-
 import io.reactivex.FlowableSubscriber
+import org.reactivestreams.Subscription
+import java.lang.ref.WeakReference
 
 open class GeneralFlowableSubscriber<T> constructor(templateView: TemplateView? = null) : FlowableSubscriber<T> {
   protected val maxNumberOfElements = java.lang.Long.MAX_VALUE

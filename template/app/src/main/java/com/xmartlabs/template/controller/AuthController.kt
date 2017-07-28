@@ -1,16 +1,12 @@
 package com.xmartlabs.template.controller
 
 import android.support.annotation.CheckResult
-
 import com.xmartlabs.bigbang.core.controller.Controller
 import com.xmartlabs.bigbang.core.providers.AccessTokenProvider
-import com.xmartlabs.template.model.AuthResponse
 import com.xmartlabs.template.model.Session
 import com.xmartlabs.template.service.AuthService
-
-import javax.inject.Inject
-
 import io.reactivex.Single
+import javax.inject.Inject
 
 class AuthController : Controller() {
   @Inject

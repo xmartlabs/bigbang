@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.support.multidex.MultiDex
-import bullet.ObjectGraph
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.raizlabs.android.dbflow.config.FlowConfig
 import com.raizlabs.android.dbflow.config.FlowManager

@@ -2,12 +2,9 @@ package com.xmartlabs.template.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.Nullable
-
 import com.f2prateek.dart.HensonNavigable
 import com.xmartlabs.bigbang.ui.BaseAppCompatActivity
 import com.xmartlabs.template.controller.SessionController
-
 import javax.inject.Inject
 
 @HensonNavigable
