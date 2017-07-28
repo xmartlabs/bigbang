@@ -1,7 +1,9 @@
 package com.xmartlabs.template;
 
 import com.xmartlabs.bigbang.core.controller.Controller;
+import com.xmartlabs.bigbang.core.controller.CoreSessionController;
 import com.xmartlabs.bigbang.core.controller.SharedPreferencesController;
+import com.xmartlabs.bigbang.core.helper.GeneralErrorHelper;
 import com.xmartlabs.bigbang.core.module.CoreAndroidModule;
 import com.xmartlabs.bigbang.core.module.GsonModule;
 import com.xmartlabs.bigbang.core.module.OkHttpModule;
@@ -12,7 +14,6 @@ import com.xmartlabs.bigbang.ui.BaseActivity;
 import com.xmartlabs.bigbang.ui.BaseAppCompatActivity;
 import com.xmartlabs.bigbang.ui.BaseFragment;
 import com.xmartlabs.bigbang.ui.SingleFragmentActivity;
-import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.module.ControllerModule;
 
 import javax.inject.Singleton;
@@ -42,7 +43,7 @@ public interface ApplicationComponent {
   void inject(BaseFragment baseFragment);
 
   void inject(Controller controller);
-  void inject(SessionController sessionController);
+  void inject(CoreSessionController sessionController);
 
   void inject(SharedPreferencesController sharedPreferencesController);
 }

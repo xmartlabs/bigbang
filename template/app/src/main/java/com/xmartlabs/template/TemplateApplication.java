@@ -8,15 +8,12 @@ import android.support.multidex.MultiDex;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 import com.xmartlabs.bigbang.core.Injector;
 import com.xmartlabs.bigbang.core.helper.GeneralErrorHelper;
 import com.xmartlabs.bigbang.core.log.LoggerTree;
 import com.xmartlabs.bigbang.core.model.BuildInfo;
-import com.xmartlabs.bigbang.core.rx.error.CompletableObserverWithErrorHandling;
-import com.xmartlabs.bigbang.core.rx.error.FlowableObserverWithErrorHandling;
-import com.xmartlabs.bigbang.core.rx.error.MaybeObserverWithErrorHandling;
-import com.xmartlabs.bigbang.core.rx.error.ObserverWithErrorHandling;
-import com.xmartlabs.bigbang.core.rx.error.SingleObserverWithErrorHandling;
 import com.xmartlabs.bigbang.log.crashlytics.CrashlyticsLogger;
 import com.xmartlabs.bigbang.retrofit.helper.ServiceErrorHandler;
 import com.xmartlabs.template.module.AndroidModule;
@@ -27,7 +24,6 @@ import com.xmartlabs.template.module.ServiceGsonModule;
 import javax.inject.Inject;
 
 import bullet.ObjectGraph;
-import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
 public class TemplateApplication extends Application {
@@ -107,15 +103,10 @@ public class TemplateApplication extends Application {
   private void initializeRxErrorHandler() {
     serviceErrorHandler.handleServiceErrors();
 
-    RxJavaPlugins.setOnSingleSubscribe((single, singleObserver) ->
-        new SingleObserverWithErrorHandling<>(singleObserver, generalErrorHelper.getGeneralErrorAction()));
-    RxJavaPlugins.setOnObservableSubscribe((observable, observer) ->
-        new ObserverWithErrorHandling<>(observer, generalErrorHelper.getGeneralErrorAction()));
-    RxJavaPlugins.setOnMaybeSubscribe((maybe, maybeObserver) ->
-        new MaybeObserverWithErrorHandling<>(maybeObserver, generalErrorHelper.getGeneralErrorAction()));
-    RxJavaPlugins.setOnFlowableSubscribe((flowable, subscriber) ->
-        new FlowableObserverWithErrorHandling<>(subscriber, generalErrorHelper.getGeneralErrorAction()));
-    RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
-        new CompletableObserverWithErrorHandling(completableObserver, generalErrorHelper.getGeneralErrorAction()));
+    TraceurConfig config = new TraceurConfig(
+        true,
+        BuildConfig.DEBUG ? Traceur.AssemblyLogLevel.SHOW_ALL : Traceur.AssemblyLogLevel.NONE,
+        generalErrorHelper.getGeneralErrorAction()::accept);
+    Traceur.enableLogging(config);
   }
 }
