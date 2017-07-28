@@ -1,12 +1,15 @@
 package com.xmartlabs.bigbang.core.observers;
 
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 import com.xmartlabs.bigbang.core.helpers.TestingTree;
-import com.xmartlabs.bigbang.core.rx.error.CompletableObserverWithErrorHandling;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.reactivex.Completable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
 import timber.log.Timber;
 
@@ -19,8 +22,15 @@ public class CompletableMainObserversWithErrorHandlingTest {
   @Before
   public void setUp() {
     Timber.plant(testingTree);
-    RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
-        new CompletableObserverWithErrorHandling(completableObserver, ObservableResult.ERROR_HANDLING_ACTION));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION);
+  }
+
+  private void setUpLog(@NonNull Consumer<? super Throwable> action) {
+    TraceurConfig config = new TraceurConfig(
+        true,
+        Traceur.AssemblyLogLevel.NONE,
+        action::accept);
+    Traceur.enableLogging(config);
   }
 
   @Test
@@ -65,9 +75,7 @@ public class CompletableMainObserversWithErrorHandlingTest {
 
   @Test
   public void doesNotCallOnCompleteWhenErrorAndErrorInHookErrorHandle() {
-    RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
-        new CompletableObserverWithErrorHandling(completableObserver,
-            ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Completable.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
@@ -88,9 +96,7 @@ public class CompletableMainObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsIt() {
-    RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
-        new CompletableObserverWithErrorHandling(completableObserver,
-            ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Completable.error(Throwable::new)
         .subscribe(() -> {});
@@ -115,9 +121,7 @@ public class CompletableMainObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsItAndCallsCompletableOnError() {
-    RxJavaPlugins.setOnCompletableSubscribe((completable, completableObserver) ->
-        new CompletableObserverWithErrorHandling(completableObserver,
-            ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Completable.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
