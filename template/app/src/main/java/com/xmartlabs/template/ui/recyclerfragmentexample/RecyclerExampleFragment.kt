@@ -27,6 +27,7 @@ class RecyclerExampleFragment : TemplateFragment<RecyclerExampleView, RecyclerEx
 
   override fun setup() {
     val strings = listOf(1..39)
+        .flatten()
         .map { String.format(Locale.getDefault(), "Item %d", it) }
 
     recyclerView.adapter = RecyclerExampleAdapter(strings)

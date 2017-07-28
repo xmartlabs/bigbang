@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentStatePagerAdapter
 
 import com.xmartlabs.template.ui.onboarding.page.OnboardingPage
 import com.xmartlabs.template.ui.onboarding.page.OnboardingPageFragment
+import com.xmartlabs.template.ui.onboarding.page.OnboardingPageFragmentBuilder
 
-//TODO: Fix the initialization
 class OnboardingPageAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
-  private val pages: List<OnboardingPageFragment> = OnboardingPage.values().map { page -> OnboardingPageFragment() }
+  private val pages = OnboardingPage.values().map { OnboardingPageFragmentBuilder(it).build() }
 
   override fun getItem(position: Int): Fragment {
     return pages[position]

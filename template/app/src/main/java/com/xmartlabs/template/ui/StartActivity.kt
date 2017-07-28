@@ -24,11 +24,11 @@ class StartActivity : BaseAppCompatActivity() {
         }
         .executeIfAbsent {
           //TODO: handle on start activity no session
-//          val intent = Henson.with(context)
-//              .gotoOnboardingActivity()
-//              .build()
-//              .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//          startActivity(intent)
+          val intent = Henson.with(context)
+              .gotoOnboardingActivity()
+              .build()
+              .setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+          startActivity(intent)
         }
   }
 }

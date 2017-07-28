@@ -15,6 +15,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 def getSignInformation = { keystorePath, keystorePropertyPath ->
     def keyStore = file(keystorePath)

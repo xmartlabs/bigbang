@@ -15,6 +15,7 @@ import com.xmartlabs.template.ui.common.TemplateFragment
 import butterknife.BindView
 import butterknife.OnClick
 import butterknife.OnPageChange
+import com.xmartlabs.template.ui.Henson
 
 @FragmentWithArgs
 class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>(), OnboardingView {
@@ -101,10 +102,10 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
   }
 
   override fun goToLoginActivity() {
-//    val intent = Henson.with(App.context)
-//        .gotoLoginActivity()
-//        .build()
-//        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//    startActivity(intent)
+    val intent = Henson.with(App.context)
+        .gotoLoginActivity()
+        .build()
+        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    startActivity(intent)
   }
 }

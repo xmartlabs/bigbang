@@ -23,7 +23,7 @@ class OnboardingPageFragment : BaseFragment() {
   @BindView(R.id.image)
   internal lateinit var imageView: ImageView
 
-  @Arg(bundler = ParcelerArgsBundler::class)
+  @Arg
   internal lateinit var onboardingPage: OnboardingPage
 
   @LayoutRes
