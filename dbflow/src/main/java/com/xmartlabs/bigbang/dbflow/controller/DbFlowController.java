@@ -84,6 +84,18 @@ public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id
   @CheckResult
   @NonNull
   @Override
+  public Maybe<D> getEntity(@NonNull SQLOperator... conditions) {
+    return Maybe
+        .fromCallable(() -> new Select()
+            .from(getModelClass())
+            .where(conditions)
+            .querySingle())
+        .subscribeOn(Schedulers.io());
+  }
+
+  @CheckResult
+  @NonNull
+  @Override
   public Single<D> createEntity(@NonNull D entity) {
     return Completable.fromAction(entity::insert)
         .toSingleDefault(entity)
