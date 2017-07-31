@@ -3,6 +3,7 @@ package com.xmartlabs.template;
 import com.xmartlabs.bigbang.core.controller.Controller;
 import com.xmartlabs.bigbang.core.controller.CoreSessionController;
 import com.xmartlabs.bigbang.core.controller.SharedPreferencesController;
+import com.xmartlabs.bigbang.core.helper.GeneralErrorHelper;
 import com.xmartlabs.bigbang.core.module.CoreAndroidModule;
 import com.xmartlabs.bigbang.core.module.GsonModule;
 import com.xmartlabs.bigbang.core.module.OkHttpModule;
