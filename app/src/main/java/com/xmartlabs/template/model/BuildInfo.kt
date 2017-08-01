@@ -1,8 +1,9 @@
 package com.xmartlabs.template.model
 
 import com.xmartlabs.template.BuildConfig
+import com.xmartlabs.bigbang.core.model.BuildInfo as CoreBuildInfo
 
-class BuildInfo : com.xmartlabs.bigbang.core.model.BuildInfo {
+class BuildInfo : CoreBuildInfo {
   override val isDebug: Boolean
     get() = BuildConfig.DEBUG
 

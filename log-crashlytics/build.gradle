@@ -38,6 +38,8 @@ android {
     }
     lintOptions {
         warning 'InvalidPackage'
+        checkAllWarnings true
+        warningsAsErrors true
     }
 }
 

@@ -106,6 +106,8 @@ android {
     //noinspection GroovyMissingReturnStatement
     lintOptions {
         warning 'InvalidPackage'
+        checkAllWarnings true
+        warningsAsErrors true
     }
     packagingOptions {
         exclude '.readme'

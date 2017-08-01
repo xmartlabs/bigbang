@@ -20,6 +20,7 @@ import javax.inject.Inject
 open class BaseProjectApplication : Application() {
   companion object {
     @JvmStatic lateinit var context: BaseProjectApplication
+        private set
   }
 
   @Inject
