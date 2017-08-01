@@ -21,8 +21,6 @@ open class BaseProjectApplication : Application() {
   companion object {
     @JvmStatic lateinit var context: BaseProjectApplication
   }
-  
-  private var bullet: ObjectGraph? = null
 
   @Inject
   internal lateinit var buildInfo: BuildInfo
@@ -48,7 +46,7 @@ open class BaseProjectApplication : Application() {
 
   private fun initializeInjections() {
     val component = createComponent()
-    bullet = createBullet(component)
+    val bullet = createBullet(component)
     Injector.instance.bullet = bullet
     Injector.inject(this)
   }
@@ -68,7 +66,7 @@ open class BaseProjectApplication : Application() {
     Timber.plant(loggerTree)
   }
 
-  fun <T> inject(t: T) = bullet!!.inject(t)
+  fun <T> inject(t: T) = Injector.inject(t)
 
   private fun initializeRxErrorHandler() {
     serviceErrorHandler.handleServiceErrors()

@@ -17,21 +17,17 @@ class RecyclerViewInteraction<A> private constructor(private val viewMatcher: Ma
   
   private var items: List<A>? = null
 
-  fun withItems(items: List<A>): RecyclerViewInteraction<A> {
-    this.items = items
-    return this
-  }
+  fun withItems(items: List<A>) = apply { this.items = items }
 
-  fun check(itemViewAssertion: ItemViewAssertion<A>): RecyclerViewInteraction<A> {
-    for (i in items!!.indices) {
+  fun check(itemViewAssertion: ItemViewAssertion<A>) = apply {
+    items?.forEachIndexed { index, element ->
       onView(viewMatcher)
-          .perform(scrollToPosition<RecyclerView.ViewHolder>(i))
-          .check(RecyclerItemViewAssertion(i, items!![i], itemViewAssertion))
+          .perform(scrollToPosition<RecyclerView.ViewHolder>(index))
+          .check(RecyclerItemViewAssertion(index, element, itemViewAssertion))
     }
-    return this
   }
 
-  interface ItemViewAssertion<A> {
+  interface ItemViewAssertion<in A> {
     fun check(item: A, view: View, e: NoMatchingViewException)
   }
 }

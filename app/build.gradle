@@ -8,16 +8,13 @@ buildscript {
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
         classpath 'com.google.gms:google-services:3.0.0'
-        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'io.fabric.tools:gradle:1.21.7'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.jakewharton.hugo'
 //apply plugin: 'io.fabric' // TODO: uncomment when having set the Fabric API key
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -106,10 +103,6 @@ android {
             dimension 'version'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     //noinspection GroovyMissingReturnStatement
     lintOptions {
         warning 'InvalidPackage'
@@ -126,9 +119,6 @@ android {
 }
 
 dependencies {
-    kaptAndroidTest "com.github.tbroyer.bullet:bullet-compiler:$libraryVersion.bullet"
-    kaptAndroidTest "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
-
     androidTestCompile "com.android.support:support-annotations:${libraryVersion.androidSupport}"
     androidTestCompile "com.android.support.test:rules:${libraryVersion.androidSupportTest}"
     androidTestCompile("com.android.support.test:runner:${libraryVersion.androidSupportTest}") {
@@ -166,9 +156,6 @@ dependencies {
     compile "com.android.support:design:${libraryVersion.androidSupport}"
     compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
-        transitive = true
-    }
     compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
     compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
@@ -208,6 +195,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     kapt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
     kapt "org.parceler:parceler:${libraryVersion.parceler}"
+
+    kaptAndroidTest "com.github.tbroyer.bullet:bullet-compiler:$libraryVersion.bullet"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+
     provided 'javax.annotation:jsr250-api:1.0'
 
     testCompile "junit:junit:${libraryVersion.junit}"

@@ -39,19 +39,19 @@ class MetricsHelperTest {
   @Test
   fun testDpToPx() {
     @Dimension(unit = Dimension.DP) val dp = 10f
-    Assert.assertEquals(25.0f, resources.dpToPx(dp))
+    Assert.assertEquals(25.0f, resources.metric.dpToPx(dp))
   }
 
   @Test
   fun testSpToPx() {
     @Dimension(unit = Dimension.SP) val sp = 10f
-    Assert.assertEquals(25.0f, resources.spToPx(sp))
+    Assert.assertEquals(25.0f, resources.metric.spToPx(sp))
   }
 
   @Test
   fun testDpToPxInt() {
     @Dimension(unit = Dimension.DP) val dp = 3f
-    Assert.assertEquals(7, resources.dpToPxInt(dp))
+    Assert.assertEquals(7, resources.metric.dpToPxInt(dp))
   }
 
   @Test
@@ -60,12 +60,12 @@ class MetricsHelperTest {
     val returned = 12.5f
     Mockito.`when`(resources.getDimension(res)).thenReturn(returned)
 
-    Assert.assertEquals(12, resources.dimResToPxInt(res))
+    Assert.assertEquals(12, resources.metric.dimResToPxInt(res))
   }
 
   @Test
   fun testPxToDp() {
     @Dimension(unit = Dimension.PX) val px = 3.5f
-    Assert.assertEquals(1.4f, resources.pxToDp(px))
+    Assert.assertEquals(1.4f, resources.metric.pxToDp(px))
   }
 }

@@ -16,5 +16,5 @@ annotation class GsonExclude(val strategy: GsonExcludeStrategy = GsonExcludeStra
 enum class GsonExcludeStrategy {
   ALL,
   DATA_BASE,
-  SERVICE
+  SERVICE,
 }

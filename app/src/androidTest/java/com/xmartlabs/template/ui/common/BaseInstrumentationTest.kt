@@ -32,7 +32,6 @@ abstract class BaseInstrumentationTest {
     } catch (e: InterruptedException) {
       e.printStackTrace()
     }
-
   }
 
   val activityInstance: Activity
@@ -48,7 +47,7 @@ abstract class BaseInstrumentationTest {
       return currentActivity[0]!!
     }
 
-  @Throws(Throwable::class)
+  @Throws(RuntimeException::class)
   protected fun assertCurrentActivityIs(activityClass: Class<out Activity>) {
     sleep()
     val currentActivityName = activityInstance.javaClass

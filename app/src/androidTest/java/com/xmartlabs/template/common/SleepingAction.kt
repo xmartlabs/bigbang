@@ -24,6 +24,5 @@ internal class SleepingAction(
       Thread.currentThread().interrupt()
       throw RuntimeException(e)
     }
-
   }
 }

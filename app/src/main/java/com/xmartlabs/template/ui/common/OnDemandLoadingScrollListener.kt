@@ -12,11 +12,11 @@ abstract class OnDemandLoadingScrollListener : RecyclerView.OnScrollListener() {
     val firstPage = 1
   }
   
-  private var previousTotal: Int = 0
+  private var previousTotal = 0
   private var loading = true
-  private var firstVisibleItem: Int = 0
-  private var visibleItemCount: Int = 0
-  private var totalItemCount: Int = 0
+  private var firstVisibleItem = 0
+  private var visibleItemCount = 0
+  private var totalItemCount = 0
   private var page = firstPage
   var enabled = true
   val visibleThreshold = VISIBLE_THRESHOLD_DEFAULT

@@ -16,6 +16,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
 import android.support.v7.widget.Toolbar
 import android.widget.ImageButton
+import com.xmartlabs.bigbang.core.extensions.ignoreException
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -24,10 +25,6 @@ import timber.log.Timber
 
 @RunWith(AndroidJUnit4::class)
 abstract class SingleActivityInstrumentationTest<T : Activity> : BaseInstrumentationTest() {
-  companion object {
-    protected val EMPTY_LIST_JSON_PATH = "jsons/list_empty.json"
-  }
-  
   @Rule
   @JvmField var activityTestRule = createTestRule()
 
@@ -45,13 +42,7 @@ abstract class SingleActivityInstrumentationTest<T : Activity> : BaseInstrumenta
   @Test
   fun checkUpNavigation() {
     launchActivityWithDefaultIntent()
-    val upButtonViewInteraction = upButtonViewInteraction
-    try {
-      upButtonViewInteraction.perform(click())
-    } catch (e: NoMatchingViewException) {
-      // Ignore if there is no up button.
-    }
-
+    upButtonViewInteraction.ignoreException { perform(click()) }
   }
 
   protected val upButtonViewInteraction: ViewInteraction
@@ -75,7 +66,6 @@ abstract class SingleActivityInstrumentationTest<T : Activity> : BaseInstrumenta
         } catch (e: UiObjectNotFoundException) {
           Timber.e(e, "There is no permissions dialog to interact with ")
         }
-
       }
     }
   }

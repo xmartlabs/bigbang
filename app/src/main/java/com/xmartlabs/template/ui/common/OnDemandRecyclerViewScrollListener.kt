@@ -3,7 +3,7 @@ package com.xmartlabs.template.ui.common
 import android.support.annotation.Dimension
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.RecyclerView
-import com.xmartlabs.bigbang.core.extensions.dpToPxInt
+import com.xmartlabs.bigbang.core.extensions.metric
 
 /**
  * An OnDemandLoadingScrollListener for recycler view pagination
@@ -15,14 +15,14 @@ abstract class OnDemandRecyclerViewScrollListener(private val recyclerView: Recy
   
   var enabled = true
   @Dimension(unit = Dimension.PX)
-  var visibleThreshold: Int = 0
+  var visibleThreshold = 0
   
-  private var previousRecyclerViewHeight: Int = 0
+  private var previousRecyclerViewHeight = 0
   private var loading = true
   private var page = 1
 
   init {
-    visibleThreshold = recyclerView.resources.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP)
+    visibleThreshold = recyclerView.resources.metric.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP)
     @Suppress("LeakingThis")
     loadNextPage(page)
   }
@@ -32,7 +32,7 @@ abstract class OnDemandRecyclerViewScrollListener(private val recyclerView: Recy
    */
   fun resetStatus() {
     enabled = true
-    visibleThreshold = recyclerView.resources.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP)
+    visibleThreshold = recyclerView.resources.metric.dpToPxInt(DEFAULT_VISIBLE_THRESHOLD_DP)
     loading = false
     previousRecyclerViewHeight = recyclerView.measuredHeight
     page = 1

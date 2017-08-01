@@ -15,7 +15,6 @@ version = versionCodeNumber
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -64,9 +63,6 @@ dependencies {
     compile "com.android.support:design:${libraryVersion.androidSupport}"
     compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    compile("com.crashlytics.sdk.android:crashlytics:${libraryVersion.crashlytics}") {
-        transitive = true
-    }
     compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
     compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"

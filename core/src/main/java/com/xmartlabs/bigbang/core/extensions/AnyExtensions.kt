@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.core.extensions
 
 /** Executes the `block` on `this` and, if an exception is thrown, returns null instead */
-fun <T, R> T.ignoreException(block: T.() -> R) = try { block(this) } catch (e: Exception) { null }
+fun <T, R> T.ignoreException(block: T.() -> R?) = try { block(this) } catch (e: Exception) { null }
 
 /** Executes the `block` on `this` and, if an exception is thrown, it's handled by `handler` */
 fun <T, R> T.ifException(block: (T) -> R, handler: (Exception) -> Unit) =

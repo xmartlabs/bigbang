@@ -3,6 +3,7 @@ package com.xmartlabs.bigbang.ui
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
+import com.xmartlabs.bigbang.ui.R.layout.activity_fragment
 
 /**
  * An extension of [BaseAppCompatActivity] that holds a single [Fragment].
@@ -25,7 +26,7 @@ abstract class SingleFragmentActivity : BaseAppCompatActivity() {
    */
   open protected val layoutResId: Int
     @LayoutRes
-    get() = R.layout.activity_fragment
+    get() = activity_fragment
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

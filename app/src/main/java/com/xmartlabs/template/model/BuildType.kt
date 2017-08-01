@@ -2,13 +2,11 @@ package com.xmartlabs.template.model
 
 enum class BuildType {
   STAGING,
-  PRODUCTION;
+  PRODUCTION,
+  ;
 
-  override fun toString(): String {
-    when (this) {
-      STAGING -> return "staging"
-      PRODUCTION -> return "production"
-      else -> throw IllegalStateException("Illegal build type")
-    }
+  override fun toString() = when (this) {
+    STAGING -> "staging"
+    PRODUCTION -> "production"
   }
 }

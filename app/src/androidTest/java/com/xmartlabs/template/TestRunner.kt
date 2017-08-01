@@ -20,6 +20,9 @@ import javax.inject.Named
 
 class TestRunner : AndroidJUnitRunner() {
   companion object {
+    val picassoClientIdleName = String.format(Locale.US, "%sOkHttp", OkHttpModule.CLIENT_PICASSO)
+    val serviceClientIdleName = String.format(Locale.US, "%sOkHttp", OkHttpModule.CLIENT_SERVICE)
+    
     @JvmStatic
     var androidAssetsFileParser: AndroidAssetsFileParser? = null
       private set
@@ -57,12 +60,10 @@ class TestRunner : AndroidJUnitRunner() {
     val testApp = app as TestApplication
     testApp.inject(this)
 
-    val picassoIdlingResource = OkHttp3IdlingResource.create(
-        String.format(Locale.US, "%sOkHttp", OkHttpModule.CLIENT_SERVICE), picassoOkHttpClient)
+    val picassoIdlingResource = OkHttp3IdlingResource.create(picassoClientIdleName, picassoOkHttpClient)
     Espresso.registerIdlingResources(picassoIdlingResource)
 
-    val serviceIdlingResource = OkHttp3IdlingResource.create(
-        String.format(Locale.US, "%sOkHttp", OkHttpModule.CLIENT_SERVICE), serviceOkHttpClient)
+    val serviceIdlingResource = OkHttp3IdlingResource.create(serviceClientIdleName, serviceOkHttpClient)
     Espresso.registerIdlingResources(serviceIdlingResource)
   }
 }
