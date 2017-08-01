@@ -10,9 +10,7 @@ dependencies:
 
 test:
   override:
-    - ./gradlew testAllVersionsProductionDebugUnitTest
     - ./gradlew testAllVersionsProductionReleaseUnitTest
-    - ./gradlew testAllVersionsStagingDebugUnitTest
     - ./gradlew testAllVersionsStagingReleaseUnitTest
 
     - ./gradlew lintAllVersionsProductionRelease
