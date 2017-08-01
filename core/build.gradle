@@ -85,7 +85,7 @@ dependencies {
     provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     provided "org.projectlombok:lombok:${libraryVersion.lombok}"
     testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.2') {
+    testCompile ('org.threeten:threetenbp:1.3.5') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }

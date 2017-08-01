@@ -45,6 +45,17 @@ public interface EntityDao<Id, E, Condition> {
   Maybe<E> getEntity(@NonNull Id id);
 
   /**
+   * Retrieves the entity that satisfies the conditions, if any
+   * If more than one entity satisfy the conditions, the first one will be returned
+   *
+   * @param conditions to find the entity
+   * @return the entity, if exists
+   */
+  @CheckResult
+  @NonNull
+  Maybe<E> getEntity(@NonNull Condition... conditions);
+
+  /**
    * Creates the {@code entity} and returns it.
    *
    * @param entity the entity to be created
