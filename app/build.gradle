@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
-        classpath 'com.google.gms:google-services:3.0.0'
+        classpath 'com.google.gms:google-services:3.1.0'
         classpath 'io.fabric.tools:gradle:1.21.7'
     }
 }
@@ -179,7 +179,7 @@ dependencies {
     compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
     compile 'com.viewpagerindicator:library:2.4.1'
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
@@ -204,7 +204,7 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
 
     testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.2') {
+    testCompile ('org.threeten:threetenbp:1.3.6') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }

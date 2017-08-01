@@ -1,13 +1,3 @@
 <resources>
     <string name="app_name" translatable="false">Base project</string>
-    <string name="url_service" translatable="false">https://api.github.com/</string><!-- TODO -->
-
-    <string name="loading">Loading…</string>
-    <string name="message_error_service_call">Oops! Something went wrong, please try again.</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
-    <string name="field_required">Field required</string>
-    <string name="the_email_not_valid">The email is not valid</string>
-    <string name="welcome">Welcome</string>
-    <string name="log_in">Log in</string>
 </resources>

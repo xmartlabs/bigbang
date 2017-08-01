@@ -27,7 +27,8 @@ ext {
         jsr305: '3.0.1',
         junit: '4.12',
         kotlin: '1.1.3-2',
-        localDateBackport: '1.0.4',
+        localDateBackport: '1.0.5',
+        materialDateTimePicker: '3.2.2',
         mockito: '1.10.19',
         okHttp: '3.6.0',
         okio: '1.11.0',
@@ -37,8 +38,8 @@ ext {
         retrofit: '2.2.0',
         rxAndroid: '2.0.1',
         rxJava: '2.0.7',
-        rxLifecycle: '2.0.1',
-        timber: '4.3.0',
+        rxLifecycle: '2.1.0',
+        timber: '4.5.1',
         traceur: '05c2c81241',
     ]
 }

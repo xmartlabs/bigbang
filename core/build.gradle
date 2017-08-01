@@ -72,7 +72,7 @@ dependencies {
     compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
     compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
     compile "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
@@ -81,7 +81,7 @@ dependencies {
     kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.2') {
+    testCompile ('org.threeten:threetenbp:1.3.6') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }
