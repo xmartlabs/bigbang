@@ -20,7 +20,9 @@ class ServiceErrorHandler @Inject constructor() {
     private val LOGGER_KEY_URL = "url"
   }
   
+  @Inject
   private lateinit var generalErrorHelper: GeneralErrorHelper
+  @Inject
   private lateinit var loggerTree: LoggerTree
   
   private val serviceErrorHandler = { serviceException: Throwable ->
