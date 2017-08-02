@@ -31,13 +31,13 @@ public class ServiceHelperTest {
 
   @Test
   public void getUrl() {
-    assertThat(ServiceHelper.getUrl(response), equalTo(REQUEST_URL));
+    assertThat(ServiceHelper.INSTANCE.getUrl(response), equalTo(REQUEST_URL));
   }
 
   @Test
   public void addParameterNameToEndOfUrl() {
-    String url = ServiceHelper.addParameterNameToEndOfUrl(REQUEST_URL, "test");
-    url = ServiceHelper.addParameterNameToEndOfUrl(url, "test2");
+    String url = ServiceHelper.INSTANCE.addParameterNameToEndOfUrl(REQUEST_URL, "test");
+    url = ServiceHelper.INSTANCE.addParameterNameToEndOfUrl(url, "test2");
 
     String expectedResult = REQUEST_URL + "/{test}/{test2}";
 
@@ -46,11 +46,11 @@ public class ServiceHelperTest {
 
   @Test
   public void addParameterToUrl() {
-    String url = ServiceHelper.addParameterNameToEndOfUrl(REQUEST_URL, "test");
-    url = ServiceHelper.addParameterNameToEndOfUrl(url, "test2");
+    String url = ServiceHelper.INSTANCE.addParameterNameToEndOfUrl(REQUEST_URL, "test");
+    url = ServiceHelper.INSTANCE.addParameterNameToEndOfUrl(url, "test2");
 
-    String parametrizedUrl = ServiceHelper.addParameterToUrl(url, "test", "replacedTest");
-    parametrizedUrl = ServiceHelper.addParameterToUrl(parametrizedUrl, "test2", "replacedTest2");
+    String parametrizedUrl = ServiceHelper.INSTANCE.addParameterToUrl(url, "test", "replacedTest");
+    parametrizedUrl = ServiceHelper.INSTANCE.addParameterToUrl(parametrizedUrl, "test2", "replacedTest2");
 
     String expectedResult = REQUEST_URL + "/replacedTest/replacedTest2";
     assertThat(parametrizedUrl, equalTo(expectedResult));

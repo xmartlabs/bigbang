@@ -1,3 +1,7 @@
+machine:
+  environment:
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+
 dependencies:
   pre:
     - echo y | android update sdk --no-ui -a --filter tools
@@ -12,9 +16,8 @@ test:
   override:
     - ./gradlew testAllVersionsProductionDebugUnitTest
     - ./gradlew testAllVersionsProductionReleaseUnitTest
-    - ./gradlew testAllVersionsStagingDebugUnitTest
     - ./gradlew testAllVersionsStagingReleaseUnitTest
-
+    - ./gradlew testAllVersionsStagingDebugUnitTest
     - ./gradlew lintAllVersionsProductionRelease
     - ./gradlew lintAllVersionsProductionDebug
     - ./gradlew lintAllVersionsStagingDebug

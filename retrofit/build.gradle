@@ -1,5 +1,4 @@
 apply from: '../versions.gradle'
-apply plugin: 'com.android.library'
 
 ext {
     projectName = "Retrofit"
@@ -13,10 +12,11 @@ ext {
 group = applicationId
 version = versionCodeNumber
 
+apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -36,19 +36,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility javaVersion8
-        targetCompatibility javaVersion8
-    }
     lintOptions {
+        checkAllWarnings true
         warning 'InvalidPackage'
+        warningsAsErrors true
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
-    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
     compile "com.google.dagger:dagger:${libraryVersion.dagger}"
     compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
     compile "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
@@ -56,10 +53,10 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
-    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.2') {
+    testCompile ('org.threeten:threetenbp:1.3.6') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }

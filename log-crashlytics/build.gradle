@@ -1,5 +1,4 @@
 apply from: '../versions.gradle'
-apply plugin: 'com.android.library'
 
 ext {
     projectName = "CrashlyticsLogger"
@@ -13,10 +12,11 @@ ext {
 group = applicationId
 version = versionCodeNumber
 
+apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -36,12 +36,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility javaVersion8
-        targetCompatibility javaVersion8
-    }
     lintOptions {
+        checkAllWarnings true
         warning 'InvalidPackage'
+        warningsAsErrors true
     }
 }
 
@@ -50,6 +48,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
     }
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
     compile project(path: ':core')
 }
 
