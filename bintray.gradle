@@ -79,7 +79,7 @@ task javadoc(type: Javadoc) {
             owner.classpath += variant.javaCompile.classpath
         }
     }
-    failOnError true
+    failOnError false
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
