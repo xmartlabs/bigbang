@@ -59,8 +59,7 @@ class App : Application() {
   
   private fun initializeInjections() {
     val component = createComponent()
-    val bullet = createBullet(component)
-    Injector.getInstance().setObjectGraph(bullet)
+    Injector.instance.bullet = createBullet(component)
     Injector.inject(this)
   }
   
@@ -89,7 +88,7 @@ class App : Application() {
     serviceErrorHandler.handleServiceErrors()
     
     val level = if (BuildConfig.DEBUG) Traceur.AssemblyLogLevel.SHOW_ALL else Traceur.AssemblyLogLevel.NONE
-    val config = TraceurConfig(true, level) { generalErrorHelper.generalErrorAction.accept(it) }
+    val config = TraceurConfig(true, level) { generalErrorHelper.generalErrorAction(it) }
     Traceur.enableLogging(config)
   }
 }

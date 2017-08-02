@@ -6,13 +6,13 @@ import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.OnPageChange
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.template.App
 import com.xmartlabs.template.R
+import com.xmartlabs.template.helper.EmptyOnPageChangeListener
 import com.xmartlabs.template.ui.Henson
 import com.xmartlabs.template.ui.common.TemplateFragment
+import kotlinx.android.synthetic.main.fragment_onboarding.*
 import javax.inject.Inject
 
 @FragmentWithArgs
@@ -23,22 +23,10 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
     private val ALPHA_START_DELAY_MILLISECONDS: Long = 100
   }
   
-  @BindView(R.id.view_pager)
-  internal lateinit var viewPager: ViewPager
-  @BindView(R.id.skip_button)
-  internal lateinit var skipButton: TextView
-  @BindView(R.id.start_button)
-  internal lateinit var startButton: Button
-  @BindView(R.id.next_button)
-  internal lateinit var nextButton: TextView
-
   @Inject
-  internal lateinit var presenter: OnboardingPresenter
+  override lateinit var presenter: OnboardingPresenter
   
-  override fun createPresenter() = presenter
-
-  @LayoutRes
-  override fun getLayoutResId() = R.layout.fragment_onboarding
+  override val layoutResId = R.layout.fragment_onboarding
 
   override fun createPageAdapter() = OnboardingPageAdapter(childFragmentManager)
 
@@ -46,10 +34,10 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
     viewPager.adapter = pageAdapter
     listOf(startButton, nextButton).forEach { it.setOnClickListener { presenter.nextButtonPressed() } }
     skipButton.setOnClickListener { presenter.skipButtonPressed() }
+    viewPager.addOnPageChangeListener(object : EmptyOnPageChangeListener() {
+      override fun onPageSelected(position: Int) = presenter.pageChanged(position)
+    })
   }
-
-  @OnPageChange(R.id.view_pager)
-  internal fun onPageChanged(position: Int) = presenter.pageChanged(position)
 
   override fun setSkipButtonVisibility(visible: Boolean) {
     if (visible && skipButton.alpha == ALPHA_OPAQUE || !visible && skipButton.alpha == View.INVISIBLE.toFloat()) {

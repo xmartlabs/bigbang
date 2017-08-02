@@ -1,5 +1,6 @@
 package com.xmartlabs.template;
 
+import com.xmartlabs.bigbang.core.controller.SessionController;
 import com.xmartlabs.bigbang.core.controller.SharedPreferencesController;
 import com.xmartlabs.bigbang.core.module.CoreAndroidModule;
 import com.xmartlabs.bigbang.core.module.GsonModule;
@@ -10,7 +11,6 @@ import com.xmartlabs.bigbang.core.providers.AccessTokenProvider;
 import com.xmartlabs.bigbang.retrofit.module.RestServiceModule;
 import com.xmartlabs.bigbang.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.controller.AuthController;
-import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.module.ControllerModule;
 import com.xmartlabs.template.module.RestServiceModuleApi;
 import com.xmartlabs.template.ui.StartActivity;

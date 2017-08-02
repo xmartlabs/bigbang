@@ -21,8 +21,6 @@ internal class RecyclerExampleAdapter(private val items: List<String>)
   override fun getItemCount() = items.size
 
   internal class RecyclerExampleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    fun bind(string: String) {
-      (itemView as? TextView)?.text = string
-    }
+    fun bind(string: String) = (itemView as? TextView)?.let { it.text = string } ?: Unit
   }
 }

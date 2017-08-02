@@ -9,13 +9,13 @@
     >
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
     <TextView
-        android:id="@+id/skip_button"
+        android:id="@+id/skipButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -28,7 +28,7 @@
         />
 
     <Button
-        android:id="@+id/start_button"
+        android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0.01"
@@ -42,11 +42,11 @@
         />
 
     <TextView
-        android:id="@+id/next_button"
+        android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="1"
-        android:layout_alignBaseline="@id/start_button"
+        android:layout_alignBaseline="@id/startButton"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
         android:text="@string/next"

@@ -7,7 +7,7 @@ class Injector private constructor() {
 
   companion object {
     @JvmStatic
-    val instance = Injector()
+    val instance by lazy { Injector() }
 
     @JvmStatic
     fun <T> inject(t: T) {

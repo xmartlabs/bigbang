@@ -13,6 +13,8 @@ abstract class TemplateFragment<V : TemplateView, P : MvpPresenter<V>> : BaseMvp
   override val isViewAlive: Boolean
     get() = isAdded && activity != null
 
+  override fun setup() = Unit
+
   override fun showError(message: Int, title: Int, buttonTitle: Int) {
     if (isViewAlive) {
       MaterialDialog.Builder(context)
@@ -41,6 +43,4 @@ abstract class TemplateFragment<V : TemplateView, P : MvpPresenter<V>> : BaseMvp
       showError(message)
     }
   }
-  
-  override fun setup() = Unit
 }

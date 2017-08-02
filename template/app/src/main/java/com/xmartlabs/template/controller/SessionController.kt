@@ -5,6 +5,6 @@ import com.xmartlabs.template.model.Session
 
 var SessionController.session
     get() = abstractSession as? Session
-    set(value) { saveSession(value) }
+    set(value) { value?.let { saveSession(it) } ?: deleteSession() }
 
 fun SessionController.update(block: (Session?) -> Session) { session = block(session) }
