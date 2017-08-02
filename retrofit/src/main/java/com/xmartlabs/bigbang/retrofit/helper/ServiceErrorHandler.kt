@@ -21,9 +21,9 @@ class ServiceErrorHandler @Inject constructor() {
   }
   
   @Inject
-  private lateinit var generalErrorHelper: GeneralErrorHelper
+  internal lateinit var generalErrorHelper: GeneralErrorHelper
   @Inject
-  private lateinit var loggerTree: LoggerTree
+  internal lateinit var loggerTree: LoggerTree
   
   private val serviceErrorHandler = { serviceException: Throwable ->
     val exception = serviceException as ServiceExceptionWithMessage
