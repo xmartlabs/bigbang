@@ -1,18 +1,14 @@
 package com.xmartlabs.template.ui.login
 
 import android.content.Intent
-import android.support.annotation.LayoutRes
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.template.App
 import com.xmartlabs.template.R
 import com.xmartlabs.template.ui.Henson
 import com.xmartlabs.template.ui.common.TemplateFragment
+import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
-
-import kotlinx.android.synthetic.main.fragment_login.*;
 
 @FragmentWithArgs
 class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {

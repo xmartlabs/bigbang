@@ -1,11 +1,7 @@
 package com.xmartlabs.template.ui.onboarding
 
 import android.content.Intent
-import android.support.annotation.LayoutRes
-import android.support.v4.view.ViewPager
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.template.App
 import com.xmartlabs.template.R
