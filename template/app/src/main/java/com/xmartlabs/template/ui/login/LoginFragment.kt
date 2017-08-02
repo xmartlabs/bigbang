@@ -22,12 +22,12 @@ class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
   override val layoutResId = R.layout.fragment_login
   
   override fun setup() {
-    //loginButton.setOnClickListener { presenter.loginButtonClicked() }
+    loginButton.setOnClickListener { presenter.loginButtonClicked() }
   }
   
   override fun setIsLoading(loading: Boolean) {
-    //loginButton.visibility = if (loading) View.GONE else View.VISIBLE
-    //progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+    loginButton.visibility = if (loading) View.GONE else View.VISIBLE
+    progressBar.visibility = if (loading) View.VISIBLE else View.GONE
   }
   
   override fun gotoRecyclerExampleActivity() {
