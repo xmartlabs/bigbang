@@ -12,7 +12,7 @@ import com.xmartlabs.bigbang.retrofit.module.ServiceGsonModule;
 import com.xmartlabs.template.controller.AuthController;
 import com.xmartlabs.template.controller.SessionController;
 import com.xmartlabs.template.module.ControllerModule;
-import com.xmartlabs.template.module.RestServiceModuleAdditions;
+import com.xmartlabs.template.module.RestServiceModuleApi;
 import com.xmartlabs.template.ui.StartActivity;
 import com.xmartlabs.template.ui.login.LoginActivity;
 import com.xmartlabs.template.ui.login.LoginFragment;
@@ -38,7 +38,7 @@ import dagger.Component;
     OkHttpModule.class,
     PicassoModule.class,
     RestServiceModule.class,
-    RestServiceModuleAdditions.class,
+    RestServiceModuleApi.class,
 })
 public interface ApplicationComponent {
   void inject(App app);

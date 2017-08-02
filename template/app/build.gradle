@@ -118,7 +118,7 @@ android {
 
 final ANDROID_SUPPORT_VERSION = '25.3.1'
 final BULLET_VERSION = 'e5044b53df'
-final BIGBANG_VERSION = '353028b'
+final BIGBANG_VERSION = '1955d7e'
 final DAGGER_VERSION = '2.10'
 final DART_VERSION = '2.0.2'
 final DBFLOW_VERSION = '4.0.2'
@@ -157,8 +157,8 @@ dependencies {
     compile "com.github.xmartlabs.bigbang:dbflow:${BIGBANG_VERSION}"
     compile "com.github.xmartlabs.bigbang:log-crashlytics:${BIGBANG_VERSION}"
     compile "com.github.xmartlabs.bigbang:retrofit:${BIGBANG_VERSION}"
-    compile "com.github.xmartlabs:Traceur:${TRACEUR_VERSION}"
     compile "com.github.xmartlabs.bigbang:ui:${BIGBANG_VERSION}"
+    compile "com.github.xmartlabs:Traceur:${TRACEUR_VERSION}"
     compile "com.google.dagger:dagger:${DAGGER_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:annotation:${FRAGMENTARGS_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${FRAGMENTARGS_VERSION}"

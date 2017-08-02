@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
-class RestServiceModuleAdditions {
+class RestServiceModuleApi {
   @Provides
   @Singleton
   internal fun provideAuthService(retrofit: Retrofit) = retrofit.create(AuthService::class.java)

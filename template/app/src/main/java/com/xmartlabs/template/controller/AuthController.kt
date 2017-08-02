@@ -2,6 +2,7 @@ package com.xmartlabs.template.controller
 
 import android.support.annotation.CheckResult
 import com.xmartlabs.bigbang.core.controller.Controller
+import com.xmartlabs.bigbang.core.controller.SessionController
 import com.xmartlabs.bigbang.core.providers.AccessTokenProvider
 import com.xmartlabs.template.model.Session
 import com.xmartlabs.template.service.AuthService
@@ -17,13 +18,13 @@ class AuthController : Controller() {
   internal lateinit var sessionController: SessionController
 
   //TODO: Change signature and method to match authService request to fetch the Access Token
-  val accessToken: Single<Session>
+  val accessToken: Single<out Session>
     @CheckResult
     get() = authService.accessToken
-        .compose(applySingleIoSchedulers())
+        .applyIoSchedulers()
         .filter { authResponse -> authResponse.accessToken != null }
         .toSingle()
-        .flatMap { authResponse -> sessionController.setSession(Session())
-              .doOnSuccess { accessTokenProvider.updateEntity(authResponse.accessToken) }
-        }
+        .doOnSuccess { sessionController.session = Session()  }
+        .doOnSuccess { accessTokenProvider.updateEntity(it.accessToken ?: "") }
+        .map { sessionController.session!! }
 }
