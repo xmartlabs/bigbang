@@ -8,7 +8,7 @@
     >
 
     <TextView
-        android:id="@+id/title_text"
+        android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -19,10 +19,10 @@
         />
 
     <Button
-        android:id="@+id/log_in_button"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_below="@id/title_text"
+        android:layout_below="@id/titleText"
         android:layout_centerHorizontal="true"
         android:minHeight="40dp"
         android:minWidth="248dp"
@@ -30,10 +30,10 @@
         />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@id/title_text"
+        android:layout_below="@id/titleText"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:visibility="gone"

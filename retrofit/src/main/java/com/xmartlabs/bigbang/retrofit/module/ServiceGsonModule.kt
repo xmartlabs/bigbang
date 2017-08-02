@@ -21,20 +21,20 @@ open class ServiceGsonModule {
   @Named(SERVICE_GSON_NAME)
   @Provides
   @Singleton
-  fun provideServiceGson(gsonBuilder: GsonBuilder, buildInfo: BuildInfo): Gson {
+  open fun provideServiceGson(gsonBuilder: GsonBuilder, buildInfo: BuildInfo): Gson {
     return modifyGsonBuilder(gsonBuilder, buildInfo)
         .setExclusionStrategies(getExclusionStrategy(GsonExcludeStrategy.SERVICE))
         .create()
   }
 
-  protected fun modifyGsonBuilder(builder: GsonBuilder, buildInfo: BuildInfo): GsonBuilder {
+  protected open fun modifyGsonBuilder(builder: GsonBuilder, buildInfo: BuildInfo): GsonBuilder {
     if (buildInfo.isDebug) {
       builder.setPrettyPrinting()
     }
     return builder
   }
 
-  protected fun getExclusionStrategy(strategy: GsonExcludeStrategy?): ExclusionStrategy {
+  protected open fun getExclusionStrategy(strategy: GsonExcludeStrategy?): ExclusionStrategy {
     return GsonExclusionStrategy(ArrayList())
         .getExclusionStrategy(strategy)
   }

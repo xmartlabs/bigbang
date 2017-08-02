@@ -6,17 +6,15 @@ buildscript {
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.14.0'
         classpath 'com.google.gms:google-services:3.0.0'
-        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
         classpath 'io.fabric.tools:gradle:1.22.1'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.1'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'com.jakewharton.hugo'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 def getSignInformation = { keystorePath, keystorePropertyPath ->
     def keyStore = file(keystorePath)
@@ -40,13 +38,13 @@ def getSignInformation = { keystorePath, keystorePropertyPath ->
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.xmartlabs.bigbang.template"
         minSdkVersion 19
         multiDexEnabled true
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -104,10 +102,6 @@ android {
             dimension 'version'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     //noinspection GroovyMissingReturnStatement
     lintOptions {
         warning 'InvalidPackage'
@@ -125,15 +119,13 @@ android {
 
 final ANDROID_SUPPORT_VERSION = '25.3.1'
 final BULLET_VERSION = 'e5044b53df'
-final BUTTERKNIFE_VERSION = '8.5.1'
-final BIGBANG_VERSION = '0.1.54'
+final BIGBANG_VERSION = '6a33a12'
 final DAGGER_VERSION = '2.10'
 final DART_VERSION = '2.0.2'
 final DBFLOW_VERSION = '4.0.2'
-final DRAG_LIST_VIEW_VERSION = 'b49f21d'
 final FRAGMENTARGS_VERSION = '3.0.2'
+final KOTLIN_VERSION = '1.1.3-2'
 final LOCALDATE_BACKPORT_VERSION = '1.0.5'
-final LOMBOK_VERSION = '1.16.16'
 final MATERIAL_DIALOGS_VERSION = '0.9.4.4'
 final MULTIDEX_VERSION = '1.0.1'
 final PARCELER_VERSION = '1.1.6'
@@ -141,7 +133,6 @@ final RETROFIT_VERSION = '2.2.0'
 final RXANDROID_VERSION = '2.0.1'
 final RXJAVA_VERSION = '2.0.9'
 final RXLIFECYCLE_VERSION = '2.0.1'
-final STREAM_VERSION = '1.1.7'
 final TIMBER_VERSION = '4.5.1'
 final TRACEUR_VERSION = '273cc7d582'
 
@@ -151,19 +142,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
-    apt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
-    apt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${BULLET_VERSION}"
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${DBFLOW_VERSION}"
-    apt "com.hannesdorfmann.fragmentargs:processor:${FRAGMENTARGS_VERSION}"
-    apt "com.jakewharton:butterknife-compiler:${BUTTERKNIFE_VERSION}"
-    apt "org.parceler:parceler:${PARCELER_VERSION}"
-    apt "org.projectlombok:lombok:${LOMBOK_VERSION}"
     compile "com.afollestad.material-dialogs:core:${MATERIAL_DIALOGS_VERSION}"
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:multidex:${MULTIDEX_VERSION}"
-    compile "com.annimon:stream:${STREAM_VERSION}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true
     }
@@ -172,27 +154,32 @@ dependencies {
     compile "com.github.Raizlabs.DBFlow:dbflow:${DBFLOW_VERSION}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${DBFLOW_VERSION}"
     compile "com.github.tbroyer.bullet:bullet:${BULLET_VERSION}"
+    compile "com.github.xmartlabs.bigbang:core:${BIGBANG_VERSION}"
+    compile "com.github.xmartlabs.bigbang:dbflow:${BIGBANG_VERSION}"
+    compile "com.github.xmartlabs.bigbang:log-crashlytics:${BIGBANG_VERSION}"
+    compile "com.github.xmartlabs.bigbang:retrofit:${BIGBANG_VERSION}"
+    compile "com.github.xmartlabs.bigbang:ui:${BIGBANG_VERSION}"
     compile "com.github.xmartlabs:Traceur:${TRACEUR_VERSION}"
-    compile "com.github.xmartlabs:draglistview:${DRAG_LIST_VIEW_VERSION}"
     compile "com.google.dagger:dagger:${DAGGER_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:annotation:${FRAGMENTARGS_VERSION}"
     compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${FRAGMENTARGS_VERSION}"
-    compile "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
     compile "com.jakewharton.threetenabp:threetenabp:${LOCALDATE_BACKPORT_VERSION}"
     compile "com.jakewharton.timber:timber:${TIMBER_VERSION}"
     compile "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT_VERSION}"
     compile "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
     compile "com.trello.rxlifecycle2:rxlifecycle:${RXLIFECYCLE_VERSION}"
     compile "com.trello.rxlifecycle2:rxlifecycle-components:${RXLIFECYCLE_VERSION}"
-    compile "com.xmartlabs.bigbang:core:${BIGBANG_VERSION}"
-    compile "com.xmartlabs.bigbang:dbflow:${BIGBANG_VERSION}"
-    compile "com.xmartlabs.bigbang:log-crashlytics:${BIGBANG_VERSION}"
-    compile "com.xmartlabs.bigbang:retrofit:${BIGBANG_VERSION}"
-    compile "com.xmartlabs.bigbang:ui:${BIGBANG_VERSION}"
     compile "io.reactivex.rxjava2:rxandroid:${RXANDROID_VERSION}"
     compile "io.reactivex.rxjava2:rxjava:${RXJAVA_VERSION}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${KOTLIN_VERSION}"
     compile "org.parceler:parceler:${PARCELER_VERSION}"
-    provided "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
-    provided "org.projectlombok:lombok:${LOMBOK_VERSION}"
+    kapt "com.f2prateek.dart:dart-processor:${DART_VERSION}"
+    kapt "com.f2prateek.dart:henson-processor:${DART_VERSION}"
+    kapt "com.github.tbroyer.bullet:bullet-compiler:${BULLET_VERSION}"
+    kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${DBFLOW_VERSION}"
+    kapt "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
+    kapt "com.hannesdorfmann.fragmentargs:processor:${FRAGMENTARGS_VERSION}"
+    kapt "org.parceler:parceler:${PARCELER_VERSION}"
+    provided 'javax.annotation:jsr250-api:1.0'
     testCompile 'junit:junit:4.12'
 }
