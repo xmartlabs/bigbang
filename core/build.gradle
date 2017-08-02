@@ -1,5 +1,4 @@
 apply from: '../versions.gradle'
-apply plugin: 'com.android.library'
 
 ext {
     projectName = "Core"
@@ -13,10 +12,11 @@ ext {
 group = applicationId
 version = versionCodeNumber
 
+apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -39,12 +39,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility javaVersion8
-        targetCompatibility javaVersion8
-    }
     lintOptions {
+        checkAllWarnings true
         warning 'InvalidPackage'
+        warningsAsErrors true
     }
 }
 
@@ -59,13 +57,8 @@ dependencies {
     androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
     androidTestCompile "junit:junit:${libraryVersion.junit}"
     androidTestCompile "org.mockito:mockito-core:${libraryVersion.mockito}"
-    apt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
-    apt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
-    apt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
-    apt "org.projectlombok:lombok:${libraryVersion.lombok}"
     compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:design:${libraryVersion.androidSupport}"
-    compile "com.annimon:stream:${libraryVersion.stream}"
     compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
     compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
@@ -79,13 +72,16 @@ dependencies {
     compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
     compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
     compile "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
-    provided "org.projectlombok:lombok:${libraryVersion.lombok}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
+    kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
+    kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.2') {
+    testCompile ('org.threeten:threetenbp:1.3.6') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }
