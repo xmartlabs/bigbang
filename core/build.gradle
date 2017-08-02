@@ -40,8 +40,8 @@ android {
         }
     }
     lintOptions {
-        warning 'InvalidPackage'
         checkAllWarnings true
+        warning 'InvalidPackage'
         warningsAsErrors true
     }
 }

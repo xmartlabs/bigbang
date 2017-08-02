@@ -9,20 +9,17 @@ import android.support.v7.app.ActionBar
 
 /** Extension object that contains all related metric extensions that make use of [Resources]  */
 val Resources.metric
-  get() = let { _Metric.instance.apply { resources = it } }
+  get() = _Metric.instance(this)
 
 /** Internal class used to extend [Resources] inside the `metric` scope */
 class _Metric internal constructor() {
   companion object {
-    private var _instance: _Metric? = null
-    internal val instance: _Metric
-      get() {
-        _instance = _instance ?: _Metric()
-        return _instance!!
-      }
+    internal val instance by lazy { _Metric() }
   }
   
   internal lateinit var resources: Resources
+  
+  operator fun invoke(resources: Resources) = apply { this.resources = resources }
   
   /**
    * Converts the `dp` value to pixels dimension.

@@ -6,20 +6,17 @@ import android.support.v4.content.ContextCompat
 
 /** Extension object that contains all related color extensions that make use of [Context] */
 val Context.color
-  get() = let { _ColorHex.instance.apply { context = it } }
+  get() = _ColorHex.instance(this)
 
 /** Internal class used to extend [Context] inside the `color` scope */
 class _ColorHex internal constructor() {
   companion object {
-    private var _instance: _ColorHex? = null
-    internal val instance: _ColorHex
-      get() {
-        _instance = _instance ?: _ColorHex()
-        return _instance!!
-      }
+    internal val instance by lazy { _ColorHex() }
   }
   
   internal lateinit var context: Context
+  
+  operator fun invoke(context: Context) = apply { this.context = context }
   
   /**
    * Retrieves the Hex string representation of the color resource.
