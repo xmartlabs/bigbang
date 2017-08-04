@@ -1,13 +1,15 @@
 package com.xmartlabs.bigbang.core.observers;
 
+import com.tspoon.traceur.Traceur;
+import com.tspoon.traceur.TraceurConfig;
 import com.xmartlabs.bigbang.core.helpers.TestingTree;
-import com.xmartlabs.bigbang.core.rx.error.SingleObserverWithErrorHandling;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import io.reactivex.Single;
-import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,8 +22,15 @@ public class SingleMainObserversWithErrorHandlingTest {
   @SuppressWarnings("unchecked")
   public void setUp() {
     Timber.plant(testingTree);
-    RxJavaPlugins.setOnSingleSubscribe((single, singleObserver) ->
-        new SingleObserverWithErrorHandling<>(singleObserver, ObservableResult.ERROR_HANDLING_ACTION));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION);
+  }
+
+  private void setUpLog(@NonNull Consumer<? super Throwable> action) {
+    TraceurConfig config = new TraceurConfig(
+        true,
+        Traceur.AssemblyLogLevel.NONE,
+        action::accept);
+    Traceur.enableLogging(config);
   }
 
   @Test
@@ -67,10 +76,7 @@ public class SingleMainObserversWithErrorHandlingTest {
 
   @Test
   public void doesNotCallOnSuccessWhenErrorAndErrorInHookErrorHandle() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnSingleSubscribe((Single, SingleObserver) ->
-        new SingleObserverWithErrorHandling(SingleObserver, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
-
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
     Single.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
         .subscribe(o -> {});
@@ -90,9 +96,7 @@ public class SingleMainObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsIt() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnSingleSubscribe((Single, SingleObserver) ->
-        new SingleObserverWithErrorHandling(SingleObserver, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Single.error(Throwable::new)
         .subscribe(o -> {});
@@ -119,9 +123,7 @@ public class SingleMainObserversWithErrorHandlingTest {
 
   @Test
   public void catchesHookOnErrorCallbackExceptionAndLogsItAndCallsSingleOnError() {
-    //noinspection unchecked
-    RxJavaPlugins.setOnSingleSubscribe((Single, SingleObserver) ->
-        new SingleObserverWithErrorHandling(SingleObserver, ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE));
+    setUpLog(ObservableResult.ERROR_HANDLING_ACTION_WITH_ERROR_INSIDE);
 
     Single.error(Throwable::new)
         .doOnError(throwable -> TestingTree.log(ObservableResult.DO_ON_ERROR))
