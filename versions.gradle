@@ -31,7 +31,7 @@ ext {
         junit: '4.12',
         localDateBackport: '1.0.5',
         lombok: '1.16.10',
-        mockito: '1.10.19',
+        mockito: '2.8.47',
         okHttp: '3.8.0',
         okio: '1.11.0',
         parceler: '1.1.5',
