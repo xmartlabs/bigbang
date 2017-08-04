@@ -17,8 +17,8 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import kotlin.reflect.KClass
 
-/** [EntityDao] implementation using DbFlow ORM  */
-class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Property<Id>)
+/** [EntityDao] implementation using DbFlow ORM */
+open class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Property<Id>)
     : Controller(), EntityDao<Id, D, SQLOperator> where D : BaseModel, D: EntityWithId<Id> {
 
   @CheckResult
@@ -51,4 +51,5 @@ class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Propert
 
 fun <T : BaseModel> T.queryAction(action: (T) -> Any) = Single.fromCallable { action(this); this }
 
-fun <D : BaseModel, T : Collection<D>> T.queryAction(action: (D) -> Any) = Observable.fromIterable(this).flatMap { it.queryAction(action).toObservable() }.toList()
+fun <D : BaseModel, T : Collection<D>> T.queryAction(action: (D) -> Any) =
+    Observable.fromIterable(this).flatMap { it.queryAction(action).toObservable() }.toList()
