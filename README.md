@@ -25,7 +25,7 @@ Learn more about the project on the [BigBang Wiki](https://github.com/xmartlabs/
 The first step is to include the Core library into your project as a Gradle compile dependency:
 
 ```groovy
-compile 'com.xmartlabs.bigbang:core:0.1.52'
+compile 'com.xmartlabs.bigbang:core:0.1.54'
 ```
 
 Then, add jCenter to the buildscript repositories:
@@ -53,10 +53,10 @@ repositories {
 
 Then, include any of the following compile dependencies to add an specific module to your app:
 ```groovy
-compile 'com.xmartlabs.bigbang:dbflow:0.1.52'
-compile 'com.xmartlabs.bigbang:log-crashlytics:0.1.52'
-compile 'com.xmartlabs.bigbang:retrofit:0.1.52'
-compile 'com.xmartlabs.bigbang:ui:0.1.52'
+compile 'com.xmartlabs.bigbang:dbflow:0.1.54'
+compile 'com.xmartlabs.bigbang:log-crashlytics:0.1.54'
+compile 'com.xmartlabs.bigbang:retrofit:0.1.54'
+compile 'com.xmartlabs.bigbang:ui:0.1.54'
 ```
 
 The `dbflow` module is database related, while the `retrofit` module is service related.
