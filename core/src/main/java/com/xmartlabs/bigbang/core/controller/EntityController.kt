@@ -21,8 +21,9 @@ import io.reactivex.Single
  * *
  * @param <S> the [EntityServiceProvider] type
  */
-abstract class EntityController<Id, E : EntityWithId<Id>, in Condition, S : EntityServiceProvider<Id, E>>(
-    protected val entityDao: EntityDao<Id, E, Condition>,
+abstract class EntityController<Id, E : EntityWithId<Id>, in Condition, out S : EntityServiceProvider<Id, E>,
+    out DAO : EntityDao<Id, E, Condition>>(
+    protected val entityDao: DAO,
     protected val entityServiceProvider: S
 ) : Controller() {
 
