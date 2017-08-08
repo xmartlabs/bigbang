@@ -13,11 +13,11 @@ import kotlin.reflect.KClass
  */
 open class SessionController(private val sessionType: KClass<out SessionType>) : Controller() {
   companion object {
-    internal val PREFERENCES_KEY_SESSION = "session"
+    private val PREFERENCES_KEY_SESSION = "session"
   }
   
   @Inject
-  protected lateinit var sharedPreferencesController: SharedPreferencesController
+  internal lateinit var sharedPreferencesController: SharedPreferencesController
 
   /**
    * Retrieves the current stored [SessionType], if it exists.
@@ -25,7 +25,7 @@ open class SessionController(private val sessionType: KClass<out SessionType>) :
    * @return the current [SessionType], or `null` if none exists
    */
   open val abstractSession
-      get() = sharedPreferencesController.getEntity(getSessionKey(), sessionType)
+      get() = sharedPreferencesController.getEntity(PREFERENCES_KEY_SESSION, sessionType)
   /**
    * Returns whether the [SessionType] information is present on the device.
    *
@@ -33,7 +33,7 @@ open class SessionController(private val sessionType: KClass<out SessionType>) :
    */
   open val isSessionAlive
     @CheckResult
-    get() = sharedPreferencesController.hasEntity(getSessionKey())
+    get() = sharedPreferencesController.hasEntity(PREFERENCES_KEY_SESSION)
 
   /**
    * Stores the `session` into the [SharedPreferences].
@@ -43,10 +43,8 @@ open class SessionController(private val sessionType: KClass<out SessionType>) :
    * @param <S> the [SessionType] object to be stored
    * */
   open fun <S : SessionType> saveSession(session: S) =
-      sharedPreferencesController.saveEntity(getSessionKey(), session)
+      sharedPreferencesController.saveEntity(PREFERENCES_KEY_SESSION, session)
   
   /** Deletes the session information  */
-  open fun deleteSession() = sharedPreferencesController.deleteEntity(getSessionKey())
-  
-  open protected fun getSessionKey() = PREFERENCES_KEY_SESSION
+  open fun deleteSession() = sharedPreferencesController.deleteEntity(PREFERENCES_KEY_SESSION)
 }

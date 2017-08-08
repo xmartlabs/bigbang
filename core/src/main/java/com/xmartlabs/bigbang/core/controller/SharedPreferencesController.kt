@@ -47,7 +47,7 @@ constructor(private val gson: Gson, private val sharedPreferences: SharedPrefere
     val element = cachedEntities[key]
     return element?.let {
       @Suppress("UNCHECKED_CAST")
-      if (it.javaClass == type::class) this as? T else null
+      if (it::class == type::class) this as? T else null
     }
   }
 
