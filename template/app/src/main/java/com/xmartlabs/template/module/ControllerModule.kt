@@ -15,5 +15,5 @@ class ControllerModule {
 
   @Provides
   @Singleton
-  internal fun provideSessionController() = SessionController(Session::class)
+  internal fun provideSessionController() = SessionController(Session::class.java)
 }
