@@ -19,8 +19,7 @@ import javax.inject.Inject
 
 open class BaseProjectApplication : Application() {
   companion object {
-    @JvmStatic lateinit var context: BaseProjectApplication
-        private set
+    @JvmStatic val context = this
   }
 
   @Inject
@@ -32,10 +31,6 @@ open class BaseProjectApplication : Application() {
   @Inject
   internal lateinit var serviceErrorHandler: ServiceErrorHandler
   
-  init {
-    context = this
-  }
-
   override fun onCreate() {
     super.onCreate()
     initializeThreeTenABP()
@@ -52,7 +47,7 @@ open class BaseProjectApplication : Application() {
     Injector.inject(this)
   }
 
-  protected open fun createComponent(): ApplicationComponent = DaggerApplicationComponent.builder()
+  protected open fun createComponent() = DaggerApplicationComponent.builder()
       .coreAndroidModule(AndroidModule(this))
       .build()
 

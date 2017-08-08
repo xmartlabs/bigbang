@@ -50,7 +50,6 @@ open class OkHttpModule {
   open fun provideCache(context: Context): Cache {
     val httpCacheDir = File(context.externalCacheDir, "cache")
     if (!httpCacheDir.exists()) {
-
       httpCacheDir.mkdirs()
     }
     val httpCacheSize = calculateDiskCacheSize(httpCacheDir)

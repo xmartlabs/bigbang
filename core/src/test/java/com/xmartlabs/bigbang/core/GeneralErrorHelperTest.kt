@@ -32,8 +32,8 @@ class GeneralErrorHelperTest {
   fun multipleTimesSameException() {
     initializeLogger()
     Observable.fromCallable { this.generateException() }
-        .map { it.trim({ it <= ' ' }) }
-        .map { it.trim({ it <= ' ' }) }
+        .map { it.trim { it <= ' ' } }
+        .map { it.trim { it <= ' ' } }
         .subscribe()
     assertThat<Int>(calls, equalTo(1))
   }
@@ -42,12 +42,12 @@ class GeneralErrorHelperTest {
   fun multipleTimesDifferentExceptions() {
     initializeLogger()
     Observable.fromCallable { this.generateException() }
-        .map { it.trim({ it <= ' ' }) }
-        .map { it.trim({ it <= ' ' }) }
+        .map { it.trim { it <= ' ' } }
+        .map { it.trim { it <= ' ' } }
         .subscribe()
     Observable.fromCallable { this.generateException() }
-        .map { it.trim({ it <= ' ' }) }
-        .map { it.trim({ it <= ' ' }) }
+        .map { it.trim { it <= ' ' } }
+        .map { it.trim { it <= ' ' } }
         .subscribe()
     assertThat<Int>(calls, equalTo(2))
   }

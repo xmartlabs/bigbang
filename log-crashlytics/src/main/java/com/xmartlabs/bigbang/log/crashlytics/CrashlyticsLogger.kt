@@ -38,9 +38,9 @@ class CrashlyticsLogger : Logger {
       return
     }
   
-    val exceptionMessage = logInformation.toList().fold("") { acc, data ->
-      Crashlytics.setString(data.first, data.second)
-      acc + data.first + " = " + data.second + "\n"
+    val exceptionMessage = logInformation.toList().fold("") { acc, (first, second) ->
+      Crashlytics.setString(first, second)
+      "$acc$first = $second\n"
     }
   
     Crashlytics.logException(t ?: Exception(exceptionMessage))

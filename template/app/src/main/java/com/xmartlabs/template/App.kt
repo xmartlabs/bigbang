@@ -54,7 +54,7 @@ class App : Application() {
     initializeInjections()
     initializeDataBase()
     initializeRxErrorHandler()
-    initializeLogging()
+    initializeLogging() // Crashlytics initialization should go at the end.
   }
   
   private fun initializeInjections() {

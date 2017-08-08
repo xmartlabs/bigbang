@@ -7,9 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import org.hamcrest.Matcher
 
-/**
- * Copied from https://medium.com/@_rpiel/recyclerview-and-espresso-a-complicated-story-3f6f4179652e#.dm9yzv52b.
- */
+/** Copied from https://medium.com/@_rpiel/recyclerview-and-espresso-a-complicated-story-3f6f4179652e#.dm9yzv52b. */
 class RecyclerViewInteraction<A> private constructor(private val viewMatcher: Matcher<View>) {
   companion object {
     fun <A> onRecyclerView(viewMatcher: Matcher<View>) = RecyclerViewInteraction<A>(viewMatcher)

@@ -10,3 +10,8 @@ fun <T, R> T.ifException(block: (T) -> R, handler: (Exception) -> Unit) =
 /** Executes `block` and, if an exception is thrown, it's handled by `handler` */
 fun <T> handleException(handler: (Exception) -> Unit, block: () -> T?) =
     try { block() } catch (e: Exception) { handler(e); null }
+
+/** Executes the `block` if and only if the `condition` is false */
+fun unless(condition: Boolean, block: () -> Unit) {
+  if (!condition) { block() }
+}

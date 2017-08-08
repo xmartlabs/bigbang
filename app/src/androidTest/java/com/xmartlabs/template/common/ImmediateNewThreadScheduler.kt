@@ -20,13 +20,9 @@ class ImmediateNewThreadScheduler : Scheduler() {
       return schedule(SleepingAction(this, execTime, unit) { run.run() })
     }
 
-    override fun dispose() {
-      innerSubscription.cancel()
-    }
+    override fun dispose() = innerSubscription.cancel()
 
-    override fun isDisposed(): Boolean {
-      return innerSubscription.isCancelled
-    }
+    override fun isDisposed() = innerSubscription.isCancelled
   }
 }
 

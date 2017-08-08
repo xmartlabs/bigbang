@@ -22,7 +22,7 @@ open class GeneralFlowableSubscriber<T> constructor(templateView: TemplateView? 
     }
   }
 
-  override fun onComplete() {}
+  override fun onComplete() { }
 
   @StringRes
   open protected fun getErrorMessage(throwable: Throwable): Int? = null

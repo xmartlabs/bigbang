@@ -6,26 +6,17 @@ import android.view.View
 
 import org.hamcrest.Matcher
 
+import android.support.test.espresso.action.ViewActions as SupportViewActions
+
 object ViewActions {
-  fun nestedScrollViewScrollTo(): ViewAction {
-    return android.support.test.espresso.action.ViewActions.actionWithAssertions(
-        ScrollToActionForNestedScrollView())
-  }
+  fun nestedScrollViewScrollTo() = SupportViewActions.actionWithAssertions(ScrollToActionForNestedScrollView())
 
   // http://stackoverflow.com/a/33516360/5170805
-  fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>): ViewAction {
-    return object : ViewAction {
-      override fun getConstraints(): Matcher<View> {
-        return constraints
-      }
-
-      override fun getDescription(): String {
-        return action.description
-      }
-
-      override fun perform(uiController: UiController, view: View) {
-        action.perform(uiController, view)
-      }
-    }
+  fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>) = object : ViewAction {
+    override fun getConstraints() = constraints
+  
+    override fun getDescription() = action.description
+  
+    override fun perform(uiController: UiController, view: View) = action.perform(uiController, view)
   }
 }
