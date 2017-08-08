@@ -71,6 +71,7 @@ dependencies {
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
     compile 'com.github.square.picasso:picasso:8c16e8564e'
     compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    compile "com.github.xmartlabs:Traceur:${libraryVersion.traceur}"
     compile "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
     compile "com.google.dagger:dagger:${libraryVersion.dagger}"
     compile "com.google.code.gson:gson:${libraryVersion.gson}"
@@ -78,13 +79,13 @@ dependencies {
     compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
     compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
     compile "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
-    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
+    compile 'com.wdullaer:materialdatetimepicker:3.2.2'
     compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
     provided "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     provided "org.projectlombok:lombok:${libraryVersion.lombok}"
     testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.2') {
+    testCompile ('org.threeten:threetenbp:1.3.5') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }
