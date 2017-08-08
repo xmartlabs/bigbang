@@ -13,6 +13,7 @@ import kotlin.reflect.KClass
  */
 open class SessionController(private val sessionType: KClass<out SessionType>) : Controller() {
   companion object {
+    @JvmStatic
     protected val PREFERENCES_KEY_SESSION = "session"
   }
   
