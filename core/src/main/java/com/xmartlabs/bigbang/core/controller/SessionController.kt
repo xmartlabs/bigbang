@@ -13,11 +13,11 @@ import kotlin.reflect.KClass
  */
 open class SessionController(private val sessionType: KClass<out SessionType>) : Controller() {
   companion object {
-    private val PREFERENCES_KEY_SESSION = "session"
+    protected val PREFERENCES_KEY_SESSION = "session"
   }
   
   @Inject
-  internal lateinit var sharedPreferencesController: SharedPreferencesController
+  protected lateinit var sharedPreferencesController: SharedPreferencesController
 
   /**
    * Retrieves the current stored [SessionType], if it exists.
@@ -31,7 +31,7 @@ open class SessionController(private val sessionType: KClass<out SessionType>) :
    *
    * @return whether or not the [SessionType] information exists
    */
-  open val isSessionAlive: Boolean
+  open val isSessionAlive
     @CheckResult
     get() = sharedPreferencesController.hasEntity(PREFERENCES_KEY_SESSION)
 
