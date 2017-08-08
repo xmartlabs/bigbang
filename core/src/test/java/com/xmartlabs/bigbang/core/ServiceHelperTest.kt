@@ -1,16 +1,13 @@
 package com.xmartlabs.bigbang.core
 
 import com.xmartlabs.bigbang.core.helper.ServiceHelper
-
-import org.junit.Before
-import org.junit.Test
-
 import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
-
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertThat
+import org.junit.Before
+import org.junit.Test
 
 class ServiceHelperTest {
   companion object {

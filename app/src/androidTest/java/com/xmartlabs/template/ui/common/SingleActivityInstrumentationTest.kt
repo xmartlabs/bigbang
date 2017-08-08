@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.intent.rule.IntentsTestRule
