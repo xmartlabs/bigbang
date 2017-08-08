@@ -31,7 +31,7 @@ constructor(private val gson: Gson, private val sharedPreferences: SharedPrefere
    */
   @CheckResult
   open fun <T : Any> getEntity(key: String, type: KClass<out T>) =
-    getEntityFromCachedElements(key, type) ?: getEntityFromSharedPreferences(key, type)
+    getEntityFromCachedElements(key, type) ?: getEntityFromSharedPreferences(key, type::class.java)
 
   /**
    * Retrieves the current stored [T] entity, from the cache.
@@ -61,10 +61,9 @@ constructor(private val gson: Gson, private val sharedPreferences: SharedPrefere
    * @return the current [T] entity if exists.
    */
   @CheckResult
-  @Suppress("UNCHECKED_CAST")
-  private fun <T : Any> getEntityFromSharedPreferences(key: String, type: KClass<out T>): T? {
+  private fun <T : Any> getEntityFromSharedPreferences(key: String, type: Class<out T>): T? {
     return sharedPreferences.getString(key, null)?.let {
-      try { gson.fromJson(it, type::class.java) as? T } catch (e: Exception) { null }
+      try { gson.fromJson(it, type) } catch (e: Exception) { null }
     }
   }
 
