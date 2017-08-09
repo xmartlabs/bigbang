@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Build;
 import android.os.StatFs;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.moczul.ok2curl.CurlInterceptor;
+import com.moczul.ok2curl.logger.Loggable;
 import com.xmartlabs.bigbang.core.model.BuildInfo;
 
 import java.io.File;
@@ -71,7 +73,7 @@ public class OkHttpModule {
       loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
       clientBuilder.addInterceptor(loggingInterceptor);
 
-      CurlInterceptor curlInterceptor = new CurlInterceptor();
+      CurlInterceptor curlInterceptor = new CurlInterceptor(message -> Log.v("Ok2Curl", message));
       clientBuilder.addInterceptor(curlInterceptor);
     }
   }
