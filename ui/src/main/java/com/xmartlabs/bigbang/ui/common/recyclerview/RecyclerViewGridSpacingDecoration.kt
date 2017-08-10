@@ -95,10 +95,10 @@ class RecyclerViewGridSpacingDecoration : RecyclerView.ItemDecoration() {
       val lastColumnRightSpacing = this.lastColumnRightSpacing ?: itemSpacing
       val lastRowBottomSpacing = this.lastRowBottomSpacing ?: itemSpacing
   
-      outRect.top = if (isFirstRow(position, spanCount, spanSizeLookup)) firstRowTopSpacing else itemSpacing
-      outRect.left = if (isFirstColumn(position, spanCount, spanSizeLookup)) firstColumnLeftSpacing else itemSpacing
-      outRect.right = if (isLastColumn(position, spanCount, numberOfItems, spanSizeLookup)) lastColumnRightSpacing else itemSpacing
-      outRect.bottom = if (isLastRow(position, spanCount, numberOfItems, spanSizeLookup)) lastRowBottomSpacing else itemSpacing
+      outRect.top = if (isFirstRow(position, spanCount, spanSizeLookup)) firstRowTopSpacing else itemSpacing / 2
+      outRect.left = if (isFirstColumn(position, spanCount, spanSizeLookup)) firstColumnLeftSpacing else itemSpacing / 2
+      outRect.right = if (isLastColumn(position, spanCount, numberOfItems, spanSizeLookup)) lastColumnRightSpacing else itemSpacing / 2
+      outRect.bottom = if (isLastRow(position, spanCount, numberOfItems, spanSizeLookup)) lastRowBottomSpacing else itemSpacing / 2
     }
   }
 
