@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /** Returns `this` number of milliseconds since the epoch */
-val LocalDate.epockMilli
+val LocalDate.epochMilli
   get() = this.toInstant().toEpochMilli()
 
 /** Returns a full date formatter (yyyy-MMM-dd HH:mm:ss) */

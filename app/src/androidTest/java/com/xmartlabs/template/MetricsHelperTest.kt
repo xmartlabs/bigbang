@@ -5,7 +5,7 @@ import android.support.annotation.DimenRes
 import android.support.annotation.Dimension
 import android.support.test.runner.AndroidJUnit4
 import android.util.DisplayMetrics
-import com.xmartlabs.bigbang.core.extensions.*
+import com.xmartlabs.bigbang.core.extensions.metric
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule

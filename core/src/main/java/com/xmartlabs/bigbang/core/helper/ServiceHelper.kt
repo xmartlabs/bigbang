@@ -47,7 +47,6 @@ object ServiceHelper {
    */
   fun addParameterNameToEndOfUrl(url: String, parameterId: String) = "$url/{$parameterId}"
 
-
   /**
    * Returns the string representation of the service response.
    * The buffer is cloned in order to be able to be consumed again.

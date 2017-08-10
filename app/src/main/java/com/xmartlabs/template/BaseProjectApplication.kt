@@ -35,7 +35,7 @@ open class BaseProjectApplication : Application() {
   init {
     context = this
   }
-
+  
   override fun onCreate() {
     super.onCreate()
     initializeThreeTenABP()
@@ -52,7 +52,7 @@ open class BaseProjectApplication : Application() {
     Injector.inject(this)
   }
 
-  protected open fun createComponent(): ApplicationComponent = DaggerApplicationComponent.builder()
+  protected open fun createComponent() = DaggerApplicationComponent.builder()
       .coreAndroidModule(AndroidModule(this))
       .build()
 
