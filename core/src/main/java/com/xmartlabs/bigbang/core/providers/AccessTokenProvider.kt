@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Provides the access token in order to be added in the service requests.
  * It's used by the [SessionInterceptor].
  */
-class AccessTokenProvider : EntityProvider<String> {
+open class AccessTokenProvider : EntityProvider<String> {
   companion object {
     private val AUTH_TOKEN_HEADER_KEY = "session"
   }
