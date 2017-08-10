@@ -19,7 +19,8 @@ import javax.inject.Inject
 
 open class BaseProjectApplication : Application() {
   companion object {
-    @JvmStatic val context = this
+    @JvmStatic lateinit var context: BaseProjectApplication
+        private set
   }
 
   @Inject
@@ -30,6 +31,10 @@ open class BaseProjectApplication : Application() {
   internal lateinit var loggerTree: LoggerTree
   @Inject
   internal lateinit var serviceErrorHandler: ServiceErrorHandler
+  
+  init {
+    context = this
+  }
   
   override fun onCreate() {
     super.onCreate()

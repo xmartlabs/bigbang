@@ -12,6 +12,4 @@ fun <T> handleException(handler: (Exception) -> Unit, block: () -> T?) =
     try { block() } catch (e: Exception) { handler(e); null }
 
 /** Executes the `block` if and only if the `condition` is false */
-fun unless(condition: Boolean, block: () -> Unit) {
-  if (!condition) { block() }
-}
+fun unless(condition: Boolean, block: () -> Unit) = if (!condition) block() else Unit
