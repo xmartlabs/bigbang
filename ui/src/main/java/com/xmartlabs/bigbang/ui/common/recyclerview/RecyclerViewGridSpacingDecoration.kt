@@ -38,25 +38,25 @@ import java.util.*
 class RecyclerViewGridSpacingDecoration : RecyclerView.ItemDecoration() {
   /** Top spacing for the first row. If null, [.itemSpacing] will be used.  */
   @Dimension(unit = Dimension.PX)
-  private val firstRowTopSpacing: Int? = null
+  var firstRowTopSpacing: Int? = null
   /** Bottom spacing for the last row. If null, [.itemSpacing] will be used.  */
   @Dimension(unit = Dimension.PX)
-  private val lastRowBottomSpacing: Int? = null
+  var lastRowBottomSpacing: Int? = null
   /** Left spacing for the first column. If null, [.itemSpacing] will be used.  */
   @Dimension(unit = Dimension.PX)
-  private val firstColumnLeftSpacing: Int? = null
+  var firstColumnLeftSpacing: Int? = null
   /** Right spacing for the last column. If null, [.itemSpacing] will be used.  */
   @Dimension(unit = Dimension.PX)
-  private val lastColumnRightSpacing: Int? = null
+  var lastColumnRightSpacing: Int? = null
   /**
    * Used to manually set the offset for every item.
    * This will override the automatic calculations.
    * The [Rect] top, right, bottom, left parameters must be modified to set the offset.
    */
-  private val setItemOffsetConsumer: ((Rect, RecyclerView) -> Unit)? = null
+  var itemOffsetConsumer: ((Rect, RecyclerView) -> Unit)? = null
   /** The default spacing for every item (top, right, bottom, left), unless one of the above spacings apply.  */
   @Dimension(unit = Dimension.PX)
-  private val itemSpacing: Int = 0
+  var itemSpacing: Int = 0
 
   private val firstColumns = ArrayList<Int>()
   private var biggestFirstColumn: Int = 0
@@ -69,7 +69,7 @@ class RecyclerViewGridSpacingDecoration : RecyclerView.ItemDecoration() {
     }
     
     val layoutManager = parent.layoutManager as GridLayoutManager
-    setItemOffsetConsumer?.invoke(outRect, parent) ?: setOffsetForItem(outRect, view, parent, layoutManager)
+    itemOffsetConsumer?.invoke(outRect, parent) ?: setOffsetForItem(outRect, view, parent, layoutManager)
   }
 
   /**
@@ -89,7 +89,7 @@ class RecyclerViewGridSpacingDecoration : RecyclerView.ItemDecoration() {
     val numberOfItems = recyclerView.adapter.itemCount
     val spanSizeLookup = gridLayoutManager.spanSizeLookup
   
-    setItemOffsetConsumer?.invoke(outRect, recyclerView).orDo {
+    itemOffsetConsumer?.invoke(outRect, recyclerView).orDo {
       val firstRowTopSpacing = this.firstRowTopSpacing ?: itemSpacing
       val firstColumnLeftSpacing = this.firstColumnLeftSpacing ?: itemSpacing
       val lastColumnRightSpacing = this.lastColumnRightSpacing ?: itemSpacing
