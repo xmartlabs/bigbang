@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.NoMatchingViewException
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.intent.rule.IntentsTestRule
@@ -26,10 +25,11 @@ import timber.log.Timber
 @RunWith(AndroidJUnit4::class)
 abstract class SingleActivityInstrumentationTest<T : Activity> : BaseInstrumentationTest() {
   @Rule
-  @JvmField var activityTestRule = createTestRule()
-
-  protected abstract val activityClass: Class<T>
-
+  @JvmField
+  var activityTestRule = createTestRule()
+  
+  protected val defaultIntent: Intent? = null
+  
   protected fun createTestRule(): ActivityTestRule<T> {
     return IntentsTestRule(activityClass, true, false)
   }
@@ -52,10 +52,7 @@ abstract class SingleActivityInstrumentationTest<T : Activity> : BaseInstrumenta
   protected fun launchActivityWithDefaultIntent() {
     activityTestRule.launchActivity(defaultIntent)
   }
-
-  protected val defaultIntent: Intent?
-    get() = null
-
+  
   protected fun allowPermissionsIfNeeded() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       val device = UiDevice.getInstance(instrumentation)
@@ -69,4 +66,6 @@ abstract class SingleActivityInstrumentationTest<T : Activity> : BaseInstrumenta
       }
     }
   }
+  
+  protected abstract val activityClass: Class<T>
 }

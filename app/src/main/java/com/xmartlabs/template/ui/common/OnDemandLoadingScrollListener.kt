@@ -3,9 +3,7 @@ package com.xmartlabs.template.ui.common
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
-/**
- * An OnDemandLoadingScrollListener for recycler view pagination
- */
+/** An OnDemandLoadingScrollListener for recycler view pagination */
 abstract class OnDemandLoadingScrollListener : RecyclerView.OnScrollListener() {
   companion object {
     val VISIBLE_THRESHOLD_DEFAULT = 5

@@ -7,5 +7,5 @@ import com.xmartlabs.template.model.BuildInfo
 import com.xmartlabs.bigbang.core.model.BuildInfo as CoreBuildInfo
 
 class AndroidModule(application: Application) : CoreAndroidModule(application) {
-  override fun provideBuildInformation(): CoreBuildInfo = BuildInfo()
+  override fun provideBuildInformation(): CoreBuildInfo = BuildInfo
 }
