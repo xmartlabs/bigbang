@@ -8,7 +8,7 @@ import java.util.*
  * A Base RecyclerViewAdapter with already implemented functions such as
  * setting, removing, adding items, getting its count among others.
  */
-abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.ViewHolder> : BaseRecyclerViewAdapter(),
+abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.ViewHolder> : BaseRecyclerViewAdapter(),
     RecycleItemType<T, VH> {
   /**
    * Sets the items data for the recycler view and notifies any registered observers that the data set has
@@ -17,7 +17,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.V
    * @param items the items that will be recycler view data.
    */
   @MainThread
-  fun setItems(items: List<Any>) {
+  fun setItems(items: List<T>) {
     setItems(this, items)
   }
 
@@ -27,7 +27,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.V
    * @param items array of items that will be the data for the recycler view.
    */
   @MainThread
-  fun setItems(items: Array<Any>) {
+  fun setItems(items: Array<T>) {
     setItems(Arrays.asList(*items))
   }
 
@@ -39,7 +39,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.V
    * @return if item was successfully added
    */
   @MainThread
-  fun addItems(items: List<Any>): Boolean {
+  fun addItems(items: List<T>): Boolean {
     return addItems(this, items)
   }
 
@@ -48,7 +48,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.V
    *
    * @param item The item to be added.
    */
-  fun addItem(item: Any) {
+  fun addItem(item: T) {
     addItem(this, item)
   }
 
@@ -62,7 +62,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.V
    * *
    * @return if items was successfully added.
    */
-  fun addItems(index: Int, items: List<Any>): Boolean {
+  fun addItems(index: Int, items: List<T>): Boolean {
     return addItems(index, this, items)
   }
 
@@ -77,7 +77,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<in T : Any, VH : RecyclerView.V
    * *
    * @param areContentTheSame A function which checks that the content of two items are the same.
    */
-  protected fun setItems(newItems: List<Any>, areItemsTheSame: (Any, Any) -> Boolean,
+  protected fun setItems(newItems: List<T>, areItemsTheSame: (Any, Any) -> Boolean,
                          areContentTheSame: (Any, Any) -> Boolean) {
     setItems(this, newItems, areItemsTheSame, areContentTheSame)
   }
