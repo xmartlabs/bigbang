@@ -23,7 +23,7 @@ open class OkHttpModule {
     const val CLIENT_PICASSO = "Picasso"
     const val CLIENT_SERVICE = "Service"
   }
-  
+
   @Named(CLIENT_SERVICE)
   @Provides
   @Singleton
@@ -62,7 +62,7 @@ open class OkHttpModule {
       loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
       clientBuilder.addInterceptor(loggingInterceptor)
 
-      val curlInterceptor = CurlInterceptor()
+      val curlInterceptor = CurlInterceptor { message -> Timber.tag("Ok2Curl").d(message) }
       clientBuilder.addInterceptor(curlInterceptor)
     }
   }
@@ -73,13 +73,9 @@ open class OkHttpModule {
 
     try {
       val statFs = StatFs(dir.absolutePath)
-      val blockCount: Long
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-        blockCount = statFs.blockCountLong
-      } else {
-        @Suppress("DEPRECATION")
-        blockCount = statFs.blockCount.toLong()
-      }
+      @Suppress("DEPRECATION")
+      val blockCount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
+        statFs.blockCountLong else statFs.blockCount.toLong()
       val available = blockCount * blockCount
       // Target 2% of the total space.
       size = available / 50
