@@ -24,7 +24,9 @@ class AuthController : Controller() {
         .applyIoSchedulers()
         .filter { authResponse -> authResponse.accessToken != null }
         .toSingle()
-        .doOnSuccess { sessionController.session = Session()  }
-        .doOnSuccess { accessTokenProvider.updateEntity(it.accessToken ?: "") }
-        .map { sessionController.session!! }
+        .map { Session(it.accessToken) }
+        .doOnSuccess {
+          sessionController.session = it
+          accessTokenProvider.updateEntity(it.accessToken ?: "")
+        }
 }

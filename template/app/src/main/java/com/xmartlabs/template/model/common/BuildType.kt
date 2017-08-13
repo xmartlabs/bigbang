@@ -1,6 +1,6 @@
 package com.xmartlabs.template.model.common
 
-import java.util.*
+import java.util.Locale
 
 enum class BuildType {
   STAGING,

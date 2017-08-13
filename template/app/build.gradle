@@ -15,6 +15,7 @@ apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "io.gitlab.arturbosch.detekt"
 
 def getSignInformation = { keystorePath, keystorePropertyPath ->
     def keyStore = file(keystorePath)
@@ -182,4 +183,14 @@ dependencies {
     kapt "org.parceler:parceler:${PARCELER_VERSION}"
     provided 'javax.annotation:jsr250-api:1.0'
     testCompile 'junit:junit:4.12'
+}
+
+detekt {
+    version = "1.0.0.RC2"
+    profile("main") {
+        input = "$projectDir/src/main/"
+        config = "$projectDir/detekt-config.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+        output = "$projectDir/../reports/detekt"
+    }
 }
