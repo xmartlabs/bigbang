@@ -57,7 +57,7 @@ open class OkHttpModule {
   }
 
   private fun addLoggingInterceptor(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo) {
-    if (buildInfo.isDebug && !buildInfo.isProduction) {
+    if (buildInfo.isDebug) {
       val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.tag("OkHttp").d(message) }
       loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
       clientBuilder.addInterceptor(loggingInterceptor)
