@@ -73,9 +73,13 @@ open class OkHttpModule {
 
     try {
       val statFs = StatFs(dir.absolutePath)
-      @Suppress("DEPRECATION")
-      val blockCount = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
-        statFs.blockCountLong else statFs.blockCount.toLong()
+      val blockCount: Long
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+        blockCount = statFs.blockCountLong
+      } else {
+        @Suppress("DEPRECATION")
+        blockCount = statFs.blockCount.toLong()
+      }
       val available = blockCount * blockCount
       // Target 2% of the total space.
       size = available / 50
