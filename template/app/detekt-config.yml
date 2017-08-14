@@ -46,7 +46,7 @@ potential-bugs:
     active: true
   LateinitUsage:
     active: true
-    excludeAnnotatedProperties: 'javax.inject.Inject,butterknife.*,com.hannesdorfmann.fragmentargs.annotation.Arg'
+    excludeAnnotatedProperties: 'javax.inject.Inject,com.hannesdorfmann.fragmentargs.annotation.Arg,com.f2prateek.dart.InjectExtra'
   UnsafeCallOnNullableType:
     active: true
   UnsafeCast:

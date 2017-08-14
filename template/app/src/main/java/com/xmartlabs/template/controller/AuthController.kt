@@ -25,8 +25,5 @@ class AuthController : Controller() {
         .filter { authResponse -> authResponse.accessToken != null }
         .toSingle()
         .map { Session(it.accessToken) }
-        .doOnSuccess {
-          sessionController.session = it
-          accessTokenProvider.updateEntity(it.accessToken ?: "")
-        }
+        .doOnSuccess { sessionController.session = it }
 }
