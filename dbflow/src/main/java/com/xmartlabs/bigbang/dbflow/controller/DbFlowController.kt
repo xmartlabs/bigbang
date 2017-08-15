@@ -12,6 +12,7 @@ import com.xmartlabs.bigbang.core.controller.Controller
 import com.xmartlabs.bigbang.core.controller.EntityDao
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.model.EntityWithId
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import kotlin.reflect.KClass
@@ -30,12 +31,12 @@ open class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Pr
           .flatMap { newEntities.queryAction(BaseModel::save) }
 
   @CheckResult
-  override fun getEntity(id: Id) =
-      select.from(modelClass.java).where(propertyId.eq(id)).rx().queryStreamResults().firstElement()
+  override fun getEntity(id: Id): Maybe<D> =
+      Maybe.fromCallable { select.from(modelClass.java).where(propertyId.eq(id)).querySingle() }
 
   @CheckResult
-  override fun getEntity(vararg conditions: SQLOperator) =
-      select.from(modelClass.java).where(*conditions).rx().queryStreamResults().firstElement()
+  override fun getEntity(vararg conditions: SQLOperator): Maybe<D> =
+      Maybe.fromCallable { select.from(modelClass.java).where(*conditions).querySingle() }
 
   @CheckResult
   override fun createEntity(entity: D) = entity.queryAction(BaseModel::save).observeOnIo()
