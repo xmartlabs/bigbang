@@ -91,7 +91,7 @@ abstract class EntityController<Id, E : EntityWithId<Id>, in Condition, out S : 
   @CheckResult
   protected open fun getServiceEntity(id: Id, serviceCall: (Id) -> Single<E>) =
       serviceCall(id).applyIoSchedulers()
-          .doOnSuccess { entityDao.createEntity(it) }
+          .flatMap { entityDao.createEntity(it) }
 
   /**
    * Retrieves the entity whose primary key value equals `id` from the service and stores the result in db.

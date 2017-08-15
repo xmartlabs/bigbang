@@ -14,7 +14,6 @@ import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.model.EntityWithId
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import kotlin.reflect.KClass
 
 /** [EntityDao] implementation using DbFlow ORM */
@@ -31,22 +30,25 @@ open class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Pr
           .flatMap { newEntities.queryAction(BaseModel::save) }
 
   @CheckResult
-  override fun getEntity(id: Id) = select.from(modelClass.java).where(propertyId.eq(id)).rx().queryStreamResults().firstElement()
+  override fun getEntity(id: Id) =
+      select.from(modelClass.java).where(propertyId.eq(id)).rx().queryStreamResults().firstElement()
 
   @CheckResult
-  override fun getEntity(vararg conditions: SQLOperator) = select.from(modelClass.java).where(*conditions).rx().queryStreamResults().firstElement()
+  override fun getEntity(vararg conditions: SQLOperator) =
+      select.from(modelClass.java).where(*conditions).rx().queryStreamResults().firstElement()
 
   @CheckResult
-  override fun createEntity(entity: D) = entity.queryAction(BaseModel::save).observeOn(Schedulers.io())
+  override fun createEntity(entity: D) = entity.queryAction(BaseModel::save).observeOnIo()
 
   @CheckResult
-  override fun updateEntity(entity: D) = entity.queryAction(BaseModel::update).observeOn(Schedulers.io())
+  override fun updateEntity(entity: D) = entity.queryAction(BaseModel::update).observeOnIo()
 
   @CheckResult
-  override fun deleteEntityWithId(entityId: Id) = delete(modelClass).where(propertyId.eq(entityId)).rx().execute().toCompletable().observeOn(Schedulers.io())
+  override fun deleteEntityWithId(entityId: Id) =
+      delete(modelClass).where(propertyId.eq(entityId)).rx().execute().toCompletable().observeOnIo()
 
   @CheckResult
-  override fun deleteEntity(entity: D) = entity.queryAction(BaseModel::delete).toCompletable().observeOn(Schedulers.io())
+  override fun deleteEntity(entity: D) = entity.queryAction(BaseModel::delete).toCompletable().observeOnIo()
 }
 
 fun <T : BaseModel> T.queryAction(action: (T) -> Any) = Single.fromCallable { action(this); this }
