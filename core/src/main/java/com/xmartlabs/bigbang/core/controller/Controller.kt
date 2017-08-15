@@ -13,11 +13,11 @@ import io.reactivex.schedulers.Schedulers
  */
 @Suppress("UNCHECKED_CAST")
 abstract class Controller protected constructor() {
-  private val completableIoTransformer = CompletableTransformer { it.subscribeOnIo().observeOnMain() }
-  private val flowableIoTransformer = FlowableTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
-  private val maybeIoTransformer = MaybeTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
-  private val observableIoTransformer = ObservableTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
-  private val singleIoTransformer = SingleTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
+  protected val completableIoTransformer = CompletableTransformer { it.subscribeOnIo().observeOnMain() }
+  protected val flowableIoTransformer = FlowableTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
+  protected val maybeIoTransformer = MaybeTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
+  protected val observableIoTransformer = ObservableTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
+  protected val singleIoTransformer = SingleTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
 
   init {
     Injector.inject(this)
