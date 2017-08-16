@@ -24,9 +24,10 @@ import javax.inject.Inject
 
 class App : Application() {
   companion object {
+    @Suppress("LateinitUsage")
     @JvmStatic lateinit var context: App
   }
-  
+
   @Inject
   internal lateinit var buildInfo: BuildInfo
   @Inject
@@ -35,19 +36,19 @@ class App : Application() {
   internal lateinit var loggerTree: LoggerTree
   @Inject
   internal lateinit var serviceErrorHandler: ServiceErrorHandler
-  
+
   init {
     context = this
   }
-  
+
   override fun attachBaseContext(base: Context) {
     super.attachBaseContext(base)
-    
+
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || !BuildConfig.DEBUG) {
       MultiDex.install(this)
     }
   }
-  
+
   override fun onCreate() {
     super.onCreate()
     initializeThreeTenABP()
@@ -56,37 +57,35 @@ class App : Application() {
     initializeRxErrorHandler()
     initializeLogging() // Crashlytics initialization should go at the end.
   }
-  
+
   private fun initializeInjections() {
     val component = createComponent()
     Injector.instance.bullet = createBullet(component)
     Injector.inject(this)
   }
-  
-  private fun createComponent(): ApplicationComponent {
-    return DaggerApplicationComponent.builder()
-        .coreAndroidModule(AndroidModule(this))
-        .restServiceModule(RestServiceModule())
-        .okHttpModule(OkHttpModule())
-        .serviceGsonModule(ServiceGsonModule())
-        .build()
-  }
+
+  private fun createComponent(): ApplicationComponent = DaggerApplicationComponent.builder()
+      .coreAndroidModule(AndroidModule(this))
+      .restServiceModule(RestServiceModule())
+      .okHttpModule(OkHttpModule())
+      .serviceGsonModule(ServiceGsonModule())
+      .build()
 
   private fun createBullet(component: ApplicationComponent) = BulletApplicationComponent(component)
-  
+
   private fun initializeDataBase() = FlowManager.init(FlowConfig.Builder(this).build())
-  
+
   private fun initializeThreeTenABP() = AndroidThreeTen.init(this)
-  
+
   private fun initializeLogging() {
     //TODO: Configure Fabric and add Fabric apiSecret and apiKey properties file in the root folder
     loggerTree.addLogger(CrashlyticsLogger().initialize(buildInfo, this))
     Timber.plant(loggerTree)
   }
-  
+
   private fun initializeRxErrorHandler() {
     serviceErrorHandler.handleServiceErrors()
-    
+
     val level = if (BuildConfig.DEBUG) Traceur.AssemblyLogLevel.SHOW_ALL else Traceur.AssemblyLogLevel.NONE
     val config = TraceurConfig(true, level) { generalErrorHelper.generalErrorAction(it) }
     Traceur.enableLogging(config)

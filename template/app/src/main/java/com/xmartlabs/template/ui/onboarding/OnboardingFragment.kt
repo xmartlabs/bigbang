@@ -14,14 +14,14 @@ import javax.inject.Inject
 @FragmentWithArgs
 class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>(), OnboardingView {
   companion object {
-    private val ALPHA_INVISIBLE = 0.01f
-    private val ALPHA_OPAQUE = 1.0f
-    private val ALPHA_START_DELAY_MILLISECONDS: Long = 100
+    private const val ALPHA_INVISIBLE = 0.01f
+    private const val ALPHA_OPAQUE = 1.0f
+    private const val ALPHA_START_DELAY_MILLISECONDS: Long = 100
   }
-  
+
   @Inject
   override lateinit var presenter: OnboardingPresenter
-  
+
   override val layoutResId = R.layout.fragment_onboarding
 
   override fun createPageAdapter() = OnboardingPageAdapter(childFragmentManager)
@@ -36,6 +36,7 @@ class OnboardingFragment : TemplateFragment<OnboardingView, OnboardingPresenter>
   }
 
   override fun setSkipButtonVisibility(visible: Boolean) {
+    @Suppress("ComplexCondition")
     if (visible && skipButton.alpha == ALPHA_OPAQUE || !visible && skipButton.alpha == View.INVISIBLE.toFloat()) {
       return
     }

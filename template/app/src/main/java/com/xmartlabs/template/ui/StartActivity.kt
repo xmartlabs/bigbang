@@ -12,10 +12,10 @@ import javax.inject.Inject
 class StartActivity : BaseAppCompatActivity() {
   @Inject
   internal lateinit var sessionController: SessionController
-  
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-  
+
     val session = sessionController.session
     if (session == null) {
       //TODO: handle on start activity no session

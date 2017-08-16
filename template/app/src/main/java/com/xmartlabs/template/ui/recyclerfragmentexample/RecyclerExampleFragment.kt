@@ -6,11 +6,15 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.template.R
 import com.xmartlabs.template.ui.common.TemplateFragment
 import kotlinx.android.synthetic.main.fragment_recycler_example.*
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
 
 @FragmentWithArgs
 class RecyclerExampleFragment : TemplateFragment<RecyclerExampleView, RecyclerExamplePresenter>(), RecyclerExampleView {
+  companion object {
+    private const val LIST_COUNT = 39
+  }
+
   @Inject
   override lateinit var presenter: RecyclerExamplePresenter
 
@@ -18,7 +22,7 @@ class RecyclerExampleFragment : TemplateFragment<RecyclerExampleView, RecyclerEx
   override val layoutResId = R.layout.fragment_recycler_example
 
   override fun setup() {
-    val strings = listOf(1..39)
+    val strings = listOf(1..LIST_COUNT)
         .flatten()
         .map { String.format(Locale.getDefault(), "Item %d", it) }
 
