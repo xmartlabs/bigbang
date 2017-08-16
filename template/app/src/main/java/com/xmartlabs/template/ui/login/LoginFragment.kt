@@ -14,18 +14,18 @@ import javax.inject.Inject
 class LoginFragment : TemplateFragment<LoginView, LoginPresenter>(), LoginView {
   @Inject
   override lateinit var presenter: LoginPresenter
-  
+
   override val layoutResId = R.layout.fragment_login
-  
+
   override fun setup() {
     loginButton.setOnClickListener { presenter.loginButtonClicked() }
   }
-  
+
   override fun setIsLoading(loading: Boolean) {
     loginButton.visibility = if (loading) View.GONE else View.VISIBLE
     progressBar.visibility = if (loading) View.VISIBLE else View.GONE
   }
-  
+
   override fun gotoRecyclerExampleActivity() {
     val intent = Henson.with(App.context)
         .gotoRecyclerExampleActivity()

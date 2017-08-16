@@ -22,8 +22,8 @@ open class GeneralSingleSubscriber<T> constructor(templateView: TemplateView? = 
   override fun onSuccess(t: T) { }
 
   @StringRes
-  open protected fun getErrorMessage(throwable: Throwable): Int? = null
+  protected open fun getErrorMessage(throwable: Throwable): Int? = null
 
   @CheckResult
-  open protected fun alertOnError(throwable: Throwable) = true
+  protected open fun alertOnError(throwable: Throwable) = true
 }
