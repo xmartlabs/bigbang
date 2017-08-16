@@ -6,20 +6,16 @@ import java.util.*
 @Suppress("unused")
 open class ParcelerEnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelConverter<T> {
   override fun toParcel(input: T?, parcel: android.os.Parcel) {
-    if (input == null) {
-      parcel.writeInt(-1)
-    } else {
-      parcel.writeInt(1)
-      parcel.writeInt(input.ordinal)
-    }
+    parcel.writeInt(input?.ordinal ?: -1)
   }
 
   override fun fromParcel(parcel: android.os.Parcel): T? {
-    if (parcel.readInt() == -1) {
+    val ordinal = parcel.readInt()
+    if (ordinal == -1) {
       return null
     }
     return EnumSet.allOf(clazz)
-        .filter { it.ordinal == parcel.readInt() }
+        .filter { it.ordinal == ordinal }
         .firstOrNull()
   }
 }
