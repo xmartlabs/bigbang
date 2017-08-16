@@ -25,8 +25,10 @@ test:
     - ./gradlew lintAllVersionsProductionDebug
     - ./gradlew lintAllVersionsStagingDebug
     - ./gradlew lintAllVersionsStagingRelease
-    - ./template/gradlew detektCheck
-    - ./template/gradlew detektFormat
+    - ./gradlew -p template detektCheck
+    - ./gradlew -p template detektFormat
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - mkdir -p $CIRCLE_TEST_REPORTS/detekt/
+    - find . -type f -regex ".*/templete/build/reports/detekt/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/detekt/ \;
