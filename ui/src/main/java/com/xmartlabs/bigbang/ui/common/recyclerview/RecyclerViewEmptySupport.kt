@@ -80,7 +80,7 @@ class RecyclerViewEmptySupport @JvmOverloads constructor(
   private fun initializeEmptyView() {
     if (emptyViewId > 0) {
       post {
-        rootView.findViewById(emptyViewId)?.let { view ->
+        rootView.findViewById<View>(emptyViewId)?.let { view ->
           emptyView = view
           showCorrectView()
         }
