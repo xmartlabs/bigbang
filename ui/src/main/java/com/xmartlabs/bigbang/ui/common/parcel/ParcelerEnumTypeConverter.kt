@@ -4,7 +4,7 @@ import org.parceler.ParcelConverter
 import java.util.*
 
 @Suppress("unused")
-open class EnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelConverter<T> {
+open class ParcelerEnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelConverter<T> {
   override fun toParcel(input: T?, parcel: android.os.Parcel) {
     if (input == null) {
       parcel.writeInt(-1)
