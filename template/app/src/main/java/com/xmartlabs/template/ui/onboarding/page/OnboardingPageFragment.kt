@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
+import com.hannesdorfmann.fragmentargs.bundler.ParcelerArgsBundler
 import com.xmartlabs.bigbang.ui.BaseFragment
 import com.xmartlabs.template.R
 
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_onboarding_page.*
 
 @FragmentWithArgs
 class OnboardingPageFragment : BaseFragment() {
-  @Arg
+  @Arg(bundler = ParcelerArgsBundler::class)
   internal lateinit var onboardingPage: OnboardingPage
 
   override val layoutResId = R.layout.fragment_onboarding_page
