@@ -6,10 +6,11 @@ dependencies:
   pre:
     - echo y | android update sdk --no-ui -a --filter tools
     - echo y | android update sdk --no-ui -a --filter platform-tools
-    - echo y | android update sdk --no-ui -a --filter build-tools-25.0.2
+    - echo y | android update sdk --no-ui -a --filter build-tools-26.0.1
     - echo y | android update sdk --no-ui -a --filter extra-google-google_play_services
     - echo y | android update sdk --no-ui -a --filter extra-google-m2repository
     - echo y | android update sdk --no-ui -a --filter extra-android-m2repository
+    - (echo y; echo y; echo y; echo y; echo y; echo y) | $ANDROID_HOME/tools/bin/sdkmanager --licenses
     # TODO: Re-enable when targetting a stable bigbang version
     #- ./templateChecks.sh
 
@@ -23,6 +24,8 @@ test:
     - ./gradlew lintAllVersionsProductionDebug
     - ./gradlew lintAllVersionsStagingDebug
     - ./gradlew lintAllVersionsStagingRelease
+    - ./template/gradlew detektCheck
+    - ./template/gradlew detektFormat
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
