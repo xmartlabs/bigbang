@@ -6,11 +6,11 @@ import java.util.*
 @Suppress("unused")
 open class ParcelerEnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelConverter<T> {
   companion object {
-    const val NULL_VALUE = -1;
+    const val NULL = -1
   }
 
   override fun toParcel(input: T?, parcel: android.os.Parcel) {
-    parcel.writeInt(input?.ordinal ?: NULL_VALUE)
+    parcel.writeInt(input?.ordinal ?: NULL)
   }
 
   override fun fromParcel(parcel: android.os.Parcel): T? {
