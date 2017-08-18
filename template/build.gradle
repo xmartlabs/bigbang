@@ -13,14 +13,15 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         flatDir {
             dirs 'libs'
         }
-        maven { url "https://jitpack.io" }
+        jcenter()
+        maven { url 'http://dl.bintray.com/xmartlabs/Android-Base-Project' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url 'https://maven.fabric.io/public' }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "http://dl.bintray.com/xmartlabs/Android-Base-Project" }
     }
 }
 
