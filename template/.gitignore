@@ -25,6 +25,3 @@ build.properties
 
 # OSX files
 .DS_Store
-
-# Reports
-/reports/
