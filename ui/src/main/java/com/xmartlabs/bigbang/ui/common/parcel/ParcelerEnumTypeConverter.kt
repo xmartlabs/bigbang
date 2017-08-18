@@ -6,7 +6,7 @@ import java.util.*
 @Suppress("unused")
 open class ParcelerEnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelConverter<T> {
   companion object {
-    const val NULL = -1
+    private const val NULL = -1
   }
 
   override fun toParcel(input: T?, parcel: android.os.Parcel) {
