@@ -10,11 +10,14 @@ buildscript {
     }
 }
 
+apply plugin: "io.gitlab.arturbosch.detekt"
 apply plugin: 'com.android.application'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
+apply from: '../detekt.gradle'
 
 def getSignInformation = { keystorePath, keystorePropertyPath ->
     def keyStore = file(keystorePath)
@@ -38,13 +41,13 @@ def getSignInformation = { keystorePath, keystorePropertyPath ->
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.xmartlabs.bigbang.template"
         minSdkVersion 19
         multiDexEnabled true
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -117,9 +120,9 @@ android {
     }
 }
 
-final ANDROID_SUPPORT_VERSION = '25.3.1'
+final ANDROID_SUPPORT_VERSION = '26.0.1'
 final BULLET_VERSION = 'e5044b53df'
-final BIGBANG_VERSION = 'ee4c641'
+final BIGBANG_VERSION = 'e058c85'
 final DAGGER_VERSION = '2.10'
 final DART_VERSION = '2.0.2'
 final DBFLOW_VERSION = '4.0.2'
@@ -144,7 +147,8 @@ dependencies {
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
     compile "com.afollestad.material-dialogs:core:${MATERIAL_DIALOGS_VERSION}"
     compile "com.android.support:appcompat-v7:${ANDROID_SUPPORT_VERSION}"
-    compile "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
+    compile "com.android.support:design:${ANDROID_SUPPORT_VERSION}"
+    compile "com.android.support:support-v13:${ANDROID_SUPPORT_VERSION}"
     compile "com.android.support:multidex:${MULTIDEX_VERSION}"
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true

@@ -1,6 +1,5 @@
 package com.xmartlabs.template.model
 
-
 import org.parceler.Parcel
 
 //TODO: check service auth response to match app's AuthResponse fields

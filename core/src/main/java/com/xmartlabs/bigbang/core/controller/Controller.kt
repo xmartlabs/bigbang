@@ -2,6 +2,7 @@ package com.xmartlabs.bigbang.core.controller
 
 import android.support.annotation.CheckResult
 import com.xmartlabs.bigbang.core.Injector
+import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.extensions.observeOnMain
 import com.xmartlabs.bigbang.core.extensions.subscribeOnIo
 import io.reactivex.*
@@ -13,11 +14,11 @@ import io.reactivex.schedulers.Schedulers
  */
 @Suppress("UNCHECKED_CAST")
 abstract class Controller protected constructor() {
-  protected val completableIoTransformer = CompletableTransformer { it.subscribeOnIo().observeOnMain() }
-  protected val flowableIoTransformer = FlowableTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
-  protected val maybeIoTransformer = MaybeTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
-  protected val observableIoTransformer = ObservableTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
-  protected val singleIoTransformer = SingleTransformer<Any, Any> { it.subscribeOnIo().observeOnMain() }
+  protected val completableIoTransformer = CompletableTransformer { it.subscribeOnIo().observeOnIo() }
+  protected val flowableIoTransformer = FlowableTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
+  protected val maybeIoTransformer = MaybeTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
+  protected val observableIoTransformer = ObservableTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
+  protected val singleIoTransformer = SingleTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
 
   init {
     Injector.inject(this)

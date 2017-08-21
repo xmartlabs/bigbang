@@ -30,7 +30,7 @@ abstract class TemplateFragment<V : TemplateView, P : MvpPresenter<V>> : BaseMvp
     if (error is CancellationException) {
       return
     }
-    
+
     var receiverError = error
     if (receiverError is CompositeException) {
       receiverError = receiverError.exceptions[0]

@@ -23,7 +23,7 @@ open class OkHttpModule {
     const val CLIENT_PICASSO = "Picasso"
     const val CLIENT_SERVICE = "Service"
   }
-  
+
   @Named(CLIENT_SERVICE)
   @Provides
   @Singleton
@@ -57,12 +57,12 @@ open class OkHttpModule {
   }
 
   private fun addLoggingInterceptor(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo) {
-    if (buildInfo.isDebug && !buildInfo.isProduction) {
+    if (buildInfo.isDebug) {
       val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.tag("OkHttp").d(message) }
       loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
       clientBuilder.addInterceptor(loggingInterceptor)
 
-      val curlInterceptor = CurlInterceptor()
+      val curlInterceptor = CurlInterceptor { message -> Timber.tag("Ok2Curl").d(message) }
       clientBuilder.addInterceptor(curlInterceptor)
     }
   }
