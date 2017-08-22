@@ -122,7 +122,7 @@ android {
 
 final ANDROID_SUPPORT_VERSION = '26.0.1'
 final BULLET_VERSION = 'e5044b53df'
-final BIGBANG_VERSION = '64ba997'
+final BIGBANG_VERSION = 'ba70fcc'
 final DAGGER_VERSION = '2.10'
 final DART_VERSION = '2.0.2'
 final DBFLOW_VERSION = '4.0.2'
