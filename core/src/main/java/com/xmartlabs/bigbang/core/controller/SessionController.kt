@@ -4,14 +4,13 @@ import android.content.SharedPreferences
 import android.support.annotation.CheckResult
 import com.xmartlabs.bigbang.core.model.SessionType
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 /**
  * Controller that manages the Session of the Application.
  *
  * The Session will be stored via the [SharedPreferencesController].
  */
-open class SessionController(private val sessionType: KClass<out SessionType>) : Controller() {
+open class SessionController(private val sessionType: Class<out SessionType>) : Controller() {
   companion object {
     private val PREFERENCES_KEY_SESSION = "session"
   }
@@ -31,7 +30,7 @@ open class SessionController(private val sessionType: KClass<out SessionType>) :
    *
    * @return whether or not the [SessionType] information exists
    */
-  open val isSessionAlive: Boolean
+  open val isSessionAlive
     @CheckResult
     get() = sharedPreferencesController.hasEntity(PREFERENCES_KEY_SESSION)
 

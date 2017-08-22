@@ -15,7 +15,7 @@ abstract class ListActivity<T : RecyclerView.Adapter<*>> : Activity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(activity_with_list)
-    recyclerView = findViewById(R.id.recycler_view) as RecyclerView
+    recyclerView = findViewById(R.id.recycler_view)
     adapter = createAdapter()
     setupRecyclerViewAdapter()
   }

@@ -11,9 +11,9 @@ import javax.inject.Inject
  * Provides the access token in order to be added in the service requests.
  * It's used by the [SessionInterceptor].
  */
-class AccessTokenProvider : EntityProvider<String> {
+open class AccessTokenProvider : EntityProvider<String> {
   companion object {
-    private val AUTH_TOKEN_HEADER_KEY = "session"
+    protected open val AUTH_TOKEN_HEADER_KEY = "session"
   }
   
   @Inject
@@ -23,19 +23,15 @@ class AccessTokenProvider : EntityProvider<String> {
     Injector.inject(this)
   }
 
-  override fun provideEntity(): String? {
-    return sessionController.abstractSession?.accessToken
-  }
+  override fun provideEntity() = sessionController.abstractSession?.accessToken
 
   /**
    * Provides the access token header key.
    * This should be overridden to change the header key.
-
+   *
    * @return the access token header key
    */
-  fun provideAccessTokenHeaderKey(): String {
-    return AUTH_TOKEN_HEADER_KEY
-  }
+  open fun provideAccessTokenHeaderKey() = AUTH_TOKEN_HEADER_KEY
 
   override fun updateEntity(entity: String) {
     sessionController.abstractSession

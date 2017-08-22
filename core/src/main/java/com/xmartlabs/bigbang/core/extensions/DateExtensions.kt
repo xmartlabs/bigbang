@@ -98,8 +98,8 @@ fun localDateTimeFromEpochMilli(milli: Long, offset: ZoneOffset = ZoneOffset.UTC
     Instant.ofEpochMilli(milli).atZone(offset).toLocalDateTime()
 
 /** Returns a `LocalDateTime` instance with `seconds` since epoch at `ZoneOffset` offset */
-fun LocalDateTimeFromEpochSeconds(milli: Long, offset: ZoneOffset = ZoneOffset.UTC) =
-    Instant.ofEpochSecond(milli).atZone(offset).toLocalDateTime()
+fun localDateTimeFromEpochSeconds(seconds: Long, offset: ZoneOffset = ZoneOffset.UTC) =
+    Instant.ofEpochSecond(seconds).atZone(offset).toLocalDateTime()
 
 /**
  * Converts a string representation of a date to its LocalDateTime object.

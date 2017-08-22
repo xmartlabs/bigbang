@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.support.annotation.CheckResult
 import com.google.gson.Gson
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 /**
  * Manage the [SharedPreferences] storage of the application.
@@ -30,8 +29,8 @@ constructor(private val gson: Gson, private val sharedPreferences: SharedPrefere
    * @return the current [T] entity if exists.
    */
   @CheckResult
-  open fun <T : Any> getEntity(key: String, type: KClass<out T>) =
-    getEntityFromCachedElements(key, type) ?: getEntityFromSharedPreferences(key, type)
+  open fun <T> getEntity(key: String, type: Class<out T>) =
+      getEntityFromCachedElements(key, type) ?: getEntityFromSharedPreferences(key, type)
 
   /**
    * Retrieves the current stored [T] entity, from the cache.
@@ -43,11 +42,11 @@ constructor(private val gson: Gson, private val sharedPreferences: SharedPrefere
    * @return the current [T] entity if exists.
    */
   @CheckResult
-  private fun <T : Any> getEntityFromCachedElements(key: String, type: KClass<out T>): T? {
+  private fun <T> getEntityFromCachedElements(key: String, type: Class<out T>): T? {
     val element = cachedEntities[key]
     return element?.let {
       @Suppress("UNCHECKED_CAST")
-      if (it.javaClass == type::class) this as? T else null
+      if (it::class == type::class) it as? T else null
     }
   }
 
@@ -61,10 +60,9 @@ constructor(private val gson: Gson, private val sharedPreferences: SharedPrefere
    * @return the current [T] entity if exists.
    */
   @CheckResult
-  @Suppress("UNCHECKED_CAST")
-  private fun <T : Any> getEntityFromSharedPreferences(key: String, type: KClass<out T>): T? {
+  private fun <T> getEntityFromSharedPreferences(key: String, type: Class<out T>): T? {
     return sharedPreferences.getString(key, null)?.let {
-      try { gson.fromJson(it, type::class.java) as? T } catch (e: Exception) { null }
+      try { gson.fromJson(it, type) } catch (e: Exception) { null }
     }
   }
 

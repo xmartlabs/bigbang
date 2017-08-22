@@ -13,7 +13,7 @@ import io.reactivex.Single
  * *
  * @param <E> Entity of the controller
  */
-class ServiceController<Id, E : EntityWithId<Id>> : Controller(), EntityServiceProvider<Id, E> {
+open class ServiceController<Id, E : EntityWithId<Id>> : Controller(), EntityServiceProvider<Id, E> {
   @CheckResult
   override fun getEntityFromList(serviceCall: Single<List<E>>, id: Id) = serviceCall
       .applyIoSchedulers()
