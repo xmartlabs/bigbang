@@ -9,12 +9,11 @@ import com.xmartlabs.bigbang.ui.recyclerview.common.Car
 import com.xmartlabs.bigbang.ui.test.R
 
 class CarAdapter : SingleItemBaseRecyclerViewAdapter<Car, CarAdapter.CarViewHolder>() {
-  override fun onCreateViewHolder(parent: ViewGroup): CarViewHolder {
-    return CarViewHolder(inflateView(parent, R.layout.item_single))
-  }
+  override fun onCreateViewHolder(parent: ViewGroup) =
+      CarViewHolder(inflateView(parent, R.layout.item_single))
 
   class CarViewHolder(view: View) : SingleItemBaseViewHolder<Car>(view) {
-    var title: TextView = view.findViewById(android.R.id.title) as TextView
+    var title: TextView = view.findViewById(android.R.id.title)
 
     override fun bindItem(item: Car) {
       super.bindItem(item)

@@ -35,7 +35,7 @@ class BrandCarAdapter : BaseRecyclerViewAdapter() {
   }
 
   class BrandViewHolder(view: View) : SingleItemBaseViewHolder<Brand>(view) {
-    var title: TextView = view.findViewById(android.R.id.title) as TextView
+    var title: TextView = view.findViewById(android.R.id.title)
   
     override fun bindItem(item: Brand) {
       super.bindItem(item)
@@ -44,7 +44,7 @@ class BrandCarAdapter : BaseRecyclerViewAdapter() {
   }
 
   class CarViewHolder(view: View) : SingleItemBaseViewHolder<Car>(view) {
-    var title: TextView = view.findViewById(android.R.id.title) as TextView
+    var title: TextView = view.findViewById(android.R.id.title)
 
     override fun bindItem(item: Car) {
       super.bindItem(item)
