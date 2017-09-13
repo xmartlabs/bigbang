@@ -86,9 +86,9 @@ object IntentHelper {
     intent.type = "message/rfc822"
     intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
     
-    subject?.takeIf(String::isNotEmpty).let { intent.putExtra(Intent.EXTRA_SUBJECT, it) }
-    body?.takeIf(String::isNotEmpty).let { intent.putExtra(Intent.EXTRA_TEXT, it) }
-    filePath?.takeIf(String::isNotEmpty).let { intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + it)) }
+    subject?.takeIf(String::isNotEmpty)?.let { intent.putExtra(Intent.EXTRA_SUBJECT, it) }
+    body?.takeIf(String::isNotEmpty)?.let { intent.putExtra(Intent.EXTRA_TEXT, it) }
+    filePath?.takeIf(String::isNotEmpty)?.let { intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + it)) }
 
     return Intent.createChooser(intent, chooserTitle)
   }
