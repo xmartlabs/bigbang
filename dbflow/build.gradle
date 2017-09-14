@@ -50,6 +50,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':core')
+    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${libraryVersion.dbFlow}"
     compile "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${libraryVersion.dbFlow}"
