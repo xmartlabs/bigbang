@@ -1,9 +1,0 @@
-detekt {
-    version = "1.0.0.RC2"
-    profile("main") {
-        input = "$projectDir/src/main/"
-        config = "$projectDir/detekt-config.yml"
-        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
-        output = "$projectDir/build/reports/detekt"
-    }
-}

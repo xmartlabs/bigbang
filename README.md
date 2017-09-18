@@ -80,7 +80,7 @@ should be specified and described in the core component.
 In order to start using the modules, you'll need to set up a few things, which are well
 explained in their respective Wiki. Therefore, to start a new project, we provide a
 template, which consists of the minimal setup required to get you going.
-You will find that in the `template` module.
+You will find that in the [bigbang-template](https://github.com/xmartlabs/bigbang-template) repository.
 
 ## Style guide
 
