@@ -7,27 +7,19 @@ import android.view.View
 import android.view.ViewPropertyAnimator
 
 /** Sets the view's visibility to [GONE](View.GONE) */
-fun View.hide() {
-  visibility = View.GONE
-}
+fun View.gone() = run { visibility = View.GONE }
 
 /** Sets the view's visibility to [VISIBLE](View.VISIBLE) */
-fun View.show() {
-  visibility = View.VISIBLE
-}
+fun View.show() = run { visibility = View.VISIBLE }
 
 /** Sets the view's visibility to [INVISIBLE](View.INVISIBLE) */
-fun View.invisible() {
-  visibility = View.INVISIBLE
-}
+fun View.invisible() = run { visibility = View.INVISIBLE }
 
 /**
  * Toggle's view's visibility. If View is [VISIBLE](View.VISIBLE), then sets to [GONE](View.GONE).
  * Else sets [VISIBLE](View.VISIBLE)
  */
-fun View.toggle() {
-  visibility = if (visibility == View.VISIBLE) View.GONE else View.VISIBLE
-}
+fun View.toggle() = run { visibility = if (visibility == View.VISIBLE) View.GONE else View.VISIBLE }
 
 /** Fades in the View */
 fun View.fadeIn(duration: Long = 400): ViewPropertyAnimator? {
@@ -94,11 +86,9 @@ fun View.enterFromBottom(duration: Long = 400): ViewPropertyAnimator? {
 }
 
 /** Animation: Exit to left */
-fun View.exitToLeft(duration: Long = 400): ViewPropertyAnimator? {
-  return animate()
-      .x(-this.width.toFloat())
-      .setDuration(duration)
-}
+fun View.exitToLeft(duration: Long = 400): ViewPropertyAnimator? = animate()
+    .x(-this.width.toFloat())
+    .setDuration(duration)
 
 /** Animation: Exit to right */
 fun View.exitToRight(duration: Long = 400): ViewPropertyAnimator? {
@@ -110,11 +100,9 @@ fun View.exitToRight(duration: Long = 400): ViewPropertyAnimator? {
 }
 
 /** Animation: Exit to top */
-fun View.exitToTop(duration: Long = 400): ViewPropertyAnimator? {
-  return animate()
-      .y(-height.toFloat())
-      .setDuration(duration)
-}
+fun View.exitToTop(duration: Long = 400): ViewPropertyAnimator? = animate()
+    .y(-height.toFloat())
+    .setDuration(duration)
 
 /** Animation: Exit to bottom */
 fun View.exitToBottom(duration: Long = 400): ViewPropertyAnimator? {
