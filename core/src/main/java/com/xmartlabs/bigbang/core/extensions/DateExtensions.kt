@@ -74,7 +74,7 @@ val LocalDate.firstDayOfWeek
   get() = this.with(DayOfWeek.MONDAY)
 
 /** Converts `this` to an Instant with `ZoneOffset` offset */
-fun LocalDate.toInstant(offset: ZoneOffset = ZoneOffset.UTC) = this.atStartOfDay(offset).toInstant()
+fun LocalDate.toInstant(offset: ZoneOffset = ZoneOffset.UTC) = atStartOfDay(offset).toInstant()
 
 /** Returns `this` number of seconds since the epoch */
 fun LocalDate.epochSeconds(offset: ZoneOffset = ZoneOffset.UTC) = this.atStartOfDay().toEpochSecond(offset)
@@ -122,7 +122,7 @@ fun stringToLocalDateTime(dateAsString: String, df: DateTimeFormatter) =
  * *
  * @return true if the date given by the `clock` is the same as `date`.
  */
-fun LocalDate.isToday(clock: Clock) = this == LocalDate.now(clock)
+fun LocalDate.isToday(clock: Clock = Clock.systemDefaultZone()) = this == LocalDate.now(clock)
 
 /**
  * Retrieves a list of days ([LocalDate]s) between `startDate` and `endDate`.
@@ -144,5 +144,5 @@ fun LocalDate.datesUntil(date: LocalDate) = IntRange(0, this.until(date).days)
  * *
  * @return true if both dates have the same month and year.
  */
-fun TemporalAccessor.haveSameMonthAndYearThen(temporalAccessor: TemporalAccessor) =
+fun TemporalAccessor.haveSameMonthAndYearThan(temporalAccessor: TemporalAccessor) =
     YearMonth.from(this) == YearMonth.from(temporalAccessor)
