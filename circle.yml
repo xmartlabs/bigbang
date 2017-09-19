@@ -6,7 +6,6 @@ dependencies:
     - echo y | android update sdk --no-ui -a --filter extra-google-google_play_services
     - echo y | android update sdk --no-ui -a --filter extra-google-m2repository
     - echo y | android update sdk --no-ui -a --filter extra-android-m2repository
-    - ./templateChecks.sh
 
 test:
   override:
