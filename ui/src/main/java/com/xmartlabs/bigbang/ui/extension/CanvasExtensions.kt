@@ -1,4 +1,4 @@
-package com.xmartlabs.bigbang.core.extensions
+package com.xmartlabs.bigbang.ui.extension
 
 import android.graphics.Canvas
 import android.graphics.Paint
