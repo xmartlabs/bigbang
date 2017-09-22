@@ -30,6 +30,20 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
   fun setItems(items: Array<T>) {
     setItems(Arrays.asList(*items))
   }
+  
+  /**
+   * Sets the items data for the recycler view and notifies any registered observers that the data set has
+   * changed.
+   * Unlike [setItems], this method updates the items and notifies removed/updated/changed items instead of a full
+   * reload.
+   *
+   * *
+   * @param items The items tobe added.
+   */
+  @MainThread
+  fun updateItems(items: List<T>) {
+    updateItems(this, items)
+  }
 
   /**
    * Adds items to the recycler view.
@@ -39,9 +53,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
    * @return if item was successfully added
    */
   @MainThread
-  fun addItems(items: List<T>): Boolean {
-    return addItems(this, items)
-  }
+  fun addItems(items: List<T>) = addItems(this, items)
 
   /**
    * Adds an item to the recycler's view data and notifies any registered observers that an item has been added.
@@ -62,9 +74,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
    * *
    * @return if items was successfully added.
    */
-  fun addItems(index: Int, items: List<T>): Boolean {
-    return addItems(index, this, items)
-  }
+  fun addItems(index: Int, items: List<T>) = addItems(index, this, items)
 
   /**
    * Sets the items for the recycler view and notifying any registered observers that the data set has

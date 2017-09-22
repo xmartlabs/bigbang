@@ -64,4 +64,18 @@ class SimpleItemTestRemoveItems : SimpleItemRecyclerViewTest() {
     val newCards = cars.filterNot { car -> car == carToRemove }
     checkItems(newCards)
   }
+  
+  @Test
+  fun testRemoveAtIndex() {
+    val cars = carList
+    
+    val activity = activityRule.activity
+    val activityCarAdapter = activity.adapter
+    activity.runOnUiThread { activityCarAdapter.setItems(cars) }
+    
+    checkItems(cars)
+    cars.removeAt(cars.size / 2)
+    activity.runOnUiThread { activityCarAdapter.removeItemAtIndex(cars.size / 2) }
+    checkItems(cars)
+  }
 }
