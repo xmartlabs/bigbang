@@ -1,5 +1,6 @@
 package com.xmartlabs.bigbang.ui.recyclerview.singleitem
 
+import com.xmartlabs.bigbang.ui.recyclerview.common.Car
 import org.junit.Test
 
 /**
@@ -44,6 +45,24 @@ class SimpleItemTestUpdateItems : SimpleItemRecyclerViewTest() {
     activity.runOnUiThread { activity.adapter.setItems(cars) }
   
     checkItems(cars)
+    activity.runOnUiThread { activity.adapter.updateItems(cars) }
+    checkItems(cars)
+  }
+  
+  @Test
+  fun testUpdateItemsWithNoItems() {
+    var cars = listOf<Car>()
+  
+    val activity = activityRule.activity
+    
+    activity.runOnUiThread { activity.adapter.updateItems(cars) }
+    checkItems(cars)
+    
+    cars = carList
+    activity.runOnUiThread { activity.adapter.updateItems(cars) }
+    checkItems(cars)
+    
+    cars = listOf()
     activity.runOnUiThread { activity.adapter.updateItems(cars) }
     checkItems(cars)
   }

@@ -266,12 +266,13 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     val diff = items.size - newItems.size
   
     items.clear()
-    newItems.forEach { addItemWithoutNotifying(type, it, false) }
+    newItems.forEach { addItemWithoutNotifying(type, it, true) }
   
+    notifyItemRangeChanged(0, if (currentItems > 0) currentItems - 1 else 0)
+    
     if (diff > 0) {
       notifyItemRangeRemoved(currentItems - diff, diff)
     } else {
-      notifyItemRangeChanged(0, currentItems - 1)
       notifyItemRangeInserted(currentItems, Math.abs(diff))
     }
   }
