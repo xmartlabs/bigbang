@@ -26,7 +26,7 @@ ext {
         gson: '2.8.0',
         jsr305: '3.0.1',
         junit: '4.12',
-        kotlin: '1.1.4-2',
+        kotlin: '1.1.4-3',
         localDateBackport: '1.0.5',
         materialDateTimePicker: '3.3.0',
         mockito: '1.10.19',

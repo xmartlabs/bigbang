@@ -13,7 +13,7 @@ import javax.inject.Inject
  */
 open class AccessTokenProvider : EntityProvider<String> {
   companion object {
-    protected open val AUTH_TOKEN_HEADER_KEY = "session"
+    protected const val AUTH_TOKEN_HEADER_KEY = "session"
   }
   
   @Inject

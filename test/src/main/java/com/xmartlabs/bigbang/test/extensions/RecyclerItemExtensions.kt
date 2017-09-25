@@ -1,6 +1,8 @@
-package com.xmartlabs.bigbang.ui.recyclerview.common
+package com.xmartlabs.bigbang.test.extensions
 
-import android.support.test.espresso.core.deps.guava.base.Preconditions.checkNotNull
+import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.assertion.ViewAssertions
+import android.support.test.espresso.core.deps.guava.base.Preconditions
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -25,7 +27,7 @@ object RecyclerViewAssertions {
   }
 
   fun atPosition(position: Int, itemMatcher: Matcher<View>): Matcher<View> {
-    checkNotNull(itemMatcher)
+    Preconditions.checkNotNull(itemMatcher)
     return object : BoundedMatcher<View, RecyclerView>(RecyclerView::class.java) {
       override fun describeTo(description: Description) {
         description.appendText("has item at position $position: ")
@@ -39,3 +41,9 @@ object RecyclerViewAssertions {
     }
   }
 }
+
+fun ViewInteraction.checkRecyclerViewAtPosition(index: Int, itemMatcher: Matcher<View>): ViewInteraction =
+    check(ViewAssertions.matches(RecyclerViewAssertions.atPosition(index, itemMatcher)))
+
+fun ViewInteraction.checkRecyclerViewCountIs(index: Int): ViewInteraction =
+    check(ViewAssertions.matches(RecyclerViewAssertions.countIs(index)))

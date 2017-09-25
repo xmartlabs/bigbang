@@ -59,6 +59,7 @@ dependencies {
     androidTestCompile "org.mockito:mockito-core:${libraryVersion.mockito}"
     compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
     compile "com.android.support:design:${libraryVersion.androidSupport}"
+    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
     compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
     compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
     compile 'com.github.mrmike:Ok2Curl:0.2.5'
