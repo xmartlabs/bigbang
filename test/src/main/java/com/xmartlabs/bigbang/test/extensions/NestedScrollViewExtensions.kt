@@ -9,15 +9,14 @@ import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.espresso.util.HumanReadables
 import android.support.v4.widget.NestedScrollView
-import android.util.Log
 import android.view.View
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf
+import timber.log.Timber
 
 class ScrollToActionForNestedScrollView : ViewAction {
   companion object {
-    private val TAG = ScrollToActionForNestedScrollView::class.java.simpleName
     private const val DISPLAY_PERCENTAGE = 90
   }
 
@@ -28,13 +27,13 @@ class ScrollToActionForNestedScrollView : ViewAction {
 
   override fun perform(uiController: UiController, view: View) {
     if (isDisplayingAtLeast(DISPLAY_PERCENTAGE).matches(view)) {
-      Log.i(TAG, "View is already displayed. Returning.")
+      Timber.i("View is already displayed. Returning.")
       return
     }
     val rect = Rect()
     view.getDrawingRect(rect)
     if (!view.requestRectangleOnScreen(rect, true)) {
-      Log.w(TAG, "Scrolling to view was requested, but none of the parents scrolled.")
+      Timber.w("Scrolling to view was requested, but none of the parents scrolled.")
     }
     uiController.loopMainThreadUntilIdle()
     if (!isDisplayingAtLeast(DISPLAY_PERCENTAGE).matches(view)) {

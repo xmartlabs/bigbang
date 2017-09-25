@@ -85,6 +85,7 @@ dependencies {
 
     compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
 }
