@@ -6,7 +6,7 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import com.xmartlabs.bigbang.test.extensions.RecyclerViewAssertions
+import com.xmartlabs.bigbang.test.assertions.RecyclerViewAssertions
 import com.xmartlabs.bigbang.test.extensions.checkRecyclerViewAtPosition
 import com.xmartlabs.bigbang.test.extensions.checkRecyclerViewCountIs
 import com.xmartlabs.bigbang.ui.recyclerview.common.Brand

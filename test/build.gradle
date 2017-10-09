@@ -68,23 +68,11 @@ dependencies {
     compile("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    compile "com.android.support.test.espresso:espresso-intents:${libraryVersion.espresso}"
-    compile "com.github.andrzejchm.RESTMock:android:${libraryVersion.restMock}"
-    compile("com.github.andrzejchm.RESTMock:core:${libraryVersion.restMock}") {
-        exclude group: 'org.bouncycastle', module: 'bcprov-jdk15on'
-    }
-    compile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
-    compile "com.crittercism.dexmaker:dexmaker:${libraryVersion.dexmaker}"
-    compile "com.crittercism.dexmaker:dexmaker-dx:${libraryVersion.dexmaker}"
-    compile "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
-    compile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
-    compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}" // Added to prevent dependencies conflict between main and test
-    compile "com.squareup.okhttp3:mockwebserver:${libraryVersion.okHttp}" // Added to prevent dependencies conflict between main and test
-    compile "com.squareup.okio:okio:${libraryVersion.okio}" // Added to prevent dependencies conflict between main and test
-    compile "org.mockito:mockito-core:${libraryVersion.mockito}"
+    compile "com.android.support.test.uiautomator:uiautomator-v18:${libraryVersion.uiautomator}"
 
     compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
 
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
 }
