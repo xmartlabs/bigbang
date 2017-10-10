@@ -21,7 +21,7 @@ import org.hamcrest.Matchers.not
 
 fun ViewInteraction.checkDoesNotExist(): ViewInteraction = check(doesNotExist())
 
-fun ViewInteraction.checkHasDescendentWithText(@IdRes textResId: Int): ViewInteraction =
+fun ViewInteraction.checkHasDescendantWithText(@IdRes textResId: Int): ViewInteraction =
     check(matches(hasDescendant(ViewMatchers.withText(textResId))))
 
 fun ViewInteraction.checkHasDescendantWithText(text: String): ViewInteraction =
