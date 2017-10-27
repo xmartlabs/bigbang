@@ -28,7 +28,7 @@ ext {
         junit: '4.12',
         kotlin: '1.1.4-3',
         localDateBackport: '1.0.5',
-        materialDateTimePicker: '3.3.0',
+        materialDateTimePicker: '3.3.1',
         mockito: '1.10.19',
         okHttp: '3.6.0',
         okio: '1.11.0',
@@ -41,5 +41,6 @@ ext {
         rxLifecycle: '2.2.0',
         timber: '4.5.1',
         traceur: '05c2c81241',
+        uiautomator: '2.1.2',
     ]
 }

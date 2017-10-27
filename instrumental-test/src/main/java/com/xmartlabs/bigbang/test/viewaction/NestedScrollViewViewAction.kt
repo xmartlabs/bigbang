@@ -1,10 +1,10 @@
-package com.xmartlabs.bigbang.test.extensions
+package com.xmartlabs.bigbang.test.viewaction
 
 import android.graphics.Rect
 import android.support.test.espresso.PerformException
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
-import android.support.test.espresso.ViewInteraction
+import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.matcher.ViewMatchers
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.espresso.util.HumanReadables
@@ -15,7 +15,7 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf
 import timber.log.Timber
 
-class ScrollToActionForNestedScrollView : ViewAction {
+class NestedScrollViewViewAction : ViewAction {
   companion object {
     private const val DISPLAY_PERCENTAGE = 90
   }
@@ -48,9 +48,5 @@ class ScrollToActionForNestedScrollView : ViewAction {
   override fun getDescription(): String = "scroll to"
 }
 
-fun nestedScrollViewScrollTo(): ViewAction {
-  return android.support.test.espresso.action.ViewActions.actionWithAssertions(
-      ScrollToActionForNestedScrollView())
-}
-
-fun ViewInteraction.performScrollInNestedScrollView() : ViewInteraction = perform(nestedScrollViewScrollTo())
+fun nestedScrollViewScrollTo(): ViewAction =
+    ViewActions.actionWithAssertions(NestedScrollViewViewAction())

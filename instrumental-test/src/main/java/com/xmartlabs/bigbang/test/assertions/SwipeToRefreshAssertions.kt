@@ -1,15 +1,11 @@
-package com.xmartlabs.bigbang.test.extensions
+package com.xmartlabs.bigbang.test.assertions
 
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayingAtLeast
 import android.view.View
 import org.hamcrest.Matcher
 
 object SwipeToRefreshAssertions {
-  // http://stackoverflow.com/a/33516360/5170805
   fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>): ViewAction {
     return object : ViewAction {
       override fun getConstraints(): Matcher<View> = constraints
@@ -22,8 +18,3 @@ object SwipeToRefreshAssertions {
     }
   }
 }
-
-@Suppress("unused")
-fun ViewInteraction.performPullDownToRefresh(): ViewInteraction =
-    perform(SwipeToRefreshAssertions.withCustomConstraints(ViewActions.swipeDown(), isDisplayingAtLeast(85)))
-

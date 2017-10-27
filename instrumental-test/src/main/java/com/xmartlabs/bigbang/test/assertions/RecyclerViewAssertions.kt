@@ -1,7 +1,5 @@
-package com.xmartlabs.bigbang.test.extensions
+package com.xmartlabs.bigbang.test.assertions
 
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.core.deps.guava.base.Preconditions
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.v7.widget.RecyclerView
@@ -41,9 +39,3 @@ object RecyclerViewAssertions {
     }
   }
 }
-
-fun ViewInteraction.checkRecyclerViewAtPosition(index: Int, itemMatcher: Matcher<View>): ViewInteraction =
-    check(ViewAssertions.matches(RecyclerViewAssertions.atPosition(index, itemMatcher)))
-
-fun ViewInteraction.checkRecyclerViewCountIs(index: Int): ViewInteraction =
-    check(ViewAssertions.matches(RecyclerViewAssertions.countIs(index)))

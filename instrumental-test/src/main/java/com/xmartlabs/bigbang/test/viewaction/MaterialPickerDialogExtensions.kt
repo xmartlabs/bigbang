@@ -1,8 +1,7 @@
-package com.xmartlabs.bigbang.test.extensions
+package com.xmartlabs.bigbang.test.viewaction
 
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
-import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.util.Log
@@ -52,8 +51,3 @@ object MaterialPickerDialogActions {
   }
 }
 
-fun ViewInteraction.performSetDateMaterialPickerDialog(year: Int, monthOfYear: Int, dayOfMonth: Int): ViewInteraction =
-    perform(MaterialPickerDialogActions.setDate(year, monthOfYear, dayOfMonth))
-
-fun ViewInteraction.performSetTimeMaterialPickerDialog(hours: Int, minutes: Int): ViewInteraction =
-    perform(MaterialPickerDialogActions.setTime(hours, minutes))
