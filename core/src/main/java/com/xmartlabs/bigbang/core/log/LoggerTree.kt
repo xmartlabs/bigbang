@@ -2,7 +2,7 @@ package com.xmartlabs.bigbang.core.log
 
 import android.util.Log
 import timber.log.Timber
-import java.util.*
+import java.util.ArrayList
 import javax.inject.Inject
 
 /**

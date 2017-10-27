@@ -10,7 +10,7 @@ import android.support.test.uiautomator.UiObjectNotFoundException
 import android.support.test.uiautomator.UiSelector
 import com.xmartlabs.bigbang.test.helpers.TestUtils
 import timber.log.Timber
-import java.util.*
+import java.util.Locale
 
 /**
  * Retrieves the first activity with `Stage.RESUMED` state

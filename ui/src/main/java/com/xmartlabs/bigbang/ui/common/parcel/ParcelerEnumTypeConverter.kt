@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.ui.common.parcel
 
 import org.parceler.ParcelConverter
-import java.util.*
+import java.util.EnumSet
 
 @Suppress("unused")
 open class ParcelerEnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelConverter<T> {

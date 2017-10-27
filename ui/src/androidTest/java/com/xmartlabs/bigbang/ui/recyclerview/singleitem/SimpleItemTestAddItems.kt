@@ -2,7 +2,7 @@ package com.xmartlabs.bigbang.ui.recyclerview.singleitem
 
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car
 import org.junit.Test
-import java.util.*
+import java.util.Arrays
 
 class SimpleItemTestAddItems : SimpleItemRecyclerViewTest() {
   private fun testAddItem(initialItems: List<Car>, itemsToAdd: List<Car>) {

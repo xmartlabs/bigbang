@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.core.helper
 
 import com.google.gson.Gson
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 

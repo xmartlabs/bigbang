@@ -17,8 +17,8 @@ import com.xmartlabs.bigbang.ui.BaseFragment
 @FragmentWithArgs
 abstract class BaseMvpFragment<V : MvpView, P : MvpPresenter<V>> : BaseFragment(), MvpView {
   abstract protected var presenter: P
-
-  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+  
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     @Suppress("UNCHECKED_CAST")
     presenter.attachView(this as V)
