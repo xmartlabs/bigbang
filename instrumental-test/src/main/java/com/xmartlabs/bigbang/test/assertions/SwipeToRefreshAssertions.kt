@@ -6,15 +6,21 @@ import android.view.View
 import org.hamcrest.Matcher
 
 object SwipeToRefreshAssertions {
-  fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>): ViewAction {
-    return object : ViewAction {
-      override fun getConstraints(): Matcher<View> = constraints
-
-      override fun getDescription(): String = action.description
-
-      override fun perform(uiController: UiController, view: View) {
-        action.perform(uiController, view)
-      }
+  /**
+   * Performs the `action` using the specified `constraints`
+   *
+   * @param action the action to be performed
+   * @param constraints the set of constraints to take into account
+   *
+   * @return the [ViewAction] instance that applies `action` under `constraints`
+   */
+  fun withCustomConstraints(action: ViewAction, constraints: Matcher<View>) = object : ViewAction {
+    override fun getConstraints() = constraints
+  
+    override fun getDescription() = action.description
+  
+    override fun perform(uiController: UiController, view: View) {
+      action.perform(uiController, view)
     }
   }
 }

@@ -15,15 +15,28 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf
 import timber.log.Timber
 
+/**
+ * [ViewAction] that scrolls the [NestedScrollView] to any desired view
+ */
 class NestedScrollViewViewAction : ViewAction {
   companion object {
     private const val DISPLAY_PERCENTAGE = 90
+  
+    /**
+     * Factory method that performs all assertions before the [ViewAction] and then returns it
+     *
+     * @return the [NestedScrollViewViewAction] instance
+     */
+    @JvmStatic
+    fun scrollTo() = ViewActions.actionWithAssertions(NestedScrollViewViewAction())
   }
 
-  override fun getConstraints(): Matcher<View> {
-    return allOf<View>(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE), isDescendantOfA(anyOf<View>(
-        isAssignableFrom(NestedScrollView::class.java), isAssignableFrom(NestedScrollView::class.java))))
-  }
+  override fun getConstraints() = allOf<View>(
+      withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE),
+      isDescendantOfA(anyOf<View>(
+          isAssignableFrom(NestedScrollView::class.java), isAssignableFrom(NestedScrollView::class.java))
+      )
+  )
 
   override fun perform(uiController: UiController, view: View) {
     if (isDisplayingAtLeast(DISPLAY_PERCENTAGE).matches(view)) {
@@ -45,8 +58,5 @@ class NestedScrollViewViewAction : ViewAction {
     }
   }
 
-  override fun getDescription(): String = "scroll to"
+  override fun getDescription() = "scroll to"
 }
-
-fun nestedScrollViewScrollTo(): ViewAction =
-    ViewActions.actionWithAssertions(NestedScrollViewViewAction())

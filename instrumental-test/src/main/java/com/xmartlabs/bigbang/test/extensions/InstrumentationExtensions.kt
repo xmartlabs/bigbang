@@ -12,18 +12,26 @@ import com.xmartlabs.bigbang.test.helpers.TestUtils
 import timber.log.Timber
 import java.util.*
 
+/**
+ * Retrieves the first activity with `Stage.RESUMED` state
+ *
+ * @return the first activity with `Stage.RESUMED` state, if any
+ */
 fun Instrumentation.getFirstActivityInstance(): Activity? {
-  val currentActivity = arrayOfNulls<Activity>(1)
-  runOnMainSync({
-    val resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
-    if (resumedActivities.iterator().hasNext()) {
-      currentActivity[0] = resumedActivities.iterator().next() as Activity
-    }
-  })
+  var currentActivity: Activity? = null
+  
+  runOnMainSync {
+    currentActivity = ActivityLifecycleMonitorRegistry.getInstance()
+        .getActivitiesInStage(Stage.RESUMED)
+        .first()
+  }
 
-  return currentActivity[0]
+  return currentActivity
 }
 
+/**
+ * Accepts any permission request by accepting the Android popup dialog with the request
+ */
 fun Instrumentation.allowPermissionsIfNeeded() {
   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
     val device = UiDevice.getInstance(this)
@@ -38,6 +46,11 @@ fun Instrumentation.allowPermissionsIfNeeded() {
   }
 }
 
+/**
+ * Asserts that the current activity is of class `activityClass`
+ *
+ * @param activityClass the class of the current activity
+ */
 @Throws(RuntimeException::class)
 fun Instrumentation.assertCurrentActivityIs(activityClass: Class<out Activity>) {
   TestUtils.sleep()

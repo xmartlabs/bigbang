@@ -11,7 +11,7 @@ ext {
     websiteUrl = 'https://github.com/xmartlabs/bigbang'
 
     libraryVersion = [
-        androidSupport: '26.1.0',
+        androidSupport: '27.0.0',
         androidSupportTest: '0.5',
         bullet: 'e5044b53df',
         butterKnife: '8.5.1',
@@ -30,6 +30,7 @@ ext {
         localDateBackport: '1.0.5',
         materialDateTimePicker: '3.3.1',
         mockito: '1.10.19',
+        ok2Curl: '0.3.1',
         okHttp: '3.6.0',
         okio: '1.11.0',
         parceler: '1.1.5',

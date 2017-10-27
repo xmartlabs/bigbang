@@ -13,41 +13,56 @@ import com.wdullaer.materialdatetimepicker.time.Timepoint
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 
+/**
+ * View action helpers for the Material Dialog Picker
+ */
 object MaterialPickerDialogActions {
-  fun setDate(year: Int, monthOfYear: Int, dayOfMonth: Int): ViewAction {
-    return object : ViewAction {
-      override fun perform(uiController: UiController, view: View) {
-        val dayPickerView = view as DayPickerView
-
-        try {
-          val field = DayPickerView::class.java.getDeclaredField("mController")
-          field.isAccessible = true
-          val controller = field.get(dayPickerView) as DatePickerController
-          controller.onDayOfMonthSelected(year, monthOfYear, dayOfMonth)
-        } catch (exception: Exception) {
-          Log.d(MaterialPickerDialogActions.javaClass.canonicalName, exception.toString())
-        }
+  /**
+   * Creates the [ViewAction] that can set the date on the date picker
+   *
+   * @param year the year to set
+   * @param monthOfYear the month to set
+   * @param dayOfMonth the day of month to set
+   *
+   * @return the [ViewAction] that sets the specified date
+   */
+  fun setDate(year: Int, monthOfYear: Int, dayOfMonth: Int) = object : ViewAction {
+    override fun perform(uiController: UiController, view: View) {
+      val dayPickerView = view as DayPickerView
+    
+      try {
+        val field = DayPickerView::class.java.getDeclaredField("mController")
+        field.isAccessible = true
+        val controller = field.get(dayPickerView) as DatePickerController
+        controller.onDayOfMonthSelected(year, monthOfYear, dayOfMonth)
+      } catch (exception: Exception) {
+        Log.d(MaterialPickerDialogActions.javaClass.canonicalName, exception.toString())
       }
-
-      override fun getDescription(): String = "set date"
-
-      override fun getConstraints(): Matcher<View> =
-          allOf<View>(isAssignableFrom(DayPickerView::class.java), isDisplayed())
     }
+  
+    override fun getDescription(): String = "set date"
+  
+    override fun getConstraints(): Matcher<View> =
+        allOf<View>(isAssignableFrom(DayPickerView::class.java), isDisplayed())
   }
-
-  fun setTime(hours: Int, minutes: Int): ViewAction {
-    return object : ViewAction {
-      override fun perform(uiController: UiController, view: View) {
-        val timePicker = view as RadialPickerLayout
-        timePicker.time = Timepoint(hours, minutes, 0)
-      }
-
-      override fun getDescription(): String = "set time"
-
-      override fun getConstraints(): Matcher<View> =
-          allOf<View>(isAssignableFrom(RadialPickerLayout::class.java), isDisplayed())
+  
+  /**
+   * Creates a [ViewAction] that can set the time on the time picker
+   *
+   * @param hours the hour to set (in 24h format)
+   * @param minutes the minutes to set
+   *
+   * @return the [ViewAction] that sets the specified time
+   */
+  fun setTime(hours: Int, minutes: Int) = object : ViewAction {
+    override fun perform(uiController: UiController, view: View) {
+      val timePicker = view as RadialPickerLayout
+      timePicker.time = Timepoint(hours, minutes, 0)
     }
+  
+    override fun getDescription(): String = "set time"
+  
+    override fun getConstraints(): Matcher<View> =
+        allOf<View>(isAssignableFrom(RadialPickerLayout::class.java), isDisplayed())
   }
 }
-
