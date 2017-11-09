@@ -1,28 +1,43 @@
-machine:
-  environment:
-    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-
-dependencies:
-  pre:
-    - mkdir $ANDROID_HOME/licenses
-    - cp -r licenses/. $ANDROID_HOME/licenses
-    - echo y | android update sdk --no-ui -a --filter tools
-    - echo y | android update sdk --no-ui -a --filter platform-tools
-    - echo y | android update sdk --no-ui -a --filter build-tools-26.0.2
-    - echo y | android update sdk --no-ui -a --filter extra-google-google_play_services
-    - echo y | android update sdk --no-ui -a --filter extra-google-m2repository
-    - echo y | android update sdk --no-ui -a --filter extra-android-m2repository
-
-test:
-  override:
-    - ./gradlew testAllVersionsProductionDebugUnitTest
-    - ./gradlew testAllVersionsProductionReleaseUnitTest
-    - ./gradlew testAllVersionsStagingReleaseUnitTest
-    - ./gradlew testAllVersionsStagingDebugUnitTest
-    - ./gradlew lintAllVersionsProductionRelease
-    - ./gradlew lintAllVersionsProductionDebug
-    - ./gradlew lintAllVersionsStagingDebug
-    - ./gradlew lintAllVersionsStagingRelease
-  post:
-    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-26-alpha
+    working_directory: ~/bigbang-template
+    environment:
+      _JAVA_OPTIONS: "-Xmx1500m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
+      JVM_OPTS: -Xmx1024m
+    resource_class: large
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Setup emulator
+          command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+      - run:
+          name: Launch emulator
+          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -noaudio -no-boot-anim -no-window -accel on
+          background: true
+      - run:
+          name: Run Tests
+          command: ./gradlew testAllVersionsProductionDebugUnitTest
+              testAllVersionsProductionReleaseUnitTest
+              testAllVersionsStagingReleaseUnitTest
+              testAllVersionsStagingDebugUnitTest
+              lintAllVersionsProductionRelease
+              lintAllVersionsProductionDebug
+              lintAllVersionsStagingDebug
+              lintAllVersionsStagingRelease
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
