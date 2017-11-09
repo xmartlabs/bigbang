@@ -29,9 +29,7 @@ fun Instrumentation.getFirstActivityInstance(): Activity? {
   return currentActivity
 }
 
-/**
- * Accepts any permission request by accepting the Android popup dialog with the request
- */
+/** Accepts any permission request by accepting the Android popup dialog with the request */
 fun Instrumentation.allowPermissionsIfNeeded() {
   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
     val device = UiDevice.getInstance(this)

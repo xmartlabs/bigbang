@@ -5,8 +5,6 @@ import bullet.ObjectGraph
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.raizlabs.android.dbflow.config.FlowConfig
 import com.raizlabs.android.dbflow.config.FlowManager
-import com.tspoon.traceur.Traceur
-import com.tspoon.traceur.TraceurConfig
 import com.xmartlabs.bigbang.core.Injector
 import com.xmartlabs.bigbang.core.helper.GeneralErrorHelper
 import com.xmartlabs.bigbang.core.log.LoggerTree
@@ -14,7 +12,6 @@ import com.xmartlabs.bigbang.core.model.BuildInfo
 import com.xmartlabs.bigbang.log.crashlytics.CrashlyticsLogger
 import com.xmartlabs.bigbang.retrofit.helper.ServiceErrorHandler
 import com.xmartlabs.template.module.AndroidModule
-import timber.log.Timber
 import javax.inject.Inject
 
 open class BaseProjectApplication : Application() {

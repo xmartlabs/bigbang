@@ -5,7 +5,7 @@ ext {
     compileSdkVersion = 26
     minSdkVersion = 17
     targetSdkVersion = 26
-    buildToolsVersion = '26.0.1'
+    buildToolsVersion = '26.0.2'
 
     vcsUrl = 'https://github.com/xmartlabs/bigbang.git'
     websiteUrl = 'https://github.com/xmartlabs/bigbang'

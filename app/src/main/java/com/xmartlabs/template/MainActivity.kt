@@ -6,8 +6,6 @@ import com.xmartlabs.bigbang.ui.mvp.BaseMvpAppCompatActivity
 import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter
 import com.xmartlabs.bigbang.ui.mvp.MvpView
 
-import kotlinx.android.synthetic.main.activity_main.*;
-
 @HensonNavigable
 class MainActivity : BaseMvpAppCompatActivity<MvpView, BaseMvpPresenter<MvpView>>() {
   override lateinit var presenter: BaseMvpPresenter<MvpView>

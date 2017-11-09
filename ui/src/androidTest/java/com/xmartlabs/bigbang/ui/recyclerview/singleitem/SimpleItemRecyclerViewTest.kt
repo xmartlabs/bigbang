@@ -19,15 +19,13 @@ abstract class SimpleItemRecyclerViewTest {
   internal val carList: MutableList<Car> = listOf("Corsa", "Gol", "Golf", "Saveiro", "Partner")
       .map(::Car)
       .toMutableList()
-  
+
   internal fun checkItems(cars: Collection<Car>) {
     val recyclerViewInteraction = onView(withId(R.id.recycler_view))
     recyclerViewInteraction.checkRecyclerViewCountIs(cars.size)
 
     cars
         .map(Car::model)
-        .forEachIndexed { index, model ->
-          recyclerViewInteraction.checkRecyclerViewAtPosition(index, withText(model))
-        }
+        .forEachIndexed { index, model -> recyclerViewInteraction.checkRecyclerViewAtPosition(index, withText(model)) }
   }
 }

@@ -17,9 +17,7 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.anyOf
 import timber.log.Timber
 
-/**
- * [ViewAction] that scrolls the [NestedScrollView] to any desired view
- */
+/** [ViewAction] that scrolls the [NestedScrollView] to any desired view */
 class NestedScrollViewViewAction : ViewAction {
   companion object {
     private const val DISPLAY_PERCENTAGE = 90

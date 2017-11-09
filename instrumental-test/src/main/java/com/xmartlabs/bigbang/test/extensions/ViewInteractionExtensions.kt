@@ -18,6 +18,8 @@ import com.xmartlabs.bigbang.test.viewaction.MaterialPickerDialogActions
 import com.xmartlabs.bigbang.test.viewaction.NestedScrollViewViewAction
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.not
+import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalTime
 
 /**
  * Checks that the matcher specified in this [ViewInteraction] does not find any view
@@ -143,6 +145,16 @@ fun ViewInteraction.performSetDateMaterialPickerDialog(year: Int, monthOfYear: I
     perform(MaterialPickerDialogActions.setDate(year, monthOfYear, dayOfMonth))
 
 /**
+ * Sets the date in the material date picker specified in this [ViewInteraction]
+ *
+ * @param localDate the date to set
+ *
+ * @return this interaction for further perform/verification calls.
+ */
+fun ViewInteraction.performSetDateMaterialPickerDialog(localDate: LocalDate) =
+    perform(MaterialPickerDialogActions.setDate(localDate.year, localDate.monthValue - 1, localDate.dayOfMonth))
+
+/**
  * Sets the time in the material time picker specified in this [ViewInteraction]
  *
  * @param hours the hour to set (in 24h format)
@@ -152,3 +164,13 @@ fun ViewInteraction.performSetDateMaterialPickerDialog(year: Int, monthOfYear: I
  */
 fun ViewInteraction.performSetTimeMaterialPickerDialog(hours: Int, minutes: Int) =
     perform(MaterialPickerDialogActions.setTime(hours, minutes))
+
+/**
+ * Sets the time in the material time picker specified in this [ViewInteraction]
+ *
+ * @param localTime the time to set
+ *
+ * @return this interaction for further perform/verification calls.
+ */
+fun ViewInteraction.performSetTimeMaterialPickerDialog(localTime: LocalTime) =
+    perform(MaterialPickerDialogActions.setTime(localTime.hour, localTime.minute))
