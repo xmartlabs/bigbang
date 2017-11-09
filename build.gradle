@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
@@ -12,14 +13,12 @@ buildscript {
 
 allprojects {
     repositories {
-        flatDir {
-            dirs 'libs'
-        }
         maven { url 'http://dl.bintray.com/populov/maven' }
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.google.com' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url 'https://maven.fabric.io/public' }
         jcenter()
+        google()
     }
 }
