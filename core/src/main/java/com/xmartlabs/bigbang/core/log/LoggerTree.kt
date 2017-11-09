@@ -2,7 +2,7 @@ package com.xmartlabs.bigbang.core.log
 
 import android.util.Log
 import timber.log.Timber
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -16,7 +16,7 @@ constructor() : Timber.DebugTree() {
   /** [Log] priorities that will be excluding from logging  */
   private val excludedPriorities = ArrayList<Int>()
 
-  override fun log(priority: Int, tag: String?, message: String?, t: Throwable?) = when {
+  override fun log(priority: Int, tag: String?, message: String, t: Throwable?) = when {
     excludedPriorities.contains(priority) -> Unit
     else -> {
       val logInfo = LogInfo(priority, tag, message)

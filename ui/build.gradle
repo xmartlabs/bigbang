@@ -50,26 +50,26 @@ android {
 }
 
 dependencies {
-    androidTestCompile project(path: ':instrumental-test')
+    androidTestImplementation project(path: ':instrumental-test')
 
-    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
-    compile "com.android.support:design:${libraryVersion.androidSupport}"
-    compile "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
-    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
-    compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
-    compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
-    compile "com.google.dagger:dagger:${libraryVersion.daggerVersion}"
-    compile "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
-    compile "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
-    compile "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
-    compile "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
-    compile "org.parceler:parceler-api:${libraryVersion.parceler}"
+    implementation "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    implementation "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    implementation "com.android.support:design:${libraryVersion.androidSupport}"
+    implementation "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    implementation "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    implementation "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    implementation "com.f2prateek.dart:henson:${libraryVersion.dart}"
+    implementation "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    implementation "com.google.dagger:dagger:${libraryVersion.dagger}"
+    implementation "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
+    implementation "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
+    implementation "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    implementation "org.parceler:parceler-api:${libraryVersion.parceler}"
 
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(path: ':core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':core')
 
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
@@ -78,7 +78,7 @@ dependencies {
     kapt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
     kapt "org.parceler:parceler:${libraryVersion.parceler}"
 
-    testCompile "junit:junit:${libraryVersion.junit}"
+    testImplementation "junit:junit:${libraryVersion.junit}"
 }
 
 apply from: '../bintray.gradle'

@@ -45,19 +45,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':core')
-    compile "com.google.dagger:dagger:${libraryVersion.dagger}"
-    compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
-    compile "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
-    compile "com.squareup.retrofit2:adapter-rxjava2:${libraryVersion.retrofit}"
-    compile "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
-    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
-    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    implementation project(':core')
+    implementation "com.android.support:support-annotations:${libraryVersion.androidSupport}"
+    implementation "com.google.dagger:dagger:${libraryVersion.dagger}"
+    implementation "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    implementation "com.jakewharton.timber:timber:${libraryVersion.timber}"
+    implementation "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${libraryVersion.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
+    implementation "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
-    testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.6') {
+    testImplementation "junit:junit:${libraryVersion.junit}"
+    testImplementation ('org.threeten:threetenbp:1.3.6') {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }

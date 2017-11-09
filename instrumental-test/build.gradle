@@ -49,16 +49,16 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    compile "com.android.support:design:${libraryVersion.androidSupport}"
-    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    implementation "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    implementation "com.android.support:design:${libraryVersion.androidSupport}"
+    implementation "com.android.support:support-v13:${libraryVersion.androidSupport}"
 
-    compile "com.android.support:support-annotations:${libraryVersion.androidSupport}"
-    compile "com.android.support.test:rules:${libraryVersion.androidSupportTest}"
-    compile("com.android.support.test:runner:${libraryVersion.androidSupportTest}") {
+    implementation "com.android.support:support-annotations:${libraryVersion.androidSupport}"
+    implementation "com.android.support.test:rules:${libraryVersion.androidSupportTest}"
+    implementation("com.android.support.test:runner:${libraryVersion.androidSupportTest}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    compile("com.android.support.test.espresso:espresso-contrib:${libraryVersion.espresso}") {
+    implementation("com.android.support.test.espresso:espresso-contrib:${libraryVersion.espresso}") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'design'
@@ -66,17 +66,17 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
-    compile("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
+    implementation("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    compile "com.android.support.test.uiautomator:uiautomator-v18:${libraryVersion.uiautomator}"
-    compile "com.android.support.test.espresso:espresso-intents:${libraryVersion.espresso}"
+    implementation "com.android.support.test.uiautomator:uiautomator-v18:${libraryVersion.uiautomator}"
+    implementation "com.android.support.test.espresso:espresso-intents:${libraryVersion.espresso}"
 
-    compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
-    compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
-    compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
+    implementation "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
+    implementation "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    implementation "com.jakewharton.timber:timber:${libraryVersion.timber}"
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
 }
 
 apply from: '../bintray.gradle'

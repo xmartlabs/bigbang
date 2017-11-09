@@ -49,16 +49,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':core')
-    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
-    compile "com.github.Raizlabs.DBFlow:dbflow:${libraryVersion.dbFlow}"
-    compile "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${libraryVersion.dbFlow}"
-    compile "com.github.Raizlabs.DBFlow:dbflow-rx2-kotlinextensions:${libraryVersion.dbFlow}"
-    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
-    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
+    implementation "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:${libraryVersion.dbFlow}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${libraryVersion.dbFlow}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow-rx2-kotlinextensions:${libraryVersion.dbFlow}"
+    implementation "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
     kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${libraryVersion.dbFlow}"
 }
 
