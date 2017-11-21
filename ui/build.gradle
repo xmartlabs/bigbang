@@ -52,24 +52,23 @@ android {
 dependencies {
     androidTestImplementation project(path: ':instrumental-test')
 
-    implementation "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    implementation "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
-    implementation "com.android.support:design:${libraryVersion.androidSupport}"
-    implementation "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
-    implementation "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    implementation "com.f2prateek.dart:dart:${libraryVersion.dart}"
-    implementation "com.f2prateek.dart:henson:${libraryVersion.dart}"
-    implementation "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
-    implementation "com.google.dagger:dagger:${libraryVersion.dagger}"
-    implementation "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
-    implementation "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
-    implementation "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
-    implementation "org.parceler:parceler-api:${libraryVersion.parceler}"
+    api project(path: ':core')
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':core')
+    api "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    api "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    api "com.android.support:design:${libraryVersion.androidSupport}"
+    api "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
+    api "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    api "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    api "com.f2prateek.dart:henson:${libraryVersion.dart}"
+    api "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    api "com.google.dagger:dagger:${libraryVersion.dagger}"
+    api "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
+    api "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
+    api "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
+    api "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    api "org.parceler:parceler-api:${libraryVersion.parceler}"
 
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"

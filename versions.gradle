@@ -11,7 +11,7 @@ ext {
     websiteUrl = 'https://github.com/xmartlabs/bigbang'
 
     libraryVersion = [
-        androidSupport: '27.0.0',
+        androidSupport: '27.0.1',
         androidSupportTest: '0.5',
         bullet: 'e5044b53df',
         butterKnife: '8.5.1',

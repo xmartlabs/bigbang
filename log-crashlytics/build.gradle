@@ -45,12 +45,12 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+    api project(path: ':core')
+
+    api('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true
     }
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
-    implementation project(path: ':core')
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
 }
 
 apply from: '../bintray.gradle'
