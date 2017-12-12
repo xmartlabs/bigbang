@@ -5,7 +5,8 @@ jobs:
       - image: circleci/android:api-26-alpha
     working_directory: ~/bigbang-template
     environment:
-      _JAVA_OPTIONS: "-Xmx1500m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+      _JAVA_OPTIONS: "-Xms512m -Xmx3072m"
       JVM_OPTS: -Xmx1024m
     resource_class: large
     steps:
@@ -28,7 +29,8 @@ jobs:
           background: true
       - run:
           name: Run Tests
-          command: ./gradlew testAllVersionsProductionDebugUnitTest
+          command: ./gradlew install
+              testAllVersionsProductionDebugUnitTest
               testAllVersionsProductionReleaseUnitTest
               testAllVersionsStagingReleaseUnitTest
               testAllVersionsStagingDebugUnitTest
@@ -36,8 +38,7 @@ jobs:
               lintAllVersionsProductionDebug
               lintAllVersionsStagingDebug
               lintAllVersionsStagingRelease
-              build
-              install
+              --no-daemon -Pkotlin.incremental=false --max-workers=2
       - store_artifacts:
           path: app/build/reports
           destination: reports
