@@ -38,7 +38,7 @@ android {
     }
     lintOptions {
         checkAllWarnings true
-        warning 'InvalidPackage'
+        ignore 'GradleDependency', 'NewerVersionAvailable'
         warningsAsErrors true
     }
     buildToolsVersion project.ext.buildToolsVersion
@@ -47,7 +47,7 @@ android {
 dependencies {
     api project(path: ':core')
 
-    api('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+    api("com.crashlytics.sdk.android:crashlytics:${libraryVersion.crashlytics}") {
         transitive = true
     }
     api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"

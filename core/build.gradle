@@ -41,7 +41,7 @@ android {
     }
     lintOptions {
         checkAllWarnings true
-        warning 'InvalidPackage'
+        ignore 'GradleDependency', 'NewerVersionAvailable'
         warningsAsErrors true
     }
     buildToolsVersion project.ext.buildToolsVersion

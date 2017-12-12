@@ -42,7 +42,7 @@ android {
     }
     lintOptions {
         checkAllWarnings true
-        warning 'InvalidPackage'
+        ignore 'GradleDependency', 'NewerVersionAvailable'
         warningsAsErrors true
     }
     buildToolsVersion project.ext.buildToolsVersion
@@ -52,9 +52,10 @@ dependencies {
     api project(':core')
 
     api "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    api "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
     api "com.github.Raizlabs.DBFlow:dbflow:${libraryVersion.dbFlow}"
+    api "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
     api "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${libraryVersion.dbFlow}"
+    api "com.github.Raizlabs.DBFlow:dbflow-rx2:${libraryVersion.dbFlow}"
     api "com.github.Raizlabs.DBFlow:dbflow-rx2-kotlinextensions:${libraryVersion.dbFlow}"
     api "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     api "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"

@@ -1,6 +1,6 @@
 package com.xmartlabs.bigbang.test.assertions
 
-import android.support.test.espresso.core.deps.guava.base.Preconditions
+import android.support.test.espresso.core.internal.deps.guava.base.Preconditions
 import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.v7.widget.RecyclerView
 import android.view.View

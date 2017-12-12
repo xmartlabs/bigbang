@@ -36,6 +36,8 @@ jobs:
               lintAllVersionsProductionDebug
               lintAllVersionsStagingDebug
               lintAllVersionsStagingRelease
+              build
+              install
       - store_artifacts:
           path: app/build/reports
           destination: reports
