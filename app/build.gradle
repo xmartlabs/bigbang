@@ -30,7 +30,7 @@ def getSignInformation = { keystorePath, keystorePropertyPath ->
         logger.error("Keystore properties file not found, path=${propertiesFile.absolutePath}")
         return
     }
-    def Properties properties = new Properties()
+    Properties properties = new Properties()
     properties.load(new FileInputStream(propertiesFile))
     return [
             storeFile    : keyStore,
@@ -106,7 +106,7 @@ android {
     //noinspection GroovyMissingReturnStatement
     lintOptions {
         checkAllWarnings true
-        ignore 'GradleDependency', 'NewerVersionAvailable'
+        ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors false
         abortOnError false
     }

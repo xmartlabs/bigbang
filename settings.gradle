@@ -1,1 +1,1 @@
-include ':app', ':core', ':ui', ':dbflow', ':retrofit', ':log-crashlytics', ':instrumental-test'
+include 'app', ':core', ':ui', ':dbflow', ':retrofit', ':log-crashlytics', ':instrumental-test'

@@ -43,7 +43,8 @@ android {
     }
     lintOptions {
         checkAllWarnings true
-        ignore 'GradleDependency', 'NewerVersionAvailable', 'UnusedResources'
+        ignore 'UnusedResources' // To keep base components
+        ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
     buildToolsVersion project.ext.buildToolsVersion

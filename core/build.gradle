@@ -41,7 +41,7 @@ android {
     }
     lintOptions {
         checkAllWarnings true
-        ignore 'GradleDependency', 'NewerVersionAvailable'
+        ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
     buildToolsVersion project.ext.buildToolsVersion
