@@ -46,6 +46,7 @@ android {
     defaultConfig {
         applicationId 'com.xmartlabs.template'
         minSdkVersion project.ext.minSdkVersion
+        multiDexEnabled true
         targetSdkVersion project.ext.targetSdkVersion
         versionCode project.ext.librariesVersionCode
         versionName project.ext.librariesVersion
@@ -122,6 +123,12 @@ android {
 }
 
 dependencies {
+    api project(path: ':core')
+    api project(path: ':log-crashlytics')
+    api project(path: ':retrofit')
+    api project(path: ':ui')
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
     implementation "com.android.support:cardview-v7:${libraryVersion.androidSupport}"
     implementation "com.android.support:design:${libraryVersion.androidSupport}"
@@ -154,11 +161,6 @@ dependencies {
     implementation "org.parceler:parceler-api:${libraryVersion.parceler}"
     implementation "com.github.square.picasso:picasso:${libraryVersion.picasso}"
     implementation 'com.viewpagerindicator:library:2.4.1'
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(path: ':core')
-    implementation project(path: ':log-crashlytics')
-    implementation project(path: ':retrofit')
-    implementation project(path: ':ui')
 
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
