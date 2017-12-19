@@ -6,8 +6,8 @@ jobs:
     working_directory: ~/bigbang-template
     environment:
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-      _JAVA_OPTIONS: "-Xms512m -Xmx3072m"
-      JVM_OPTS: -Xmx1024m
+      _JAVA_OPTIONS: "-Xms512m -Xmx2048m"
+      JVM_OPTS: -Xmx1500m
     resource_class: large
     steps:
       - checkout
@@ -26,7 +26,6 @@ jobs:
               assembleAndroidTest
               test
               lint
-              --no-daemon -Pkotlin.incremental=false --max-workers=1
       - store_artifacts:
           path: app/build/reports
           destination: reports
