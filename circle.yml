@@ -23,9 +23,19 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew clean install
+              :core:assembleDebug
+              :dbflow:assembleDebug
+              :instrumental-test:assembleDebug
+              :log-crashlytics:assembleDebug
+              :retrofit:assembleDebug
+              :ui:assembleDebug
               assembleAndroidTest
               test
               lint
+              --max-workers=2
+      - run:
+          name: Compile App Module
+          command: ./gradlew :app:compileLollipopAndAboveProductionReleaseSources --max-workers=1
       - store_artifacts:
           path: app/build/reports
           destination: reports
