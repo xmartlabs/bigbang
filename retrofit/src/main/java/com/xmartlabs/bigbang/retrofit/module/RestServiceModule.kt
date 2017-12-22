@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,11 +23,11 @@ open class RestServiceModule {
                       rxJavaCallAdapterFactory: RxJava2CallAdapterFactory,
                       gsonConverterFactory: GsonConverterFactory,
                       baseUrl: HttpUrl,
-                      serviceStringConverter: ServiceStringConverter): Retrofit {
+                      stringConverter: Converter.Factory): Retrofit {
     return Retrofit.Builder()
         .addCallAdapterFactory(rxJavaCallAdapterFactory)
         .addConverterFactory(gsonConverterFactory)
-        .addConverterFactory(serviceStringConverter)
+        .addConverterFactory(stringConverter)
         .baseUrl(baseUrl)
         .client(client)
         .build()
