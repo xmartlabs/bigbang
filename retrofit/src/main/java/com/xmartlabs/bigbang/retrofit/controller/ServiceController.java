@@ -22,7 +22,7 @@ import io.reactivex.SingleTransformer;
  * @param <Id> Type of the entity id
  * @param <E> Entity of the controller
  */
-public class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
+public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
     implements EntityServiceProvider<Id, E> {
   @CheckResult
   @NonNull
