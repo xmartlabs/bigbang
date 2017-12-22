@@ -6,7 +6,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.xmartlabs.bigbang.core.extensions.orDo
-import java.util.*
+import java.util.ArrayList
 
 /**
  * [RecyclerView.ItemDecoration] subclass designed to add spacing to item controlled by a [GridLayoutManager].

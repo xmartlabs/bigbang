@@ -6,12 +6,12 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import android.view.View
+import com.xmartlabs.bigbang.test.assertions.RecyclerViewAssertions
+import com.xmartlabs.bigbang.test.extensions.checkRecyclerViewAtPosition
+import com.xmartlabs.bigbang.test.extensions.checkRecyclerViewCountIs
 import com.xmartlabs.bigbang.ui.recyclerview.common.Brand
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car
-import com.xmartlabs.bigbang.ui.recyclerview.common.RecyclerViewAssertions
 import com.xmartlabs.bigbang.ui.test.R
-import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,19 +28,16 @@ class MultipleItemRecyclerViewTest {
     val activity = activityRule.activity
     activity.runOnUiThread { activity.setItems(brands) }
 
-    checkRecyclerViewCondition(RecyclerViewAssertions.countIs(6))
-    
+    val recyclerViewInteraction = onView(withId(R.id.recycler_view))
+    recyclerViewInteraction.check(matches(RecyclerViewAssertions.countIs(6)))
+
+    recyclerViewInteraction.checkRecyclerViewCountIs(6)
+
     brands
         .flatMap { mutableListOf(it.name).apply { addAll(it.cars.map(Car::model)) } }
         .forEachIndexed { index, brand ->
-          checkRecyclerViewCondition(
-              RecyclerViewAssertions.atPosition(index, withText(brand)))
+          recyclerViewInteraction.checkRecyclerViewAtPosition(index, withText(brand))
         }
-  }
-
-  private fun checkRecyclerViewCondition(viewMatcher: Matcher<View>) {
-    val recyclerViewInteraction = onView(withId(R.id.recycler_view))
-    recyclerViewInteraction.check(matches(viewMatcher))
   }
 
   private val brands: List<Brand>

@@ -1,0 +1,86 @@
+apply from: '../versions.gradle'
+
+ext {
+    projectName = "Instrumental Test"
+    versionCodeId = project.ext.librariesVersionCode
+    versionCodeNumber = project.ext.librariesVersion
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "instrumental-test"
+    PUBLISH_VERSION = versionCodeNumber
+}
+
+group = applicationId
+version = versionCodeNumber
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        multiDexEnabled true
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkAllWarnings true
+        ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
+        warningsAsErrors true
+    }
+    buildToolsVersion project.ext.buildToolsVersion
+}
+
+dependencies {
+    api project(path: ':core')
+
+    api "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    api "com.android.support:design:${libraryVersion.androidSupport}"
+    api "com.android.support:support-v13:${libraryVersion.androidSupport}"
+
+    api "com.android.support:support-annotations:${libraryVersion.androidSupport}"
+    api "com.android.support.test:rules:${libraryVersion.androidSupportTest}"
+    api("com.android.support.test:runner:${libraryVersion.androidSupportTest}") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    api("com.android.support.test.espresso:espresso-contrib:${libraryVersion.espresso}") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+    }
+    api("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    api "com.android.support.test.uiautomator:uiautomator-v18:${libraryVersion.uiautomator}"
+    api "com.android.support.test.espresso:espresso-intents:${libraryVersion.espresso}"
+
+    api "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
+    api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    api "com.jakewharton.timber:timber:${libraryVersion.timber}"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+}
+
+apply from: '../bintray.gradle'
+apply from: '../circleci.gradle'

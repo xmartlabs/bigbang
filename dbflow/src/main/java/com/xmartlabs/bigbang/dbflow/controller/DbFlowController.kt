@@ -28,7 +28,7 @@ open class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Pr
   override fun deleteAndInsertEntities(newEntities: List<D>, vararg conditions: SQLOperator) =
       delete(modelClass).where(*conditions).rx().execute()
           .observeOnIo()
-          .flatMap { newEntities.queryAction(BaseModel::save) }
+          .andThen(newEntities.queryAction(BaseModel::save))
 
   @CheckResult
   override fun getEntity(id: Id): Maybe<D> =
@@ -46,7 +46,7 @@ open class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Pr
 
   @CheckResult
   override fun deleteEntityWithId(entityId: Id) =
-      delete(modelClass).where(propertyId.eq(entityId)).rx().execute().toCompletable().observeOnIo()
+      delete(modelClass).where(propertyId.eq(entityId)).rx().execute().observeOnIo()
 
   @CheckResult
   override fun deleteEntity(entity: D) = entity.queryAction(BaseModel::delete).toCompletable().observeOnIo()

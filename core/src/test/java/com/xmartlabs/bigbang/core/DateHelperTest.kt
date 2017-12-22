@@ -10,7 +10,7 @@ import org.junit.Test
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.Month
-import java.util.*
+import java.util.TimeZone
 
 class DateHelperTest {
   companion object {

@@ -7,7 +7,7 @@ import com.xmartlabs.bigbang.core.log.LoggerTree
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
-import java.util.*
+import java.util.HashMap
 import javax.inject.Named
 import javax.inject.Singleton
 

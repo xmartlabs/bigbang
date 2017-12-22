@@ -15,7 +15,7 @@ class TestingTree : Timber.Tree() {
   
   private val loggingTree = ArrayList<TestingTreeNode>()
 
-  override fun log(priority: Int, tag: String?, message: String?, t: Throwable?) {
+  override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
     loggingTree.add(TestingTreeNode(priority, tag, message, t))
   }
 

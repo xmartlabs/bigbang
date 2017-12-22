@@ -5,7 +5,7 @@ import com.xmartlabs.bigbang.core.helper.ServiceHelper
 import com.xmartlabs.bigbang.core.log.LoggerTree
 import com.xmartlabs.bigbang.retrofit.exception.ServiceExceptionWithMessage
 import retrofit2.HttpException
-import java.util.*
+import java.util.HashMap
 import javax.inject.Inject
 
 /**
