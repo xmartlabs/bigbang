@@ -33,11 +33,11 @@ class ObjectHelperTest {
     val `object` = dummyAndDeepCopyOfDummy.first
     val deepCopy = dummyAndDeepCopyOfDummy.second
 
-    assertThat(deepCopy.otherObject, notNullValue())
-    assertThat(deepCopy.otherObject?.otherObject, notNullValue())
-    assertThat(`object`.otherObject === deepCopy.otherObject, `is`(false))
-    assertThat(`object`.otherObject === deepCopy.otherObject, `is`(false))
-    assertThat(`object`.otherObject?.otherObject === deepCopy.otherObject?.otherObject, `is`(false))
+    assertThat(deepCopy?.otherObject, notNullValue())
+    assertThat(deepCopy?.otherObject?.otherObject, notNullValue())
+    assertThat(`object`?.otherObject === deepCopy?.otherObject, `is`(false))
+    assertThat(`object`?.otherObject === deepCopy?.otherObject, `is`(false))
+    assertThat(`object`?.otherObject?.otherObject === deepCopy?.otherObject?.otherObject, `is`(false))
   }
 
   @Test
@@ -46,10 +46,10 @@ class ObjectHelperTest {
     val `object` = dummyAndCopy.first
     val deepCopy = dummyAndCopy.second
 
-    assertThat(`object`.otherObject == deepCopy.otherObject, `is`(true))
-    assertThat(`object`.otherObject?.integer == deepCopy.otherObject?.integer, `is`(true))
-    assertThat(`object`.string == deepCopy.string, `is`(true))
-    assertThat(`object`.otherObject?.string == deepCopy.otherObject?.string, `is`(true))
+    assertThat(`object`?.otherObject == deepCopy?.otherObject, `is`(true))
+    assertThat(`object`?.otherObject?.integer == deepCopy?.otherObject?.integer, `is`(true))
+    assertThat(`object`?.string == deepCopy?.string, `is`(true))
+    assertThat(`object`?.otherObject?.string == deepCopy?.otherObject?.string, `is`(true))
   }
 
   private fun createDummyObject() = DummyObject(1, "something", DummyObject(2, "something else", DummyObject()))

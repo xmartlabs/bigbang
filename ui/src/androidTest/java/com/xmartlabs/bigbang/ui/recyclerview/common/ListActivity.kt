@@ -8,7 +8,7 @@ import com.xmartlabs.bigbang.ui.test.R
 import com.xmartlabs.bigbang.ui.test.R.layout.activity_with_list
 
 abstract class ListActivity<T : RecyclerView.Adapter<*>> : Activity() {
-  internal lateinit var recyclerView: RecyclerView
+  private lateinit var recyclerView: RecyclerView
 
   lateinit var adapter: T
 

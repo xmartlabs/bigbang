@@ -13,7 +13,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import java.util.*
+import java.util.Locale
 
 object UiHelper {
   /**
@@ -142,9 +142,9 @@ object UiHelper {
   fun validateField(editText: EditText, isValid: (String) -> Pair<Boolean, String>): Boolean {
     val validation = isValid(editText.text.toString())
     UiHelper.getTextInputLayout(editText)?.let {
-      it.error = if (validation.first) null else validation.second
+      it.error = if (validation.first == true) null else validation.second
       it.isErrorEnabled = validation.second == null
     }
-    return validation.first
+    return validation.first ?: false
   }
 }

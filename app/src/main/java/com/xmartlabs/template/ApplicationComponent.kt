@@ -31,6 +31,7 @@ interface ApplicationComponent {
 
   fun inject(baseActivity: BaseActivity)
   fun inject(baseAppCompatActivity: BaseAppCompatActivity)
+  fun inject(mainActivity: MainActivity)
   fun inject(singleFragmentActivity: SingleFragmentActivity)
   fun inject(startActivity: StartActivity)
   
