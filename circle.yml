@@ -21,7 +21,7 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Buid
+          name: Build
           command: ./gradlew clean install
             --no-daemon -Pkotlin.incremental=false --max-workers=2
       - run:
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Assemble instrumental tests
           command: ./gradlew assembleAndroidTest
-            --no-daemon -Pkotlin.incremental=false --max-workers=2
+            --max-workers=1
       - run:
           name: Run Tests
           command: ./gradlew test
