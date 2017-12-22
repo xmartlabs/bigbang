@@ -41,48 +41,47 @@ android {
     }
     lintOptions {
         checkAllWarnings true
-        warning 'InvalidPackage'
+        ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
+    buildToolsVersion project.ext.buildToolsVersion
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile 'com.android.support:multidex:1.0.1'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
         exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    androidTestCompile "com.crittercism.dexmaker:dexmaker:${libraryVersion.dexmaker}"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${libraryVersion.dexmaker}"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
-    androidTestCompile "junit:junit:${libraryVersion.junit}"
-    androidTestCompile "org.mockito:mockito-core:${libraryVersion.mockito}"
-    compile "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    compile "com.android.support:design:${libraryVersion.androidSupport}"
-    compile "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    compile "com.f2prateek.dart:dart:${libraryVersion.dart}"
-    compile "com.f2prateek.dart:henson:${libraryVersion.dart}"
-    compile 'com.github.mrmike:Ok2Curl:0.2.5'
-    compile 'com.github.square.picasso:picasso:8c16e8564e'
-    compile "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
-    compile "com.github.xmartlabs:Traceur:${libraryVersion.traceur}"
-    compile "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
-    compile "com.google.dagger:dagger:${libraryVersion.dagger}"
-    compile "com.google.code.gson:gson:${libraryVersion.gson}"
-    compile "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
-    compile "com.jakewharton.timber:timber:${libraryVersion.timber}"
-    compile "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
-    compile "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
-    compile "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
-    compile "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
-    compile "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    }
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker:${libraryVersion.dexmaker}"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker-dx:${libraryVersion.dexmaker}"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
+    androidTestImplementation "junit:junit:${libraryVersion.junit}"
+    androidTestImplementation "org.mockito:mockito-core:${libraryVersion.mockito}"
+    api "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    api "com.android.support:design:${libraryVersion.androidSupport}"
+    api "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    api "com.f2prateek.dart:dart:${libraryVersion.dart}"
+    api "com.f2prateek.dart:henson:${libraryVersion.dart}"
+    api "com.github.mrmike:Ok2Curl:${libraryVersion.ok2Curl}"
+    api "com.github.square.picasso:picasso:${libraryVersion.picasso}"
+    api "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
+    api "com.github.xmartlabs:Traceur:${libraryVersion.traceur}"
+    api "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
+    api "com.google.dagger:dagger:${libraryVersion.dagger}"
+    api "com.google.code.gson:gson:${libraryVersion.gson}"
+    api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
+    api "com.jakewharton.timber:timber:${libraryVersion.timber}"
+    api "com.squareup.okhttp3:okhttp:${libraryVersion.okHttp}"
+    api "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
+    api "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
+    api "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
+    api "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
     kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
-    testCompile "junit:junit:${libraryVersion.junit}"
-    testCompile ('org.threeten:threetenbp:1.3.6') {
+    testImplementation "junit:junit:${libraryVersion.junit}"
+    testImplementation ("org.threeten:threetenbp:${libraryVersion.threetenbp}") {
         exclude group:'com.jakewharton.threetenabp', module:'threetenabp'
     }
 }

@@ -2,7 +2,7 @@ package com.xmartlabs.bigbang.ui.common.recyclerview
 
 import android.support.annotation.MainThread
 import android.support.v7.widget.RecyclerView
-import java.util.*
+import java.util.Arrays
 
 /**
  * A Base RecyclerViewAdapter with already implemented functions such as

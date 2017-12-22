@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Ignore everything in the test source set -->
+    <issue id="InvalidPackage">
+        <ignore path="/*/*.jar" />
+    </issue>
+</lint>

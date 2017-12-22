@@ -5,7 +5,7 @@ import com.xmartlabs.bigbang.core.common.GsonExcludeStrategy
 import com.xmartlabs.bigbang.core.model.BuildInfo
 import dagger.Module
 import dagger.Provides
-import java.util.*
+import java.util.ArrayList
 import javax.inject.Singleton
 
 @Module

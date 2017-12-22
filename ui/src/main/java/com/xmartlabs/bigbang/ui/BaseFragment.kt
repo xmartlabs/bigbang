@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.fragmentargs.FragmentArgs
 import com.trello.rxlifecycle2.components.support.RxFragment
@@ -50,9 +51,9 @@ abstract class BaseFragment : RxFragment() {
     Injector.inject(this)
   }
   
-  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) =
-      inflater!!.inflate(layoutResId, container, false)
-  
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
+      inflater.inflate(layoutResId, container, false)
+
   @Suppress("OverridingDeprecatedMember", "DEPRECATION")
   override fun onAttach(activity: Activity?) {
     super.onAttach(activity)
@@ -82,29 +83,31 @@ abstract class BaseFragment : RxFragment() {
    * Show a simple alert with an ok button.
    * @param stringResId the message to be shown in the alert
    */
-  open protected fun showAlertError(stringResId: Int) = AlertDialog.Builder(context)
-      .setMessage(stringResId)
-      .setNeutralButton(android.R.string.ok, null)
-      .show()
-  
-  /** Shows a progress dialog, provided the method [.createProgressDialog] return an object that isn't null.  */
-  open fun showProgressDialog() = progressDialog?.show()
-  
-  /** Hides the progress dialog shown with [.showProgressDialog], if such a dialog was ever shown (and exists).  */
-  open fun hideProgressDialog() = progressDialog?.hide()
-  
-  /** Removes the Fragment from the [BaseAppCompatActivity] Activity.  */
-  open protected fun removeItselfFromActivity() = (activity as? BaseAppCompatActivity)?.removeFragment(this)
-  
-  /** Removes the Fragment from its parent  */
-  open protected fun removeItselfFromParentFragment() {
-    parentFragment?.childFragmentManager?.beginTransaction()?.remove(this)?.commit()
+  open protected fun showAlertError(stringResId: Int) = context?.let {
+    AlertDialog.Builder(it)
+        .setMessage(stringResId)
+        .setNeutralButton(android.R.string.ok, null)
+        .show()
   }
   
-  /**
-   * If the Fragment is contained within another Fragment, it removes the former.
-   * Otherwise, removes the Fragment from the [BaseAppCompatActivity] Activity.
-   */
-  open protected fun removeItselfFromParent() =
-      if (parentFragment != null) removeItselfFromParentFragment() else removeItselfFromActivity()
+    /** Shows a progress dialog, provided the method [.createProgressDialog] return an object that isn't null.  */
+    open fun showProgressDialog() = progressDialog?.show()
+  
+    /** Hides the progress dialog shown with [.showProgressDialog], if such a dialog was ever shown (and exists).  */
+    open fun hideProgressDialog() = progressDialog?.hide()
+  
+    /** Removes the Fragment from the [BaseAppCompatActivity] Activity.  */
+    open protected fun removeItselfFromActivity() = (activity as? BaseAppCompatActivity)?.removeFragment(this)
+  
+    /** Removes the Fragment from its parent  */
+    open protected fun removeItselfFromParentFragment() {
+      parentFragment?.childFragmentManager?.beginTransaction()?.remove(this)?.commit()
+    }
+  
+    /**
+     * If the Fragment is contained within another Fragment, it removes the former.
+     * Otherwise, removes the Fragment from the [BaseAppCompatActivity] Activity.
+     */
+    open protected fun removeItselfFromParent() =
+        if (parentFragment != null) removeItselfFromParentFragment() else removeItselfFromActivity()
 }
