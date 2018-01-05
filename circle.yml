@@ -3,11 +3,11 @@ jobs:
   build:
     docker:
       - image: circleci/android:api-26-alpha
-    working_directory: ~/bigbang-template
+    working_directory: ~/bigbang
     environment:
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-      _JAVA_OPTIONS: "-Xms512m -Xmx2048m"
-      JVM_OPTS: -Xmx1500m
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3072m -XX:+HeapDumpOnOutOfMemoryError"'
+      _JAVA_OPTIONS: "-Xmx3072m"
+      JVM_OPTS: -Xmx3072m
     resource_class: large
     steps:
       - checkout
@@ -21,18 +21,27 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Run Tests
+          name: Build
           command: ./gradlew clean install
-              :core:assembleDebug
-              :dbflow:assembleDebug
-              :instrumental-test:assembleDebug
-              :log-crashlytics:assembleDebug
-              :retrofit:assembleDebug
-              :ui:assembleDebug
-              assembleAndroidTest
-              test
+            --no-daemon -Pkotlin.incremental=false --max-workers=2
+      - run:
+          name: Assemble modules
+          command: ./gradlew :core:assembleDebug
+            :dbflow:assembleDebug
+            :instrumental-test:assembleDebug
+            :log-crashlytics:assembleDebug
+            :retrofit:assembleDebug
+            :ui:assembleDebug
+            --no-daemon -Pkotlin.incremental=false --max-workers=2
+      - run:
+          name: Assemble instrumental tests
+          command: ./gradlew assembleAndroidTest
+            --max-workers=2
+      - run:
+          name: Run Tests
+          command: ./gradlew test
               lint
-              --max-workers=2
+              --no-daemon -Pkotlin.incremental=false --max-workers=2
       - run:
           name: Compile App Module
           command: ./gradlew :app:compileLollipopAndAboveProductionReleaseSources --max-workers=1
