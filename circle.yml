@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/android:api-26-alpha
-    working_directory: ~/bigbang-template
+    working_directory: ~/bigbang
     environment:
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
       _JAVA_OPTIONS: "-Xmx2048m"
