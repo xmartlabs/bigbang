@@ -5,9 +5,9 @@ jobs:
       - image: circleci/android:api-26-alpha
     working_directory: ~/bigbang
     environment:
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
-      _JAVA_OPTIONS: "-Xmx2048m"
-      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3072m -XX:+HeapDumpOnOutOfMemoryError"'
+      _JAVA_OPTIONS: "-Xmx3072m"
+      JVM_OPTS: -Xmx3072m
     resource_class: large
     steps:
       - checkout
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Assemble instrumental tests
           command: ./gradlew assembleAndroidTest
-            --max-workers=1
+            --max-workers=2
       - run:
           name: Run Tests
           command: ./gradlew test
