@@ -13,6 +13,7 @@ import com.xmartlabs.bigbang.core.Injector
 import com.xmartlabs.bigbang.core.log.analytics.AnalyticsManager
 import com.xmartlabs.bigbang.core.log.analytics.TrackableAnalytic
 import com.xmartlabs.bigbang.ui.common.BaseProgressDialog
+import com.xmartlabs.bigbang.ui.extension.removeFragment
 import javax.inject.Inject
 
 /**
