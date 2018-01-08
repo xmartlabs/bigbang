@@ -1,12 +1,14 @@
-package com.xmartlabs.bigbang.ui.extension
+package com.xmartlabs.bigbang.core.extensions
 
 import android.content.res.Resources
 import android.content.res.Resources.Theme
 import android.support.annotation.AttrRes
 import android.support.annotation.Dimension
+import android.support.annotation.VisibleForTesting
 import android.support.v7.app.ActionBar
 
-private val displayMetrics = Resources.getSystem().displayMetrics
+@VisibleForTesting
+var displayMetrics = Resources.getSystem().displayMetrics
 
 /**
  * Converts the `dp` value to pixels dimension.
@@ -31,6 +33,30 @@ val Int.pxToDp: Int
  */
 val Int.spToPx: Int
   @Dimension(unit = Dimension.SP) get() = (this * displayMetrics.scaledDensity).toInt()
+
+/**
+ * Converts the `dp` value to pixels dimension.
+ *
+ * @return the converted `dp` value to integer pixels
+ */
+val Float.dpToPx: Float
+  @Dimension(unit = Dimension.PX) get() = (this * displayMetrics.density)
+
+/**
+ * Converts the `px` value to dp.
+ *
+ * @return the converted `px` value to dp
+ */
+val Float.pxToDp: Float
+  @Dimension(unit = Dimension.DP) get() = (this / displayMetrics.density)
+
+/**
+ * Converts the `sp` value to pixels dimension.
+ *
+ * @return the converted `sp` value to pixels
+ */
+val Float.spToPx: Float
+  @Dimension(unit = Dimension.SP) get() = (this * displayMetrics.scaledDensity)
 
 /**
  * Retrieves the toolbar height of an app theme.

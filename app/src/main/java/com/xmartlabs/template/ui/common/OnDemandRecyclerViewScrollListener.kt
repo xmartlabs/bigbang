@@ -4,7 +4,7 @@ import android.support.annotation.Dimension
 import android.support.annotation.Px
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.RecyclerView
-import com.xmartlabs.bigbang.ui.extension.dpToPx
+import com.xmartlabs.bigbang.core.extensions.dpToPx
 
 /** An OnDemandLoadingScrollListener for recycler view pagination */
 abstract class OnDemandRecyclerViewScrollListener(private val recyclerView: RecyclerView) : NestedScrollView.OnScrollChangeListener {
