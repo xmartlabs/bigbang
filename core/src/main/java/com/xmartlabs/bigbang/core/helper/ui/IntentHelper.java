@@ -91,7 +91,7 @@ public class IntentHelper {
       intent.putExtra(Intent.EXTRA_SUBJECT, subject);
     }
     if (!StringUtils.isNullOrEmpty(body)) {
-      intent.putExtra(Intent.EXTRA_TEXT, subject);
+      intent.putExtra(Intent.EXTRA_TEXT, body);
     }
 
     if (!StringUtils.isNullOrEmpty(filePath)) {
