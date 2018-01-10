@@ -7,6 +7,7 @@ import com.xmartlabs.bigbang.core.log.LoggerTree
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import timber.log.Timber
 import java.util.HashMap
 import javax.inject.Named
 import javax.inject.Singleton
@@ -17,10 +18,18 @@ open class PicassoModule {
     private const val LOGGER_KEY_URL = "url"
     private const val LOGGER_KEY_MESSAGE = "message"
   }
-  
+
   @Provides
   @Singleton
-  open fun providePicasso(picassoBuilder: Picasso.Builder) = picassoBuilder.build()
+  open fun providePicasso(picassoBuilder: Picasso.Builder): Picasso {
+    val providePicasso = picassoBuilder.build()
+    try {
+      Picasso.setSingletonInstance(providePicasso)
+    } catch (illegalStateException: IllegalStateException) {
+      Timber.w(illegalStateException)
+    }
+    return providePicasso
+  }
 
   @Provides
   @Singleton
@@ -28,7 +37,7 @@ open class PicassoModule {
       Picasso.Builder(context)
           .downloader(downloader)
           .listener(getPicassoListener(loggerTree))
-  
+
   private fun getPicassoListener(loggerTree: LoggerTree) = Picasso.Listener { _, uri, exception ->
     val data = HashMap<String, String>()
     uri?.let { data.put(LOGGER_KEY_URL, it.toString()) }
