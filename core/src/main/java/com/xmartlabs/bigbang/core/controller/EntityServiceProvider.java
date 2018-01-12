@@ -10,6 +10,7 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.CompletableTransformer;
 import io.reactivex.Maybe;
+import io.reactivex.MaybeTransformer;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 
@@ -21,6 +22,32 @@ import io.reactivex.SingleTransformer;
  */
 public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
   /**
+   * @deprecated
+   *
+   * Provides the service {@link Completable} transformation.
+   * It could be used to sign out the user when getting a service error for example.
+   *
+   * @return The {@link Completable} transformation
+   */
+  @CheckResult
+  @Deprecated
+  @NonNull
+  CompletableTransformer applyCompletableServiceTransformation();
+
+  /**
+   *
+   * Provides the service {@link Maybe} transformation.
+   * It could be used to sign out the user when getting a service error for example.
+   *
+   * @return The {@link Maybe} transformation
+   */
+  @CheckResult
+  @NonNull
+  <S> MaybeTransformer<S, S> applyMaybeServiceTransformation();
+
+  /**
+   * @deprecated
+   *
    * Provides the service {@link Single} transformation.
    * It could be used to sign out the user when getting a service error for example.
    *
@@ -28,18 +55,9 @@ public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
    * @return The {@link Single} transformation
    */
   @CheckResult
+  @Deprecated
   @NonNull
   <S> SingleTransformer<S, S> applySingleServiceTransformation();
-
-  /**
-   * Provides the service {@link Completable} transformation.
-   * It could be used to sign out the user when getting a service error for example.
-   *
-   * @return The {@link Completable} transformation
-   */
-  @CheckResult
-  @NonNull
-  CompletableTransformer applyCompletableServiceTransformation();
 
   /**
    * Provides an entity {@link E} from a service which gives a list of {@link E}.

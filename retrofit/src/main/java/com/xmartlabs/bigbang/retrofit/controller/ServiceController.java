@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.reactivex.CompletableTransformer;
 import io.reactivex.Maybe;
+import io.reactivex.MaybeTransformer;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
@@ -25,17 +26,26 @@ import io.reactivex.SingleTransformer;
 public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
     implements EntityServiceProvider<Id, E> {
   @CheckResult
+  @Deprecated
   @NonNull
   @Override
-  public <S> SingleTransformer<S, S> applySingleServiceTransformation() {
-    return applySingleIoSchedulers();
+  public CompletableTransformer applyCompletableServiceTransformation() {
+    return applyCompletableIoSchedulers();
   }
 
   @CheckResult
   @NonNull
   @Override
-  public CompletableTransformer applyCompletableServiceTransformation() {
-    return applyCompletableIoSchedulers();
+  public <S> MaybeTransformer<S, S> applyMaybeServiceTransformation() {
+    return applyMaybeIoSchedulersTransformation();
+  }
+
+  @CheckResult
+  @Deprecated
+  @NonNull
+  @Override
+  public <S> SingleTransformer<S, S> applySingleServiceTransformation() {
+    return applySingleIoSchedulers();
   }
 
   @CheckResult
