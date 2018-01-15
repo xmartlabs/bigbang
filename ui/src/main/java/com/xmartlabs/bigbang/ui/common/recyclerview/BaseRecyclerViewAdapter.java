@@ -286,7 +286,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         //noinspection unchecked
         return Exceptional.of(() -> areItemsTheSameFunction.apply(
             (T) items.get(oldItemPosition).getItem(),
-            (T) newItems.get(newItemPosition)))
+            newItems.get(newItemPosition)))
             .ifException(Timber::w)
             .getOrElse(false);
       }
@@ -296,7 +296,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         //noinspection unchecked
         return Exceptional.of(() -> areContentTheSameFunction.apply(
             (T) items.get(oldItemPosition).getItem(),
-             newItems.get(newItemPosition)))
+            newItems.get(newItemPosition)))
             .ifException(Timber::w)
             .getOrElse(false);
       }
