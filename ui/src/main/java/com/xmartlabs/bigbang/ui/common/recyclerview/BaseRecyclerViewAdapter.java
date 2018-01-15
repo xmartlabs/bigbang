@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.annimon.stream.Exceptional;
 import com.annimon.stream.IntPair;
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
@@ -31,6 +32,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import timber.log.Timber;
 
 /**
  * A Base RecyclerViewAdapter with already implemented functions such as
@@ -236,9 +238,9 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param areItemsTheSameFunction   A function which checks that two items are the same.
    * @param areContentTheSameFunction A function which checks that the content of two items are the same.
    */
-  protected void setMultipleTypeItems(final @Nullable List<Pair<? extends RecycleItemType,?>> newItems,
-                                                      @NonNull BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
-                                                      @NonNull BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+  protected <T> void setMultipleTypeItems(final @Nullable List<Pair<? extends RecycleItemType,T>> newItems,
+                                                      @NonNull BiFunction<T, T, Boolean> areItemsTheSameFunction,
+                                                      @NonNull BiFunction<T, T, Boolean> areContentTheSameFunction) {
     if (CollectionHelper.isNullOrEmpty(newItems)) {
       return;
     }
@@ -259,10 +261,10 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
   }
 
   @NonNull
-  private DiffUtil.Callback getUpdateDiffCallback(
+  private <T> DiffUtil.Callback getUpdateDiffCallback(
       @NonNull final List<?> newItems,
-      @NonNull final BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
-      @NonNull final BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+      @NonNull final BiFunction<T, T, Boolean> areItemsTheSameFunction,
+      @NonNull final BiFunction<T, T, Boolean> areContentTheSameFunction) {
     return new DiffUtil.Callback() {
       @Override
       public int getOldListSize() {
@@ -276,16 +278,22 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
       @Override
       public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return areItemsTheSameFunction.apply(
-            items.get(oldItemPosition).getItem(),
-            newItems.get(newItemPosition));
+        //noinspection unchecked
+        return Exceptional.of(() -> areItemsTheSameFunction.apply(
+            (T) items.get(oldItemPosition).getItem(),
+            (T) newItems.get(newItemPosition)))
+            .ifException(Timber::w)
+            .getOrElse(false);
       }
 
       @Override
       public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return areContentTheSameFunction.apply(
-            BaseRecyclerViewAdapter.this.items.get(oldItemPosition).getItem(),
-            newItems.get(newItemPosition));
+        //noinspection unchecked
+        return Exceptional.of(() -> areContentTheSameFunction.apply(
+            (T) items.get(oldItemPosition).getItem(),
+            (T) newItems.get(newItemPosition)))
+            .ifException(Timber::w)
+            .getOrElse(false);
       }
     };
   }
