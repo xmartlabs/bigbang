@@ -206,9 +206,9 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param areContentTheSameFunction A function which checks that the content of two items are the same.
    */
   @SuppressWarnings("WeakerAccess")
-  protected <T extends RecycleItemType> void setItems(@NonNull T type, final @Nullable List<?> newItems,
-                                                      @NonNull BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
-                                                      @NonNull BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+  protected <T, R extends RecycleItemType> void setItems(@NonNull R type, final @Nullable List<T> newItems,
+                                                      @NonNull BiFunction<T, T, Boolean> areItemsTheSameFunction,
+                                                      @NonNull BiFunction<T, T, Boolean> areContentTheSameFunction) {
     if (CollectionHelper.isNullOrEmpty(newItems)) {
       return;
     }
