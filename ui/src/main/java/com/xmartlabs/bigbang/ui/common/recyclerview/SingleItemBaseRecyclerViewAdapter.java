@@ -81,9 +81,9 @@ public abstract class SingleItemBaseRecyclerViewAdapter<T, VH extends RecyclerVi
    * @param areItemsTheSameFunction   A function which checks that two items are the same.
    * @param areContentTheSameFunction A function which checks that the content of two items are the same.
    */
-  protected void setItems(final @Nullable List<?> newItems,
-                          @NonNull BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
-                          @NonNull BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+  protected void setItems(final @Nullable List<T> newItems,
+                          @NonNull BiFunction<T, T, Boolean> areItemsTheSameFunction,
+                          @NonNull BiFunction<T, T, Boolean> areContentTheSameFunction) {
     setItems(this, newItems, areItemsTheSameFunction, areContentTheSameFunction);
   }
 
