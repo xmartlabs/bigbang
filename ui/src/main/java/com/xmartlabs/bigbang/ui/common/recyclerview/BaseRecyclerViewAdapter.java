@@ -234,6 +234,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
+   * @param <T>                       Type of the items to be added.
    * @param newItems                  Items to be added. Each Pair consists of an item and its RecycleItemType.
    * @param areItemsTheSameFunction   A function which checks that two items are the same.
    * @param areContentTheSameFunction A function which checks that the content of two items are the same.
@@ -248,8 +249,12 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
     if (updateElementsDisposable != null && !updateElementsDisposable.isDisposed()) {
       updateElementsDisposable.dispose();
     }
+    List<T> newItemsContent = Stream.ofNullable(newItems)
+        .map(pair -> pair.second)
+        .toList();
+
     updateElementsDisposable = Single.fromCallable(() -> DiffUtil
-        .calculateDiff(getUpdateDiffCallback(newItems, areItemsTheSameFunction, areContentTheSameFunction)))
+        .calculateDiff(getUpdateDiffCallback(newItemsContent, areItemsTheSameFunction, areContentTheSameFunction)))
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(diffResult -> {
@@ -262,7 +267,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
 
   @NonNull
   private <T> DiffUtil.Callback getUpdateDiffCallback(
-      @NonNull final List<?> newItems,
+      @NonNull final List<T> newItems,
       @NonNull final BiFunction<T, T, Boolean> areItemsTheSameFunction,
       @NonNull final BiFunction<T, T, Boolean> areContentTheSameFunction) {
     return new DiffUtil.Callback() {
@@ -291,7 +296,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         //noinspection unchecked
         return Exceptional.of(() -> areContentTheSameFunction.apply(
             (T) items.get(oldItemPosition).getItem(),
-            (T) newItems.get(newItemPosition)))
+             newItems.get(newItemPosition)))
             .ifException(Timber::w)
             .getOrElse(false);
       }
