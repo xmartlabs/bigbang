@@ -11,11 +11,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by bruno on 1/12/18.
+ * Contains RXJava's Transformers
  */
 public class RxTransformerHelper {
   /**
-   *
+   * CompletableTransformer that subscribes and observes the stream on Io bound {@link Schedulers}.
    */
   @NonNull
   public static final CompletableTransformer completableIoTransformer = upstream -> upstream
@@ -23,7 +23,7 @@ public class RxTransformerHelper {
       .observeOn(Schedulers.io());
 
   /**
-   *
+   * FlowableTransformer that subscribes and observes the stream on Io bound {@link Schedulers}.
    */
   @NonNull
   public static final FlowableTransformer flowableIoTransformer = upstream -> upstream
@@ -31,7 +31,7 @@ public class RxTransformerHelper {
       .observeOn(Schedulers.io());
 
   /**
-   *
+   * MaybeTransformer that subscribes and observes the stream on Io bound {@link Schedulers}.
    */
   @NonNull
   public static final MaybeTransformer maybeIoTransformer = upstream -> upstream
@@ -39,7 +39,7 @@ public class RxTransformerHelper {
       .observeOn(Schedulers.io());
 
   /**
-   *
+   * ObservableTransformer that subscribes and observes the stream on Io bound {@link Schedulers}.
    */
   @NonNull
   public static final ObservableTransformer observableIoTransformer = upstream -> upstream
@@ -47,7 +47,7 @@ public class RxTransformerHelper {
       .observeOn(Schedulers.io());
 
   /**
-   *
+   * SingleTransformer that subscribes and observes the stream on Io bound {@link Schedulers}.
    */
   @NonNull
   public static final SingleTransformer singleIoTransformer = upstream -> upstream
@@ -55,6 +55,12 @@ public class RxTransformerHelper {
       .observeOn(Schedulers.io());
 
   /**
+   * @deprecated The transformer shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #singleIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
+   *
+   * CompletableTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * it on the {Android main thread.
    *
    */
   @Deprecated
@@ -64,6 +70,12 @@ public class RxTransformerHelper {
       .observeOn(AndroidSchedulers.mainThread());
 
   /**
+   * @deprecated The transformer shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #singleIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
+   *
+   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * it on the {Android main thread.
    *
    */
   @Deprecated
@@ -73,6 +85,12 @@ public class RxTransformerHelper {
       .observeOn(AndroidSchedulers.mainThread());
 
   /**
+   * @deprecated The transformer shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #singleIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
+   *
+   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * it on the {Android main thread.
    *
    */
   @Deprecated
@@ -82,6 +100,12 @@ public class RxTransformerHelper {
       .observeOn(AndroidSchedulers.mainThread());
 
   /**
+   * @deprecated The transformer shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #singleIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
+   *
+   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * it on the {Android main thread.
    *
    */
   @Deprecated
@@ -91,6 +115,12 @@ public class RxTransformerHelper {
       .observeOn(AndroidSchedulers.mainThread());
 
   /**
+   * @deprecated The transformer shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #singleIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
+   *
+   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * it on the {Android main thread.
    *
    */
   @Deprecated

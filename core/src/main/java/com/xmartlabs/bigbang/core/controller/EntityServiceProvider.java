@@ -22,7 +22,6 @@ import io.reactivex.SingleTransformer;
  */
 public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
   /**
-   * @deprecated
    *
    * Provides the service {@link Completable} transformation.
    * It could be used to sign out the user when getting a service error for example.
@@ -30,7 +29,6 @@ public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
    * @return The {@link Completable} transformation
    */
   @CheckResult
-  @Deprecated
   @NonNull
   CompletableTransformer applyCompletableServiceTransformation();
 
@@ -46,7 +44,6 @@ public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
   <S> MaybeTransformer<S, S> applyMaybeServiceTransformation();
 
   /**
-   * @deprecated
    *
    * Provides the service {@link Single} transformation.
    * It could be used to sign out the user when getting a service error for example.
@@ -55,7 +52,6 @@ public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
    * @return The {@link Single} transformation
    */
   @CheckResult
-  @Deprecated
   @NonNull
   <S> SingleTransformer<S, S> applySingleServiceTransformation();
 

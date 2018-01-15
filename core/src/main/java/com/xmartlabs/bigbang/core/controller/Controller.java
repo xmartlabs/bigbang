@@ -29,7 +29,7 @@ public abstract class Controller {
 
   /**
    * Provides the Io schedule {@link Single} transformation.
-   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
    */
@@ -41,7 +41,7 @@ public abstract class Controller {
 
   /**
    * Provides the Io schedule {@link Single} transformation.
-   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
    */
@@ -54,7 +54,7 @@ public abstract class Controller {
 
   /**
    * Provides the Io schedule {@link Single} transformation.
-   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
    */
@@ -67,7 +67,7 @@ public abstract class Controller {
 
   /**
    * Provides the Io schedule {@link Single} transformation.
-   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
    */
@@ -80,7 +80,7 @@ public abstract class Controller {
 
   /**
    * Provides the Io schedule {@link Single} transformation.
-   * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
+   * Subscribes and observes the stream on Io bound {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
    */
@@ -92,7 +92,9 @@ public abstract class Controller {
   }
 
   /**
-   * @deprecated
+   * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Completable} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
@@ -107,7 +109,9 @@ public abstract class Controller {
   }
 
   /**
-   * @deprecated
+   * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Observable} transformation.
    * Subscribes the stream to Io bound {@link Flowable} and observes it in the {Android main thread.
@@ -123,7 +127,9 @@ public abstract class Controller {
   }
 
   /**
-   * @deprecated
+   * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Maybe} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
@@ -139,7 +145,9 @@ public abstract class Controller {
   }
 
   /**
-   * @deprecated
+   * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Observable} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
@@ -155,7 +163,9 @@ public abstract class Controller {
   }
 
   /**
-   * @deprecated
+   * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
+   * to decide when to observe on the main thread. Instead of this, use
+   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Single} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.

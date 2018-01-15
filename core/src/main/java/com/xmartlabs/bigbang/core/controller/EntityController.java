@@ -62,7 +62,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
         .scan((databaseEntities, serviceEntities) ->
             entityDao.deleteAndInsertEntities(serviceEntities, conditions).blockingGet()
         )
-        .compose(applyFlowableIoSchedulers());
+        .compose(applyFlowableIoSchedulersTransformation());
   }
 
   /**

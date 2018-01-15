@@ -26,11 +26,10 @@ import io.reactivex.SingleTransformer;
 public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
     implements EntityServiceProvider<Id, E> {
   @CheckResult
-  @Deprecated
   @NonNull
   @Override
   public CompletableTransformer applyCompletableServiceTransformation() {
-    return applyCompletableIoSchedulers();
+    return applyCompletableIoSchedulersTransformation();
   }
 
   @CheckResult
@@ -41,11 +40,10 @@ public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends 
   }
 
   @CheckResult
-  @Deprecated
   @NonNull
   @Override
   public <S> SingleTransformer<S, S> applySingleServiceTransformation() {
-    return applySingleIoSchedulers();
+    return applySingleIoSchedulersTransformation();
   }
 
   @CheckResult

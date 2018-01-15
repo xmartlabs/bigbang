@@ -17,7 +17,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -168,7 +167,7 @@ public class SharedPreferencesController extends Controller {
           .putString(key, serializedValue)
           .commit();
       return value;
-    }).compose(applySingleIoSchedulers());
+    }).compose(applySingleIoSchedulersTransformation());
   }
 
   /**
