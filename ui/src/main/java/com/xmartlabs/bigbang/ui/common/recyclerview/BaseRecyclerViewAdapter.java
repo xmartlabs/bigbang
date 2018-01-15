@@ -236,7 +236,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
    * @param areItemsTheSameFunction   A function which checks that two items are the same.
    * @param areContentTheSameFunction A function which checks that the content of two items are the same.
    */
-  protected <T extends RecycleItemType> void setMultipleTypeItems(final @Nullable List<Pair<T,?>> newItems,
+  protected void setMultipleTypeItems(final @Nullable List<Pair<? extends RecycleItemType,?>> newItems,
                                                       @NonNull BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
                                                       @NonNull BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
     if (CollectionHelper.isNullOrEmpty(newItems)) {
@@ -253,7 +253,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
         .subscribe(diffResult -> {
           items.clear();
           Stream.of(newItems)
-              .forEach(pair -> addItemWithoutNotifying(pair.second, pair.first, true));
+              .forEach(pair -> addItemWithoutNotifying(pair.first, pair.second, true));
           diffResult.dispatchUpdatesTo(this);
         });
   }
