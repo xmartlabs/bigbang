@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.Pair;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import android.view.ViewGroup;
 import com.annimon.stream.IntPair;
 import com.annimon.stream.Objects;
 import com.annimon.stream.Stream;
-import com.annimon.stream.function.Predicate;
 import com.xmartlabs.bigbang.core.helper.CollectionHelper;
 import com.xmartlabs.bigbang.core.helper.ObjectHelper;
 import com.xmartlabs.bigbang.core.helper.function.BiFunction;
@@ -223,6 +223,37 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
           Stream.of(newItems)
               .forEach(item -> addItemWithoutNotifying(type, item, false));
           addItemTypeIfNeeded(type);
+          diffResult.dispatchUpdatesTo(this);
+        });
+  }
+
+  /**
+   * Sets the items data for the recycler view and notifying any registered observers that the data set has
+   * changed. It uses a function that calculates the difference between the old and the new items
+   * in order to improve the update process.
+   *
+   * @param newItems                  Items to be added. Each Pair consists of an item and its RecycleItemType.
+   * @param areItemsTheSameFunction   A function which checks that two items are the same.
+   * @param areContentTheSameFunction A function which checks that the content of two items are the same.
+   */
+  protected <T extends RecycleItemType> void setMultipleTypeItems(final @Nullable List<Pair<?,T>> newItems,
+                                                      @NonNull BiFunction<Object, Object, Boolean> areItemsTheSameFunction,
+                                                      @NonNull BiFunction<Object, Object, Boolean> areContentTheSameFunction) {
+    if (CollectionHelper.isNullOrEmpty(newItems)) {
+      return;
+    }
+
+    if (updateElementsDisposable != null && !updateElementsDisposable.isDisposed()) {
+      updateElementsDisposable.dispose();
+    }
+    updateElementsDisposable = Single.fromCallable(() -> DiffUtil
+        .calculateDiff(getUpdateDiffCallback(newItems, areItemsTheSameFunction, areContentTheSameFunction)))
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(diffResult -> {
+          items.clear();
+          Stream.of(newItems)
+              .forEach(pair -> addItemWithoutNotifying(pair.second, pair.first, true));
           diffResult.dispatchUpdatesTo(this);
         });
   }
