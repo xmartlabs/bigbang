@@ -13,15 +13,11 @@ import com.xmartlabs.bigbang.ui.test.R
 
 class BrandCarAdapter : BaseRecyclerViewAdapter() {
   private val carItemType = object : SimpleItemRecycleItemType<Car, CarViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup): CarViewHolder {
-      return CarViewHolder(inflateView(parent, R.layout.item_single))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup) = CarViewHolder(inflateView(parent, R.layout.item_single))
   }
-
+  
   private val brandItemType = object : SimpleItemRecycleItemType<Brand, BrandViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup): BrandViewHolder {
-      return BrandViewHolder(inflateView(parent, R.layout.item_single))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup) = BrandViewHolder(inflateView(parent, R.layout.item_single))
   }
 
   @MainThread

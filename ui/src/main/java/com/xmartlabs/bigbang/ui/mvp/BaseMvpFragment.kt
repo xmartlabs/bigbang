@@ -15,7 +15,7 @@ import com.xmartlabs.bigbang.ui.BaseFragment
  * @param <P> the presenter that coordinates the view
  */
 @FragmentWithArgs
-abstract class BaseMvpFragment<V : MvpView, P : MvpPresenter<V>> : BaseFragment(), MvpView {
+abstract class BaseMvpFragment<in V : MvpView, P : MvpPresenter<V>> : BaseFragment(), MvpView {
   abstract protected var presenter: P
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

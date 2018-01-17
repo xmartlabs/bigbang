@@ -39,9 +39,7 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
    * @return if item was successfully added
    */
   @MainThread
-  fun addItems(items: List<T>): Boolean {
-    return addItems(this, items)
-  }
+  fun addItems(items: List<T>) = addItems(this, items)
 
   /**
    * Adds an item to the recycler's view data and notifies any registered observers that an item has been added.
@@ -62,25 +60,25 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
    * *
    * @return if items was successfully added.
    */
-  fun addItems(index: Int, items: List<T>): Boolean {
-    return addItems(index, this, items)
-  }
+  fun addItems(index: Int, items: List<T>) = addItems(index, this, items)
 
   /**
    * Sets the items for the recycler view and notifying any registered observers that the data set has
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
-   * @param newItems The items tobe added.
+   * Items compare will be executed on a secondary thread
+   *
+   * @param newItems The items to be set.
    * *
    * @param areItemsTheSame A function which checks that two items are the same.
    * *
    * @param areContentTheSame A function which checks that the content of two items are the same.
    */
-  protected fun setItems(newItems: List<T>, areItemsTheSame: (Any, Any) -> Boolean,
-                         areContentTheSame: (Any, Any) -> Boolean) {
+  fun setItems(newItems: List<T>, areItemsTheSame: (Any, Any) -> Boolean,
+               areContentTheSame: (Any, Any) -> Boolean) {
     setItems(this, newItems, areItemsTheSame, areContentTheSame)
   }
 
-  override fun onBindViewHolder(viewHolder: VH, item: T, position: Int) { }
+  override fun onBindViewHolder(viewHolder: VH, item: T, position: Int) {}
 }

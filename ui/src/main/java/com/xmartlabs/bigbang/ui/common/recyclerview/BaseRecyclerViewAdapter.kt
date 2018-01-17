@@ -22,21 +22,20 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
   protected val items = ArrayList<Element>()
   private val types = ArrayList<RecycleItemType<*, *>>()
   private var updateElementsDisposable: Disposable? = null
-  
+
   open protected class Element(var type: RecycleItemType<*, *>, var item: Any)
-  
+
   protected fun inflateView(parent: ViewGroup, @LayoutRes layoutResId: Int): View {
     val layoutInflater = LayoutInflater.from(parent.context)
     return layoutInflater.inflate(layoutResId, parent, false)
   }
-  
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-    return types[viewType].onCreateViewHolder(parent)
-  }
-  
+
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+      types[viewType].onCreateViewHolder(parent)
+
   /**
    * Removes an item from the data and any registered observers of its removal.
-   
+   *
    * @param item the item to be removed.
    */
   @MainThread
@@ -49,19 +48,32 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
           notifyItemRemoved(it.index)
         }
   }
-  
+
+  /**
+   * Removes an item from the data and any registered observers of its removal.
+   *
+   * @param index the index of the item to be removed.
+   */
+  @MainThread
+  fun removeItemAtIndex(index: Int) {
+    if (index < items.size) {
+      items.removeAt(index)
+      notifyItemRemoved(index)
+    }
+  }
+
   /**
    * Removes a list of items from the data and any registered observers of its removal.
-   
+   *
    * @param items the list of items to be removed.
    */
   @MainThread
   fun removeItems(items: List<Any>) = items.distinct().forEach(this::removeItem)
-  
+
   /**
    * Adds an item to the data for the recycler view without notifying any registered observers that an item has been
    * added.
-   
+   *
    * @param type            The type of the item.
    * *
    * @param item            The item to be added.
@@ -73,11 +85,11 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
                                                                     addTypeIfNeeded: Boolean) {
     addItemWithoutNotifying(items.size, type, item, addTypeIfNeeded)
   }
-  
+
   /**
    * Adds an item to the data for the recycler view without notifying any registered observers that an item has been
    * added.
-   
+   *
    * @param index           The index at which the specified items are to be inserted.
    * *
    * @param type            The type of the item.
@@ -96,10 +108,10 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
       addItemTypeIfNeeded(type)
     }
   }
-  
+
   /**
    * Add the type to the collection type only if it is needed.
-   
+   *
    * @param type The type to be added.
    */
   private fun <T : RecycleItemType<*, *>> addItemTypeIfNeeded(type: T) {
@@ -107,10 +119,10 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
       types.add(type)
     }
   }
-  
+
   /**
    * Adds an item to the data for the recycler view and notifies any registered observers that an item has been added.
-   
+   *
    * @param type The type of the item.
    * *
    * @param item The item to be added.
@@ -120,10 +132,10 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     addItemWithoutNotifying(type, item, true)
     notifyItemInserted(items.size - 1)
   }
-  
+
   /**
    * Adds items to the data for the recycler view and notifies any registered observers that the items has been added.
-   
+   *
    * @param index The index at which the specified items are to be inserted.
    * *
    * @param type  The type of the item.
@@ -143,10 +155,10 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     notifyItemRangeInserted(index, itemCount - lastItemCount)
     return true
   }
-  
+
   /**
    * Adds items to the data for the recycler view and notifies any registered observers that the items has been added.
-   
+   *
    * @param type  The type of the items.
    * *
    * @param items the items that will be the data for the recycler view.
@@ -158,28 +170,30 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     if (items.isEmpty()) {
       return false
     }
-    
+
     val lastItemCount = itemCount
     items.forEach { addItemWithoutNotifying(type, it, false) }
     addItemTypeIfNeeded(type)
-    
+
     if (lastItemCount == 0) {
       notifyDataSetChanged()
     } else {
       notifyItemRangeInserted(lastItemCount, itemCount - lastItemCount)
     }
-    
+
     return true
   }
-  
+
   /**
    * Sets the items data for the recycler view and notifying any registered observers that the data set has
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
-   
+   *
+   * Items compare will be executed on a secondary thread
+   *
    * @param type                      Type of items.
    * *
-   * @param newItems                  The items tobe added.
+   * @param newItems                  The items tobe set.
    * *
    * @param areItemsTheSame   A function which checks that two items are the same.
    * *
@@ -189,9 +203,10 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
                                                      areItemsTheSame: (Any, Any) -> Boolean,
                                                      areContentTheSame: (Any, Any) -> Boolean) {
     if (newItems.isEmpty()) {
+      clearAll()
       return
     }
-    
+
     if (updateElementsDisposable != null && !updateElementsDisposable!!.isDisposed) {
       updateElementsDisposable!!.dispose()
     }
@@ -206,34 +221,28 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
           diffResult.dispatchUpdatesTo(this)
         }
   }
-  
+
   private fun getUpdateDiffCallback(
       newItems: List<*>,
       areItemsTheSame: (Any, Any) -> Boolean,
       areContentTheSame: (Any, Any) -> Boolean): DiffUtil.Callback {
     return object : DiffUtil.Callback() {
-      override fun getOldListSize(): Int {
-        return items.size
-      }
-      
-      override fun getNewListSize(): Int {
-        return newItems.size
-      }
-      
-      override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return areItemsTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
-      }
-      
-      override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return areContentTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
-      }
+      override fun getOldListSize() = items.size
+
+      override fun getNewListSize() = newItems.size
+
+      override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+          areItemsTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
+
+      override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+          areContentTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
     }
   }
-  
+
   /**
    * Sets the items data for the recycler view and notifies any registered observers that the data set has
    * changed.
-   
+   *
    * @param type     Type of items.
    * *
    * @param newItems The items tobe added.
@@ -243,44 +252,44 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     items.clear()
     addItems(type, newItems)
   }
-  
+
   /**
    * Gets all the items count, including dividers.
-   
+   *
    * @return number of total items.
    */
   override fun getItemCount(): Int = items.size
-  
+
   @CallSuper
   override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
     val element = items[position]
     val item = element.item
-    
+
     @Suppress("UNCHECKED_CAST")
     (element.type as? RecycleItemType<Any, RecyclerView.ViewHolder>)?.onBindViewHolder(viewHolder, item, position)
     @Suppress("UNCHECKED_CAST")
     (viewHolder as? BindingItemViewHolder<Any>)?.bindItem(element.item)
   }
-  
+
   /**
    * Gets the item type.
-   
+   *
    * @param position of the item among all items conforming the recycler view.
    * *
    * @return item divider type.
    */
   override fun getItemViewType(position: Int) = types.indexOf(items[position].type)
-  
+
   /** Removes all items and notifies that the data has changed.  */
   @MainThread
   fun clearAll() {
     items.clear()
     notifyDataSetChanged()
   }
-  
+
   /**
    * Removes all items in the recyclerView of a specified type.
-   
+   *
    * @param itemType The specified type of items to be removed.
    */
   @MainThread
@@ -288,7 +297,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     val itemsToRemove = items
         .filter { it.type == itemType }
         .map(Element::item)
-    
+
     removeItems(itemsToRemove)
   }
 }
