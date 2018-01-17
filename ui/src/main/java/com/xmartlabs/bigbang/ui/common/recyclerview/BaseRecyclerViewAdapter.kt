@@ -22,17 +22,17 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
   protected val items = ArrayList<Element>()
   private val types = ArrayList<RecycleItemType<*, *>>()
   private var updateElementsDisposable: Disposable? = null
-  
+
   open protected class Element(var type: RecycleItemType<*, *>, var item: Any)
-  
+
   protected fun inflateView(parent: ViewGroup, @LayoutRes layoutResId: Int): View {
     val layoutInflater = LayoutInflater.from(parent.context)
     return layoutInflater.inflate(layoutResId, parent, false)
   }
-  
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
       types[viewType].onCreateViewHolder(parent)
-  
+
   /**
    * Removes an item from the data and any registered observers of its removal.
    *
@@ -48,7 +48,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
           notifyItemRemoved(it.index)
         }
   }
-  
+
   /**
    * Removes an item from the data and any registered observers of its removal.
    *
@@ -56,12 +56,12 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    */
   @MainThread
   fun removeItemAtIndex(index: Int) {
-    if(index < items.size) {
+    if (index < items.size) {
       items.removeAt(index)
       notifyItemRemoved(index)
     }
   }
-  
+
   /**
    * Removes a list of items from the data and any registered observers of its removal.
    *
@@ -69,7 +69,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    */
   @MainThread
   fun removeItems(items: List<Any>) = items.distinct().forEach(this::removeItem)
-  
+
   /**
    * Adds an item to the data for the recycler view without notifying any registered observers that an item has been
    * added.
@@ -85,7 +85,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
                                                                     addTypeIfNeeded: Boolean) {
     addItemWithoutNotifying(items.size, type, item, addTypeIfNeeded)
   }
-  
+
   /**
    * Adds an item to the data for the recycler view without notifying any registered observers that an item has been
    * added.
@@ -108,7 +108,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
       addItemTypeIfNeeded(type)
     }
   }
-  
+
   /**
    * Add the type to the collection type only if it is needed.
    *
@@ -119,7 +119,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
       types.add(type)
     }
   }
-  
+
   /**
    * Adds an item to the data for the recycler view and notifies any registered observers that an item has been added.
    *
@@ -132,7 +132,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     addItemWithoutNotifying(type, item, true)
     notifyItemInserted(items.size - 1)
   }
-  
+
   /**
    * Adds items to the data for the recycler view and notifies any registered observers that the items has been added.
    *
@@ -155,7 +155,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     notifyItemRangeInserted(index, itemCount - lastItemCount)
     return true
   }
-  
+
   /**
    * Adds items to the data for the recycler view and notifies any registered observers that the items has been added.
    *
@@ -170,20 +170,20 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     if (items.isEmpty()) {
       return false
     }
-    
+
     val lastItemCount = itemCount
     items.forEach { addItemWithoutNotifying(type, it, false) }
     addItemTypeIfNeeded(type)
-    
+
     if (lastItemCount == 0) {
       notifyDataSetChanged()
     } else {
       notifyItemRangeInserted(lastItemCount, itemCount - lastItemCount)
     }
-    
+
     return true
   }
-  
+
   /**
    * Sets the items data for the recycler view and notifying any registered observers that the data set has
    * changed. It uses a function that calculates the difference between the old and the new items
@@ -191,7 +191,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    *
    * @param type                      Type of items.
    * *
-   * @param newItems                  The items tobe added.
+   * @param newItems                  The items tobe set.
    * *
    * @param areItemsTheSame   A function which checks that two items are the same.
    * *
@@ -203,7 +203,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     if (newItems.isEmpty()) {
       return
     }
-    
+
     if (updateElementsDisposable != null && !updateElementsDisposable!!.isDisposed) {
       updateElementsDisposable!!.dispose()
     }
@@ -218,24 +218,24 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
           diffResult.dispatchUpdatesTo(this)
         }
   }
-  
+
   private fun getUpdateDiffCallback(
       newItems: List<*>,
       areItemsTheSame: (Any, Any) -> Boolean,
       areContentTheSame: (Any, Any) -> Boolean): DiffUtil.Callback {
     return object : DiffUtil.Callback() {
       override fun getOldListSize() = items.size
-      
+
       override fun getNewListSize() = newItems.size
-      
+
       override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
           areItemsTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
-      
+
       override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
           areContentTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
     }
   }
-  
+
   /**
    * Sets the items data for the recycler view and notifies any registered observers that the data set has
    * changed.
@@ -249,52 +249,25 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     items.clear()
     addItems(type, newItems)
   }
-  
-  /**
-   * Sets the items data for the recycler view and notifies any registered observers that the data set has
-   * changed.
-   * Unlike [setItems], this method updates the items and notifies removed/updated/changed items instead of a full
-   * reload.
-   *
-   * @param type     Type of items.
-   * *
-   * @param newItems The items tobe added.
-   */
-  @MainThread
-  fun <T : RecycleItemType<*, *>> updateItems(type: T, newItems: List<Any>) {
-    val currentItems = items.size
-    val diff = items.size - newItems.size
-  
-    items.clear()
-    newItems.forEach { addItemWithoutNotifying(type, it, true) }
-  
-    notifyItemRangeChanged(0, if (currentItems > 0) currentItems - 1 else 0)
-    
-    if (diff > 0) {
-      notifyItemRangeRemoved(currentItems - diff, diff)
-    } else {
-      notifyItemRangeInserted(currentItems, Math.abs(diff))
-    }
-  }
-  
+
   /**
    * Gets all the items count, including dividers.
    *
    * @return number of total items.
    */
   override fun getItemCount(): Int = items.size
-  
+
   @CallSuper
   override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
     val element = items[position]
     val item = element.item
-    
+
     @Suppress("UNCHECKED_CAST")
     (element.type as? RecycleItemType<Any, RecyclerView.ViewHolder>)?.onBindViewHolder(viewHolder, item, position)
     @Suppress("UNCHECKED_CAST")
     (viewHolder as? BindingItemViewHolder<Any>)?.bindItem(element.item)
   }
-  
+
   /**
    * Gets the item type.
    *
@@ -303,14 +276,14 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    * @return item divider type.
    */
   override fun getItemViewType(position: Int) = types.indexOf(items[position].type)
-  
+
   /** Removes all items and notifies that the data has changed.  */
   @MainThread
   fun clearAll() {
     items.clear()
     notifyDataSetChanged()
   }
-  
+
   /**
    * Removes all items in the recyclerView of a specified type.
    *
@@ -321,7 +294,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     val itemsToRemove = items
         .filter { it.type == itemType }
         .map(Element::item)
-    
+
     removeItems(itemsToRemove)
   }
 }

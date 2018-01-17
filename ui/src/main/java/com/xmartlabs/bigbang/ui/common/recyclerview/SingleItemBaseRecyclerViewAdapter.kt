@@ -30,20 +30,6 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
   fun setItems(items: Array<T>) {
     setItems(Arrays.asList(*items))
   }
-  
-  /**
-   * Sets the items data for the recycler view and notifies any registered observers that the data set has
-   * changed.
-   * Unlike [setItems], this method updates the items and notifies removed/updated/changed items instead of a full
-   * reload.
-   *
-   * *
-   * @param items The items tobe added.
-   */
-  @MainThread
-  fun updateItems(items: List<T>) {
-    updateItems(this, items)
-  }
 
   /**
    * Adds items to the recycler view.
@@ -81,16 +67,16 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
-   * @param newItems The items tobe added.
+   * @param newItems The items to be set.
    * *
    * @param areItemsTheSame A function which checks that two items are the same.
    * *
    * @param areContentTheSame A function which checks that the content of two items are the same.
    */
-  protected fun setItems(newItems: List<T>, areItemsTheSame: (Any, Any) -> Boolean,
-                         areContentTheSame: (Any, Any) -> Boolean) {
+  fun setItems(newItems: List<T>, areItemsTheSame: (Any, Any) -> Boolean,
+               areContentTheSame: (Any, Any) -> Boolean) {
     setItems(this, newItems, areItemsTheSame, areContentTheSame)
   }
 
-  override fun onBindViewHolder(viewHolder: VH, item: T, position: Int) { }
+  override fun onBindViewHolder(viewHolder: VH, item: T, position: Int) {}
 }
