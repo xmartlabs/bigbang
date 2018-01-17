@@ -3,6 +3,7 @@ package com.xmartlabs.bigbang.retrofit.module
 import android.content.Context
 import com.google.gson.Gson
 import com.xmartlabs.bigbang.core.module.OkHttpModule
+import com.xmartlabs.bigbang.retrofit.common.DefaultServiceStringConverter
 import com.xmartlabs.bigbang.retrofit.common.ServiceStringConverter
 import dagger.Module
 import dagger.Provides
@@ -23,11 +24,11 @@ open class RestServiceModule {
                       rxJavaCallAdapterFactory: RxJava2CallAdapterFactory,
                       gsonConverterFactory: GsonConverterFactory,
                       baseUrl: HttpUrl,
-                      stringConverter: Converter.Factory): Retrofit {
+                      serviceStringConverter: ServiceStringConverter): Retrofit {
     return Retrofit.Builder()
         .addCallAdapterFactory(rxJavaCallAdapterFactory)
         .addConverterFactory(gsonConverterFactory)
-        .addConverterFactory(stringConverter)
+        .addConverterFactory(serviceStringConverter)
         .baseUrl(baseUrl)
         .client(client)
         .build()
@@ -44,7 +45,7 @@ open class RestServiceModule {
 
   @Provides
   @Singleton
-  fun provideStringConverter() = ServiceStringConverter()
+  fun provideStringConverter(): ServiceStringConverter = DefaultServiceStringConverter()
 
   @Provides
   @Singleton
