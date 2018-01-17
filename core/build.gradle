@@ -59,7 +59,6 @@ dependencies {
     api "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
     api "com.android.support:design:${libraryVersion.androidSupport}"
     api "com.android.support:support-v13:${libraryVersion.androidSupport}"
-    api "com.android.support:support-v13:${libraryVersion.androidSupport}"
     api "com.f2prateek.dart:dart:${libraryVersion.dart}"
     api "com.f2prateek.dart:henson:${libraryVersion.dart}"
     api "com.github.mrmike:Ok2Curl:${libraryVersion.ok2Curl}"
