@@ -1,7 +1,9 @@
 package com.xmartlabs.bigbang.ui.recyclerview.singleitem
 
+import com.xmartlabs.bigbang.test.helpers.TestUtils.Companion.sleep
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car
 import org.junit.Test
+import org.threeten.bp.Duration
 import java.util.Objects
 import java.util.Arrays
 import java.util.Collections
@@ -31,12 +33,11 @@ class SimpleItemTestUpdateItems : SimpleItemRecyclerViewTest() {
 
     val activity = activityRule.activity
     activity.runOnUiThread { activity.adapter.setItems(cars) }
-
     checkItems(cars)
 
     cars.addAll(cars)
     activity.runOnUiThread { activity.adapter.setItems(cars, { car1, car2 -> car1 == car2 }, Objects::equals) }
-
+    sleep()
     checkItems(cars)
   }
 
@@ -49,6 +50,7 @@ class SimpleItemTestUpdateItems : SimpleItemRecyclerViewTest() {
 
     checkItems(cars)
     activity.runOnUiThread { activity.adapter.setItems(cars, { car1, car2 -> car1 == car2 }, Objects::equals) }
+    sleep()
     checkItems(cars)
   }
 
@@ -57,28 +59,33 @@ class SimpleItemTestUpdateItems : SimpleItemRecyclerViewTest() {
     val activity = activityRule.activity
 
     activity.runOnUiThread { activity.adapter.setItems(carList, { car1, car2 -> car1 == car2 }, Objects::equals) }
+    sleep()
     checkItems(carList)
 
     val otherCars = Arrays.asList(Car("VW Gol"), Car("VW Up!"))
     activity.runOnUiThread { activity.adapter.setItems(otherCars, { car1, car2 -> car1 == car2 }, Objects::equals) }
+    sleep()
     checkItems(otherCars)
   }
 
   @Test
   fun testUpdateItemsWithNoItems() {
-    var cars = Collections.emptyList<Car>()
+    var cars = listOf<Car>()
 
     val activity = activityRule.activity
 
     activity.runOnUiThread { activity.adapter.setItems(cars, { car1, car2 -> car1 == car2 }, Objects::equals) }
+    sleep()
     checkItems(cars)
 
     cars = carList
     activity.runOnUiThread { activity.adapter.setItems(cars, { car1, car2 -> car1 == car2 }, Objects::equals) }
+    sleep()
     checkItems(cars)
 
-    cars = Collections.emptyList()
+    cars = listOf()
     activity.runOnUiThread { activity.adapter.setItems(cars, { car1, car2 -> car1 == car2 }, Objects::equals) }
+    sleep()
     checkItems(cars)
   }
 }

@@ -189,6 +189,8 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
+   * Items compare will be executed on a secondary thread
+   *
    * @param type                      Type of items.
    * *
    * @param newItems                  The items tobe set.
@@ -201,6 +203,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
                                                      areItemsTheSame: (Any, Any) -> Boolean,
                                                      areContentTheSame: (Any, Any) -> Boolean) {
     if (newItems.isEmpty()) {
+      clearAll()
       return
     }
 

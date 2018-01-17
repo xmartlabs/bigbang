@@ -67,6 +67,8 @@ abstract class SingleItemBaseRecyclerViewAdapter<T : Any, VH : RecyclerView.View
    * changed. It uses a function that calculates the difference between the old and the new items
    * in order to improve the update process.
    *
+   * Items compare will be executed on a secondary thread
+   *
    * @param newItems The items to be set.
    * *
    * @param areItemsTheSame A function which checks that two items are the same.
