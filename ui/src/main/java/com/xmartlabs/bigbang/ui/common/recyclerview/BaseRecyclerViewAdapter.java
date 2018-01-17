@@ -210,6 +210,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                                                          @NonNull BiFunction<T, T, Boolean> areItemsTheSameFunction,
                                                          @NonNull BiFunction<T, T, Boolean> areContentTheSameFunction) {
     if (CollectionHelper.isNullOrEmpty(newItems)) {
+      clearAll();
       return;
     }
 
@@ -243,6 +244,7 @@ public abstract class BaseRecyclerViewAdapter extends RecyclerView.Adapter<Recyc
                                           @NonNull BiFunction<T, T, Boolean> areItemsTheSameFunction,
                                           @NonNull BiFunction<T, T, Boolean> areContentTheSameFunction) {
     if (CollectionHelper.isNullOrEmpty(newItems)) {
+      clearAll();
       return;
     }
 
