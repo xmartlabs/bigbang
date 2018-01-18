@@ -15,6 +15,7 @@ import retrofit2.Retrofit;
 /**
  * Created by mike on 18/01/2018.
  */
+/** Converts {@link LocalDate} and {@link LocalDateTime} to Strings */
 public class DefaultServiceStringConverter extends ServiceStringConverter {
   @Override
   public Converter<?, String> stringConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
