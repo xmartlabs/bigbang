@@ -39,7 +39,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    * @param item the item to be removed.
    */
   @MainThread
-  fun removeItem(item: Any) {
+  fun <T> removeItem(item: T) {
     items.withIndex()
         .filter { it.value.item == item }
         .sortedByDescending { it.index }
@@ -293,7 +293,7 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    * @param itemType The specified type of items to be removed.
    */
   @MainThread
-  fun clearItems(itemType: RecycleItemType<Any, RecyclerView.ViewHolder>) {
+  fun clearItems(itemType: RecycleItemType<*, out RecyclerView.ViewHolder>) {
     val itemsToRemove = items
         .filter { it.type == itemType }
         .map(Element::item)
