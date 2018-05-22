@@ -13,10 +13,9 @@ ext {
     libraryVersion = [
         androidSupport: '27.0.2',
         androidSupportTest: '1.0.1',
-        bullet: 'e5044b53df',
         butterKnife: '8.5.1',
         crashlytics: '2.8.0@aar',
-        dagger: '2.6',
+        dagger: '2.15',
         dart: '2.0.0',
         dbFlow: '4.1.2',
         dexmaker: '1.4',

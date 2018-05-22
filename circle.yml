@@ -32,7 +32,7 @@ jobs:
             :log-crashlytics:assembleDebug
             :retrofit:assembleDebug
             :ui:assembleDebug
-            --no-daemon -Pkotlin.incremental=false --max-workers=2
+            --max-workers=2
       - run:
           name: Assemble instrumental tests
           command: ./gradlew assembleAndroidTest

@@ -1,26 +1,29 @@
 package com.xmartlabs.template
 
+import android.app.Activity
 import android.app.Application
-import bullet.ObjectGraph
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.raizlabs.android.dbflow.config.FlowConfig
 import com.raizlabs.android.dbflow.config.FlowManager
 import com.tspoon.traceur.Traceur
 import com.tspoon.traceur.TraceurConfig
-import com.xmartlabs.bigbang.core.Injector
+import com.xmartlabs.bigbang.core.di.AppInjector
 import com.xmartlabs.bigbang.core.helper.GeneralErrorHelper
 import com.xmartlabs.bigbang.core.log.LoggerTree
-import com.xmartlabs.bigbang.core.model.BuildInfo
 import com.xmartlabs.bigbang.log.crashlytics.CrashlyticsLogger
 import com.xmartlabs.bigbang.retrofit.helper.ServiceErrorHandler
-import com.xmartlabs.template.module.AndroidModule
+import com.xmartlabs.template.model.BuildInfo
+import com.xmartlabs.template.module.DaggerApplicationComponent
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-open class BaseProjectApplication : Application() {
+open class BaseProjectApplication : Application(), HasActivityInjector {
   companion object {
-    @JvmStatic lateinit var context: BaseProjectApplication
-        private set
+    @JvmStatic
+    lateinit var context: BaseProjectApplication
+      private set
   }
 
   @Inject
@@ -31,11 +34,13 @@ open class BaseProjectApplication : Application() {
   internal lateinit var loggerTree: LoggerTree
   @Inject
   internal lateinit var serviceErrorHandler: ServiceErrorHandler
-  
+  @Inject
+  internal lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+
   init {
     context = this
   }
-  
+
   override fun onCreate() {
     super.onCreate()
     initializeThreeTenABP()
@@ -45,18 +50,17 @@ open class BaseProjectApplication : Application() {
     initializeLogging() // Crashlytics initialization should go at the end.
   }
 
+  override fun activityInjector() = dispatchingAndroidInjector
+
   private fun initializeInjections() {
-    val component = createComponent()
-    val bullet = createBullet(component)
-    Injector.instance.bullet = bullet
-    Injector.inject(this)
+    createComponent().inject(this)
+    AppInjector.init(this)
   }
 
   protected open fun createComponent() = DaggerApplicationComponent.builder()
-      .coreAndroidModule(AndroidModule(this))
+      .application(this)
+      .buildInfo(BuildInfo())
       .build()
-
-  protected open fun createBullet(component: ApplicationComponent): ObjectGraph = BulletApplicationComponent(component)
 
   private fun initializeDataBase() = FlowManager.init(FlowConfig.Builder(this).build())
 
@@ -66,8 +70,6 @@ open class BaseProjectApplication : Application() {
     loggerTree.addLogger(CrashlyticsLogger().initialize(buildInfo, this))
     Timber.plant(loggerTree)
   }
-
-  fun <T> inject(t: T) = Injector.inject(t)
 
   private fun initializeRxErrorHandler() {
     serviceErrorHandler.handleServiceErrors()

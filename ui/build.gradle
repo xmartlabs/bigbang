@@ -47,7 +47,7 @@ android {
         ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
-    buildToolsVersion project.ext.buildToolsVersion
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -62,18 +62,18 @@ dependencies {
     api "com.android.support:support-v13:${libraryVersion.androidSupport}"
     api "com.f2prateek.dart:dart:${libraryVersion.dart}"
     api "com.f2prateek.dart:henson:${libraryVersion.dart}"
-    api "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
     api "com.google.dagger:dagger:${libraryVersion.dagger}"
+    api "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
     api "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
     api "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
     api "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
     api "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
     api "org.parceler:parceler-api:${libraryVersion.parceler}"
 
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
-    kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    kapt "com.google.dagger:dagger-android-processor:${libraryVersion.dagger}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     kapt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
     kapt "org.parceler:parceler:${libraryVersion.parceler}"

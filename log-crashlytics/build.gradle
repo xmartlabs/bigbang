@@ -41,7 +41,7 @@ android {
         ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
-    buildToolsVersion project.ext.buildToolsVersion
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -50,7 +50,7 @@ dependencies {
     api("com.crashlytics.sdk.android:crashlytics:${libraryVersion.crashlytics}") {
         transitive = true
     }
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
 }
 
 apply from: '../bintray.gradle'
