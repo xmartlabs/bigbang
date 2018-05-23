@@ -47,7 +47,6 @@ android {
         ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
-    buildToolsVersion '27.0.3'
 }
 
 dependencies {
