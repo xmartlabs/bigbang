@@ -1,4 +1,3 @@
-
 package com.xmartlabs.template.module
 
 import com.xmartlabs.template.MainActivity
@@ -6,8 +5,8 @@ import com.xmartlabs.template.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Suppress("unused")
 @Module
+@Suppress("unused")
 abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
     abstract fun contributeMainActivity(): MainActivity
