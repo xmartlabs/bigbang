@@ -20,15 +20,14 @@ import javax.inject.Singleton
       ActivityModule::class,
       AndroidInjectionModule::class,
       AndroidModule::class,
-      AndroidModule::class,
-      ActivityModule::class,
       AppModule::class,
       ControllerModule::class,
       GsonModule::class,
-      ServiceGsonModule::class,
       OkHttpModule::class,
       PicassoModule::class,
-      RestServiceModule::class]
+      RestServiceModule::class,
+      ServiceGsonModule::class
+    ]
 )
 interface ApplicationComponent {
   @Component.Builder

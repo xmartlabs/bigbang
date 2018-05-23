@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.f2prateek.dart.Dart
 import com.trello.rxlifecycle2.components.RxActivity
 
-/** A base Activity that inherits from [RxActivity] and performs [Dart] in the [.onCreate] lifecycle method. */
+/** A base Activity that inherits from [RxActivity] and performs [Dart] injection in the [.onCreate] lifecycle method. */
 abstract class BaseActivity : RxActivity() {
   protected val context: Context
     get() = this

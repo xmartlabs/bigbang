@@ -11,7 +11,8 @@ import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 /**
- * A base AppCompatActivity that inherits from [RxActivity] and performs [Dart] in the [.onCreate] lifecycle method.
+ * A base AppCompatActivity that inherits from [RxActivity] and performs [Dart]
+ * injections in the [.onCreate] lifecycle method.
  */
 abstract class BaseAppCompatActivity : RxAppCompatActivity(), HasSupportFragmentInjector {
   @Inject
