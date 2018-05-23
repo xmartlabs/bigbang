@@ -71,8 +71,8 @@ class RecyclerViewEmptySupport @JvmOverloads constructor(
    * @param attrs The attributes of the XML tag that is inflating the view.
    */
   private fun bindAttributes(context: Context, attrs: AttributeSet?) {
-    val attributes = context.obtainStyledAttributes(attrs, R.styleable.Commons, 0, 0)
-    emptyViewId = attributes.getResourceId(R.styleable.Commons_emptyView, -1)
+    val attributes = context.obtainStyledAttributes(attrs, R.styleable.RecyclerViewEmptySupport, 0, 0)
+    emptyViewId = attributes.getResourceId(R.styleable.RecyclerViewEmptySupport_emptyView, -1)
     attributes.recycle()
   }
 
