@@ -28,9 +28,9 @@ jobs:
             :dbflow:assembleDebug
             :instrumental-test:assembleDebug
             :log-crashlytics:assembleDebug
+            :mvp:assembleDebug
             :retrofit:assembleDebug
             :ui:assembleDebug
-            :mvp:assembleDebug
             --max-workers=2
       - run:
           name: Assemble instrumental tests
