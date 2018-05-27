@@ -3,7 +3,7 @@ package com.xmartlabs.template
 import android.content.Intent
 import android.os.Bundle
 
-import com.xmartlabs.bigbang.ui.BaseActivity
+import com.xmartlabs.bigbang.mvp.BaseActivity
 
 class StartActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {

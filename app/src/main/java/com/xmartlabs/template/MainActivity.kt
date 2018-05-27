@@ -2,9 +2,9 @@ package com.xmartlabs.template
 
 import android.os.Bundle
 import com.f2prateek.dart.HensonNavigable
-import com.xmartlabs.bigbang.ui.mvp.BaseMvpAppCompatActivity
-import com.xmartlabs.bigbang.ui.mvp.BaseMvpPresenter
-import com.xmartlabs.bigbang.ui.mvp.MvpView
+import com.xmartlabs.bigbang.mvp.ui.BaseMvpAppCompatActivity
+import com.xmartlabs.bigbang.mvp.ui.BaseMvpPresenter
+import com.xmartlabs.bigbang.mvp.ui.MvpView
 
 import kotlinx.android.synthetic.main.activity_main.*
 

@@ -1,7 +1,7 @@
 package com.xmartlabs.template.module
 
-import com.xmartlabs.bigbang.ui.BaseFragment
-import com.xmartlabs.bigbang.ui.BaseFragment_MembersInjector
+import com.xmartlabs.bigbang.mvp.BaseFragment
+import com.xmartlabs.bigbang.mvp.BaseFragment_MembersInjector
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
