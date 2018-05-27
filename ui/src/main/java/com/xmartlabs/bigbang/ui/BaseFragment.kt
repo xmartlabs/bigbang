@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.hannesdorfmann.fragmentargs.FragmentArgs
 import com.trello.rxlifecycle2.components.support.RxFragment
-import com.xmartlabs.bigbang.core.Injector
+import com.xmartlabs.bigbang.core.di.Injectable
 import com.xmartlabs.bigbang.core.log.analytics.AnalyticsManager
 import com.xmartlabs.bigbang.core.log.analytics.TrackableAnalytic
 import com.xmartlabs.bigbang.ui.common.BaseProgressDialog
@@ -28,7 +27,7 @@ import javax.inject.Inject
  *  * Proper cleanup on detach/destroy
  *
  */
-abstract class BaseFragment : RxFragment() {
+abstract class BaseFragment : RxFragment(), Injectable {
   @Inject
   internal lateinit var analyticsManager: AnalyticsManager
   
@@ -48,7 +47,6 @@ abstract class BaseFragment : RxFragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     FragmentArgs.inject(this)
-    Injector.inject(this)
   }
   
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =

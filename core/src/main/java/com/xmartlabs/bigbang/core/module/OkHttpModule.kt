@@ -8,6 +8,7 @@ import com.xmartlabs.bigbang.core.model.BuildInfo
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
@@ -18,16 +19,19 @@ import javax.inject.Singleton
 @Module
 open class OkHttpModule {
   companion object {
-    const private val MIN_DISK_CACHE_SIZE = 10 * 1024 * 1024 // 10MB
-    const private val MAX_DISK_CACHE_SIZE = 100 * 1024 * 1024 // 100MB
+    private const val MIN_DISK_CACHE_SIZE = 10 * 1024 * 1024 // 10MB
+    private const val MAX_DISK_CACHE_SIZE = 100 * 1024 * 1024 // 100MB
     const val CLIENT_PICASSO = "Picasso"
     const val CLIENT_SERVICE = "Service"
+    const val SESSION_INTERCEPTOR = "Service"
   }
 
   @Named(CLIENT_SERVICE)
   @Provides
   @Singleton
-  open fun provideServiceOkHttpClient(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo): OkHttpClient {
+  open fun provideServiceOkHttpClient(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo,
+                                      @Named(SESSION_INTERCEPTOR) sessionInterceptor: Interceptor): OkHttpClient {
+    clientBuilder.addInterceptor(sessionInterceptor)
     addLoggingInterceptor(clientBuilder, buildInfo)
     return clientBuilder.build()
   }

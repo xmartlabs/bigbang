@@ -5,7 +5,7 @@ ext {
     compileSdkVersion = 27
     minSdkVersion = 17
     targetSdkVersion = 27
-    buildToolsVersion = '27.0.2'
+    buildToolsVersion = '27.0.3'
 
     vcsUrl = 'https://github.com/xmartlabs/bigbang.git'
     websiteUrl = 'https://github.com/xmartlabs/bigbang'
@@ -13,10 +13,9 @@ ext {
     libraryVersion = [
         androidSupport: '27.0.2',
         androidSupportTest: '1.0.1',
-        bullet: 'e5044b53df',
         butterKnife: '8.5.1',
         crashlytics: '2.8.0@aar',
-        dagger: '2.6',
+        dagger: '2.15',
         dart: '2.0.0',
         dbFlow: '4.1.2',
         dexmaker: '1.4',
@@ -42,7 +41,7 @@ ext {
         rxJava: '2.1.7',
         rxLifecycle: '2.2.1',
         threetenbp: '1.3.6',
-        timber: '4.6.0',
+        timber: '4.7.0',
         traceur: '05c2c81241',
         uiautomator: '2.1.3',
     ]

@@ -41,7 +41,6 @@ android {
         ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
-    buildToolsVersion project.ext.buildToolsVersion
 }
 
 dependencies {
@@ -49,6 +48,7 @@ dependencies {
 
     api "com.android.support:support-annotations:${libraryVersion.androidSupport}"
     api "com.google.dagger:dagger:${libraryVersion.dagger}"
+    api "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
     api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
     api "com.jakewharton.timber:timber:${libraryVersion.timber}"
     api "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
@@ -56,8 +56,9 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
     api "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     api "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
 
+    kapt "com.google.dagger:dagger-android-processor:${libraryVersion.dagger}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     testImplementation "junit:junit:${libraryVersion.junit}"
     testImplementation ("org.threeten:threetenbp:${libraryVersion.threetenbp}") {

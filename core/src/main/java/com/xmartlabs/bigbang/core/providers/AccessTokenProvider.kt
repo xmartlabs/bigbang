@@ -1,26 +1,18 @@
 package com.xmartlabs.bigbang.core.providers
 
-import com.xmartlabs.bigbang.core.Injector
 import com.xmartlabs.bigbang.core.common.EntityProvider
-import com.xmartlabs.bigbang.core.controller.SessionController
+import com.xmartlabs.bigbang.core.controller.CoreSessionController
 import com.xmartlabs.bigbang.core.module.SessionInterceptor
-
 import javax.inject.Inject
 
 /**
  * Provides the access token in order to be added in the service requests.
  * It's used by the [SessionInterceptor].
  */
-open class AccessTokenProvider : EntityProvider<String> {
+open class AccessTokenProvider @Inject constructor(val sessionController: CoreSessionController)
+  : EntityProvider<String> {
   companion object {
     protected val AUTH_TOKEN_HEADER_KEY = "session"
-  }
-  
-  @Inject
-  internal lateinit var sessionController: SessionController
-
-  init {
-    Injector.inject(this)
   }
 
   override fun provideEntity() = sessionController.abstractSession?.accessToken

@@ -3,20 +3,18 @@ package com.xmartlabs.bigbang.core.controller
 import android.content.SharedPreferences
 import android.support.annotation.CheckResult
 import com.xmartlabs.bigbang.core.model.SessionType
-import javax.inject.Inject
 
 /**
  * Controller that manages the Session of the Application.
  *
  * The Session will be stored via the [SharedPreferencesController].
  */
-open class SessionController(private val sessionType: Class<out SessionType>) : Controller() {
+abstract class CoreSessionController(private val sharedPreferencesController: SharedPreferencesController) : Controller() {
   companion object {
     private val PREFERENCES_KEY_SESSION = "session"
   }
-  
-  @Inject
-  internal lateinit var sharedPreferencesController: SharedPreferencesController
+
+  abstract fun getSessionType(): Class<out SessionType>
 
   /**
    * Retrieves the current stored [SessionType], if it exists.
@@ -24,7 +22,8 @@ open class SessionController(private val sessionType: Class<out SessionType>) : 
    * @return the current [SessionType], or `null` if none exists
    */
   open val abstractSession
-      get() = sharedPreferencesController.getEntity(PREFERENCES_KEY_SESSION, sessionType)
+    get() = sharedPreferencesController.getEntity(PREFERENCES_KEY_SESSION, getSessionType())
+
   /**
    * Returns whether the [SessionType] information is present on the device.
    *
@@ -43,7 +42,7 @@ open class SessionController(private val sessionType: Class<out SessionType>) : 
    * */
   open fun <S : SessionType> saveSession(session: S) =
       sharedPreferencesController.saveEntity(PREFERENCES_KEY_SESSION, session)
-  
+
   /** Deletes the session information  */
   open fun deleteSession() = sharedPreferencesController.deleteEntity(PREFERENCES_KEY_SESSION)
 }

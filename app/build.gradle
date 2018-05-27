@@ -119,7 +119,6 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
-    buildToolsVersion project.ext.buildToolsVersion
 }
 
 dependencies {
@@ -139,9 +138,9 @@ dependencies {
     implementation "com.github.mrmike:Ok2Curl:${libraryVersion.ok2Curl}"
     implementation "com.github.Raizlabs.DBFlow:dbflow-core:${libraryVersion.dbFlow}"
     implementation "com.github.Raizlabs.DBFlow:dbflow:${libraryVersion.dbFlow}"
-    implementation "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
     implementation "com.github.xmartlabs:Traceur:${libraryVersion.traceur}"
     implementation "com.google.dagger:dagger:${libraryVersion.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
     implementation "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
     implementation "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
     implementation "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
@@ -157,7 +156,7 @@ dependencies {
     implementation "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     implementation "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     implementation "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
     implementation "org.parceler:parceler-api:${libraryVersion.parceler}"
     implementation "com.github.square.picasso:picasso:${libraryVersion.picasso}"
     implementation 'com.viewpagerindicator:library:2.4.1'
@@ -165,7 +164,7 @@ dependencies {
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
     kapt "com.github.Raizlabs.DBFlow:dbflow-processor:${libraryVersion.dbFlow}"
-    kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    kapt "com.google.dagger:dagger-android-processor:${libraryVersion.dagger}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     kapt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
     kapt "org.parceler:parceler:${libraryVersion.parceler}"

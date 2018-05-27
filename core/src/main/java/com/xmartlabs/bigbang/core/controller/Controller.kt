@@ -1,7 +1,6 @@
 package com.xmartlabs.bigbang.core.controller
 
 import android.support.annotation.CheckResult
-import com.xmartlabs.bigbang.core.Injector
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.extensions.subscribeOnIo
 import io.reactivex.Completable
@@ -27,10 +26,6 @@ abstract class Controller protected constructor() {
   protected val maybeIoTransformer = MaybeTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
   protected val observableIoTransformer = ObservableTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
   protected val singleIoTransformer = SingleTransformer<Any, Any> { it.subscribeOnIo().observeOnIo() }
-
-  init {
-    Injector.inject(this)
-  }
 
   /**
    * Provides the Io schedule [Completable] transformation.

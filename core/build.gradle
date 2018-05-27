@@ -44,7 +44,6 @@ android {
         ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
-    buildToolsVersion project.ext.buildToolsVersion
 }
 
 dependencies {
@@ -63,10 +62,10 @@ dependencies {
     api "com.f2prateek.dart:henson:${libraryVersion.dart}"
     api "com.github.mrmike:Ok2Curl:${libraryVersion.ok2Curl}"
     api "com.github.square.picasso:picasso:${libraryVersion.picasso}"
-    api "com.github.tbroyer.bullet:bullet:${libraryVersion.bullet}"
     api "com.github.xmartlabs:Traceur:${libraryVersion.traceur}"
     api "com.google.android.gms:play-services-base:${libraryVersion.playServices}"
     api "com.google.dagger:dagger:${libraryVersion.dagger}"
+    api "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
     api "com.google.code.gson:gson:${libraryVersion.gson}"
     api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
     api "com.jakewharton.timber:timber:${libraryVersion.timber}"
@@ -75,10 +74,10 @@ dependencies {
     api "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     api "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     api "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
     kapt "com.f2prateek.dart:dart-processor:${libraryVersion.dart}"
     kapt "com.f2prateek.dart:henson-processor:${libraryVersion.dart}"
-    kapt "com.github.tbroyer.bullet:bullet-compiler:${libraryVersion.bullet}"
+    kapt "com.google.dagger:dagger-android-processor:${libraryVersion.dagger}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     testImplementation "junit:junit:${libraryVersion.junit}"
     testImplementation ("org.threeten:threetenbp:${libraryVersion.threetenbp}") {
