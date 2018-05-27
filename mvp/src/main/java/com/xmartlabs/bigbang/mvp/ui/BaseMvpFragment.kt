@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
-import com.xmartlabs.bigbang.mvp.BaseFragment
+import com.xmartlabs.bigbang.ui.BaseFragment
 
 /**
  * Fragment that uses a [MvpPresenter] to implement the MVP pattern. The fragments that inherit from this class

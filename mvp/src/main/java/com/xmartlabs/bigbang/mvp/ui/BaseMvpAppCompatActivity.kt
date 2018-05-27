@@ -2,7 +2,7 @@ package com.xmartlabs.bigbang.mvp.ui
 
 import android.os.Bundle
 
-import com.xmartlabs.bigbang.mvp.BaseAppCompatActivity
+import com.xmartlabs.bigbang.ui.BaseAppCompatActivity
 
 /**
  * AppCompactActivity that uses a [MvpPresenter] to implement the MVP pattern. The activities that inherit from
