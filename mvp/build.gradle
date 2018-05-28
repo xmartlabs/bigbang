@@ -5,7 +5,7 @@ ext {
     versionCodeId = project.ext.librariesVersionCode
     versionCodeNumber = project.ext.librariesVersion
     PUBLISH_GROUP_ID = applicationId
-    PUBLISH_ARTIFACT_ID = "ui-mvp"
+    PUBLISH_ARTIFACT_ID = "mvp"
     PUBLISH_VERSION = versionCodeNumber
 }
 
