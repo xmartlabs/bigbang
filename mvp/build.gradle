@@ -1,7 +1,7 @@
 apply from: '../versions.gradle'
 
 ext {
-    projectName = "Ui-MVP"
+    projectName = "MVP"
     versionCodeId = project.ext.librariesVersionCode
     versionCodeNumber = project.ext.librariesVersion
     PUBLISH_GROUP_ID = applicationId
