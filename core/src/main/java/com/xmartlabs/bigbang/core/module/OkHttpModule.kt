@@ -33,7 +33,8 @@ open class OkHttpModule {
   @Singleton
   open fun provideServiceOkHttpClient(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo,
                                       @Named(SESSION_INTERCEPTOR) sessionInterceptor: Interceptor,
-                                      loggingInterceptors: Map<Class<out Interceptor>, Provider<Interceptor>>
+                                      loggingInterceptors: Map<Class<out Interceptor>,
+                                          @JvmSuppressWildcards Provider<Interceptor>>
   ): OkHttpClient {
     clientBuilder.addInterceptor(sessionInterceptor)
     addLoggingInterceptor(clientBuilder, buildInfo, loggingInterceptors)
@@ -43,9 +44,9 @@ open class OkHttpModule {
   @Named(CLIENT_PICASSO)
   @Provides
   @Singleton
-  open fun providePicassoOkHttpClient(clientBuilder: OkHttpClient.Builder, cache: Cache,
-                                      loggingInterceptors: Map<Class<out Interceptor>, Provider<Interceptor>>,
-                                      buildInfo: BuildInfo): OkHttpClient {
+  open fun providePicassoOkHttpClient(clientBuilder: OkHttpClient.Builder, cache: Cache, buildInfo: BuildInfo,
+                                      loggingInterceptors: Map<Class<out Interceptor>,
+                                          @JvmSuppressWildcards Provider<Interceptor>>): OkHttpClient {
     clientBuilder.cache(cache)
     addLoggingInterceptor(clientBuilder, buildInfo, loggingInterceptors)
     return clientBuilder.build()
