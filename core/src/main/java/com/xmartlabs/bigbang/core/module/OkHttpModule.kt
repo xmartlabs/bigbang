@@ -88,7 +88,7 @@ open class OkHttpModule {
     if (buildInfo.isDebug) {
       loggingInterceptors.values
           .map(Provider<Interceptor>::get)
-          .forEach { interceptor -> clientBuilder.addInterceptor(interceptor) }
+          .forEach { interceptor -> clientBuilder.addNetworkInterceptor(interceptor) }
     }
   }
 
