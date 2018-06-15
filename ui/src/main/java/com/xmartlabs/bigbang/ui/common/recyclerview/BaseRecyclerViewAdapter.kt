@@ -235,16 +235,16 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
    *
    * Items compare will be executed on a secondary thread
    *
-   * @param newItems                  The elements to be set.
+   * @param newElements                  The elements to be set.
    *
    * @param areItemsTheSame   A function which checks that two items are the same.
    *
    * @param areContentTheSame A function which checks that the content of two items are the same.
    */
-  protected fun setElements(newItems: List<Element>,
+  protected fun setElements(newElements: List<Element>,
                             areItemsTheSame: (Any, Any) -> Boolean,
                             areContentTheSame: (Any, Any) -> Boolean) {
-    if (newItems.isEmpty()) {
+    if (newElements.isEmpty()) {
       clearAll()
       notifyDataSetChanged()
       return
@@ -255,16 +255,16 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     updateElementsDisposable = Single
-        .fromCallable { DiffUtil.calculateDiff(getUpdateDiffCallback(items, newItems, areItemsTheSame, areContentTheSame)) }
+        .fromCallable { DiffUtil.calculateDiff(getUpdateDiffCallback(items, newElements, areItemsTheSame, areContentTheSame)) }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { diffResult ->
-          newItems
+          newElements
               .map { it.type }
               .distinct()
               .forEach { addItemTypeIfNeeded(it) }
           items.clear()
-          items.addAll(newItems)
+          items.addAll(newElements)
           diffResult.dispatchUpdatesTo(this)
         }
   }
