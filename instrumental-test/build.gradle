@@ -46,7 +46,6 @@ android {
         ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
         warningsAsErrors true
     }
-    buildToolsVersion project.ext.buildToolsVersion
 }
 
 dependencies {
@@ -79,7 +78,7 @@ dependencies {
     api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
     api "com.jakewharton.timber:timber:${libraryVersion.timber}"
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:${libraryVersion.kotlin}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
 }
 
 apply from: '../bintray.gradle'

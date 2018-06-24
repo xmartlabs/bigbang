@@ -2,8 +2,6 @@ package com.xmartlabs.bigbang.ui.mvp
 
 import android.support.annotation.UiThread
 
-import com.xmartlabs.bigbang.core.Injector
-
 import java.lang.ref.WeakReference
 
 /**
@@ -28,7 +26,6 @@ open class BaseMvpPresenter<V : MvpView> : MvpPresenter<V> {
     get() = viewReference?.get()
   
   override fun attachView(view: V) {
-    Injector.inject(this)
     viewReference = WeakReference(view)
   }
 

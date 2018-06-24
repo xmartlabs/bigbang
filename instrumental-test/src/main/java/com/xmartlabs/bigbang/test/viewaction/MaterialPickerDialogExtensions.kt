@@ -12,6 +12,7 @@ import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout
 import com.wdullaer.materialdatetimepicker.time.Timepoint
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
+import timber.log.Timber
 
 /**
  * View action helpers for the Material Dialog Picker
@@ -36,7 +37,7 @@ object MaterialPickerDialogActions {
         val controller = field.get(dayPickerView) as DatePickerController
         controller.onDayOfMonthSelected(year, monthOfYear, dayOfMonth)
       } catch (exception: Exception) {
-        Log.d(MaterialPickerDialogActions.javaClass.canonicalName, exception.toString())
+        Timber.d(exception)
       }
     }
   
