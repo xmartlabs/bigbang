@@ -25,13 +25,13 @@ class LocalDateTimeCustomFormatterAdapter(private val dateFormat: DateTimeFormat
           ?.let(dateFormat::format)
           .ifException(::JsonPrimitive) { Timber.e(it, "Date cannot be serialized, date='%s'", dateTime) }
 
-  @Synchronized override fun deserialize(jsonElement: JsonElement?, type: Type?,
-                                         jsonDeserializationContext: JsonDeserializationContext?) =
+  @Synchronized
+  override fun deserialize(jsonElement: JsonElement?, type: Type?,
+                           jsonDeserializationContext: JsonDeserializationContext?) =
       jsonElement
           ?.let(JsonElement::toString)
           ?.takeIf(String::isNotEmpty)
-          ?.let(String::toLong)
-          ?.ifException(::localDateTimeFromEpochMilli) {
+          ?.ifException({ LocalDateTime.parse(it, dateFormat) }) {
             Timber.e(it, "Date cannot be parsed, date='%s'", jsonElement)
           }
 }
