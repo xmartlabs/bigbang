@@ -2,6 +2,7 @@ package com.xmartlabs.bigbang.core
 
 import com.google.gson.JsonElement
 import com.google.gson.JsonPrimitive
+import com.xmartlabs.bigbang.core.extensions.DefaultDateTimeFormatter
 import com.xmartlabs.bigbang.core.helper.gsonadapters.LocalDateTimeCustomFormatterAdapter
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
@@ -11,15 +12,13 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.Month
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.format.FormatStyle
 import java.util.Locale
 
 class LocalDateTimeCustomFormatterAdapterTest {
   companion object {
     private val DEFAULT_DATE = LocalDateTime.of(2017, Month.APRIL, 10, 10, 20, 30)
-    private val DEFAULT_DATE_LONG = 1491819630000L
-    private val dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
+    private val DEFAULT_DATE_STRING_VALUE = DefaultDateTimeFormatter.ISOFORMAT.format(DEFAULT_DATE)
+    private val dateTimeFormatter = DefaultDateTimeFormatter.ISOFORMAT
         .withLocale(Locale.getDefault())
         .withZone(ZoneId.systemDefault())
     private val DEFAULT_DATE_STRING = dateTimeFormatter.format(DEFAULT_DATE.atOffset(ZoneOffset.UTC)
@@ -37,7 +36,7 @@ class LocalDateTimeCustomFormatterAdapterTest {
 
   @Test
   fun correctDeserialization() {
-    val actualJsonElement = JsonPrimitive(DEFAULT_DATE_LONG)
+    val actualJsonElement = JsonPrimitive(DEFAULT_DATE_STRING_VALUE)
 
     assertThat(adapter.deserialize(actualJsonElement, JsonElement::class.java, null), equalTo(DEFAULT_DATE))
   }
