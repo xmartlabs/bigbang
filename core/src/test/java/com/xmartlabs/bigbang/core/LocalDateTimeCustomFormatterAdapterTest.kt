@@ -17,8 +17,8 @@ import java.util.Locale
 class LocalDateTimeCustomFormatterAdapterTest {
   companion object {
     private val DEFAULT_DATE = LocalDateTime.of(2017, Month.APRIL, 10, 10, 20, 30)
-    private val DEFAULT_DATE_STRING_VALUE = DefaultDateTimeFormatter.ISOFORMAT.format(DEFAULT_DATE)
-    private val dateTimeFormatter = DefaultDateTimeFormatter.ISOFORMAT
+    private val DEFAULT_DATE_STRING_VALUE = DefaultDateTimeFormatter.ISO_8601.format(DEFAULT_DATE)
+    private val dateTimeFormatter = DefaultDateTimeFormatter.ISO_8601
         .withLocale(Locale.getDefault())
         .withZone(ZoneId.systemDefault())
     private val DEFAULT_DATE_STRING = dateTimeFormatter.format(DEFAULT_DATE.atOffset(ZoneOffset.UTC)
