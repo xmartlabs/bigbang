@@ -19,17 +19,17 @@ import org.threeten.bp.temporal.TemporalAccessor
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+object DefaultDateTimeFormatter{
+  /** Returns a full date formatter (yyyy-MMM-dd HH:mm:ss) */
+  val FULL_DATE_WITH_TIME = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm:ss", Locale.US)
+
+  /** Returns a ISO 8601 date formatter (yyyy-MM-dd'T'HH:mm:ss.SSS'Z') */
+  val ISO_8601 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+}
+
 /** Returns `this` number of milliseconds since the epoch */
 val LocalDate.epochMilli
   get() = this.toInstant().toEpochMilli()
-
-/** Returns a full date formatter (yyyy-MMM-dd HH:mm:ss) */
-val DateTimeFormatter.completeFormat
-  get() = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm:ss", Locale.US)
-
-/** Returns a ISO 8601 date formatter (yyyy-MM-dd'T'HH:mm:ss.SSS'Z') */
-val DateTimeFormatter.isoFormat
-  get() = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
 
 /**
  * Gets the android device time format.

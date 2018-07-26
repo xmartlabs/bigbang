@@ -7,6 +7,7 @@ import com.moczul.ok2curl.CurlInterceptor
 import com.xmartlabs.bigbang.core.model.BuildInfo
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoMap
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
 import java.io.File
 import javax.inject.Named
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -30,19 +32,23 @@ open class OkHttpModule {
   @Provides
   @Singleton
   open fun provideServiceOkHttpClient(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo,
-                                      @Named(SESSION_INTERCEPTOR) sessionInterceptor: Interceptor): OkHttpClient {
+                                      @Named(SESSION_INTERCEPTOR) sessionInterceptor: Interceptor,
+                                      loggingInterceptors: Map<Class<out Interceptor>,
+                                          @JvmSuppressWildcards Provider<Interceptor>>
+  ): OkHttpClient {
     clientBuilder.addInterceptor(sessionInterceptor)
-    addLoggingInterceptor(clientBuilder, buildInfo)
+    addLoggingInterceptor(clientBuilder, buildInfo, loggingInterceptors)
     return clientBuilder.build()
   }
 
   @Named(CLIENT_PICASSO)
   @Provides
   @Singleton
-  open fun providePicassoOkHttpClient(clientBuilder: OkHttpClient.Builder, cache: Cache,
-                                      buildInfo: BuildInfo): OkHttpClient {
+  open fun providePicassoOkHttpClient(clientBuilder: OkHttpClient.Builder, cache: Cache, buildInfo: BuildInfo,
+                                      loggingInterceptors: Map<Class<out Interceptor>,
+                                          @JvmSuppressWildcards Provider<Interceptor>>): OkHttpClient {
     clientBuilder.cache(cache)
-    addLoggingInterceptor(clientBuilder, buildInfo)
+    addLoggingInterceptor(clientBuilder, buildInfo, loggingInterceptors)
     return clientBuilder.build()
   }
 
@@ -60,14 +66,29 @@ open class OkHttpModule {
     return Cache(httpCacheDir, httpCacheSize)
   }
 
-  private fun addLoggingInterceptor(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo) {
-    if (buildInfo.isDebug) {
-      val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.tag("OkHttp").d(message) }
-      loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-      clientBuilder.addInterceptor(loggingInterceptor)
+  @IntoMap
+  @Provides
+  @OkHttpLoggingInterceptorKey(HttpLoggingInterceptor::class)
+  @Singleton
+  fun provideLoggingInterceptor(): Interceptor {
+    val loggingInterceptor = HttpLoggingInterceptor { message -> Timber.tag("OkHttp").d(message) }
+    loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+    return loggingInterceptor
+  }
 
-      val curlInterceptor = CurlInterceptor { message -> Timber.tag("Ok2Curl").d(message) }
-      clientBuilder.addInterceptor(curlInterceptor)
+  @IntoMap
+  @Provides
+  @OkHttpLoggingInterceptorKey(CurlInterceptor::class)
+  @Singleton
+  fun provideCurlInterceptor(): Interceptor =
+      CurlInterceptor { message -> Timber.tag("Ok2Curl").d(message) }
+
+  private fun addLoggingInterceptor(clientBuilder: OkHttpClient.Builder, buildInfo: BuildInfo,
+                                    loggingInterceptors: Map<Class<out Interceptor>, Provider<Interceptor>>) {
+    if (buildInfo.isDebug) {
+      loggingInterceptors.values
+          .map(Provider<Interceptor>::get)
+          .forEach { interceptor -> clientBuilder.addNetworkInterceptor(interceptor) }
     }
   }
 
