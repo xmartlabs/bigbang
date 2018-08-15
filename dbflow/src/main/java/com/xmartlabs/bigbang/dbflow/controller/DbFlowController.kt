@@ -8,7 +8,6 @@ import com.raizlabs.android.dbflow.rx2.kotlinextensions.rx
 import com.raizlabs.android.dbflow.sql.language.SQLOperator
 import com.raizlabs.android.dbflow.sql.language.property.Property
 import com.raizlabs.android.dbflow.structure.BaseModel
-import com.xmartlabs.bigbang.core.controller.Controller
 import com.xmartlabs.bigbang.core.controller.EntityDao
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.model.EntityWithId
@@ -19,7 +18,7 @@ import kotlin.reflect.KClass
 
 /** [EntityDao] implementation using DbFlow ORM */
 open class DbFlowController<Id, D>(val modelClass: KClass<D>, val propertyId: Property<Id>)
-    : Controller(), EntityDao<Id, D, SQLOperator> where D : BaseModel, D: EntityWithId<Id> {
+    : EntityDao<Id, D, SQLOperator> where D : BaseModel, D: EntityWithId<Id> {
 
   @CheckResult
   override fun getEntities(vararg conditions: SQLOperator) = select.from(modelClass.java).where(*conditions).rx().list.observeOnIo()

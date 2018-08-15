@@ -1,0 +1,59 @@
+apply from: '../versions.gradle'
+
+ext {
+    projectName = "MVP"
+    versionCodeId = project.ext.librariesVersionCode
+    versionCodeNumber = project.ext.librariesVersion
+    PUBLISH_GROUP_ID = applicationId
+    PUBLISH_ARTIFACT_ID = "mvp"
+    PUBLISH_VERSION = versionCodeNumber
+}
+
+group = applicationId
+version = versionCodeNumber
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
+    defaultConfig {
+        group group
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode versionCodeId
+        versionName version
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        checkAllWarnings true
+        ignore 'UnusedResources' // To keep base components
+        ignore 'GradleDependency', 'NewerVersionAvailable' // To avoid flaky builds when the dependencies are updated
+        warningsAsErrors true
+    }
+}
+
+dependencies {
+    api project(path: ':ui')
+
+    testImplementation "junit:junit:${libraryVersion.junit}"
+}
+
+apply from: '../bintray.gradle'
+apply from: '../circleci.gradle'
