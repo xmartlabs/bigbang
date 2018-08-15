@@ -1,7 +1,7 @@
 package com.xmartlabs.template.module
 
-import com.xmartlabs.bigbang.core.controller.SharedPreferencesController
-import com.xmartlabs.template.controller.SessionController
+import com.xmartlabs.bigbang.core.controller.SharedPreferencesSource
+import com.xmartlabs.template.controller.SessionRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -10,5 +10,5 @@ import javax.inject.Singleton
 class ControllerModule {
   @Provides
   @Singleton
-  internal fun provideSessionController(sharedPreferencesController: SharedPreferencesController) = SessionController(sharedPreferencesController)
+  internal fun provideSessionController(sharedPreferencesSource: SharedPreferencesSource) = SessionRepository(sharedPreferencesSource)
 }

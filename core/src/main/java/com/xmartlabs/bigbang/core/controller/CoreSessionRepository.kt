@@ -7,9 +7,9 @@ import com.xmartlabs.bigbang.core.model.SessionType
 /**
  * Controller that manages the Session of the Application.
  *
- * The Session will be stored via the [SharedPreferencesController].
+ * The Session will be stored via the [SharedPreferencesSource].
  */
-abstract class CoreSessionController(private val sharedPreferencesController: SharedPreferencesController) : Controller() {
+abstract class CoreSessionRepository(private val sharedPreferencesSource: SharedPreferencesSource) {
   companion object {
     private val PREFERENCES_KEY_SESSION = "session"
   }
@@ -22,7 +22,7 @@ abstract class CoreSessionController(private val sharedPreferencesController: Sh
    * @return the current [SessionType], or `null` if none exists
    */
   open val abstractSession
-    get() = sharedPreferencesController.getEntity(PREFERENCES_KEY_SESSION, getSessionType())
+    get() = sharedPreferencesSource.getEntity(PREFERENCES_KEY_SESSION, getSessionType())
 
   /**
    * Returns whether the [SessionType] information is present on the device.
@@ -31,7 +31,7 @@ abstract class CoreSessionController(private val sharedPreferencesController: Sh
    */
   open val isSessionAlive
     @CheckResult
-    get() = sharedPreferencesController.hasEntity(PREFERENCES_KEY_SESSION)
+    get() = sharedPreferencesSource.hasEntity(PREFERENCES_KEY_SESSION)
 
   /**
    * Stores the `session` into the [SharedPreferences].
@@ -41,8 +41,8 @@ abstract class CoreSessionController(private val sharedPreferencesController: Sh
    * @param <S> the [SessionType] object to be stored
    * */
   open fun <S : SessionType> saveSession(session: S) =
-      sharedPreferencesController.saveEntity(PREFERENCES_KEY_SESSION, session)
+      sharedPreferencesSource.saveEntity(PREFERENCES_KEY_SESSION, session)
 
   /** Deletes the session information  */
-  open fun deleteSession() = sharedPreferencesController.deleteEntity(PREFERENCES_KEY_SESSION)
+  open fun deleteSession() = sharedPreferencesSource.deleteEntity(PREFERENCES_KEY_SESSION)
 }

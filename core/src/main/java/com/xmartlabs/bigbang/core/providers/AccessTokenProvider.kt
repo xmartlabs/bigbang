@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.core.providers
 
 import com.xmartlabs.bigbang.core.common.EntityProvider
-import com.xmartlabs.bigbang.core.controller.CoreSessionController
+import com.xmartlabs.bigbang.core.controller.CoreSessionRepository
 import com.xmartlabs.bigbang.core.module.SessionInterceptor
 import javax.inject.Inject
 
@@ -9,13 +9,13 @@ import javax.inject.Inject
  * Provides the access token in order to be added in the service requests.
  * It's used by the [SessionInterceptor].
  */
-open class AccessTokenProvider @Inject constructor(val sessionController: CoreSessionController)
+open class AccessTokenProvider @Inject constructor(val sessionRepository: CoreSessionRepository)
   : EntityProvider<String> {
   companion object {
     protected val AUTH_TOKEN_HEADER_KEY = "session"
   }
 
-  override fun provideEntity() = sessionController.abstractSession?.accessToken
+  override fun provideEntity() = sessionRepository.abstractSession?.accessToken
 
   /**
    * Provides the access token header key.
@@ -26,14 +26,14 @@ open class AccessTokenProvider @Inject constructor(val sessionController: CoreSe
   open fun provideAccessTokenHeaderKey() = AUTH_TOKEN_HEADER_KEY
 
   override fun updateEntity(entity: String) {
-    sessionController.abstractSession
+    sessionRepository.abstractSession
         ?.apply { accessToken = entity }
-        ?.let(sessionController::saveSession)
+        ?.let(sessionRepository::saveSession)
   }
 
   override fun deleteEntity() {
-    sessionController.abstractSession
+    sessionRepository.abstractSession
         ?.apply { accessToken = null }
-        ?.let(sessionController::saveSession)
+        ?.let(sessionRepository::saveSession)
   }
 }
