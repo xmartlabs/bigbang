@@ -15,8 +15,6 @@ open class ParcelerEnumTypeConverter<T : Enum<T>>(val clazz: Class<T>) : ParcelC
 
   override fun fromParcel(parcel: android.os.Parcel): T? {
     val ordinal = parcel.readInt()
-    return EnumSet.allOf(clazz)
-        .filter { it.ordinal == ordinal }
-        .firstOrNull()
+    return EnumSet.allOf(clazz).firstOrNull { it.ordinal == ordinal }
   }
 }
