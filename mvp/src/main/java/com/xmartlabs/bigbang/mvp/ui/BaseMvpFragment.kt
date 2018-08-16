@@ -3,7 +3,6 @@ package com.xmartlabs.bigbang.mvp.ui
 import android.os.Bundle
 import android.view.View
 
-import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.xmartlabs.bigbang.ui.BaseFragment
 
 /**
@@ -14,7 +13,6 @@ import com.xmartlabs.bigbang.ui.BaseFragment
  * *
  * @param <P> the presenter that coordinates the view
  */
-@FragmentWithArgs
 abstract class BaseMvpFragment<in V : MvpView, P : MvpPresenter<V>> : BaseFragment(), MvpView {
   abstract protected var presenter: P
   
