@@ -9,7 +9,12 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableTransformer;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Maybe;
+import io.reactivex.MaybeTransformer;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 
@@ -21,25 +26,31 @@ import io.reactivex.SingleTransformer;
  */
 public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
   /**
-   * Provides the service {@link Single} transformation.
-   * It could be used to sign out the user when getting a service error for example.
+   * @deprecated
    *
-   * @param <S> Type of the item emitted by the {@link Single}
-   * @return The {@link Single} transformation
-   */
-  @CheckResult
-  @NonNull
-  <S> SingleTransformer<S, S> applySingleServiceTransformation();
-
-  /**
    * Provides the service {@link Completable} transformation.
    * It could be used to sign out the user when getting a service error for example.
    *
    * @return The {@link Completable} transformation
    */
   @CheckResult
+  @Deprecated
   @NonNull
   CompletableTransformer applyCompletableServiceTransformation();
+
+  /**
+   * @deprecated
+   *
+   * Provides the service {@link Single} transformation.
+   * It could be used to sign out the user when getting a service error for example.
+   *
+   * @param <S> Type of the item emitted by the {@link Single}
+   * @return The {@link Single} transformation
+   */
+  @Deprecated
+  @CheckResult
+  @NonNull
+  <S> SingleTransformer<S, S> applySingleServiceTransformation();
 
   /**
    * Provides an entity {@link E} from a service which gives a list of {@link E}.

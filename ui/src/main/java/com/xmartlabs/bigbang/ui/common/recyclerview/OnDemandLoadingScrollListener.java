@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.common;
+package com.xmartlabs.bigbang.ui.common.recyclerview;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +10,7 @@ import lombok.Setter;
  * An OnDemandLoadingScrollListener for recycler view pagination
  */
 public abstract class OnDemandLoadingScrollListener extends RecyclerView.OnScrollListener {
-  public static final int VISIBLE_THRESHOLD_DEFAULT = 5;
+  private static final int VISIBLE_THRESHOLD_DEFAULT = 5;
 
   private int previousTotal;
   private boolean loading = true;

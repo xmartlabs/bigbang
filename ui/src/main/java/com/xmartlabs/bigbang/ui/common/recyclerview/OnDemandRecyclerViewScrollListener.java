@@ -1,4 +1,4 @@
-package com.xmartlabs.template.ui.common;
+package com.xmartlabs.bigbang.ui.common.recyclerview;
 
 import android.support.annotation.Dimension;
 import android.support.annotation.NonNull;

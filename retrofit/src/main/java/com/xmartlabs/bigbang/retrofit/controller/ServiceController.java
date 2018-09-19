@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.annimon.stream.Objects;
 import com.xmartlabs.bigbang.core.controller.Controller;
 import com.xmartlabs.bigbang.core.controller.EntityServiceProvider;
+import com.xmartlabs.bigbang.core.helper.SchedulersTransformationHelper;
 import com.xmartlabs.bigbang.core.model.EntityWithId;
 
 import java.util.List;
@@ -25,6 +26,7 @@ import io.reactivex.SingleTransformer;
 public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
     implements EntityServiceProvider<Id, E> {
   @CheckResult
+  @Deprecated
   @NonNull
   @Override
   public <S> SingleTransformer<S, S> applySingleServiceTransformation() {
@@ -32,6 +34,7 @@ public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends 
   }
 
   @CheckResult
+  @Deprecated
   @NonNull
   @Override
   public CompletableTransformer applyCompletableServiceTransformation() {
@@ -43,7 +46,7 @@ public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends 
   @Override
   public Maybe<E> getEntityFromList(@NonNull Single<List<E>> serviceCall, @NonNull Id id) {
     return serviceCall
-        .compose(applySingleServiceTransformation())
+        .compose(SchedulersTransformationHelper.applySingleIoSchedulersTransformation())
         .toObservable()
         .flatMap(Observable::fromIterable)
         .filter(entity -> Objects.equals(entity, id))

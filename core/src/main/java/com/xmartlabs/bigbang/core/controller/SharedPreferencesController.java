@@ -10,6 +10,7 @@ import com.annimon.stream.Objects;
 import com.annimon.stream.Optional;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.xmartlabs.bigbang.core.helper.SchedulersTransformationHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -168,7 +168,7 @@ public class SharedPreferencesController extends Controller {
           .putString(key, serializedValue)
           .commit();
       return value;
-    }).compose(applySingleIoSchedulers());
+    }).compose(SchedulersTransformationHelper.applySingleIoSchedulersTransformation());
   }
 
   /**
