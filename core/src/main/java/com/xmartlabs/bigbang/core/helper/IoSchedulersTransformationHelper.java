@@ -12,7 +12,7 @@ import io.reactivex.SingleTransformer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Created by bruno on 19/09/18.
+ * Contains the different Io Schedulers transformations for main RxJava operators.
  */
 public class IoSchedulersTransformationHelper {
   /**
