@@ -6,13 +6,13 @@ import android.support.annotation.NonNull;
 import com.annimon.stream.Objects;
 import com.xmartlabs.bigbang.core.controller.Controller;
 import com.xmartlabs.bigbang.core.controller.EntityServiceProvider;
+import com.xmartlabs.bigbang.core.helper.IoSchedulersTransformationHelper;
 import com.xmartlabs.bigbang.core.model.EntityWithId;
 
 import java.util.List;
 
 import io.reactivex.CompletableTransformer;
 import io.reactivex.Maybe;
-import io.reactivex.MaybeTransformer;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
@@ -26,24 +26,19 @@ import io.reactivex.SingleTransformer;
 public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends Controller
     implements EntityServiceProvider<Id, E> {
   @CheckResult
-  @NonNull
-  @Override
-  public CompletableTransformer applyCompletableServiceTransformation() {
-    return applyCompletableIoSchedulersTransformation();
-  }
-
-  @CheckResult
-  @NonNull
-  @Override
-  public <S> MaybeTransformer<S, S> applyMaybeServiceTransformation() {
-    return applyMaybeIoSchedulersTransformation();
-  }
-
-  @CheckResult
+  @Deprecated
   @NonNull
   @Override
   public <S> SingleTransformer<S, S> applySingleServiceTransformation() {
-    return applySingleIoSchedulersTransformation();
+    return applySingleIoSchedulers();
+  }
+
+  @CheckResult
+  @Deprecated
+  @NonNull
+  @Override
+  public CompletableTransformer applyCompletableServiceTransformation() {
+    return applyCompletableIoSchedulers();
   }
 
   @CheckResult
@@ -51,7 +46,7 @@ public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends 
   @Override
   public Maybe<E> getEntityFromList(@NonNull Single<List<E>> serviceCall, @NonNull Id id) {
     return serviceCall
-        .compose(applySingleServiceTransformation())
+        .compose(IoSchedulersTransformationHelper.applySingleIoSchedulersTransformation())
         .toObservable()
         .flatMap(Observable::fromIterable)
         .filter(entity -> Objects.equals(entity, id))

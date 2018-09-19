@@ -9,8 +9,12 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableTransformer;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableTransformer;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeTransformer;
+import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 
@@ -29,21 +33,10 @@ public interface EntityServiceProvider<Id, E extends EntityWithId<Id>> {
    *
    * @return The {@link Completable} transformation
    */
-  @Deprecated
   @CheckResult
+  @Deprecated
   @NonNull
   CompletableTransformer applyCompletableServiceTransformation();
-
-  /**
-   *
-   * Provides the service {@link Maybe} transformation.
-   * It could be used to sign out the user when getting a service error for example.
-   *
-   * @return The {@link Maybe} transformation
-   */
-  @CheckResult
-  @NonNull
-  <S> MaybeTransformer<S, S> applyMaybeServiceTransformation();
 
   /**
    * @deprecated

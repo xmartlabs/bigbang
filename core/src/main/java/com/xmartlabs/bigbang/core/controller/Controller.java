@@ -4,6 +4,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.xmartlabs.bigbang.core.Injector;
+import com.xmartlabs.bigbang.core.helper.IoSchedulersTransformationHelper;
 import com.xmartlabs.bigbang.core.helper.RxTransformerHelper;
 
 import io.reactivex.Completable;
@@ -28,73 +29,10 @@ public abstract class Controller {
   }
 
   /**
-   * Provides the Io schedule {@link Single} transformation.
-   * Subscribes and observes the stream in the Io {@link Schedulers}.
-   *
-   * @return The stream with the schedule transformation
-   */
-  @CheckResult
-  @NonNull
-  protected CompletableTransformer applyCompletableIoSchedulersTransformation() {
-    return RxTransformerHelper.completableIoTransformer;
-  }
-
-  /**
-   * Provides the Io schedule {@link Single} transformation.
-   * Subscribes and observes the stream in the Io {@link Schedulers}.
-   *
-   * @return The stream with the schedule transformation
-   */
-  @CheckResult
-  @NonNull
-  protected <T> FlowableTransformer<T, T> applyFlowableIoSchedulersTransformation() {
-    //noinspection unchecked
-    return (FlowableTransformer<T, T>) RxTransformerHelper.flowableIoTransformer;
-  }
-
-  /**
-   * Provides the Io schedule {@link Single} transformation.
-   * Subscribes and observes the stream in the Io {@link Schedulers}.
-   *
-   * @return The stream with the schedule transformation
-   */
-  @CheckResult
-  @NonNull
-  protected <T> MaybeTransformer<T, T> applyMaybeIoSchedulersTransformation() {
-    //noinspection unchecked
-    return (MaybeTransformer<T, T>) RxTransformerHelper.maybeIoTransformer;
-  }
-
-  /**
-   * Provides the Io schedule {@link Single} transformation.
-   * Subscribes and observes the stream in the Io {@link Schedulers}.
-   *
-   * @return The stream with the schedule transformation
-   */
-  @CheckResult
-  @NonNull
-  protected <T> ObservableTransformer<T, T> applyObservableIoSchedulersTransformation() {
-    //noinspection unchecked
-    return (ObservableTransformer<T, T>) RxTransformerHelper.observableIoTransformer;
-  }
-
-  /**
-   * Provides the Io schedule {@link Single} transformation.
-   * Subscribes and observes the stream on Io bound {@link Schedulers}.
-   *
-   * @return The stream with the schedule transformation
-   */
-  @CheckResult
-  @NonNull
-  protected <T> SingleTransformer<T, T> applySingleIoSchedulersTransformation() {
-    //noinspection unchecked
-    return (SingleTransformer<T, T>) RxTransformerHelper.singleIoTransformer;
-  }
-
-  /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
+   * {@link IoSchedulersTransformationHelper#applyCompletableIoSchedulersTransformation()}
+   * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Completable} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
@@ -111,7 +49,8 @@ public abstract class Controller {
   /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
+   * {@link IoSchedulersTransformationHelper#applyFlowableIoSchedulersTransformation()}
+   * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Observable} transformation.
    * Subscribes the stream to Io bound {@link Flowable} and observes it in the {Android main thread.
@@ -129,7 +68,8 @@ public abstract class Controller {
   /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
+   * {@link IoSchedulersTransformationHelper#applySingleIoSchedulersTransformation()}
+   * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Maybe} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
@@ -147,7 +87,8 @@ public abstract class Controller {
   /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
+   * {@link IoSchedulersTransformationHelper#applySingleIoSchedulersTransformation()}
+   * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Observable} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
@@ -165,7 +106,8 @@ public abstract class Controller {
   /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link #applySingleIoSchedulersTransformation()} (it subscribes and observes on Io bound {@link Schedulers})
+   * {@link IoSchedulersTransformationHelper#applySingleIoSchedulersTransformation()}
+   * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Single} transformation.
    * Subscribes the stream to Io bound {@link Schedulers} and observes it in the {Android main thread.
