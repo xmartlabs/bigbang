@@ -41,7 +41,7 @@ public abstract class Controller {
    */
   @Deprecated
   @NonNull
-  public static final CompletableTransformer completableIoAndMainThreadTransformer = upstream -> upstream
+  private final CompletableTransformer completableIoAndMainThreadTransformer = upstream -> upstream
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
 
@@ -56,7 +56,7 @@ public abstract class Controller {
    */
   @Deprecated
   @NonNull
-  public static final FlowableTransformer flowableIoAndMainThreadTransformer = upstream -> upstream
+  private final FlowableTransformer flowableIoAndMainThreadTransformer = upstream -> upstream
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
 
@@ -71,7 +71,7 @@ public abstract class Controller {
    */
   @Deprecated
   @NonNull
-  public static final MaybeTransformer maybeIoAndMainThreadTransformer = upstream -> upstream
+  private final MaybeTransformer maybeIoAndMainThreadTransformer = upstream -> upstream
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
 
@@ -86,7 +86,7 @@ public abstract class Controller {
    */
   @Deprecated
   @NonNull
-  public static final ObservableTransformer observableIoAndMainThreadTransformer = observable -> observable
+  private final ObservableTransformer observableIoAndMainThreadTransformer = observable -> observable
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
 
@@ -101,7 +101,7 @@ public abstract class Controller {
    */
   @Deprecated
   @NonNull
-  public static final SingleTransformer singleIoAndMainThreadTransformer = upstream -> upstream
+  private final SingleTransformer singleIoAndMainThreadTransformer = upstream -> upstream
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread());
 
