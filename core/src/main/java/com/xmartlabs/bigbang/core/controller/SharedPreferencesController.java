@@ -10,6 +10,7 @@ import com.annimon.stream.Objects;
 import com.annimon.stream.Optional;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.xmartlabs.bigbang.core.helper.IoSchedulersTransformationHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -167,7 +168,7 @@ public class SharedPreferencesController extends Controller {
           .putString(key, serializedValue)
           .commit();
       return value;
-    }).compose(applySingleIoSchedulersTransformation());
+    }).compose(IoSchedulersTransformationHelper.applySingleIoSchedulersTransformation());
   }
 
   /**
