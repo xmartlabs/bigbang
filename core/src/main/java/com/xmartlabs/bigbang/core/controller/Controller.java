@@ -50,7 +50,7 @@ public abstract class Controller {
    * to decide when to observe on the main thread. Instead of this, use
    * {@link RxTransformerHelper#flowableIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
    *
-   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * FlowableTransformer that subscribes the stream in the Io {@link Schedulers} and observes
    * it on the {Android main thread.
    *
    */
@@ -65,7 +65,7 @@ public abstract class Controller {
    * to decide when to observe on the main thread. Instead of this, use
    * {@link RxTransformerHelper#maybeIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
    *
-   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * MaybeTransformer that subscribes the stream in the Io {@link Schedulers} and observes
    * it on the {Android main thread.
    *
    */
@@ -80,7 +80,7 @@ public abstract class Controller {
    * to decide when to observe on the main thread. Instead of this, use
    * {@link RxTransformerHelper#observableIoTransformer} (it subscribes and observes on Io bound {@link Schedulers})
    *
-   * SingleTransformer that subscribes the stream in the Io {@link Schedulers} and observes
+   * ObservableTransformer that subscribes the stream in the Io {@link Schedulers} and observes
    * it on the {Android main thread.
    *
    */
@@ -145,7 +145,7 @@ public abstract class Controller {
   /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link SchedulersTransformationHelper#applySingleIoSchedulersTransformation()}
+   * {@link SchedulersTransformationHelper#applyMaybeIoSchedulersTransformation()}
    * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Maybe} transformation.
@@ -164,7 +164,7 @@ public abstract class Controller {
   /**
    * @deprecated The transformation shouldn't observe on the {Android main thread. You should be the one
    * to decide when to observe on the main thread. Instead of this, use
-   * {@link SchedulersTransformationHelper#applySingleIoSchedulersTransformation()}
+   * {@link SchedulersTransformationHelper#applyObservableIoSchedulersTransformation()}
    * (it subscribes and observes on Io bound {@link Schedulers})
    *
    * Provides the Io schedule {@link Observable} transformation.
