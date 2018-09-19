@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import com.annimon.stream.Objects;
 import com.xmartlabs.bigbang.core.controller.Controller;
 import com.xmartlabs.bigbang.core.controller.EntityServiceProvider;
-import com.xmartlabs.bigbang.core.helper.IoSchedulersTransformationHelper;
+import com.xmartlabs.bigbang.core.helper.SchedulersTransformationHelper;
 import com.xmartlabs.bigbang.core.model.EntityWithId;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public abstract class ServiceController<Id, E extends EntityWithId<Id>> extends 
   @Override
   public Maybe<E> getEntityFromList(@NonNull Single<List<E>> serviceCall, @NonNull Id id) {
     return serviceCall
-        .compose(IoSchedulersTransformationHelper.applySingleIoSchedulersTransformation())
+        .compose(SchedulersTransformationHelper.applySingleIoSchedulersTransformation())
         .toObservable()
         .flatMap(Observable::fromIterable)
         .filter(entity -> Objects.equals(entity, id))

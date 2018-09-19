@@ -4,7 +4,7 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.annimon.stream.Optional;
-import com.xmartlabs.bigbang.core.helper.IoSchedulersTransformationHelper;
+import com.xmartlabs.bigbang.core.helper.SchedulersTransformationHelper;
 import com.xmartlabs.bigbang.core.helper.function.BiFunction;
 import com.xmartlabs.bigbang.core.helper.function.Function;
 import com.xmartlabs.bigbang.core.model.EntityWithId;
@@ -55,7 +55,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
         .concatArrayDelayError(
             entityDao.getEntities(conditions).toFlowable(),
             serviceCall
-                .compose(IoSchedulersTransformationHelper.applySingleIoSchedulersTransformation())
+                .compose(SchedulersTransformationHelper.applySingleIoSchedulersTransformation())
                 .toFlowable()
         )
         .subscribeOn(Schedulers.io())
@@ -63,7 +63,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
         .scan((databaseEntities, serviceEntities) ->
             entityDao.deleteAndInsertEntities(serviceEntities, conditions).blockingGet()
         )
-        .compose(IoSchedulersTransformationHelper.applyFlowableIoSchedulersTransformation());
+        .compose(SchedulersTransformationHelper.applyFlowableIoSchedulersTransformation());
   }
 
   /**
@@ -113,7 +113,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
   @SuppressWarnings({"unused", "WeakerAccess"})
   protected Single<E> getServiceEntity(@NonNull Function<Id, Single<E>> serviceCall, Id id) {
     return serviceCall.apply(id)
-        .compose(IoSchedulersTransformationHelper.applySingleIoSchedulersTransformation())
+        .compose(SchedulersTransformationHelper.applySingleIoSchedulersTransformation())
         .doOnSuccess(entityDao::updateEntity);
   }
 
@@ -128,7 +128,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
   @SuppressWarnings({"unused", "WeakerAccess"})
   protected Single<E> createEntityAndGetValue(@NonNull Single<E> serviceCall) {
     return serviceCall
-        .compose(IoSchedulersTransformationHelper.applySingleIoSchedulersTransformation ())
+        .compose(SchedulersTransformationHelper.applySingleIoSchedulersTransformation ())
         .flatMap(entityDao::createEntity);
   }
 
@@ -174,7 +174,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
   @SuppressWarnings({"unused", "WeakerAccess"})
   protected Single<E> updateEntityAndGetValue(E entity, Completable completable) {
     return completable
-        .compose(IoSchedulersTransformationHelper.applyCompletableIoSchedulersTransformation())
+        .compose(SchedulersTransformationHelper.applyCompletableIoSchedulersTransformation())
         .toSingleDefault(entity)
         .flatMap(entityDao::updateEntity);
   }
@@ -206,7 +206,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
   @SuppressWarnings({"unused", "WeakerAccess"})
   protected Completable deleteEntity(@NonNull Function<Id, Completable> serviceCall, @NonNull Id entityId) {
     return serviceCall.apply(entityId)
-        .compose(IoSchedulersTransformationHelper.applyCompletableIoSchedulersTransformation())
+        .compose(SchedulersTransformationHelper.applyCompletableIoSchedulersTransformation())
         .concatWith(entityDao.deleteEntityWithId(entityId));
   }
 
@@ -223,7 +223,7 @@ public abstract class EntityController<Id, E extends EntityWithId<Id>, Condition
   protected Completable deleteEntity(@NonNull Function<Id, Completable> serviceCall, @NonNull E entity) {
     return Optional.of(entity.getId())
         .map(id -> serviceCall.apply(id)
-            .compose(IoSchedulersTransformationHelper.applyCompletableIoSchedulersTransformation())
+            .compose(SchedulersTransformationHelper.applyCompletableIoSchedulersTransformation())
             .concatWith(entityDao.deleteEntity(entity)))
         .orElse(Completable.error(() -> new IllegalStateException("Entity id cannot be null")));
   }

@@ -3,9 +3,13 @@ package com.xmartlabs.bigbang.core.helper;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
+import io.reactivex.Completable;
 import io.reactivex.CompletableTransformer;
+import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
+import io.reactivex.Maybe;
 import io.reactivex.MaybeTransformer;
+import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
@@ -14,9 +18,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Contains the different Io Schedulers transformations for main RxJava operators.
  */
-public class IoSchedulersTransformationHelper {
+public class SchedulersTransformationHelper {
   /**
-   * Provides the Io schedule {@link Single} transformation.
+   * Provides the Io schedule {@link Completable} transformation.
    * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
@@ -28,7 +32,7 @@ public class IoSchedulersTransformationHelper {
   }
 
   /**
-   * Provides the Io schedule {@link Single} transformation.
+   * Provides the Io schedule {@link Flowable} transformation.
    * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
@@ -41,7 +45,7 @@ public class IoSchedulersTransformationHelper {
   }
 
   /**
-   * Provides the Io schedule {@link Single} transformation.
+   * Provides the Io schedule {@link Maybe} transformation.
    * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
@@ -54,7 +58,7 @@ public class IoSchedulersTransformationHelper {
   }
 
   /**
-   * Provides the Io schedule {@link Single} transformation.
+   * Provides the Io schedule {@link Observable} transformation.
    * Subscribes and observes the stream in the Io {@link Schedulers}.
    *
    * @return The stream with the schedule transformation
