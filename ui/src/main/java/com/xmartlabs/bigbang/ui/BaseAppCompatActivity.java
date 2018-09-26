@@ -1,9 +1,12 @@
 package com.xmartlabs.bigbang.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.f2prateek.dart.Dart;
 import com.trello.rxlifecycle2.components.RxActivity;
@@ -35,5 +38,14 @@ public abstract class BaseAppCompatActivity extends RxAppCompatActivity {
    */
   public void removeFragment(@NonNull Fragment fragment) {
     getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+  }
+
+  /** Hides the keyboard, if visible. */
+  protected void hideKeyboard() {
+    InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    View currentFocus = this.getCurrentFocus();
+    if (currentFocus != null) {
+      inputMethodManager.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+    }
   }
 }
