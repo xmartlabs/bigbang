@@ -1,6 +1,7 @@
 package com.xmartlabs.bigbang.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.annimon.stream.Optional;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
@@ -26,13 +28,13 @@ import butterknife.Unbinder;
 /**
  * Base Fragment implementation with the following functionality:
  * <ul>
- *   <li>Inflate the view given a layout resource</li>
- *   <li>Bind the view layout elements with ButterKnife</li>
- *   <li>Ability to show/hide a progress dialog of your choosing (providing it extends from {@link BaseProgressDialog}</li>
- *   <li>If the activity that holds this Fragment extends from {@link BaseAppCompatActivity}, allows the instance
- *       to be removed</li>
- *   <li>Ability to remove itself from parent fragment</li>
- *   <li>Proper cleanup on detach/destroy</li>
+ * <li>Inflate the view given a layout resource</li>
+ * <li>Bind the view layout elements with ButterKnife</li>
+ * <li>Ability to show/hide a progress dialog of your choosing (providing it extends from {@link BaseProgressDialog}</li>
+ * <li>If the activity that holds this Fragment extends from {@link BaseAppCompatActivity}, allows the instance
+ * to be removed</li>
+ * <li>Ability to remove itself from parent fragment</li>
+ * <li>Proper cleanup on detach/destroy</li>
  * </ul>
  */
 public abstract class BaseFragment extends RxFragment {
@@ -45,6 +47,7 @@ public abstract class BaseFragment extends RxFragment {
 
   /**
    * Inflates the view layout/elements.
+   *
    * @return the layout resource from which to inflate the view
    */
   @LayoutRes
@@ -89,6 +92,7 @@ public abstract class BaseFragment extends RxFragment {
   /**
    * Creates a BaseProgressDialog instance to be used to show/hide a progress dialog.
    * The dialog must extend from BaseProgressDialog.
+   *
    * @return the BaseProgressDialog instance to be shown upon request
    */
   @Nullable
@@ -111,6 +115,7 @@ public abstract class BaseFragment extends RxFragment {
 
   /**
    * Show a simple alert with an ok button.
+   *
    * @param stringResId the message to be shown in the alert
    */
   protected void showAlertError(int stringResId) {
@@ -147,5 +152,17 @@ public abstract class BaseFragment extends RxFragment {
   protected void removeItselfFromParent() {
     Optional.ofNullable(getParentFragment())
         .ifPresentOrElse(parent -> removeItselfFromParentFragment(), this::removeItselfFromActivity);
+  }
+
+  /** Hides the keyboard, if visible. */
+  protected void hideKeyboard() {
+    Optional.ofNullable(getActivity())
+        .ifPresent(activity -> {
+          InputMethodManager inputMethodManager =
+              (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+          if (inputMethodManager != null && getView() != null) {
+            inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+          }
+        });
   }
 }
