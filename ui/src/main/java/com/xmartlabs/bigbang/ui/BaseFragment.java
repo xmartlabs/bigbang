@@ -28,13 +28,13 @@ import butterknife.Unbinder;
 /**
  * Base Fragment implementation with the following functionality:
  * <ul>
- *  <li>Inflate the view given a layout resource</li>
- *  <li>Bind the view layout elements with ButterKnife</li>
- *  <li>Ability to show/hide a progress dialog of your choosing (providing it extends from {@link BaseProgressDialog}</li>
- *  <li>If the activity that holds this Fragment extends from {@link BaseAppCompatActivity}, allows the instance
+ *    <li>Inflate the view given a layout resource</li>
+ *    <li>Bind the view layout elements with ButterKnife</li>
+ *    <li>Ability to show/hide a progress dialog of your choosing (providing it extends from {@link BaseProgressDialog}</li>
+ *    <li>If the activity that holds this Fragment extends from {@link BaseAppCompatActivity}, allows the instance
  * to be removed</li>
- *  <li>Ability to remove itself from parent fragment</li>
- *  <li>Proper cleanup on detach/destroy</li>
+ *    <li>Ability to remove itself from parent fragment</li>
+ *    <li>Proper cleanup on detach/destroy</li>
  * </ul>
  */
 public abstract class BaseFragment extends RxFragment {
@@ -113,7 +113,6 @@ public abstract class BaseFragment extends RxFragment {
 
   /**
    * Show a simple alert with an ok button.
-   *
    * @param stringResId the message to be shown in the alert
    */
   protected void showAlertError(int stringResId) {
