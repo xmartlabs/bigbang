@@ -1,6 +1,7 @@
 package com.xmartlabs.bigbang.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.annimon.stream.Optional;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
@@ -147,5 +149,17 @@ public abstract class BaseFragment extends RxFragment {
   protected void removeItselfFromParent() {
     Optional.ofNullable(getParentFragment())
         .ifPresentOrElse(parent -> removeItselfFromParentFragment(), this::removeItselfFromActivity);
+  }
+
+  /** Hides the keyboard, if visible. */
+  protected void hideKeyboard() {
+    Optional.ofNullable(getActivity())
+        .ifPresent(activity -> {
+          InputMethodManager inputMethodManager =
+              (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+          if (inputMethodManager != null && getView() != null) {
+            inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+          }
+        });
   }
 }
