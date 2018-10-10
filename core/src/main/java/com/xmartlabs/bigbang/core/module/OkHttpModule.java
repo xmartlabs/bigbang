@@ -30,17 +30,20 @@ public class OkHttpModule {
   @Named(CLIENT_SERVICE)
   @Provides
   @Singleton
-  public OkHttpClient provideServiceOkHttpClient(OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
-    addLoggingInterceptor(clientBuilder, buildInfo);
-
+  public OkHttpClient provideServiceOkHttpClient(@NonNull OkHttpClient.Builder clientBuilder, @NonNull BuildInfo buildInfo) {
+    addInterceptors(clientBuilder, buildInfo);
     return clientBuilder.build();
+  }
+
+  protected void addInterceptors(@NonNull OkHttpClient.Builder clientBuilder, @NonNull BuildInfo buildInfo) {
+    addLoggingInterceptor(clientBuilder, buildInfo);
   }
 
   @Named(CLIENT_PICASSO)
   @Provides
   @Singleton
   public OkHttpClient providePicassoOkHttpClient(OkHttpClient.Builder clientBuilder, Cache cache,
-                                          BuildInfo buildInfo) {
+                                                 BuildInfo buildInfo) {
     clientBuilder.cache(cache);
 
     addLoggingInterceptor(clientBuilder, buildInfo);
@@ -65,14 +68,14 @@ public class OkHttpModule {
     return new Cache(httpCacheDir, httpCacheSize);
   }
 
-  private void addLoggingInterceptor(@NonNull OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
+  protected void addLoggingInterceptor(@NonNull OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
     if (buildInfo.isDebug() && !buildInfo.isProduction()) {
       HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Timber.tag("OkHttp").d(message));
       loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-      clientBuilder.addInterceptor(loggingInterceptor);
+      clientBuilder.addNetworkInterceptor(loggingInterceptor);
 
-      CurlInterceptor curlInterceptor = new CurlInterceptor();
-      clientBuilder.addInterceptor(curlInterceptor);
+      CurlInterceptor curlInterceptor = new CurlInterceptor(message -> Timber.tag("Ok2Curl").d(message));
+      clientBuilder.addNetworkInterceptor(curlInterceptor);
     }
   }
 
