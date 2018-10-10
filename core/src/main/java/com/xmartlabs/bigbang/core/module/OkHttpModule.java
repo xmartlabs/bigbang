@@ -3,6 +3,7 @@ package com.xmartlabs.bigbang.core.module;
 import android.content.Context;
 import android.os.Build;
 import android.os.StatFs;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
 import com.moczul.ok2curl.CurlInterceptor;
@@ -35,18 +36,23 @@ public class OkHttpModule {
     return clientBuilder.build();
   }
 
+  @CallSuper
   protected void addInterceptors(@NonNull OkHttpClient.Builder clientBuilder, @NonNull BuildInfo buildInfo) {
-    addLoggingInterceptor(clientBuilder, buildInfo);
+    if (buildInfo.isDebug()) {
+      addDebugLoggingInterceptor(clientBuilder);
+    }
   }
 
   @Named(CLIENT_PICASSO)
   @Provides
   @Singleton
-  public OkHttpClient providePicassoOkHttpClient(OkHttpClient.Builder clientBuilder, Cache cache,
-                                                 BuildInfo buildInfo) {
+  public OkHttpClient providePicassoOkHttpClient(@NonNull OkHttpClient.Builder clientBuilder, @NonNull Cache cache,
+                                                 @NonNull BuildInfo buildInfo) {
     clientBuilder.cache(cache);
 
-    addLoggingInterceptor(clientBuilder, buildInfo);
+    if (buildInfo.isDebug()) {
+      addDebugLoggingInterceptor(clientBuilder);
+    }
 
     return clientBuilder.build();
   }
@@ -68,15 +74,13 @@ public class OkHttpModule {
     return new Cache(httpCacheDir, httpCacheSize);
   }
 
-  protected void addLoggingInterceptor(@NonNull OkHttpClient.Builder clientBuilder, BuildInfo buildInfo) {
-    if (buildInfo.isDebug() && !buildInfo.isProduction()) {
-      HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> Timber.tag("OkHttp").d(message));
-      loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-      clientBuilder.addNetworkInterceptor(loggingInterceptor);
+  protected void addDebugLoggingInterceptor(@NonNull OkHttpClient.Builder clientBuilder) {
+    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(Timber.tag("OkHttp")::d);
+    loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    clientBuilder.addNetworkInterceptor(loggingInterceptor);
 
-      CurlInterceptor curlInterceptor = new CurlInterceptor(message -> Timber.tag("Ok2Curl").d(message));
-      clientBuilder.addNetworkInterceptor(curlInterceptor);
-    }
+    CurlInterceptor curlInterceptor = new CurlInterceptor(Timber.tag("Ok2Curl")::d);
+    clientBuilder.addNetworkInterceptor(curlInterceptor);
   }
 
   // Taken from: https://github.com/square/picasso/blob/eb2e9730fb7dbe25b4ab9d4ba5d2050c70c27024/picasso/src/main/java/com/squareup/picasso/Utils.java#L255
