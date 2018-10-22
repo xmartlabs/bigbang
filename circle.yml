@@ -29,6 +29,7 @@ jobs:
             :instrumental-test:assembleDebug
             :log-crashlytics:assembleDebug
             :mvp:assembleDebug
+            :mvvm:assembleDebug
             :retrofit:assembleDebug
             :ui:assembleDebug
             --max-workers=2

@@ -8,7 +8,7 @@ import com.raizlabs.android.dbflow.rx2.kotlinextensions.rx
 import com.raizlabs.android.dbflow.sql.language.SQLOperator
 import com.raizlabs.android.dbflow.sql.language.property.Property
 import com.raizlabs.android.dbflow.structure.BaseModel
-import com.xmartlabs.bigbang.core.controller.EntityDao
+import com.xmartlabs.bigbang.core.repository.EntityDao
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.model.EntityWithId
 import io.reactivex.Maybe

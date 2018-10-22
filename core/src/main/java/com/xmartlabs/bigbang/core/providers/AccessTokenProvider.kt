@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.core.providers
 
 import com.xmartlabs.bigbang.core.common.EntityProvider
-import com.xmartlabs.bigbang.core.controller.CoreSessionRepository
+import com.xmartlabs.bigbang.core.repository.CoreSessionRepository
 import com.xmartlabs.bigbang.core.module.SessionInterceptor
 import javax.inject.Inject
 
