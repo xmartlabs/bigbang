@@ -56,9 +56,10 @@ public class ServiceErrorHandler {
    */
   public void handleServiceErrors() {
     generalErrorHelper.setErrorHandlerForThrowable(ServiceExceptionWithMessage.class, serviceErrorHandler);
-    generalErrorHelper.setErrorHandlerForThrowable(HttpException.class, throwable ->
+    Consumer<Throwable> consumer = throwable ->
         Optional.ofNullable((HttpException) throwable)
-          .ifPresent(t -> serviceErrorHandler.accept(new ServiceExceptionWithMessage(t)))
-    );
+            .ifPresent(t -> serviceErrorHandler.accept(new ServiceExceptionWithMessage(t)));
+    generalErrorHelper.setErrorHandlerForThrowable(HttpException.class, consumer    );
+    generalErrorHelper.setErrorHandlerForThrowable(retrofit2.adapter.rxjava2.HttpException.class, consumer    );
   }
 }
