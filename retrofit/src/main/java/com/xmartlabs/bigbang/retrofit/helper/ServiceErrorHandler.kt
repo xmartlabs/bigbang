@@ -43,10 +43,12 @@ class ServiceErrorHandler @Inject constructor() {
    */
   fun handleServiceErrors() {
     generalErrorHelper.setErrorHandlerForThrowable(ServiceExceptionWithMessage::class) { ex -> serviceErrorHandler(ex) }
-    generalErrorHelper.setErrorHandlerForThrowable(HttpException::class) { throwable ->
+    val handler: (Throwable) -> Unit = { throwable ->
       when (throwable) {
         is HttpException -> serviceErrorHandler(ServiceExceptionWithMessage(throwable))
       }
     }
+    generalErrorHelper.setErrorHandlerForThrowable(HttpException::class, handler)
+    generalErrorHelper.setErrorHandlerForThrowable(retrofit2.adapter.rxjava2.HttpException::class, handler)
   }
 }
