@@ -51,6 +51,10 @@ android {
 
 dependencies {
     androidTestImplementation project(path: ':instrumental-test')
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
 
     api project(path: ':core')
 
