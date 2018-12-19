@@ -204,38 +204,86 @@ abstract class BaseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewH
                                                      areContentTheSame: (Any, Any) -> Boolean) {
     if (newItems.isEmpty()) {
       clearAll()
+      notifyDataSetChanged()
       return
     }
 
     if (updateElementsDisposable != null && !updateElementsDisposable!!.isDisposed) {
       updateElementsDisposable!!.dispose()
     }
+
+    val newElements = newItems
+        .filterNotNull()
+        .map { item -> Element(type, item) }
+
     updateElementsDisposable = Single
-        .fromCallable { DiffUtil.calculateDiff(getUpdateDiffCallback(newItems, areItemsTheSame, areContentTheSame)) }
+        .fromCallable { DiffUtil.calculateDiff(getUpdateDiffCallback(items, newElements, areItemsTheSame, areContentTheSame)) }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { diffResult ->
           items.clear()
-          newItems.filterNotNull().forEach { addItemWithoutNotifying(type, it, false) }
+          items.addAll(newElements)
           addItemTypeIfNeeded(type)
           diffResult.dispatchUpdatesTo(this)
         }
   }
 
+  /**
+   * Sets the items data for the recycler view and notifying any registered observers that the data set has
+   * changed. It uses a function that calculates the difference between the old and the new items
+   * in order to improve the update process.
+   *
+   * Items compare will be executed on a secondary thread
+   *
+   * @param newElements                  The elements to be set.
+   *
+   * @param areItemsTheSame   A function which checks that two items are the same.
+   *
+   * @param areContentTheSame A function which checks that the content of two items are the same.
+   */
+  protected fun setElements(newElements: List<Element>,
+                            areItemsTheSame: (Any, Any) -> Boolean,
+                            areContentTheSame: (Any, Any) -> Boolean) {
+    if (newElements.isEmpty()) {
+      clearAll()
+      notifyDataSetChanged()
+      return
+    }
+
+    if (updateElementsDisposable != null && !updateElementsDisposable!!.isDisposed) {
+      updateElementsDisposable!!.dispose()
+    }
+
+    updateElementsDisposable = Single
+        .fromCallable { DiffUtil.calculateDiff(getUpdateDiffCallback(items, newElements, areItemsTheSame, areContentTheSame)) }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe { diffResult ->
+          newElements
+              .map { it.type }
+              .distinct()
+              .forEach { addItemTypeIfNeeded(it) }
+          items.clear()
+          items.addAll(newElements)
+          diffResult.dispatchUpdatesTo(this)
+        }
+  }
+
   private fun getUpdateDiffCallback(
-      newItems: List<*>,
+      oldItems: List<Element>,
+      newItems: List<Element>,
       areItemsTheSame: (Any, Any) -> Boolean,
       areContentTheSame: (Any, Any) -> Boolean): DiffUtil.Callback {
     return object : DiffUtil.Callback() {
-      override fun getOldListSize() = items.size
+      override fun getOldListSize() = oldItems.size
 
       override fun getNewListSize() = newItems.size
 
       override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-          areItemsTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
+          areItemsTheSame(oldItems[oldItemPosition].item, newItems[newItemPosition].item)
 
       override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-          areContentTheSame(items[oldItemPosition].item, newItems[newItemPosition]!!)
+          areContentTheSame(oldItems[oldItemPosition].item, newItems[newItemPosition].item)
     }
   }
 
