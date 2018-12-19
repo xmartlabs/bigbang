@@ -1,4 +1,4 @@
-package com.xmartlabs.bigbang.core.controller
+package com.xmartlabs.bigbang.core.repository
 
 import android.support.annotation.CheckResult
 import com.xmartlabs.bigbang.core.extensions.applyIoSchedulers

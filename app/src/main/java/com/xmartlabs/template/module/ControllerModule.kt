@@ -1,6 +1,6 @@
 package com.xmartlabs.template.module
 
-import com.xmartlabs.bigbang.core.controller.SharedPreferencesSource
+import com.xmartlabs.bigbang.core.repository.SharedPreferencesSource
 import com.xmartlabs.template.controller.SessionRepository
 import dagger.Module
 import dagger.Provides
