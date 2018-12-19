@@ -1,10 +1,15 @@
 package com.xmartlabs.bigbang.core.extensions
 
 import io.reactivex.Completable
+import io.reactivex.CompletableTransformer
 import io.reactivex.Flowable
+import io.reactivex.FlowableTransformer
 import io.reactivex.Maybe
+import io.reactivex.MaybeTransformer
 import io.reactivex.Observable
+import io.reactivex.ObservableTransformer
 import io.reactivex.Single
+import io.reactivex.SingleTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -51,3 +56,16 @@ fun <T : Any> Maybe<T>.subscribeOnMain() = this.subscribeOn(AndroidSchedulers.ma
 fun <T : Any> Flowable<T>.subscribeOnMain() = this.subscribeOn(AndroidSchedulers.mainThread())
 /** Returns a Completable which subscribes the child subscriber on the Android main thread */
 fun Completable.subscribeOnMain() = this.subscribeOn(AndroidSchedulers.mainThread())
+
+/** Modifies the Observable to observes and subscribes on the IO thread */
+fun <T : Any> Observable<T>.applyIoSchedulers(delayError: Boolean = false) = this
+    .observeOnIo(delayError)
+    .subscribeOnIo()
+/** Modifies the Single to observes and subscribes on the IO thread */
+fun <T : Any> Single<T>.applyIoSchedulers() = this.observeOnIo().subscribeOnIo()
+/** Modifies the Maybe to observes and subscribes on the IO thread */
+fun <T : Any> Maybe<T>.applyIoSchedulers() = this.observeOnIo().subscribeOnIo()
+/** Modifies the Flowable to observes and subscribes on the IO thread */
+fun <T : Any> Flowable<T>.applyIoSchedulers(delayError: Boolean = false) = this.observeOnIo(delayError).subscribeOnIo()
+/** Modifies the Completable to observes and subscribes on the IO thread */
+fun Completable.applyIoSchedulers() = this.observeOnIo().subscribeOnIo()

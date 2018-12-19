@@ -1,4 +1,4 @@
-package com.xmartlabs.bigbang.ui.mvp
+package com.xmartlabs.bigbang.mvp.ui
 
 import android.support.annotation.UiThread
 

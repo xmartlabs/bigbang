@@ -12,8 +12,8 @@ import javax.inject.Inject
  * Thus, the entities objects are serialized using [Gson].
  * The entities are retrieved once from disk and then kept in memory for faster access.
  */
-open class SharedPreferencesController @Inject
-constructor(private val gson: Gson, private val sharedPreferences: SharedPreferences) : Controller() {
+open class SharedPreferencesSource @Inject
+constructor(private val gson: Gson, private val sharedPreferences: SharedPreferences) {
   private val cachedEntities = HashMap<String, Any>()
 
   /**

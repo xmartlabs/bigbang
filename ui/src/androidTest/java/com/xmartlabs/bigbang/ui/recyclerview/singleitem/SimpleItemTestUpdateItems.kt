@@ -3,10 +3,8 @@ package com.xmartlabs.bigbang.ui.recyclerview.singleitem
 import com.xmartlabs.bigbang.test.helpers.TestUtils.Companion.sleep
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car
 import org.junit.Test
-import org.threeten.bp.Duration
 import java.util.Objects
 import java.util.Arrays
-import java.util.Collections
 
 /**
  * Created by diegomedina24 on 22/9/17.

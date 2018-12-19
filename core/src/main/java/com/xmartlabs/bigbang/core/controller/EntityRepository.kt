@@ -1,6 +1,7 @@
 package com.xmartlabs.bigbang.core.controller
 
 import android.support.annotation.CheckResult
+import com.xmartlabs.bigbang.core.extensions.applyIoSchedulers
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.extensions.subscribeOnIo
 import com.xmartlabs.bigbang.core.model.EntityWithId
@@ -21,11 +22,11 @@ import io.reactivex.Single
  * *
  * @param <S> the [EntityServiceProvider] type
  */
-abstract class EntityController<Id, E : EntityWithId<Id>, in Condition, out S : EntityServiceProvider<Id, E>,
+abstract class EntityRepository<Id, E : EntityWithId<Id>, in Condition, out S : EntityServiceProvider<Id, E>,
     out DAO : EntityDao<Id, E, Condition>>(
     protected val entityDao: DAO,
     protected val entityServiceProvider: S
-) : Controller() {
+) {
 
   /**
    * Retrieves the entities from the db that match the `conditions` and, when the service call returns,

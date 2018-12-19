@@ -124,6 +124,7 @@ android {
 dependencies {
     api project(path: ':core')
     api project(path: ':log-crashlytics')
+    api project(path: ':mvp')
     api project(path: ':retrofit')
     api project(path: ':ui')
 
