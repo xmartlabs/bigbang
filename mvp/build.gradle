@@ -52,6 +52,16 @@ android {
 dependencies {
     api project(path: ':ui')
 
+    implementation "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
+    implementation "com.google.dagger:dagger:${libraryVersion.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
+    implementation "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
+
+    kapt "com.google.dagger:dagger-android-processor:${libraryVersion.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
+
     testImplementation "junit:junit:${libraryVersion.junit}"
 }
 

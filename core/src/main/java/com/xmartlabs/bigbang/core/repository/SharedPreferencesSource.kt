@@ -1,4 +1,4 @@
-package com.xmartlabs.bigbang.core.controller
+package com.xmartlabs.bigbang.core.repository
 
 import android.content.SharedPreferences
 import android.support.annotation.CheckResult
