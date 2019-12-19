@@ -3,9 +3,6 @@ package com.xmartlabs.bigbang.core.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
 import dagger.android.AndroidInjection
 import dagger.android.HasActivityInjector
 import dagger.android.support.AndroidSupportInjection
@@ -39,14 +36,14 @@ object AppInjector {
     if (activity is HasSupportFragmentInjector) {
       AndroidInjection.inject(activity)
     }
-    if (activity is FragmentActivity) {
+    if (activity is androidx.fragment.app.FragmentActivity) {
       activity.supportFragmentManager
           .registerFragmentLifecycleCallbacks(
-              object : FragmentManager.FragmentLifecycleCallbacks() {
+              object : androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
                 override fun onFragmentCreated(
-                    fm: FragmentManager,
-                    f: Fragment,
-                    savedInstanceState: Bundle?
+                        fm: androidx.fragment.app.FragmentManager,
+                        f: androidx.fragment.app.Fragment,
+                        savedInstanceState: Bundle?
                 ) {
                   if (f is Injectable) {
                     AndroidSupportInjection.inject(f)

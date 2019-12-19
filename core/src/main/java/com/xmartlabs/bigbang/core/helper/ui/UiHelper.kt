@@ -3,17 +3,17 @@ package com.xmartlabs.bigbang.core.helper.ui
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
-import android.support.annotation.DrawableRes
-import android.support.design.widget.TextInputLayout
-import android.support.v4.util.Pair
 import android.text.InputType
 import android.text.TextUtils
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.annotation.DrawableRes
+import androidx.core.util.Pair
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import java.util.Locale
+import com.google.android.material.textfield.TextInputLayout
+import java.util.*
 
 object UiHelper {
   /**

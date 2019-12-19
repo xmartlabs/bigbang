@@ -1,9 +1,9 @@
 package com.xmartlabs.template.ui.common
 
-import android.support.annotation.Dimension
-import android.support.annotation.Px
-import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.Dimension
+import androidx.annotation.Px
+import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.RecyclerView
 import com.xmartlabs.bigbang.core.extensions.dpToPx
 
 /** An OnDemandLoadingScrollListener for recycler view pagination */

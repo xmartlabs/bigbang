@@ -1,11 +1,10 @@
 package com.xmartlabs.bigbang.ui.common.recyclerview
 
 import android.content.Context
-import android.support.annotation.IdRes
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.View
-
+import androidx.annotation.IdRes
+import androidx.recyclerview.widget.RecyclerView
 import com.xmartlabs.bigbang.ui.R
 
 /**

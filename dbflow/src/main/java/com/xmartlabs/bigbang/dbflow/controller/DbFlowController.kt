@@ -1,6 +1,6 @@
 package com.xmartlabs.bigbang.dbflow.controller
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.raizlabs.android.dbflow.kotlinextensions.delete
 import com.raizlabs.android.dbflow.kotlinextensions.select
 import com.raizlabs.android.dbflow.rx2.kotlinextensions.list
@@ -8,9 +8,9 @@ import com.raizlabs.android.dbflow.rx2.kotlinextensions.rx
 import com.raizlabs.android.dbflow.sql.language.SQLOperator
 import com.raizlabs.android.dbflow.sql.language.property.Property
 import com.raizlabs.android.dbflow.structure.BaseModel
-import com.xmartlabs.bigbang.core.repository.EntityDao
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.model.EntityWithId
+import com.xmartlabs.bigbang.core.repository.EntityDao
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single

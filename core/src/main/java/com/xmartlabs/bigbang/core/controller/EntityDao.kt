@@ -1,6 +1,6 @@
 package com.xmartlabs.bigbang.core.controller
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 
 import io.reactivex.Completable
 import io.reactivex.Maybe

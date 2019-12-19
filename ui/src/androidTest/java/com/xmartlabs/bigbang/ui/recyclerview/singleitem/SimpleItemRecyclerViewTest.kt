@@ -1,10 +1,10 @@
 package com.xmartlabs.bigbang.ui.recyclerview.singleitem
 
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
 import com.xmartlabs.bigbang.test.extensions.checkRecyclerViewAtPosition
 import com.xmartlabs.bigbang.test.extensions.checkRecyclerViewCountIs
 import com.xmartlabs.bigbang.ui.recyclerview.common.Car

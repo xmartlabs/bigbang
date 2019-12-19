@@ -1,6 +1,6 @@
 package com.xmartlabs.bigbang.mvp.ui
 
-import android.support.annotation.UiThread
+import androidx.annotation.UiThread
 
 import java.lang.ref.WeakReference
 

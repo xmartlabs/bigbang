@@ -1,17 +1,13 @@
 package com.xmartlabs.bigbang.test.helpers
 
-import android.support.annotation.IdRes
-import android.support.annotation.StringRes
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import android.support.test.espresso.matcher.ViewMatchers.isClickable
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.matcher.ViewMatchers.withParent
-import android.support.test.espresso.matcher.ViewMatchers.withText
-import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ImageButton
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.appcompat.widget.Toolbar
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.Matchers.allOf
 
 /**

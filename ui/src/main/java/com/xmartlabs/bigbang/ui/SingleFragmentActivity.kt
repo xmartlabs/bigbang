@@ -1,8 +1,8 @@
 package com.xmartlabs.bigbang.ui
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import com.xmartlabs.bigbang.ui.R.layout.activity_fragment
 
 /**

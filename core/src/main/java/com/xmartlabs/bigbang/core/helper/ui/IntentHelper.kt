@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.support.annotation.RequiresPermission
-import android.support.annotation.StringRes
+import androidx.annotation.RequiresPermission
+import androidx.annotation.StringRes
 
 object IntentHelper {
   /**

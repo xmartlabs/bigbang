@@ -1,18 +1,18 @@
 package com.xmartlabs.bigbang.ui.common.recyclerview
 
-import android.support.annotation.CallSuper
-import android.support.annotation.LayoutRes
-import android.support.annotation.MainThread
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
+import androidx.annotation.LayoutRes
+import androidx.annotation.MainThread
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.util.ArrayList
+import java.util.*
 
 /**
  * A Base RecyclerViewAdapter with already implemented functions such as

@@ -1,6 +1,6 @@
 package com.xmartlabs.bigbang.core.repository
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.xmartlabs.bigbang.core.model.EntityWithId
 import io.reactivex.Maybe
 import io.reactivex.Single

@@ -2,8 +2,8 @@ package com.xmartlabs.bigbang.ui.common.recyclerview
 
 import android.content.Context
 import android.content.res.Resources
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 open class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
   /**

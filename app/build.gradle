@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
         classpath 'com.google.gms:google-services:3.1.1'
-        classpath 'io.fabric.tools:gradle:1.24.3'
+        classpath 'io.fabric.tools:gradle:1.26.1'
     }
 }
 
@@ -129,11 +129,11 @@ dependencies {
     api project(path: ':ui')
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    implementation "com.android.support:cardview-v7:${libraryVersion.androidSupport}"
-    implementation "com.android.support:design:${libraryVersion.androidSupport}"
-    implementation "com.android.support:recyclerview-v7:${libraryVersion.androidSupport}"
-    implementation "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    implementation "androidx.appcompat:appcompat:${libraryVersion.androidSupport}"
+    implementation "androidx.cardview:cardview:${libraryVersion.androidSupport}"
+    implementation "com.google.android.material:material:${libraryVersion.androidSupport}"
+    implementation "androidx.recyclerview:recyclerview:${libraryVersion.androidSupport}"
+    implementation "androidx.legacy:legacy-support-v13:${libraryVersion.androidSupport}"
     implementation "com.f2prateek.dart:dart:${libraryVersion.dart}"
     implementation "com.f2prateek.dart:henson:${libraryVersion.dart}"
     implementation "com.github.mrmike:Ok2Curl:${libraryVersion.ok2Curl}"
@@ -143,7 +143,6 @@ dependencies {
     implementation "com.google.dagger:dagger:${libraryVersion.dagger}"
     implementation "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
     implementation "com.hannesdorfmann.fragmentargs:annotation:${libraryVersion.fragmentArgs}"
-    implementation "com.hannesdorfmann.fragmentargs:bundler-parceler:${libraryVersion.fragmentArgs}"
     implementation "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
     implementation "com.jakewharton.timber:timber:${libraryVersion.timber}"
     implementation "com.squareup.okhttp3:logging-interceptor:${libraryVersion.okHttp}"
@@ -152,13 +151,12 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${libraryVersion.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${libraryVersion.retrofit}"
     implementation "com.squareup.retrofit2:retrofit:${libraryVersion.retrofit}"
-    implementation "com.trello.rxlifecycle2:rxlifecycle-components:${libraryVersion.rxLifecycle}"
-    implementation "com.trello.rxlifecycle2:rxlifecycle:${libraryVersion.rxLifecycle}"
+    implementation "com.trello.rxlifecycle3:rxlifecycle-components:${libraryVersion.rxLifecycle}"
+    implementation "com.trello.rxlifecycle3:rxlifecycle:${libraryVersion.rxLifecycle}"
     implementation "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     implementation "io.reactivex.rxjava2:rxandroid:${libraryVersion.rxAndroid}"
     implementation "io.reactivex.rxjava2:rxjava:${libraryVersion.rxJava}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
-    implementation "org.parceler:parceler-api:${libraryVersion.parceler}"
     implementation "com.github.square.picasso:picasso:${libraryVersion.picasso}"
     implementation 'com.viewpagerindicator:library:2.4.1'
 
@@ -168,7 +166,6 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:${libraryVersion.dagger}"
     kapt "com.google.dagger:dagger-compiler:${libraryVersion.dagger}"
     kapt "com.hannesdorfmann.fragmentargs:processor:${libraryVersion.fragmentArgs}"
-    kapt "org.parceler:parceler:${libraryVersion.parceler}"
 
     compileOnly 'javax.annotation:jsr250-api:1.0'
 }

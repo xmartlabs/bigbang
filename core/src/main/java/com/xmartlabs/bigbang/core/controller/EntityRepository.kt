@@ -1,6 +1,6 @@
 package com.xmartlabs.bigbang.core.controller
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.xmartlabs.bigbang.core.extensions.applyIoSchedulers
 import com.xmartlabs.bigbang.core.extensions.observeOnIo
 import com.xmartlabs.bigbang.core.extensions.subscribeOnIo

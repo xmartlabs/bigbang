@@ -1,7 +1,7 @@
 package com.xmartlabs.template.ui.common
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 /** An OnDemandLoadingScrollListener for recycler view pagination */
 abstract class OnDemandLoadingScrollListener : RecyclerView.OnScrollListener() {

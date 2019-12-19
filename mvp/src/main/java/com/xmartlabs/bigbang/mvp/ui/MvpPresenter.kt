@@ -1,8 +1,8 @@
 package com.xmartlabs.bigbang.mvp.ui
 
 import android.app.Activity
-import android.support.annotation.UiThread
-import android.support.v4.app.Fragment
+import androidx.annotation.UiThread
+import androidx.fragment.app.Fragment
 
 /**
  * The base interface that defines a presenter in the MVP patterns.

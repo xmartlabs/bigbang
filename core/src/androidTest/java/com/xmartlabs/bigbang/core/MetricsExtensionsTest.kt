@@ -1,10 +1,11 @@
 package com.xmartlabs.bigbang.core
 
 import android.content.res.Resources
-import android.support.annotation.DimenRes
-import android.support.annotation.Dimension
-import android.support.test.runner.AndroidJUnit4
 import android.util.DisplayMetrics
+import androidx.annotation.DimenRes
+import androidx.annotation.Dimension
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import com.xmartlabs.bigbang.core.extensions.displayMetrics
 import com.xmartlabs.bigbang.core.extensions.dpToPx
 import com.xmartlabs.bigbang.core.extensions.pxToDp
