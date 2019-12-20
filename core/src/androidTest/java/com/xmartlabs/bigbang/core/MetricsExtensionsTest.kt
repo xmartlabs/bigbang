@@ -4,7 +4,6 @@ import android.content.res.Resources
 import android.util.DisplayMetrics
 import androidx.annotation.DimenRes
 import androidx.annotation.Dimension
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.runner.AndroidJUnit4
 import com.xmartlabs.bigbang.core.extensions.displayMetrics
 import com.xmartlabs.bigbang.core.extensions.dpToPx
