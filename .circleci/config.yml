@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/android:api-26-alpha
+      - image: circleci/android:api-29-alpha
     working_directory: ~/bigbang
     environment:
       JVM_OPTS: -Xmx3200m
