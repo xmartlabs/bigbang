@@ -23,7 +23,7 @@ object RecyclerViewAssertions {
     internal var items = -1
     
     override fun matchesSafely(view: View): Boolean {
-      items = (view as RecyclerView).adapter.itemCount
+      items = (view as RecyclerView).adapter!!.itemCount
       return items == count
     }
   
