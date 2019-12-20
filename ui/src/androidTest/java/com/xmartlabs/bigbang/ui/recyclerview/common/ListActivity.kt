@@ -2,8 +2,8 @@ package com.xmartlabs.bigbang.ui.recyclerview.common
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.xmartlabs.bigbang.ui.test.R
 import com.xmartlabs.bigbang.ui.test.R.layout.activity_with_list
 

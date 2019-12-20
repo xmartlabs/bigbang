@@ -1,17 +1,8 @@
 package com.xmartlabs.bigbang.mvvm.result
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import io.reactivex.Completable
-import io.reactivex.CompletableObserver
-import io.reactivex.Flowable
-import io.reactivex.FlowableSubscriber
-import io.reactivex.Maybe
-import io.reactivex.MaybeObserver
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.Single
-import io.reactivex.SingleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import io.reactivex.*
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.reactivestreams.Subscription

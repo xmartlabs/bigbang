@@ -33,7 +33,7 @@ android {
         versionCode versionCodeId
         versionName version
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -51,16 +51,16 @@ android {
 dependencies {
     api project(path: ':core')
 
-    api "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    api "com.android.support:design:${libraryVersion.androidSupport}"
-    api "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    api "androidx.appcompat:appcompat:${libraryVersion.androidSupport}"
+    api "com.google.android.material:material:${libraryVersion.androidSupport}"
+    api "androidx.legacy:legacy-support-v13:${libraryVersion.androidSupport}"
 
-    api "com.android.support:support-annotations:${libraryVersion.androidSupport}"
-    api "com.android.support.test:rules:${libraryVersion.androidSupportTest}"
-    api("com.android.support.test:runner:${libraryVersion.androidSupportTest}") {
+    api "androidx.annotation:annotation:${libraryVersion.androidSupport}"
+    api "androidx.test:rules:${libraryVersion.androidSupportTest}"
+    api("androidx.test.ext:junit:${libraryVersion.androidSupportTest}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    api("com.android.support.test.espresso:espresso-contrib:${libraryVersion.espresso}") {
+    api("androidx.test.espresso:espresso-contrib:${libraryVersion.espresso}") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'design'
@@ -68,11 +68,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude module: 'recyclerview-v7'
     }
-    api("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
+    api("androidx.test.espresso:espresso-core:${libraryVersion.espresso}") {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    api "com.android.support.test.uiautomator:uiautomator-v18:${libraryVersion.uiautomator}"
-    api "com.android.support.test.espresso:espresso-intents:${libraryVersion.espresso}"
+    api "androidx.test.uiautomator:uiautomator:${libraryVersion.uiautomator}"
+    api "androidx.test.espresso:espresso-intents:${libraryVersion.espresso}"
 
     api "com.wdullaer:materialdatetimepicker:${libraryVersion.materialDateTimePicker}"
     api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"

@@ -1,17 +1,16 @@
 package com.xmartlabs.bigbang.test.extensions
 
-import android.support.annotation.IdRes
-import android.support.test.espresso.ViewInteraction
-
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.assertion.ViewAssertions
-import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers
-import android.support.test.espresso.matcher.ViewMatchers.hasDescendant
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.view.View
+import androidx.annotation.IdRes
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import com.xmartlabs.bigbang.test.assertions.RecyclerViewAssertions
 import com.xmartlabs.bigbang.test.assertions.SwipeToRefreshAssertions
 import com.xmartlabs.bigbang.test.viewaction.MaterialPickerDialogActions

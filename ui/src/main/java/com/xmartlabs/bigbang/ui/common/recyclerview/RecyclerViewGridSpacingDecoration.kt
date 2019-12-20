@@ -1,12 +1,12 @@
 package com.xmartlabs.bigbang.ui.common.recyclerview
 
 import android.graphics.Rect
-import android.support.annotation.Dimension
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.annotation.Dimension
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.xmartlabs.bigbang.core.extensions.orDo
-import java.util.ArrayList
+import java.util.*
 
 /**
  * [RecyclerView.ItemDecoration] subclass designed to add spacing to item controlled by a [GridLayoutManager].
@@ -63,7 +63,7 @@ class RecyclerViewGridSpacingDecoration : RecyclerView.ItemDecoration() {
   private val lastColumns = ArrayList<Int>()
   private var biggestLastColumn: Int = 0
 
-  override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+  override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
     if (parent.layoutManager !is GridLayoutManager) {
       throw IllegalArgumentException("This Item Decoration can only be used with GridLayoutManager")
     }
@@ -86,7 +86,7 @@ class RecyclerViewGridSpacingDecoration : RecyclerView.ItemDecoration() {
   private fun setOffsetForItem(outRect: Rect, view: View, recyclerView: RecyclerView, gridLayoutManager: GridLayoutManager) {
     val position = recyclerView.getChildLayoutPosition(view)
     val spanCount = gridLayoutManager.spanCount
-    val numberOfItems = recyclerView.adapter.itemCount
+    val numberOfItems = recyclerView.adapter!!.itemCount
     val spanSizeLookup = gridLayoutManager.spanSizeLookup
   
     itemOffsetConsumer?.invoke(outRect, recyclerView).orDo {

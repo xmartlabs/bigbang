@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.ui.common.recyclerview
 
-import android.support.annotation.CallSuper
 import android.view.View
+import androidx.annotation.CallSuper
 
 /**
  * View holder for a single item [T].

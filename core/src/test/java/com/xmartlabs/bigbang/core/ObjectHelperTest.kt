@@ -1,6 +1,6 @@
 package com.xmartlabs.base.core
 
-import android.support.v4.util.Pair
+import androidx.core.util.Pair
 import com.google.gson.Gson
 import com.xmartlabs.bigbang.core.helper.ObjectHelper
 import org.hamcrest.MatcherAssert.assertThat

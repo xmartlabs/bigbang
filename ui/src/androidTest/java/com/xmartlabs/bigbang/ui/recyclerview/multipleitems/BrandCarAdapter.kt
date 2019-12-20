@@ -1,9 +1,9 @@
 package com.xmartlabs.bigbang.ui.recyclerview.multipleitems
 
-import android.support.annotation.MainThread
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.MainThread
 import com.xmartlabs.bigbang.ui.common.recyclerview.BaseRecyclerViewAdapter
 import com.xmartlabs.bigbang.ui.common.recyclerview.SimpleItemRecycleItemType
 import com.xmartlabs.bigbang.ui.common.recyclerview.SingleItemBaseViewHolder

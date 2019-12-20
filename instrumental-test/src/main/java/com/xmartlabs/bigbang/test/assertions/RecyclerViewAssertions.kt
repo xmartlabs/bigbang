@@ -1,9 +1,9 @@
 package com.xmartlabs.bigbang.test.assertions
 
-import android.support.test.espresso.core.internal.deps.guava.base.Preconditions
-import android.support.test.espresso.matcher.BoundedMatcher
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.core.internal.deps.guava.base.Preconditions
+import androidx.test.espresso.matcher.BoundedMatcher
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
@@ -23,7 +23,7 @@ object RecyclerViewAssertions {
     internal var items = -1
     
     override fun matchesSafely(view: View): Boolean {
-      items = (view as RecyclerView).adapter.itemCount
+      items = (view as RecyclerView).adapter!!.itemCount
       return items == count
     }
   

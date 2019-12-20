@@ -3,14 +3,14 @@ package com.xmartlabs.bigbang.test.extensions
 import android.app.Activity
 import android.app.Instrumentation
 import android.os.Build
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import android.support.test.runner.lifecycle.Stage
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.UiObjectNotFoundException
-import android.support.test.uiautomator.UiSelector
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiObjectNotFoundException
+import androidx.test.uiautomator.UiSelector
 import com.xmartlabs.bigbang.test.helpers.TestUtils
 import timber.log.Timber
-import java.util.Locale
+import java.util.*
 
 /**
  * Retrieves the first activity with `Stage.RESUMED` state

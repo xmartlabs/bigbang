@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.core.repository
 
 import android.content.SharedPreferences
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.xmartlabs.bigbang.core.model.SessionType
 
 /**

@@ -1,8 +1,8 @@
 package com.xmartlabs.bigbang.test.assertions
 
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
 import android.view.View
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
 import org.hamcrest.Matcher
 
 object SwipeToRefreshAssertions {

@@ -2,10 +2,10 @@ package com.xmartlabs.bigbang.core.extensions
 
 import android.content.res.Resources
 import android.content.res.Resources.Theme
-import android.support.annotation.AttrRes
-import android.support.annotation.Dimension
-import android.support.annotation.VisibleForTesting
-import android.support.v7.app.ActionBar
+import androidx.annotation.AttrRes
+import androidx.annotation.Dimension
+import androidx.annotation.VisibleForTesting
+import androidx.appcompat.app.ActionBar
 
 @VisibleForTesting
 var displayMetrics = Resources.getSystem().displayMetrics

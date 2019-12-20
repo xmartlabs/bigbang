@@ -28,7 +28,7 @@ android {
         versionCode versionCodeId
         versionName version
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -47,7 +47,7 @@ dependencies {
     api project(path: ':core')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${libraryVersion.kotlin}"
-    implementation "android.arch.lifecycle:livedata:${libraryVersion.archLifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata:${libraryVersion.archLifecycle}"
 }
 
 apply from: '../bintray.gradle'

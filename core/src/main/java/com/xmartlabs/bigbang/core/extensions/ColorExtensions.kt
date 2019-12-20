@@ -1,8 +1,8 @@
 package com.xmartlabs.bigbang.core.extensions
 
 import android.content.Context
-import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 
 /** Extension object that contains all related color extensions that make use of [Context] */
 val Context.color

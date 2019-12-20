@@ -30,7 +30,7 @@ android {
         targetSdkVersion project.ext.targetSdkVersion
         versionCode versionCodeId
         versionName version
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
     buildTypes {
@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:${libraryVersion.espresso}") {
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     androidTestImplementation "com.crittercism.dexmaker:dexmaker:${libraryVersion.dexmaker}"
@@ -55,9 +55,9 @@ dependencies {
     androidTestImplementation "com.crittercism.dexmaker:dexmaker-mockito:${libraryVersion.dexmaker}"
     androidTestImplementation "junit:junit:${libraryVersion.junit}"
     androidTestImplementation "org.mockito:mockito-core:${libraryVersion.mockito}"
-    api "com.android.support:appcompat-v7:${libraryVersion.androidSupport}"
-    api "com.android.support:design:${libraryVersion.androidSupport}"
-    api "com.android.support:support-v13:${libraryVersion.androidSupport}"
+    api "androidx.appcompat:appcompat:${libraryVersion.androidSupport}"
+    api "com.google.android.material:material:${libraryVersion.androidSupport}"
+    api "androidx.legacy:legacy-support-v13:${libraryVersion.androidSupport}"
     api "com.f2prateek.dart:dart:${libraryVersion.dart}"
     api "com.f2prateek.dart:henson:${libraryVersion.dart}"
     api "com.github.mrmike:Ok2Curl:${libraryVersion.ok2Curl}"

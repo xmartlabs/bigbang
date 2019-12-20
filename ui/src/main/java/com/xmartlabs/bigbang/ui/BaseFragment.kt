@@ -2,12 +2,12 @@ package com.xmartlabs.bigbang.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import com.hannesdorfmann.fragmentargs.FragmentArgs
-import com.trello.rxlifecycle2.components.support.RxFragment
+import com.trello.rxlifecycle3.components.support.RxFragment
 import com.xmartlabs.bigbang.core.di.Injectable
 import com.xmartlabs.bigbang.core.log.analytics.AnalyticsManager
 import com.xmartlabs.bigbang.core.log.analytics.TrackableAnalytic
@@ -53,7 +53,7 @@ abstract class BaseFragment : RxFragment(), Injectable {
       inflater.inflate(layoutResId, container, false)
 
   @Suppress("OverridingDeprecatedMember", "DEPRECATION")
-  override fun onAttach(activity: Activity?) {
+  override fun onAttach(activity: Activity) {
     super.onAttach(activity)
     progressDialog = createProgressDialog()
   }

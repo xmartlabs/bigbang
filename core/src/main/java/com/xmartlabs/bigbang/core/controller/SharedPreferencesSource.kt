@@ -1,7 +1,7 @@
 package com.xmartlabs.bigbang.core.controller
 
 import android.content.SharedPreferences
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.google.gson.Gson
 import javax.inject.Inject
 

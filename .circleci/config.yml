@@ -1,12 +1,11 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/android:api-26-alpha
+      - image: circleci/android:api-26
     working_directory: ~/bigbang
     environment:
       JVM_OPTS: -Xmx3200m
-    resource_class: large
     steps:
       - checkout
       - restore_cache:
@@ -40,8 +39,8 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew test
-              lint
-              --max-workers=2
+            lint
+            --max-workers=2
       - run:
           name: Compile App Module
           command: ./gradlew :app:compileLollipopAndAboveProductionReleaseSources --max-workers=1

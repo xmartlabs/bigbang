@@ -29,6 +29,6 @@ fun Context.copyTextToClipboard(text: String) {
   } else {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
     val clip = android.content.ClipData.newPlainText("Copied Text", text)
-    clipboard.primaryClip = clip
+    clipboard.setPrimaryClip(clip)
   }
 }

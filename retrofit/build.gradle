@@ -28,7 +28,7 @@ android {
         versionCode versionCodeId
         versionName version
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -46,7 +46,7 @@ android {
 dependencies {
     api project(':core')
 
-    api "com.android.support:support-annotations:${libraryVersion.androidSupport}"
+    api "androidx.annotation:annotation:${libraryVersion.androidSupport}"
     api "com.google.dagger:dagger:${libraryVersion.dagger}"
     api "com.google.dagger:dagger-android-support:${libraryVersion.dagger}"
     api "com.jakewharton.threetenabp:threetenabp:${libraryVersion.localDateBackport}"
